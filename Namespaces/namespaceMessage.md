@@ -1,0 +1,97 @@
+---
+title: Message
+summary: Namespace that handles some os-independent output. 
+
+---
+
+# Message
+
+Namespace that handles some os-independent output. 
+
+## Functions
+
+|                | Name           |
+| -------------- | -------------- |
+| void | **[DisplayWarning](/Namespaces/namespaceMessage.md#function-displaywarning)**(TString Message, std::ostream & os =std::cout)<br>Display a Warning.  |
+| void | **[DisplayFatalError](/Namespaces/namespaceMessage.md#function-displayfatalerror)**(TString Message, std::ostream & os =std::cout)<br>Throw a Fatal Error.  |
+| void | **[DisplayMessage](/Namespaces/namespaceMessage.md#function-displaymessage)**(TString Message, std::ostream & os =std::cout)<br>Display a [Message](/Namespaces/namespaceMessage.md).  |
+| void | **[DisplayMessageWithEmphasys](/Namespaces/namespaceMessage.md#function-displaymessagewithemphasys)**(TString Message, std::ostream & os =std::cout)<br>Display an emphsized message.  |
+
+
+## Functions Documentation
+
+### function DisplayWarning
+
+```cpp
+void DisplayWarning(
+    TString Message,
+    std::ostream & os =std::cout
+)
+```
+
+Display a Warning. 
+
+**Parameters**: 
+
+  * **[Message](/Namespaces/namespaceMessage.md)** Text of the warning 
+  * **os** ostream object 
+
+
+### function DisplayFatalError
+
+```cpp
+void DisplayFatalError(
+    TString Message,
+    std::ostream & os =std::cout
+)
+```
+
+Throw a Fatal Error. 
+
+**Parameters**: 
+
+  * **[Message](/Namespaces/namespaceMessage.md)** text of the error 
+  * **os** ostream object 
+
+
+### function DisplayMessage
+
+```cpp
+void DisplayMessage(
+    TString Message,
+    std::ostream & os =std::cout
+)
+```
+
+Display a [Message](/Namespaces/namespaceMessage.md). 
+
+**Parameters**: 
+
+  * **[Message](/Namespaces/namespaceMessage.md)** text of the [Message](/Namespaces/namespaceMessage.md)
+  * **os** ostream object 
+
+
+### function DisplayMessageWithEmphasys
+
+```cpp
+void DisplayMessageWithEmphasys(
+    TString Message,
+    std::ostream & os =std::cout
+)
+```
+
+Display an emphsized message. 
+
+**Parameters**: 
+
+  * **[Message](/Namespaces/namespaceMessage.md)** Text of the message 
+  * **os** ostream object 
+
+
+
+
+
+
+-------------------------------
+
+Updated on 2021-12-29 at 15:02:03 +0100
