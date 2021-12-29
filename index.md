@@ -1,23 +1,21 @@
 ---
-title: SLIPPER developer manual
+title: Stand-aLone Identification of Particles through Partial Event Reonstruction
 
 ---
 
-# SLIPPER developer manual
+# Stand-aLone Identification of Particles through Partial Event Reonstruction
 
 
 
 
 # Project     : FOOT (FragmentatiOn Of Target)
 
-Software for stand-alone signal processing of the WaveDAQ system. At this stage, the code handles information from the:
+Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [_bitbucket page_](https://bitbucket.org/rzarrella/slipper/src/master/). At this stage, the code handles signals from the:
 
 * Start Counter (SC)
 * TOF-Wall (TW)
 * Calorimeter (CALO)
 * Neutron detectors
-For a detailed user guide, check the dedicated page in this manual or at the [_bitbucket page_](https://bitbucket.org/rzarrella/slipper/src/master/).
-
 
 ## Authors
 
@@ -50,4 +48,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2021-12-29 at 14:24:53 +0000
+Updated on 2021-12-29 at 15:21:51 +0000

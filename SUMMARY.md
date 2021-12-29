@@ -1,7 +1,7 @@
 # Summary
 
 
-* [Content](index.md)
+* [SLIPPER Developer manual](index.md)
   * [Classes](Classes/index.md)
     * [XmlParser](Classes/classXmlParser.md)
     * [WDTag](Classes/classWDTag.md)

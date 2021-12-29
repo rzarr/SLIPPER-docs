@@ -8,11 +8,11 @@ title: Pages
 
 
 
-* **page [SLIPPER developer manual](/)** 
+* **page [Stand-aLone Identification of Particles through Partial Event Reonstruction](/)** 
 * **page [User Manual](/Pages/md_README.md#page-md-readme)** 
 
 
 
 -------------------------------
 
-Updated on 2021-12-29 at 14:24:53 +0000
+Updated on 2021-12-29 at 15:21:51 +0000
