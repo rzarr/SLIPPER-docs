@@ -1,18 +1,3 @@
----
-title: README.md
-
----
-
-# README.md
-
-
-
-
-
-
-## Source code
-
-```markdown
 User Manual
 ======
 
@@ -427,9 +412,3 @@ From version 2.5, a first analysis script has been implemented. This is meant to
   -h, --help              Print help
 ```
 As of today, the script produces a series of histograms to quickly check the correct functioning of TOF-Wall detector (channels/bars), as well as some preliminary time resolution studies.
-```
-
-
--------------------------------
-
-Updated on 2021-12-29 at 14:24:53 +0000
