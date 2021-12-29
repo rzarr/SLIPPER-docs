@@ -1,5 +1,5 @@
 ---
-title: SLIPPER developer manual
+title: SLIPPER developer manual 
 
 ---
 
