@@ -108,13 +108,18 @@ void LoadMCRefValues(
 
 Function needed to load the MC reference values for TW calibration. 
 
+**Parameters**: 
+
+  * **MCRefValuesFile** Name of the MC table file 
+
+
 The MC table needs to contain the fields:
 
 * campaign name (string) (to be added?)
 * particle ID (string)
 * beam energy (Float_t, MeV/u)
 * mean dE_MC in the x and y layer (Float_t, MeV)
-* mean TOF_MC in the x and y layer (Float_t, ns) MCRefValuesFileName of the MC table file 
+* mean TOF_MC in the x and y layer (Float_t, ns)
 
 
 ### function SetDebugMode
@@ -170,12 +175,17 @@ void EnergyCalibration(
 
 Function that contains the routine used for the energy calibration of the TW. 
 
+**Parameters**: 
+
+  * **OutputDir** Output directory name, where maps are saved 
+
+
 The function saves a calibration map for each TW layer where every line contains:
 
 * Position ID
 * p0, "gain" factor of the Birks model [a.u./MeV]
 * p1, "saturation" parameter of the Birks model [1/MeV]
-* one flag indicating if the fit was successful. In the current version: -> 0 = not good for low statistics/number of beams -> 1 = good statistics, both CNAO and GSI data -> 2 = good statistics, only CNAO data -> 3 = good statistics, fit was unsuccessful anyway (high chi2) OutputDirOutput directory name, where maps are saved 
+* one flag indicating if the fit was successful. In the current version: -> 0 = not good for low statistics/number of beams -> 1 = good statistics, both CNAO and GSI data -> 2 = good statistics, only CNAO data -> 3 = good statistics, fit was unsuccessful anyway (high chi2)
 
 
 ### function CalibrateLayerDeltaE
@@ -209,13 +219,18 @@ void TOFCalibration(
 
 Function that contains the routine used for the TOF calibration of the dE-TOF. 
 
+**Parameters**: 
+
+  * **OutputDir** Output directory name, where maps are saved 
+
+
 The maps contain:
 
 * Position ID
 * Bar ID for layer X
 * Bar ID for layer Y
 * Time difference between the raw TOF and the associated MC reference value [ns]
-* DeltaT2 [ns] -> TO BE DEFINED!! OutputDirOutput directory name, where maps are saved 
+* DeltaT2 [ns] -> TO BE DEFINED!!
 
 
 ### function CalibrateLayerTOF
@@ -372,4 +387,4 @@ Flag used to set debug mode.
 
 -------------------------------
 
-Updated on 2022-01-12 at 10:56:23 +0000
+Updated on 2022-01-12 at 16:47:44 +0000

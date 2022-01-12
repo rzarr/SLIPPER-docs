@@ -12,7 +12,7 @@ File containing all Parameters used in the processing and calibration executable
 
 |                | Name           |
 | -------------- | -------------- |
-| enum| **[ParticleType](/Files/Parameters_8h.md#enum-particletype)** { None =-1, Proton, Helium, Carbon, Oxygen}<br>Type of beam particles.  |
+| enum| **[ParticleType](/Files/Parameters_8h.md#enum-particletype)** { None =-1, Proton =0, Helium =1, Carbon =2, Oxygen =3}<br>Type of beam particles.  |
 | enum| **[TLayer](/Files/Parameters_8h.md#enum-tlayer)** { NoLayer =-1, LayerX =1, LayerY =0}<br>TW X-Y layer definition.  |
 
 ## Attributes
@@ -88,10 +88,10 @@ This file needs to be carefully checked everytime a different campaign is analyz
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
 | None | =-1|   |
-| Proton | |   |
-| Helium | |   |
-| Carbon | |   |
-| Oxygen | |   |
+| Proton | =0|   |
+| Helium | =1|   |
+| Carbon | =2|   |
+| Oxygen | =3|   |
 
 
 
@@ -564,7 +564,7 @@ Maximum expected calibrated energy loss [MeV].
 #define DEMIN 0.                            
 #define DEMAX 250.                          
 
-enum ParticleType {None=-1, Proton, Helium, Carbon, Oxygen};
+enum ParticleType {None=-1, Proton=0, Helium=1, Carbon=2, Oxygen=3};
 
 enum TLayer {NoLayer=-1,LayerX=1,LayerY=0};  // layer1--> horizontal bars, layer0--> vertical bars
 
@@ -578,4 +578,4 @@ static std::map<ParticleType, std::string> ParticleName={{None,"None"},{Proton,"
 
 -------------------------------
 
-Updated on 2022-01-12 at 10:56:23 +0000
+Updated on 2022-01-12 at 16:47:44 +0000

@@ -43,7 +43,7 @@ Class that handles all the processing of raw WaveDAQ waveforms.  [More...](#deta
 
 |                | Name           |
 | -------------- | -------------- |
-| [WDBDATA](/Classes/classWDBDATA.md) | **[data](/Classes/classCWaveFormContainer.md#variable-data)** <br>Structure containing the raw Waveforms of a single WaveDREAM board.  |
+| [WDBDATA](/Classes/classWDBDATA.md) | **[data](/Classes/classCWaveFormContainer.md#variable-data)** <br>Object containing the raw Waveforms of a single WaveDREAM board.  |
 
 ## Protected Attributes
 
@@ -354,19 +354,21 @@ virtual Float_t GetCLKPhase(
 
 Get the phase of a CLK signal. 
 
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+  * **board** Board serial number 
+  * **event** Event number 
+  * **fOut** Pointer to output file 
+
+
+**Return**: Phase of the CLK signal [ns] 
+
 This function analyzes the clock waveform and returns its phase.
 
 * Each rising edge of the waveform is analyzed -> the zero-crossing points are found using linear interpolation
 * These timestamps are then plotted versus the number of clock cycles elapsed
-* This graph is linearly fitted -> the clock phase is the intercept of the fit channelWaveDREAM channel Id 
-
-boardBoard serial number 
-
-eventEvent number 
-
-fOutPointer to output file 
-
-Phase of the CLK signal [ns] 
+* This graph is linearly fitted -> the clock phase is the intercept of the fit
 
 
 ## Protected Functions Documentation
@@ -456,7 +458,7 @@ Save the waveform to a folder in the output file.
 WDBDATA data;
 ```
 
-Structure containing the raw Waveforms of a single WaveDREAM board. 
+Object containing the raw Waveforms of a single WaveDREAM board. 
 
 ## Protected Attributes Documentation
 
@@ -510,4 +512,4 @@ Rise Time of the signals [ns].
 
 -------------------------------
 
-Updated on 2022-01-12 at 10:56:23 +0000
+Updated on 2022-01-12 at 16:47:44 +0000

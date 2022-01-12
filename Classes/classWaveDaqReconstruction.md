@@ -336,10 +336,15 @@ void AnalyzeWaveformsSC(
 
 Analysis of SC Waveforms (WFs) 
 
+**Parameters**: 
+
+  * **board** Serial number of the SC board 
+
+
 This function performs the whole anlysis of SC waveforms, which consists of two steps:
 
 * The channels of the SC are added together in a single WF.
-* The timestamp of the event is then evaluated applying the CFD method to this WF. boardSerial number of the SC board 
+* The timestamp of the event is then evaluated applying the CFD method to this WF.
 
 
 ### function AnalyzeWaveformsTW
@@ -1419,4 +1424,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-01-12 at 10:56:22 +0000
+Updated on 2022-01-12 at 16:47:44 +0000
