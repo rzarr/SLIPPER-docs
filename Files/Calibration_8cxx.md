@@ -1,17 +1,27 @@
 ---
 title: src/Calibration.cxx
+summary: File containing the main function of the Calibration executable. 
 
 ---
 
 # src/Calibration.cxx
 
-
+File containing the main function of the Calibration executable.  [More...](#detailed-description)
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
 | int | **[main](/Files/Calibration_8cxx.md#function-main)**(int argc, char ** argv) |
+
+## Detailed Description
+
+File containing the main function of the Calibration executable. 
+
+**Author**: R. Zarrella
+
+
+This executable calls the [TOFWallCalibration](/Classes/classTOFWallCalibration.md) class to produce the dE and TOF calibration maps for SC-TW measurements. This script has been studied for data samples acquired before the GSI2021 campaign, so the [TOFWallCalibration](/Classes/classTOFWallCalibration.md) class does not work on more recent samples. This stems from the change in the calibration approach which, for the GSI2021 campaign, uses the dE peaks of nuclear fragments instead of different primary beams. 
 
 
 ## Functions Documentation
@@ -31,6 +41,7 @@ int main(
 ## Source code
 
 ```cpp
+
 #include "cxxopts.hpp"
 #include "TOFWallCalibration.h"
 #include <dirent.h>
@@ -97,4 +108,4 @@ int main(int argc, char **argv)
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

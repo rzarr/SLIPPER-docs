@@ -10,16 +10,16 @@ title: Files
 
 * **file [README.md](/Files/README_8md.md#file-readme.md)** 
 * **dir [src](/Files/dir_68267d1309a1af8e8297ef4c3efbcdba.md#dir-src)** 
-    * **file [src/Analysis.cxx](/Files/Analysis_8cxx.md#file-analysis.cxx)** 
+    * **file [src/Analysis.cxx](/Files/Analysis_8cxx.md#file-analysis.cxx)** <br>File containing the main function of the Analysis executable. 
     * **file [src/CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx)** <br>File containing all methods of [CReadBinary](/Classes/classCReadBinary.md) class. 
     * **file [src/CReadBinary.h](/Files/CReadBinary_8h.md#file-creadbinary.h)** <br>Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx). 
     * **file [src/CWaveFormContainer.cxx](/Files/CWaveFormContainer_8cxx.md#file-cwaveformcontainer.cxx)** <br>File containing all methods used for Waveform processing. 
     * **file [src/CWaveFormContainer.h](/Files/CWaveFormContainer_8h.md#file-cwaveformcontainer.h)** <br>Header of [CWaveFormContainer.cxx](/Files/CWaveFormContainer_8cxx.md#file-cwaveformcontainer.cxx). 
-    * **file [src/Calibration.cxx](/Files/Calibration_8cxx.md#file-calibration.cxx)** 
+    * **file [src/Calibration.cxx](/Files/Calibration_8cxx.md#file-calibration.cxx)** <br>File containing the main function of the Calibration executable. 
     * **file [src/DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx)** <br>File containing all methods of [DataAnalysis](/Classes/classDataAnalysis.md) class. 
     * **file [src/DataAnalysis.h](/Files/DataAnalysis_8h.md#file-dataanalysis.h)** <br>Header of [DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx). 
     * **file [src/LinkDef.h](/Files/LinkDef_8h.md#file-linkdef.h)** <br>LinkDef of src folder. 
-    * **file [src/Reconstruction.cxx](/Files/Reconstruction_8cxx.md#file-reconstruction.cxx)** 
+    * **file [src/Reconstruction.cxx](/Files/Reconstruction_8cxx.md#file-reconstruction.cxx)** <br>File containing the main function of the Reconstruction executable. 
     * **file [src/TOFWallCalibration.cxx](/Files/TOFWallCalibration_8cxx.md#file-tofwallcalibration.cxx)** <br>File containing all methods of [TOFWallCalibration](/Classes/classTOFWallCalibration.md) class. 
     * **file [src/TOFWallCalibration.h](/Files/TOFWallCalibration_8h.md#file-tofwallcalibration.h)** <br>Header of [TOFWallCalibration.cxx](/Files/TOFWallCalibration_8cxx.md#file-tofwallcalibration.cxx). 
     * **file [src/WaveDaqReconstruction.cxx](/Files/WaveDaqReconstruction_8cxx.md#file-wavedaqreconstruction.cxx)** <br>File containing all methods of [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md) class. 
@@ -51,4 +51,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

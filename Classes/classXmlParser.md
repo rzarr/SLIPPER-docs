@@ -30,6 +30,13 @@ Class that handles all the decoding of XML configuration files for Channel Maps.
 | XMLNodePointer_t | **[CreateMainNode](/Classes/classXmlParser.md#function-createmainnode)**(std::string Name)<br>Create a new main Node in the xml.  |
 | void | **[AddElementWithContent](/Classes/classXmlParser.md#function-addelementwithcontent)**(std::string Name, XMLNodePointer_t ParentNode, std::string Value)<br>Add an element with content to and xml Node.  |
 
+## Protected Attributes
+
+|                | Name           |
+| -------------- | -------------- |
+| TXMLEngine * | **[_XMLEngine](/Classes/classXmlParser.md#variable--xmlengine)** <br>Object to handle xml parsing engine.  |
+| XMLDocPointer_t | **[_xmldoc](/Classes/classXmlParser.md#variable--xmldoc)** <br>Pointer to the actual xmlfile.  |
+
 ## Public Functions Documentation
 
 ### function XmlParser
@@ -291,6 +298,24 @@ Add an element with content to and xml Node.
   * **Content** Content of the new element 
 
 
+## Protected Attributes Documentation
+
+### variable _XMLEngine
+
+```cpp
+TXMLEngine * _XMLEngine;
+```
+
+Object to handle xml parsing engine. 
+
+### variable _xmldoc
+
+```cpp
+XMLDocPointer_t _xmldoc;
+```
+
+Pointer to the actual xmlfile. 
+
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:22 +0000

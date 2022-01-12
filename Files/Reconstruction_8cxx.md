@@ -1,17 +1,27 @@
 ---
 title: src/Reconstruction.cxx
+summary: File containing the main function of the Reconstruction executable. 
 
 ---
 
 # src/Reconstruction.cxx
 
-
+File containing the main function of the Reconstruction executable.  [More...](#detailed-description)
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
 | int | **[main](/Files/Reconstruction_8cxx.md#function-main)**(int argc, char ** argv) |
+
+## Detailed Description
+
+File containing the main function of the Reconstruction executable. 
+
+**Author**: R. Zarrella
+
+
+This executable performs the whole signal processing and level0 Reconstruction of all detectors connected to the WaveDAQ. 
 
 
 ## Functions Documentation
@@ -31,6 +41,7 @@ int main(
 ## Source code
 
 ```cpp
+
 #include "cxxopts.hpp"
 #include "WaveDaqReconstruction.h"
 
@@ -108,4 +119,4 @@ int main(int argc, char **argv)
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

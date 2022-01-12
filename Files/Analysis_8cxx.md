@@ -1,17 +1,27 @@
 ---
 title: src/Analysis.cxx
+summary: File containing the main function of the Analysis executable. 
 
 ---
 
 # src/Analysis.cxx
 
-
+File containing the main function of the Analysis executable.  [More...](#detailed-description)
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
 | int | **[main](/Files/Analysis_8cxx.md#function-main)**(int argc, char ** argv) |
+
+## Detailed Description
+
+File containing the main function of the Analysis executable. 
+
+**Author**: R. Zarrella and M. Montefiori
+
+
+This executable calls the [DataAnalysis](/Classes/classDataAnalysis.md) class and processes Reconstructed ROOT files to produce a set of histograms 
 
 
 ## Functions Documentation
@@ -31,6 +41,7 @@ int main(
 ## Source code
 
 ```cpp
+
 #include "cxxopts.hpp"
 #include "DataAnalysis.h"
 
@@ -65,4 +76,4 @@ int main(int argc, char **argv)
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

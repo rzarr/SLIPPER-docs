@@ -41,12 +41,12 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| UShort_t | **[_BoardSlow](/Classes/classNeutronChannelMap.md#variable--boardslow)**  |
-| UShort_t | **[_BoardFast](/Classes/classNeutronChannelMap.md#variable--boardfast)**  |
-| std::vector< Int_t > | **[_SlowCh](/Classes/classNeutronChannelMap.md#variable--slowch)**  |
-| std::vector< Int_t > | **[_FastCh](/Classes/classNeutronChannelMap.md#variable--fastch)**  |
-| std::map< std::pair< UShort_t, Int_t >, std::string > | **[_BoardChToDetMap](/Classes/classNeutronChannelMap.md#variable--boardchtodetmap)**  |
-| std::map< std::pair< UShort_t, Int_t >, Int_t > | **[_BoardChToGlobMap](/Classes/classNeutronChannelMap.md#variable--boardchtoglobmap)**  |
+| UShort_t | **[_BoardSlow](/Classes/classNeutronChannelMap.md#variable--boardslow)** <br>WaveDREAM board of neutron slow channels.  |
+| UShort_t | **[_BoardFast](/Classes/classNeutronChannelMap.md#variable--boardfast)** <br>WaveDREAM board of neutron fast channels.  |
+| std::vector< Int_t > | **[_SlowCh](/Classes/classNeutronChannelMap.md#variable--slowch)** <br>List of channels used in the slow board.  |
+| std::vector< Int_t > | **[_FastCh](/Classes/classNeutronChannelMap.md#variable--fastch)** <br>List of channels used in the fast board.  |
+| std::map< std::pair< UShort_t, Int_t >, std::string > | **[_BoardChToDetMap](/Classes/classNeutronChannelMap.md#variable--boardchtodetmap)** <br>Map linking board-channel pairs to the corresponding detector name.  |
+| std::map< std::pair< UShort_t, Int_t >, Int_t > | **[_BoardChToGlobMap](/Classes/classNeutronChannelMap.md#variable--boardchtoglobmap)** <br>Map linking board-channel pairs to the corresponding global neutron channel index.  |
 | Bool_t | **[_IsMapLoaded](/Classes/classNeutronChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
 | std::vector< UShort_t > | **[_ListOfBoards](/Classes/classNeutronChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
@@ -279,6 +279,7 @@ This functions checks that the Neutron detectors are connected to exactly one Sl
 UShort_t _BoardSlow = 0;
 ```
 
+WaveDREAM board of neutron slow channels. 
 
 ### variable _BoardFast
 
@@ -286,6 +287,7 @@ UShort_t _BoardSlow = 0;
 UShort_t _BoardFast = 0;
 ```
 
+WaveDREAM board of neutron fast channels. 
 
 ### variable _SlowCh
 
@@ -293,6 +295,7 @@ UShort_t _BoardFast = 0;
 std::vector< Int_t > _SlowCh;
 ```
 
+List of channels used in the slow board. 
 
 ### variable _FastCh
 
@@ -300,6 +303,7 @@ std::vector< Int_t > _SlowCh;
 std::vector< Int_t > _FastCh;
 ```
 
+List of channels used in the fast board. 
 
 ### variable _BoardChToDetMap
 
@@ -307,6 +311,7 @@ std::vector< Int_t > _FastCh;
 std::map< std::pair< UShort_t, Int_t >, std::string > _BoardChToDetMap;
 ```
 
+Map linking board-channel pairs to the corresponding detector name. 
 
 ### variable _BoardChToGlobMap
 
@@ -314,6 +319,7 @@ std::map< std::pair< UShort_t, Int_t >, std::string > _BoardChToDetMap;
 std::map< std::pair< UShort_t, Int_t >, Int_t > _BoardChToGlobMap;
 ```
 
+Map linking board-channel pairs to the corresponding global neutron channel index. 
 
 ### variable _IsMapLoaded
 
@@ -333,4 +339,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

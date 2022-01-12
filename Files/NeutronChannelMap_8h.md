@@ -35,12 +35,12 @@ Header of [NeutronChannelMap.cxx](/Files/NeutronChannelMap_8cxx.md#file-neutronc
 class NeutronChannelMap : public BaseMap
 {
 protected:
-    UShort_t _BoardSlow = 0;
-    UShort_t _BoardFast = 0;
-    std::vector<Int_t> _SlowCh;
-    std::vector<Int_t> _FastCh;
-    std::map<std::pair<UShort_t, Int_t>, std::string> _BoardChToDetMap;
-    std::map<std::pair<UShort_t, Int_t>, Int_t> _BoardChToGlobMap;
+    UShort_t _BoardSlow = 0;                                                
+    UShort_t _BoardFast = 0;                                                
+    std::vector<Int_t> _SlowCh;                                             
+    std::vector<Int_t> _FastCh;                                             
+    std::map<std::pair<UShort_t, Int_t>, std::string> _BoardChToDetMap;     
+    std::map<std::pair<UShort_t, Int_t>, Int_t> _BoardChToGlobMap;          
     
     void    AddDetector(std::string DetName, UShort_t BoardSlow, std::vector<Int_t> ChSlow, std::vector<Int_t> GlobSlow, UShort_t BoardFast, std::vector<Int_t> ChFast, std::vector<Int_t> GlobFast);
     virtual Bool_t  CheckMapConsistency();
@@ -66,4 +66,4 @@ public:
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

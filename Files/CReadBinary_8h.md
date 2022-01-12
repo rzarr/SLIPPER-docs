@@ -60,6 +60,13 @@ Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx).
 #define DBG 1
 
 class CReadBinary {
+private:
+    //Local variables and indices
+    int garbage;
+    int b, chn, chn_index;
+    double t1, t2, dt;
+
+protected:
     //Main control and data variables
     int Nev;                                                    
     std::vector<WDBBIN> _bins;                                  
@@ -94,10 +101,6 @@ class CReadBinary {
     Float_t* _TDCTime;                                          
     std::map<int, int>* _TDCchMap;                              
 
-    //Local variables and indices
-    int garbage;
-    int b, chn, chn_index;
-    double t1, t2, dt;
 
     Bool_t      ReadTDCData(FILE *f);
     void        ReadWDBEvent(FILE *f);
@@ -109,7 +112,7 @@ class CReadBinary {
     void        FillHistoTGEN(TH2F* hTGEN);
     void        FillHistoTrigPattern(uint64_t TriggerPattern);
 
-    public:
+public:
     CReadBinary(std::vector<CWaveFormContainer*>* wdb_data_ptr, std::vector<TCBDATA*>* tcb_data_ptr, std::map<UShort_t, Int_t>* _WDBIdToIdMap, std::map<UShort_t, Int_t>* ActiveBoards, Float_t* TDCTime, std::map<int, int>* TDCchMap, TH2F* hTGEN_MB, TH2F* hTGEN_frag, TH1I* hTriggerPattern, TH1I* hTriggerRates);
     virtual ~CReadBinary();
     void        CheckBinaryFileHeader(FILE* f);
@@ -130,4 +133,4 @@ class CReadBinary {
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000

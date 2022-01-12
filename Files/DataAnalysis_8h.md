@@ -43,6 +43,7 @@ Header of [DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx).
 
 class DataAnalysis
 {
+protected:
     Int_t RearBar;                                      
     Int_t FrontBar;                                     
 
@@ -88,7 +89,7 @@ class DataAnalysis
     TF1* FitGauss(TH1F *hist);
     void AnalyzeDeltaT();
 
-    public:
+public:
     DataAnalysis();
     void DoAll(TString InputFileName, TString OutputFileName);
 
@@ -99,4 +100,4 @@ class DataAnalysis
 
 -------------------------------
 
-Updated on 2021-12-30 at 11:00:09 +0000
+Updated on 2022-01-12 at 10:56:23 +0000
