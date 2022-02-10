@@ -453,6 +453,17 @@ void CWaveFormContainer::MedianFilter(Int_t channel)
 }
 
 
+Float_t CWaveFormContainer::GetSCTotalCharge(std::vector<Int_t>* Channels)
+{
+    Float_t charge = 0;
+    for(std::vector<Int_t>::iterator itCh = Channels->begin(); itCh != Channels->end(); ++itCh)
+        charge += GetCharge(*itCh);
+    
+    return charge;
+}
+
+
+
 Float_t CWaveFormContainer::GetTimeSC(std::vector<Int_t>* Channels, UShort_t BoardId, Int_t event, TFile* fOut)
 {
     //Declare the arrays for the sum of the WFs
@@ -465,6 +476,7 @@ Float_t CWaveFormContainer::GetTimeSC(std::vector<Int_t>* Channels, UShort_t Boa
     {
         for(std::vector<Int_t>::iterator itCh = Channels->begin(); itCh != Channels->end(); ++itCh)
             SaveWF(BoardId, *itCh, event, fOut, "SC", "");
+        CheckForPileUp(&SC_Sum_W, &SC_Sum_T, event, fOut);
     }
 
     //Analyze the final WF
@@ -608,13 +620,14 @@ void CWaveFormContainer::SumSCWavefoms(std::vector<Int_t>* Channels, std::vector
         SC_Sum_T->push_back(data.t[0][0] + (sum_start_bin + i)*time_step);
     }
 
+    Float_t *x_down, *x_up, *y_down, *y_up;
     //Cycle on the channels to check their "goodness" and add them to the final WF
     for(std::vector<Int_t>::iterator itCh = Channels->begin(); itCh != Channels->end(); ++itCh)
     {
-        Float_t* x_down = &data.t[*itCh][SCSUMSTARTBIN];
-        Float_t* x_up = &data.t[*itCh][SCSUMSTARTBIN + 1];
-        Float_t* y_down = &data.w[*itCh][SCSUMSTARTBIN];
-        Float_t* y_up = &data.w[*itCh][SCSUMSTARTBIN + 1];
+        x_down = &data.t[*itCh][SCSUMSTARTBIN];
+        x_up = &data.t[*itCh][SCSUMSTARTBIN + 1];
+        y_down = &data.w[*itCh][SCSUMSTARTBIN];
+        y_up = &data.w[*itCh][SCSUMSTARTBIN + 1];
         Float_t value = 0;
         Int_t current_ch_bin = 0;
         for(Int_t i = 0; i<sum_bin_length; ++i)
@@ -637,6 +650,46 @@ void CWaveFormContainer::SumSCWavefoms(std::vector<Int_t>* Channels, std::vector
     }
 }
 
+
+Bool_t CWaveFormContainer::CheckForPileUp(std::vector<Float_t>* w_ptr, std::vector<Float_t>* t_ptr,Int_t event, TFile* fOut)
+{
+    std::vector<Float_t> Der_W, Der_T;
+
+    Float_t* x_down = &t_ptr->at(0);
+    Float_t* x_up = &t_ptr->at(6);
+    Float_t* y_down = &w_ptr->at(0);
+    Float_t* y_up = &w_ptr->at(6);
+
+    for(int i = 0; i < w_ptr->size() - 7; ++i)
+    {
+        Der_T.push_back( *(x_down + 3) );
+        Der_W.push_back( 1E-9*(*y_up - *y_down)/(*x_up - *x_down) );
+        x_down++;
+        x_up++;
+        y_down++;
+        y_up++;
+    }
+
+    //Rescale time for the plot
+    for(int i = 0; i < Der_T.size(); ++i)
+        Der_T[i] *= 1E9;
+
+    //Save some other graphs if in debug mode
+    TGraph* WaveGraph = new TGraph(Der_T.size(), &Der_T[0], &Der_W[0]);
+
+    if(!fOut->GetDirectory(Form("WavesSC/Event_%d", event)))
+    {
+        fOut->mkdir(Form("WavesSC/Event_%d", event));
+    }
+    fOut->cd(Form("WavesSC/Event_%d", event));
+    WaveGraph->SetTitle("SC WF der; Time [ns]; Derivative [V/ns]");
+    WaveGraph->SetLineWidth(2);
+    WaveGraph->SetLineColor(kBlack);
+    WaveGraph->Write("SC_WAVE_DER");
+    delete WaveGraph;
+
+    return true;
+}
 
 
 Float_t CWaveFormContainer::GetCLKPhase(Int_t channel, UShort_t board, Int_t event, TFile* fOut)
@@ -786,4 +839,4 @@ void CWaveFormContainer::SaveWF(Int_t board, Int_t channel, Int_t event, TFile *
 
 -------------------------------
 
-Updated on 2022-01-12 at 16:47:44 +0000
+Updated on 2022-02-10 at 11:12:25 +0000

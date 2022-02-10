@@ -231,7 +231,7 @@ Threshold for Costant Fraction Discriminator in SC time calculation.
 ### define SCBOARD
 
 ```cpp
-#define SCBOARD 173
+#define SCBOARD 27
 ```
 
 Serial number of the SC WaveDREAM board. 
@@ -521,7 +521,7 @@ Maximum expected calibrated energy loss [MeV].
 #define SCSUMSTARTBIN 100                   
 #define SCSUMSTOPBIN 700                    
 #define SCCFDTHRESHOLD 0.2                  
-#define SCBOARD 173                         
+#define SCBOARD 27                          
 
 //Range of CLK analysis
 #define CLKSTARTBIN 500                     
@@ -578,4 +578,4 @@ static std::map<ParticleType, std::string> ParticleName={{None,"None"},{Proton,"
 
 -------------------------------
 
-Updated on 2022-01-12 at 16:47:44 +0000
+Updated on 2022-02-10 at 11:12:25 +0000

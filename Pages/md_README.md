@@ -10,9 +10,9 @@ title: User Manual
 
 # Stand-aLone Identification of Particles through Partial Event Reconstruction (v3.0)
 
-This is the version 3.0 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/" and one with configuration files "config/".
+This is the version 3.0 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
 
-**N.B.: Each time a new acquisition is processed, the associated ChannelMap.xml, MCTable.txt and src/Parameters.h should be carefully checked and tuned.**
+**N.B.: Each time a new acquisition is processed, the associated configuration files (config/ChannelMap*.xml, config/MCTable*.txt and src/Utils/Parameters.h) should be carefully checked and tuned.**
 
 
 ## Requirements
@@ -71,17 +71,15 @@ SLIPPER can be easily installed and run on the Bologna Tier3. The procedure is s
 
 # Doxygen documentation for developers
 
-From version 3.0, the code has also been conceived to produce a developer documentation. **To access this feature, the [Doxygen](https://www.doxygen.nl/index.html) toolkit is mandatory**.
+From version 3.0, the code has also been conceived to produce a developer documentation and update it each time a new push to the master branch is preformed. The developer documentation is currently hosted on GitBook at the following link: [https://roberto-zarrella2.gitbook.io/slipper-developer-manual/](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/).
 
-Once Doxygen is installed, the documentation can be created by running the following command in the "slipper" directory: 
+Alternatively, the documentation can be produced locally by the developer using the **[Doxygen](https://www.doxygen.nl/index.html)** toolkit. Once Doxygen is installed, the documentation can be created by running the following command in the "slipper" directory: 
 
 ```cpp
->> path/to/doxygen Doxyfile
+>> path/to/doxygen docs/Doxyfile
 ```
 
- This command will create a folder named "docs/" containing all the documentation. To access the documentation, open the file "docs/html/index.html" using any browser.
-
-Alternatively, the developer documentation is currently hosted on GitBook at the following link: [https://roberto-zarrella2.gitbook.io/slipper-developer-manual/](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/)
+ This command will create a folder named "docs_temp/" containing all the documentation. To access the documentation, open the file "docs_temp/html/index.html" using any browser.
 
 
 # XML configuration file: Channel Map
@@ -338,7 +336,7 @@ The "neutrons" flag needs to be used ONLY if the user wants to save the decoded 
 
 
 
-* SC_Timestamp, TriggerType, IsFRagTriggerOn, EventNumber and Tags as defined above
+* SC_Timestamp, TriggerType, IsFragTriggerOn, EventNumber and Tags as defined above
 * A branch with WFs from neutron slow channels
 * A branch with WFs from neutron fast channels
 For each WF, the quantities saved are:
@@ -500,4 +498,4 @@ From version 2.5, a first analysis script has been implemented. This is meant to
 
 -------------------------------
 
-Updated on 2022-01-12 at 16:47:44 +0000
+Updated on 2022-02-10 at 11:12:25 +0000
