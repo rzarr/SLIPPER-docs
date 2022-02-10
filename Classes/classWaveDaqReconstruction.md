@@ -70,7 +70,6 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | std::vector< [CWaveFormContainer](/Classes/classCWaveFormContainer.md) * > | **[_WaveFormContainer](/Classes/classWaveDaqReconstruction.md#variable--waveformcontainer)** <br>Container for WaveDREAM raw waveforms and signal processing methods.  |
 | std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > | **[_TCBdata](/Classes/classWaveDaqReconstruction.md#variable--tcbdata)** <br>Container for TCB raw data.  |
 | Float_t | **[_SCTime](/Classes/classWaveDaqReconstruction.md#variable--sctime)** <br>SC raw time [ns].  |
-| Float_t | **[_SCTotCharge](/Classes/classWaveDaqReconstruction.md#variable--sctotcharge)** <br>SC raw total energy loss [V*ns].  |
 | Float_t | **[_SCPedestal](/Classes/classWaveDaqReconstruction.md#variable--scpedestal)** <br>SC channel pedestal [V] **DEBUG ONLY** |
 | Float_t | **[_SCPedestalRMS](/Classes/classWaveDaqReconstruction.md#variable--scpedestalrms)** <br>SC channel pedestal RMS [V] **DEBUG ONLY** |
 | Float_t | **[_SCAmplitude](/Classes/classWaveDaqReconstruction.md#variable--scamplitude)** <br>SC channel amplitude (<0) [V] **DEBUG ONLY** |
@@ -344,7 +343,6 @@ Analysis of SC Waveforms (WFs)
 
 This function performs the whole anlysis of SC waveforms, which consists of two steps:
 
-* The energy loss in single SC channels is calculated and saved in a global variable
 * The channels of the SC are added together in a single WF.
 * The timestamp of the event is then evaluated applying the CFD method to this WF.
 
@@ -735,14 +733,6 @@ Float_t _SCTime;
 ```
 
 SC raw time [ns]. 
-
-### variable _SCTotCharge
-
-```cpp
-Float_t _SCTotCharge;
-```
-
-SC raw total energy loss [V*ns]. 
 
 ### variable _SCPedestal
 
@@ -1434,4 +1424,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-02-10 at 11:57:30 +0000
+Updated on 2022-02-10 at 12:05:07 +0000

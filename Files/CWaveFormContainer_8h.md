@@ -71,10 +71,8 @@ public:
     virtual Float_t     GetRiseTime(Int_t channel);
     
     //_SC functions
-    virtual Float_t     GetSCTotalCharge(std::vector<Int_t>* Channels);
     virtual Float_t     GetTimeSC(std::vector<Int_t>* Channels, UShort_t BoardId = 0, Int_t event = -1, TFile* fOut = nullptr);
     virtual Float_t     GetTimeSC_Linear(std::vector<Int_t>* Channels);
-    virtual Bool_t      CheckForPileUp(std::vector<Float_t>* w_ptr, std::vector<Float_t>* t_ptr, Int_t event=-1, TFile* fOut=nullptr);
 
     //TW functions
     virtual Float_t     GetTimeCFD(Int_t channel, UShort_t board = 0, Int_t event=-1, TFile* fOut=nullptr, TString detector="");
@@ -93,4 +91,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-02-10 at 11:57:31 +0000
+Updated on 2022-02-10 at 12:05:07 +0000

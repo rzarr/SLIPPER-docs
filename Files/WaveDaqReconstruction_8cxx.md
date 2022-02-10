@@ -242,7 +242,6 @@ void WaveDaqReconstruction::SetOutputDataToZero()
     if( _WDChannelMap.IsSCMapLoaded() )
     {
         _SCTime = 0;
-        _SCTotCharge = 0;
         _SC_CLK_phase = 0;
         if(_Debug)
         {
@@ -355,11 +354,7 @@ void WaveDaqReconstruction::SetOutputTreeBranches(TTree* RecTree)
     }
 
     // SC timestamps
-    if( _WDChannelMap.IsSCMapLoaded() )
-    {
-        RecTree->Branch("SC_Timestamp",&_SCTime,"SC_Timestamp/F");
-        RecTree->Branch("SC_TotCharge",&_SCTotCharge,"SC_TotCharge/F");
-    }
+    if( _WDChannelMap.IsSCMapLoaded() ) RecTree->Branch("SC_Timestamp",&_SCTime,"SC_Timestamp/F");
 
     // Waveform level data
     if(_Debug)
@@ -804,9 +799,8 @@ void WaveDaqReconstruction::AnalyzeWaveformsSC(UShort_t board)
     Int_t boardindex = _BoardIdToIdMap[board];
     std::vector<Int_t> SCChannels = _WDChannelMap.GetSCChannelMap()->GetSCChannels();
 
-    _SCTotCharge = _WaveFormContainer[boardindex]->GetSCTotalCharge(&SCChannels);
 
-    if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
+    if(_Debug &&  _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
     {
         _SCTime = _WaveFormContainer[boardindex]->GetTimeSC(&SCChannels, board, _Event, fout);
         _SC_CLK_phase = _WaveFormContainer[boardindex]->GetCLKPhase(16, board, _Event, fout);
@@ -827,6 +821,7 @@ void WaveDaqReconstruction::AnalyzeWaveformsSC(UShort_t board)
             _SCAmplitude[*itCh] = _WaveFormContainer[boardindex]->GetAmplitude(*itCh);
             _SCCharge[*itCh] = _WaveFormContainer[boardindex]->GetCharge(*itCh);
             _SCRiseTime[*itCh] = _WaveFormContainer[boardindex]->GetRiseTime(*itCh);
+
         }
     }
 }
@@ -1287,4 +1282,4 @@ void WaveDaqReconstruction::SetGain(Float_t Gain){_Gain=Gain;}
 
 -------------------------------
 
-Updated on 2022-02-10 at 11:57:31 +0000
+Updated on 2022-02-10 at 12:05:07 +0000

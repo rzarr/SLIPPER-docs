@@ -23,10 +23,8 @@ Class that handles all the processing of raw WaveDAQ waveforms.  [More...](#deta
 | virtual Float_t | **[GetAmplitude](/Classes/classCWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
 | virtual Float_t | **[GetCharge](/Classes/classCWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =[CHARGESTARTBIN](/Files/Parameters_8h.md#define-chargestartbin), Int_t stop_bin =[CHARGESTOPBIN](/Files/Parameters_8h.md#define-chargestopbin))<br>Find the integral charge of the waveform.  |
 | virtual Float_t | **[GetRiseTime](/Classes/classCWaveFormContainer.md#function-getrisetime)**(Int_t channel)<br>Calucalte the 10% - 90% rise time of the waveform.  |
-| virtual Float_t | **[GetSCTotalCharge](/Classes/classCWaveFormContainer.md#function-getsctotalcharge)**(std::vector< Int_t > * Channels)<br>Compute and get the total raw energy loss in the SC.  |
 | virtual Float_t | **[GetTimeSC](/Classes/classCWaveFormContainer.md#function-gettimesc)**(std::vector< Int_t > * Channels, UShort_t BoardId =0, Int_t event =-1, TFile * fOut =nullptr)<br>Analyze SC waveforms to extract its timestamp.  |
 | virtual Float_t | **[GetTimeSC_Linear](/Classes/classCWaveFormContainer.md#function-gettimesc-linear)**(std::vector< Int_t > * Channels)<br>Analyze SC waveforms and extract the SC time with a linear extrapolation to the baseline.  |
-| virtual Bool_t | **[CheckForPileUp](/Classes/classCWaveFormContainer.md#function-checkforpileup)**(std::vector< Float_t > * w_ptr, std::vector< Float_t > * t_ptr, Int_t event =-1, TFile * fOut =nullptr)<br>Check for PileUp in the Start Counter signal.  |
 | virtual Float_t | **[GetTimeCFD](/Classes/classCWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
 | virtual Float_t | **[GetTimeLinear](/Classes/classCWaveFormContainer.md#function-gettimelinear)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with a linear extrapolation.  |
 | virtual Float_t | **[GetChargeCALO](/Classes/classCWaveFormContainer.md#function-getchargecalo)**(Int_t channel)<br>Find the integral charge of a Calorimeter waveform.  |
@@ -221,26 +219,6 @@ Calucalte the 10% - 90% rise time of the waveform.
 
 **Return**: Rise time of the signal [ns] 
 
-### function GetSCTotalCharge
-
-```cpp
-virtual Float_t GetSCTotalCharge(
-    std::vector< Int_t > * Channels
-)
-```
-
-Compute and get the total raw energy loss in the SC. 
-
-**Parameters**: 
-
-  * **Channels** Pointer to vector of SC channel 
-
-
-**Return**: SC total raw energy loss 
-
-The energy loss of single SC channels is computed as the integral of the WaveForms and then all the values are added together 
-
-
 ### function GetTimeSC
 
 ```cpp
@@ -286,21 +264,6 @@ Analyze SC waveforms and extract the SC time with a linear extrapolation to the 
 
 This function is the new template one for linear extrapolation to the baseline. CURRENTLY NOT USED 
 
-
-### function CheckForPileUp
-
-```cpp
-virtual Bool_t CheckForPileUp(
-    std::vector< Float_t > * w_ptr,
-    std::vector< Float_t > * t_ptr,
-    Int_t event =-1,
-    TFile * fOut =nullptr
-)
-```
-
-Check for PileUp in the Start Counter signal. 
-
-**Return**: True if there is PileUp in the event, false otherwise 
 
 ### function GetTimeCFD
 
@@ -549,4 +512,4 @@ Rise Time of the signals [ns].
 
 -------------------------------
 
-Updated on 2022-02-10 at 11:57:30 +0000
+Updated on 2022-02-10 at 12:05:07 +0000

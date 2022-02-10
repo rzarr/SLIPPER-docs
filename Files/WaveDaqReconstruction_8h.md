@@ -69,7 +69,6 @@ protected:
 
     //Start Counter variables
     Float_t _SCTime;                                                
-    Float_t _SCTotCharge;                                           
     Float_t _SCPedestal[NUMBEROFSCCHANNELS];                        
     Float_t _SCPedestalRMS[NUMBEROFSCCHANNELS];                     
     Float_t _SCAmplitude[NUMBEROFSCCHANNELS];                       
@@ -239,4 +238,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-02-10 at 11:57:31 +0000
+Updated on 2022-02-10 at 12:05:07 +0000
