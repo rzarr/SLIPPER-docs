@@ -19,7 +19,7 @@ User Manual
 # Stand-aLone Identification of Particles through Partial Event Reconstruction (v3.0)
 This is the version 3.0 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
 
-**N.B.: Each time a new acquisition is processed, the associated configuration files (config/ChannelMap*.xml, config/MCTable*.txt and src/Utils/Parameters.h) should be carefully checked and tuned.**
+**N.B.: Each time a new acquisition is processed, the associated configuration files (config/ChannelMap\*.xml, config/MCTable\*.txt and src/Utils/Parameters.h) should be carefully checked and tuned.**
 
 ## Requirements
 In order to be able to compile this SW you will need to install:
@@ -430,4 +430,4 @@ As of today, the script produces a series of histograms to quickly check the cor
 
 -------------------------------
 
-Updated on 2022-02-10 at 11:12:25 +0000
+Updated on 2022-02-10 at 11:57:31 +0000
