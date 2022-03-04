@@ -24,22 +24,20 @@ File containing all methods of [CReadBinary](/Classes/classCReadBinary.md) class
 
 /*-----------------------------------------------------------------------------*/
 
-CReadBinary::CReadBinary(std::vector<CWaveFormContainer*>* wdb_data_ptr, std::vector<TCBDATA*>* tcb_data_ptr, std::map<UShort_t, Int_t>* _WDBIdtoIdMap, std::map<UShort_t, Int_t>* ActiveBoards, Float_t* TDCTime, std::map<int, int>* TDCchMap, TH2F* hTGEN_MB, TH2F* hTGEN_frag, TH1I* hTriggerPattern, TH1I* hTriggerRates) :
-    _IsFragTriggerOn(false)
+CReadBinary::CReadBinary(std::vector<WaveFormContainer*>* wdb_data_ptr, std::vector<TCBDATA*>* tcb_data_ptr, WDChannelMap* WDchMap, std::map<UShort_t, Int_t>* _WDBIdtoIdMap, std::map<UShort_t, Int_t>* ActiveBoards) :
+    _IsFragTriggerOn(false),
+    _hTGEN_MB(0x0),
+    _hTGEN_frag(0x0),
+    _hTriggerPattern(0x0),
+    _hTriggerRates(0x0)
 {
     Nev = 0;
     
     _data_wdb = wdb_data_ptr;
     _data_tcb = tcb_data_ptr;
+    _WDChannelMap = WDchMap;
     _wdb_index = _WDBIdtoIdMap;
     _ActiveBoards = ActiveBoards;
-
-    _TDCTime = TDCTime;
-    _TDCchMap = TDCchMap;
-    _hTGEN_MB = hTGEN_MB;
-    _hTGEN_frag = hTGEN_frag;
-    _hTriggerPattern = hTriggerPattern;
-    _hTriggerRates = hTriggerRates;
 };
 
 
@@ -52,6 +50,15 @@ CReadBinary::~CReadBinary()
     
     _data_tcb->clear();
     delete _data_tcb;
+}
+
+
+void CReadBinary::SetHistograms(TH2F* hTGEN_MB, TH2F* hTGEN_frag, TH1I* hTriggerPattern, TH1I* hTriggerRates)
+{
+    _hTGEN_MB = hTGEN_MB;
+    _hTGEN_frag = hTGEN_frag;
+    _hTriggerPattern = hTriggerPattern;
+    _hTriggerRates = hTriggerRates;
 }
 
 
@@ -102,9 +109,29 @@ void CReadBinary::LoadWaveDreamTimeCalibration(FILE* f)
         {
             (*_wdb_index)[bh.board_serial_number] = _wdb_index->size();
             _bins.resize(_bins.size() + 1);
+
+            if( bh.board_serial_number == _WDChannelMap->GetSCChannelMap()->GetSCBoard() )
+            {
+                WaveFormContainer* dummy = new SCWaveFormContainer();
+                (*_data_wdb).push_back(dummy);
+            }
+            else if( _WDChannelMap->GetTWChannelMap()->IsBoardLoaded(bh.board_serial_number) )
+            {
+                WaveFormContainer* dummy = new TWWaveFormContainer();
+                (*_data_wdb).push_back(dummy);
+            }
+            else if( _WDChannelMap->GetCALOChannelMap()->IsBoardLoaded(bh.board_serial_number) )
+            {
+                WaveFormContainer* dummy = new CALOWaveFormContainer();
+                (*_data_wdb).push_back(dummy);
+            }
+            else
+            {
+                WaveFormContainer* dummy = new WaveFormContainer();
+                (*_data_wdb).push_back(dummy);
+            }
             
-            (*_data_wdb).push_back(new CWaveFormContainer());
-            
+
             //define board index just for shorthand lines
             UShort_t board_id = _wdb_index->at(bh.board_serial_number);
 
@@ -294,7 +321,7 @@ void CReadBinary::CheckRangeOverflow(Float_t* w_ptr)
 {
     for (int i=1 ; i < WAVEFORMBINS ; i++) 
     {
-        if( fabs(*w_ptr - *(w_ptr-1)) > 0.5 )
+        if( fabs(*w_ptr - *(w_ptr-1)) > 0.7 )
         {
             if( *w_ptr > *(w_ptr - 1) )
                 *w_ptr -= 1.;
@@ -430,7 +457,7 @@ void CReadBinary::FillHistoTrigPattern(uint64_t TriggerPattern)
 
 void CReadBinary::AlignTriggerCell()
 {
-    std::vector<CWaveFormContainer*>::iterator itWDB;
+    std::vector<WaveFormContainer*>::iterator itWDB;
     
     int SCboard_id = _wdb_index->at( (UShort_t)SCBOARD );
     t1 = _data_wdb->at(SCboard_id)->data.t[16][(WAVEFORMBINS - drsch[16].trigger_cell) % WAVEFORMBINS];
@@ -456,7 +483,7 @@ void CReadBinary::AlignTriggerCell()
 
 void CReadBinary::AlignSignalsRight()
 {
-    std::vector<CWaveFormContainer*>::iterator itWDB;
+    std::vector<WaveFormContainer*>::iterator itWDB;
     
     int SCboard_id = _wdb_index->at( (UShort_t)SCBOARD );
     t1 = _data_wdb->at(SCboard_id)->data.t[16][WAVEFORMBINS - 1];
@@ -595,4 +622,4 @@ void CReadBinary::ResetFragTrigger()
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

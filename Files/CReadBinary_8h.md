@@ -54,7 +54,10 @@ Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx).
 
 #include <string.h>
 #include <iostream>
-#include "CWaveFormContainer.h"
+#include "SCWaveFormContainer.h"
+#include "TWWaveFormContainer.h"
+#include "CALOWaveFormContainer.h"
+#include "WDChannelMap.h"
 
 #define ALLINFO 0
 #define DBG 1
@@ -70,8 +73,9 @@ protected:
     //Main control and data variables
     int Nev;                                                    
     std::vector<WDBBIN> _bins;                                  
-    std::vector<CWaveFormContainer*>* _data_wdb;                
+    std::vector<WaveFormContainer*>* _data_wdb;                 
     std::vector<TCBDATA*>* _data_tcb;                           
+    WDChannelMap* _WDChannelMap;                                
     std::map<UShort_t, int>* _wdb_index, _tcb_index;            
     std::map<UShort_t, int>* _ActiveBoards;                     
     TH2F* _hTGEN_MB;                                            
@@ -113,11 +117,14 @@ protected:
     void        FillHistoTrigPattern(uint64_t TriggerPattern);
 
 public:
-    CReadBinary(std::vector<CWaveFormContainer*>* wdb_data_ptr, std::vector<TCBDATA*>* tcb_data_ptr, std::map<UShort_t, Int_t>* _WDBIdToIdMap, std::map<UShort_t, Int_t>* ActiveBoards, Float_t* TDCTime, std::map<int, int>* TDCchMap, TH2F* hTGEN_MB, TH2F* hTGEN_frag, TH1I* hTriggerPattern, TH1I* hTriggerRates);
+    CReadBinary(std::vector<WaveFormContainer*>* wdb_data_ptr, std::vector<TCBDATA*>* tcb_data_ptr, WDChannelMap* WDchMap, std::map<UShort_t, Int_t>* _WDBIdToIdMap, std::map<UShort_t, Int_t>* ActiveBoards);
+
     virtual ~CReadBinary();
     void        CheckBinaryFileHeader(FILE* f);
     void        LoadWaveDreamTimeCalibration(FILE* f);
     Int_t       DecodeEvent(FILE* f);
+
+    void        SetHistograms(TH2F* hTGEN_MB, TH2F* hTGEN_frag, TH1I* hTriggerPattern, TH1I* hTriggerRates);
     void        FillHistoTrigRates();
 
     Bool_t      IsFragTriggerOn();
@@ -133,4 +140,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

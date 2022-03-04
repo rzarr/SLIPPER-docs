@@ -10,7 +10,7 @@ title: Stand-aLone Identification of Particles through Partial Event Reonstructi
 
 # Project     : FOOT (FragmentatiOn Of Target)
 
-Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [_bitbucket page_](https://bitbucket.org/rzarrella/slipper/src/master/). At this stage, the code handles signals from the:
+Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [_baltig page_](https://baltig.infn.it/zarrella/slipper/). At this stage, the code handles signals from the:
 
 * Start Counter (SC)
 * TOF-Wall (TW)
@@ -25,6 +25,14 @@ Software for stand-alone signal processing of the WaveDAQ system. For a detailed
 * Luca Galli (LC) -> First implementation
 * Marco Montefiori (MM) -> First implementation of WaveDAQ histograms and [DataAnalysis](/Classes/classDataAnalysis.md) class
 * Roberto Zarrella (RZ) -> Inclusion of all detectors and re-ordering of code; Currently main developer
+
+## Current developers
+
+
+
+* Esther Ciarrocchi (EC)
+* Aafke Kraan (AK)
+* Roberto Zarrella (Mantainer)
 
 ## Content
 
@@ -48,4 +56,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

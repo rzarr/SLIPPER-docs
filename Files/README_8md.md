@@ -21,6 +21,13 @@ This is the version 3.0 of the stand-alone SW used by the Pisa group of the FOOT
 
 **N.B.: Each time a new acquisition is processed, the associated configuration files (config/ChannelMap\*.xml, config/MCTable\*.txt and src/Utils/Parameters.h) should be carefully checked and tuned.**
 
+Branches (updated 24/02/2022):
+- master
+- debora (DEvelopment Branch Of Reconstruction Algorithm)
+
+Tags:
+- CNAO2021 -> For processing of CNAO run in 11/2021
+
 ## Requirements
 In order to be able to compile this SW you will need to install:
 
@@ -430,4 +437,4 @@ As of today, the script produces a series of histograms to quickly check the cor
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

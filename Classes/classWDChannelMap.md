@@ -25,6 +25,23 @@ Main class that handles the WaveDAQ Channel Map.  [More...](#detailed-descriptio
 | Bool_t | **[IsCALOMapLoaded](/Classes/classWDChannelMap.md#function-iscalomaploaded)**()<br>Check if the CALO Channel Map has been loaded.  |
 | Bool_t | **[IsNeutronMapLoaded](/Classes/classWDChannelMap.md#function-isneutronmaploaded)**()<br>Check if the Neutron Channel Map has been loaded.  |
 
+## Protected Functions
+
+|                | Name           |
+| -------------- | -------------- |
+| void | **[ClearChannelMap](/Classes/classWDChannelMap.md#function-clearchannelmap)**()<br>Clear the WaveDAQ channel map.  |
+| Bool_t | **[CheckMapConsistency](/Classes/classWDChannelMap.md#function-checkmapconsistency)**()<br>Check consistency of the detector maps between them.  |
+
+## Protected Attributes
+
+|                | Name           |
+| -------------- | -------------- |
+| [SCChannelMap](/Classes/classSCChannelMap.md) | **[_SCChannelMap](/Classes/classWDChannelMap.md#variable--scchannelmap)** <br>Start Counter Channel Map.  |
+| [TWChannelMap](/Classes/classTWChannelMap.md) | **[_TWChannelMap](/Classes/classWDChannelMap.md#variable--twchannelmap)** <br>TOF-Wall Channel Map.  |
+| [CALOChannelMap](/Classes/classCALOChannelMap.md) | **[_CALOChannelMap](/Classes/classWDChannelMap.md#variable--calochannelmap)** <br>Calorimeter Channel Map.  |
+| [NeutronChannelMap](/Classes/classNeutronChannelMap.md) | **[_NeutronChannelMap](/Classes/classWDChannelMap.md#variable--neutronchannelmap)** <br>Neutron detectors Channel Map.  |
+| Bool_t | **[_ChannelMapIsOk](/Classes/classWDChannelMap.md#variable--channelmapisok)** <br>Boolean flag for WaveDAQ Channel Map status.  |
+
 ## Detailed Description
 
 ```cpp
@@ -153,6 +170,71 @@ Check if the Neutron Channel Map has been loaded.
 
 **Return**: True if the map is loaded, False otherwise 
 
+## Protected Functions Documentation
+
+### function ClearChannelMap
+
+```cpp
+void ClearChannelMap()
+```
+
+Clear the WaveDAQ channel map. 
+
+All single detector maps are deleted 
+
+
+### function CheckMapConsistency
+
+```cpp
+Bool_t CheckMapConsistency()
+```
+
+Check consistency of the detector maps between them. 
+
+**Return**: True if the channel maps of all detectors are fine 
+
+## Protected Attributes Documentation
+
+### variable _SCChannelMap
+
+```cpp
+SCChannelMap _SCChannelMap;
+```
+
+Start Counter Channel Map. 
+
+### variable _TWChannelMap
+
+```cpp
+TWChannelMap _TWChannelMap;
+```
+
+TOF-Wall Channel Map. 
+
+### variable _CALOChannelMap
+
+```cpp
+CALOChannelMap _CALOChannelMap;
+```
+
+Calorimeter Channel Map. 
+
+### variable _NeutronChannelMap
+
+```cpp
+NeutronChannelMap _NeutronChannelMap;
+```
+
+Neutron detectors Channel Map. 
+
+### variable _ChannelMapIsOk
+
+```cpp
+Bool_t _ChannelMapIsOk;
+```
+
+Boolean flag for WaveDAQ Channel Map status. 
+
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

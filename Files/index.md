@@ -13,8 +13,6 @@ title: Files
     * **file [src/Analysis.cxx](/Files/Analysis_8cxx.md#file-analysis.cxx)** <br>File containing the main function of the Analysis executable. 
     * **file [src/CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx)** <br>File containing all methods of [CReadBinary](/Classes/classCReadBinary.md) class. 
     * **file [src/CReadBinary.h](/Files/CReadBinary_8h.md#file-creadbinary.h)** <br>Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx). 
-    * **file [src/CWaveFormContainer.cxx](/Files/CWaveFormContainer_8cxx.md#file-cwaveformcontainer.cxx)** <br>File containing all methods used for Waveform processing. 
-    * **file [src/CWaveFormContainer.h](/Files/CWaveFormContainer_8h.md#file-cwaveformcontainer.h)** <br>Header of [CWaveFormContainer.cxx](/Files/CWaveFormContainer_8cxx.md#file-cwaveformcontainer.cxx). 
     * **file [src/Calibration.cxx](/Files/Calibration_8cxx.md#file-calibration.cxx)** <br>File containing the main function of the Calibration executable. 
     * **file [src/DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx)** <br>File containing all methods of [DataAnalysis](/Classes/classDataAnalysis.md) class. 
     * **file [src/DataAnalysis.h](/Files/DataAnalysis_8h.md#file-dataanalysis.h)** <br>Header of [DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx). 
@@ -46,9 +44,19 @@ title: Files
         * **file [src/Utilities/Message.cxx](/Files/Message_8cxx.md#file-message.cxx)** <br>File containing all methods of [Message](/Namespaces/namespaceMessage.md) namespace. 
         * **file [src/Utilities/Message.h](/Files/Message_8h.md#file-message.h)** <br>Header of [Message.cxx](/Files/Message_8cxx.md#file-message.cxx). 
         * **file [src/Utilities/Parameters.h](/Files/Parameters_8h.md#file-parameters.h)** <br>File containing all Parameters used in the processing and calibration executables. 
+    * **dir [src/WFProcessing](/Files/dir_cee828f8bfe1e9ceeff45a2da91f8dbd.md#dir-src/wfprocessing)** 
+        * **file [src/WFProcessing/CALOWaveFormContainer.cxx](/Files/CALOWaveFormContainer_8cxx.md#file-calowaveformcontainer.cxx)** <br>File containing all methods used for Calorimeter Waveform processing. 
+        * **file [src/WFProcessing/CALOWaveFormContainer.h](/Files/CALOWaveFormContainer_8h.md#file-calowaveformcontainer.h)** <br>Header of [CALOWaveFormContainer.cxx](/Files/CALOWaveFormContainer_8cxx.md#file-calowaveformcontainer.cxx). 
+        * **file [src/WFProcessing/LinkDef.h](/Files/WFProcessing_2LinkDef_8h.md#file-linkdef.h)** <br>LinkDef of WFProcessing folder. 
+        * **file [src/WFProcessing/SCWaveFormContainer.cxx](/Files/SCWaveFormContainer_8cxx.md#file-scwaveformcontainer.cxx)** <br>File containing all methods used for Start Counter Waveform processing. 
+        * **file [src/WFProcessing/SCWaveFormContainer.h](/Files/SCWaveFormContainer_8h.md#file-scwaveformcontainer.h)** <br>Header of [SCWaveFormContainer.cxx](/Files/SCWaveFormContainer_8cxx.md#file-scwaveformcontainer.cxx). 
+        * **file [src/WFProcessing/TWWaveFormContainer.cxx](/Files/TWWaveFormContainer_8cxx.md#file-twwaveformcontainer.cxx)** <br>File containing all methods used for TOF-Wall Waveform processing. 
+        * **file [src/WFProcessing/TWWaveFormContainer.h](/Files/TWWaveFormContainer_8h.md#file-twwaveformcontainer.h)** <br>Header of [TWWaveFormContainer.cxx](/Files/TWWaveFormContainer_8cxx.md#file-twwaveformcontainer.cxx). 
+        * **file [src/WFProcessing/WaveFormContainer.cxx](/Files/WaveFormContainer_8cxx.md#file-waveformcontainer.cxx)** <br>File containing all methods used for Waveform processing. 
+        * **file [src/WFProcessing/WaveFormContainer.h](/Files/WaveFormContainer_8h.md#file-waveformcontainer.h)** <br>Header of [WaveFormContainer.cxx](/Files/WaveFormContainer_8cxx.md#file-waveformcontainer.cxx). 
 
 
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

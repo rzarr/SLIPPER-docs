@@ -36,7 +36,6 @@ Header of [WaveDaqReconstruction.cxx](/Files/WaveDaqReconstruction_8cxx.md#file-
 #include <TCanvas.h>
 #include "TGaxis.h"
 
-#include "CWaveFormContainer.h"
 #include "WDChannelMap.h"
 #include "CReadBinary.h"
 
@@ -45,13 +44,13 @@ class WaveDaqReconstruction
 {
 protected:
     //Output TFile
-    TFile* fout;                                                    
-    std::string OutputFileName;                                     
+    TFile* _fOut;                                                       
+    std::string _OutputFileName;                                        
+    std::string _InputFileName;                                         
 
     // Channel maps
     WDChannelMap _WDChannelMap;                                     
     TGlobalToBarChIDpairMap _GlobalToBarChIDpairMap;                
-    std::map<int, int> _TDCchMap;                                   
     
     // parameters
     Float_t _Gain;                                                  
@@ -63,12 +62,14 @@ protected:
 
     //Containers for binary file decoding and waveform analysis
     CReadBinary* _BinaryReader;                                     
-    std::vector<CWaveFormContainer*> _WaveFormContainer;            
+    std::vector<WaveFormContainer*> _WaveFormContainer;             
     std::vector<TCBDATA*> _TCBdata;                                 
 
 
     //Start Counter variables
+    Bool_t _IsPossiblePileUp;                                       
     Float_t _SCTime;                                                
+    Float_t _SCTotCharge;                                           
     Float_t _SCPedestal[NUMBEROFSCCHANNELS];                        
     Float_t _SCPedestalRMS[NUMBEROFSCCHANNELS];                     
     Float_t _SCAmplitude[NUMBEROFSCCHANNELS];                       
@@ -141,9 +142,6 @@ protected:
     Bool_t _NeutronOn;                                              
     Bool_t _SaveNeutrons;                                           
 
-    //TDC Timestamp
-    Float_t _TDCTime[4];                                            
-
     //Trigger variables
     Int_t _TriggerType;                                             
     Bool_t _IsFragTriggerOn;                                        
@@ -205,10 +203,10 @@ protected:
     void    PrintTriggerEfficiency();
 
     //Input/Output + checks
-    void    GetFileTags(std::string FileName); //Get the file tags from the name
-    void    SetOutputTreeBranches(TTree* RecTree); //Set the branches of the output tree
-    void    SetOutputNeutronWF(TTree* RecTree); //Set the branches of the output tree when neutron WFs are saved
-    void    SetOutputDataToZero(); //Initialize data of output tree to zero at the beginning of each cycle
+    void    GetFileTags(std::string FileName);
+    void    SetOutputTreeBranches(TTree* RecTree);
+    void    SetOutputNeutronWF(TTree* RecTree);
+    void    SetOutputDataToZero();
     void    CheckLoadedBoards();
 
     //Histograms
@@ -238,4 +236,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

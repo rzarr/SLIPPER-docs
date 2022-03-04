@@ -28,7 +28,6 @@ LinkDef of src folder.
 
 
 #pragma link C++ class CReadBinary+;
-#pragma link C++ class CWaveFormContainer+;
 #pragma link C++ class WaveDaqReconstruction+;
 #pragma link C++ class TOFWallCalibration+;
 #pragma link C++ class DataAnalysis+;
@@ -41,4 +40,4 @@ LinkDef of src folder.
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

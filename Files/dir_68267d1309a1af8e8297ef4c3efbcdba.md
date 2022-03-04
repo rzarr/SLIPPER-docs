@@ -13,6 +13,7 @@ title: src
 | -------------- |
 | **[src/ChannelMap](/Files/dir_f373e83ee03194f063cb71a08edbe6a6.md#dir-src/channelmap)**  |
 | **[src/Utilities](/Files/dir_ff383ddf1aa4eab0c4ce7910366d05a5.md#dir-src/utilities)**  |
+| **[src/WFProcessing](/Files/dir_cee828f8bfe1e9ceeff45a2da91f8dbd.md#dir-src/wfprocessing)**  |
 
 ## Files
 
@@ -22,8 +23,6 @@ title: src
 | **[src/Calibration.cxx](/Files/Calibration_8cxx.md#file-calibration.cxx)** <br>File containing the main function of the Calibration executable.  |
 | **[src/CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx)** <br>File containing all methods of [CReadBinary](/Classes/classCReadBinary.md) class.  |
 | **[src/CReadBinary.h](/Files/CReadBinary_8h.md#file-creadbinary.h)** <br>Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx).  |
-| **[src/CWaveFormContainer.cxx](/Files/CWaveFormContainer_8cxx.md#file-cwaveformcontainer.cxx)** <br>File containing all methods used for Waveform processing.  |
-| **[src/CWaveFormContainer.h](/Files/CWaveFormContainer_8h.md#file-cwaveformcontainer.h)** <br>Header of [CWaveFormContainer.cxx](/Files/CWaveFormContainer_8cxx.md#file-cwaveformcontainer.cxx).  |
 | **[src/DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx)** <br>File containing all methods of [DataAnalysis](/Classes/classDataAnalysis.md) class.  |
 | **[src/DataAnalysis.h](/Files/DataAnalysis_8h.md#file-dataanalysis.h)** <br>Header of [DataAnalysis.cxx](/Files/DataAnalysis_8cxx.md#file-dataanalysis.cxx).  |
 | **[src/LinkDef.h](/Files/LinkDef_8h.md#file-linkdef.h)** <br>LinkDef of src folder.  |
@@ -40,4 +39,4 @@ title: src
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

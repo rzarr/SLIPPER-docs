@@ -38,6 +38,7 @@ Header of [WDChannelMap.cxx](/Files/WDChannelMap_8cxx.md#file-wdchannelmap.cxx).
 // Overall WaveDAQ channel map that handles all the attached detectors
 class WDChannelMap
 {
+protected:
     SCChannelMap _SCChannelMap;             
     TWChannelMap _TWChannelMap;             
     CALOChannelMap _CALOChannelMap;         
@@ -64,4 +65,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

@@ -65,6 +65,7 @@ WaveDaqReconstruction::WaveDaqReconstruction()
 void WaveDaqReconstruction::RunReconstruction(std::string FileName, std::string TimeCalFileName, int nEv = -1)
 {
     //Set input file
+    _InputFileName = FileName;
     FILE* BinaryInputFilePtr = fopen(FileName.c_str(), "r");
     if(BinaryInputFilePtr == nullptr)
     {
@@ -87,7 +88,7 @@ void WaveDaqReconstruction::RunReconstruction(std::string FileName, std::string 
         TimeCalFilePtr = BinaryInputFilePtr;
 
     //Set output file
-    fout = new TFile(OutputFileName.c_str(),"recreate");
+    _fOut = new TFile(_OutputFileName.c_str(),"recreate");
     TTree *RecTree = new TTree("rec_tree","rec_tree");
 
     if(!_SaveNeutrons)
@@ -96,12 +97,13 @@ void WaveDaqReconstruction::RunReconstruction(std::string FileName, std::string 
         SetOutputNeutronWF(RecTree);
 
     //Set binary reader and load time calibration
-    _BinaryReader = new CReadBinary(&_WaveFormContainer, &_TCBdata, &_BoardIdToIdMap, &_ActiveBoards, _TDCTime, &_TDCchMap, _hTGEN_MB, _hTGEN_frag, _hTriggerPattern, _hTriggerRates);
+    _BinaryReader = new CReadBinary(&_WaveFormContainer, &_TCBdata, &_WDChannelMap, &_BoardIdToIdMap, &_ActiveBoards);
+    if( _EnableHisto )
+        _BinaryReader->SetHistograms(_hTGEN_MB, _hTGEN_frag, _hTriggerPattern, _hTriggerRates);
     _BinaryReader->CheckBinaryFileHeader(TimeCalFilePtr);
     _BinaryReader->LoadWaveDreamTimeCalibration(TimeCalFilePtr);
     
-    if(!_IsTDAQ)
-        BinaryInputFilePtr = TimeCalFilePtr;
+    if(!_IsTDAQ)    BinaryInputFilePtr = TimeCalFilePtr;
 
     CheckLoadedBoards();
 
@@ -133,8 +135,8 @@ void WaveDaqReconstruction::RunReconstruction(std::string FileName, std::string 
     //Finalize
     Message::DisplayMessage("Done");
     std::cout << "Writing file" << std::endl;
-    fout->Write();
-    fout->Close();
+    _fOut->Write();
+    _fOut->Close();
 
     if( _TriggerEnable )    PrintTriggerEfficiency();
 }
@@ -218,7 +220,15 @@ void WaveDaqReconstruction::LoopEvent(TTree* RecTree)
     _TriggerType = 0;
     _IsFragTriggerOn = false;
     for(it = _ActiveBoards.begin(); it != _ActiveBoards.end(); ++it)
+    {
+        if(it->first == _WDChannelMap.GetSCChannelMap()->GetSCBoard())
+        {
+            SCWaveFormContainer* SCWaves = static_cast<SCWaveFormContainer*>(_WaveFormContainer[it->second]);
+            SCWaves->ClearData();
+            continue;
+        }
         _WaveFormContainer[it->second]->ClearData();
+    }
     _Event ++;
     _NeutronOn = false;
 }
@@ -237,11 +247,11 @@ void WaveDaqReconstruction::SetDebugMode(Int_t first_ev, Int_t last_ev)
 
 void WaveDaqReconstruction::SetOutputDataToZero()
 {
-    memset(_TDCTime, 0, sizeof(Float_t)*4);
-
     if( _WDChannelMap.IsSCMapLoaded() )
     {
+        _IsPossiblePileUp = false;
         _SCTime = 0;
+        _SCTotCharge = 0;
         _SC_CLK_phase = 0;
         if(_Debug)
         {
@@ -354,7 +364,11 @@ void WaveDaqReconstruction::SetOutputTreeBranches(TTree* RecTree)
     }
 
     // SC timestamps
-    if( _WDChannelMap.IsSCMapLoaded() ) RecTree->Branch("SC_Timestamp",&_SCTime,"SC_Timestamp/F");
+    if( _WDChannelMap.IsSCMapLoaded() )
+    {
+        RecTree->Branch("SC_Timestamp",&_SCTime,"SC_Timestamp/F");
+        RecTree->Branch("SC_TotCharge",&_SCTotCharge,"SC_TotCharge/F");
+    }
 
     // Waveform level data
     if(_Debug)
@@ -549,6 +563,8 @@ void WaveDaqReconstruction::SetOutputTreeBranches(TTree* RecTree)
     }
 
     //Trigger and tags
+    if( _WDChannelMap.IsSCMapLoaded() )
+        RecTree->Branch("IsPossiblePileUp", &_IsPossiblePileUp,"IsPossiblePileUp/O");
     RecTree->Branch("TriggerType", &_TriggerType, "TriggerType/I");
     RecTree->Branch("IsFragTriggerOn", &_IsFragTriggerOn, "IsFragTriggerOn/O");
     RecTree->Branch("EventNumber", &_Event, "EventNumber/I");
@@ -709,29 +725,32 @@ void WaveDaqReconstruction::AnalyzeWaveformsTW(UShort_t board)
     //set a boolean variable to flag the 2 clocks of the board
     Bool_t CLK_done[2] = {false, false};
     Int_t boardindex = _BoardIdToIdMap[board];
+    TWWaveFormContainer* TWwaves = static_cast<TWWaveFormContainer*>(_WaveFormContainer[boardindex]);
 
     for (Int_t channel=0;channel<NUMBEROFCHANNELS-2;++channel)
     {
         // if the waveform is empty skip the analysis
-        if(_WaveFormContainer[boardindex]->IsEmpty(channel))    continue;
+        if(TWwaves->IsEmpty(channel))   continue;
 
         //get the global channel
         std::pair<UShort_t, Int_t> BC_pair = std::make_pair(board, channel);
         Int_t globalch = _WDChannelMap.GetTWChannelMap()->GetGlobalFromBoardChannelPair(BC_pair);
 
         //Calculate the quantities of interest
-        std::pair<Float_t, Float_t> PedPair = _WaveFormContainer[boardindex]->GetPedestal(channel);
+        std::pair<Float_t, Float_t> PedPair = TWwaves->GetPedestal(channel);
         _CPedestal[globalch] = PedPair.first;
         _CPedestalRMS[globalch] = PedPair.second;
-        _CAmplitude[globalch] = _WaveFormContainer[boardindex]->GetAmplitude(channel);
-        _CCharge[globalch] = _WaveFormContainer[boardindex]->GetCharge(channel);
-        _CRiseTime[globalch] = _WaveFormContainer[boardindex]->GetRiseTime(channel);
+        _CAmplitude[globalch] = TWwaves->GetAmplitude(channel);
+        _CCharge[globalch] = TWwaves->GetCharge(channel);
+        _CRiseTime[globalch] = TWwaves->GetRiseTime(channel);
 
         if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
-            _CTimestamps[globalch] = _WaveFormContainer[boardindex]->GetTimeLinear(channel, board, _Event, fout, "TW");
+            _CTimestamps[globalch] = TWwaves->GetTimeLinear(channel, board, _Event, _fOut, "TW");
         else
-            _CTimestamps[globalch] = _WaveFormContainer[boardindex]->GetTimeLinear(channel);
+            _CTimestamps[globalch] = TWwaves->GetTimeLinear(channel);
 
+        // if(_CTimestamps[globalch] < 0 && !_IsPossiblePileUp)
+        //  Info("AnalyzeWaveformsTW()", "In file %s: global channel %d has negative time value for event %d!", this->_InputFileName.c_str(), globalch, _Event);
 
         /*Analyze the clock if not done yet
         * The reason for the indexing is the mapping of clocks:
@@ -742,11 +761,11 @@ void WaveDaqReconstruction::AnalyzeWaveformsTW(UShort_t board)
         {
             if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
             {
-                _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8, board, _Event, fout);
+                _CLK_phase[boardindex][channel/8] = TWwaves->GetCLKPhase(16 + channel/8, board, _Event, _fOut);
             }
             else
             {
-                _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8);
+                _CLK_phase[boardindex][channel/8] = TWwaves->GetCLKPhase(16 + channel/8);
             }
             CLK_done[channel/8] = true;
         }
@@ -798,30 +817,33 @@ void WaveDaqReconstruction::AnalyzeWaveformsSC(UShort_t board)
     _SC_CLK_phase = 0;
     Int_t boardindex = _BoardIdToIdMap[board];
     std::vector<Int_t> SCChannels = _WDChannelMap.GetSCChannelMap()->GetSCChannels();
+    SCWaveFormContainer* SCWaves = static_cast<SCWaveFormContainer*>(_WaveFormContainer[boardindex]);
 
 
-    if(_Debug &&  _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
+    std::pair<Float_t, Float_t> ChargeSC;
+    _SCTotCharge = SCWaves->GetSCTotalCharge(&SCChannels);
+
+    if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
     {
-        _SCTime = _WaveFormContainer[boardindex]->GetTimeSC(&SCChannels, board, _Event, fout);
-        _SC_CLK_phase = _WaveFormContainer[boardindex]->GetCLKPhase(16, board, _Event, fout);
+        _SCTime = SCWaves->GetTimeSC(&_IsPossiblePileUp, &SCChannels, board, _Event, _fOut);
+        _SC_CLK_phase = SCWaves->GetCLKPhase(16, board, _Event, _fOut);
     }
     else
     {
-        _SCTime = _WaveFormContainer[boardindex]->GetTimeSC(&SCChannels);
-        _SC_CLK_phase = _WaveFormContainer[boardindex]->GetCLKPhase(16);
+        _SCTime = SCWaves->GetTimeSC(&_IsPossiblePileUp, &SCChannels, board, _Event);
+        _SC_CLK_phase = SCWaves->GetCLKPhase(16);
     }
 
     if(_Debug)
     {
         for(std::vector<Int_t>::iterator itCh = SCChannels.begin(); itCh != SCChannels.end(); ++itCh)
         {
-            std::pair<Float_t, Float_t> PedPair = _WaveFormContainer[boardindex]->GetPedestal(*itCh);
+            std::pair<Float_t, Float_t> PedPair = SCWaves->GetPedestal(*itCh);
             _SCPedestal[*itCh] = PedPair.first;
             _SCPedestalRMS[*itCh] = PedPair.second;
-            _SCAmplitude[*itCh] = _WaveFormContainer[boardindex]->GetAmplitude(*itCh);
-            _SCCharge[*itCh] = _WaveFormContainer[boardindex]->GetCharge(*itCh);
-            _SCRiseTime[*itCh] = _WaveFormContainer[boardindex]->GetRiseTime(*itCh);
-
+            _SCAmplitude[*itCh] = SCWaves->GetAmplitude(*itCh);
+            _SCCharge[*itCh] = SCWaves->GetChargeSC(*itCh);
+            _SCRiseTime[*itCh] = SCWaves->GetRiseTime(*itCh);
         }
     }
 }
@@ -834,27 +856,28 @@ void WaveDaqReconstruction::AnalyzeWaveformsCALO(UShort_t board)
     //set a boolean variable to flag the 2 clocks of the board
     Bool_t CLK_done[2] = {false, false};
     Int_t boardindex = _BoardIdToIdMap[board];
+    CALOWaveFormContainer* CALOwaves = static_cast<CALOWaveFormContainer*>(_WaveFormContainer[boardindex]);
 
     for (Int_t channel=0; channel<NUMBEROFCHANNELS-2; ++channel)
     {
         // if the waveform is empty or the CALO crystal is not found in the channel map skip the analysis
         Int_t CrystalId;
-        if(_WaveFormContainer[boardindex]->IsEmpty(channel) || !_WDChannelMap.GetCALOChannelMap()->GetCrystalId(board, channel, &CrystalId))
+        if(CALOwaves->IsEmpty(channel) || !_WDChannelMap.GetCALOChannelMap()->GetCrystalId(board, channel, &CrystalId))
             continue;
 
         //Calculate the quantities of interest
         std::pair<Float_t, Float_t> PedPair;
-        PedPair = _WaveFormContainer[boardindex]->GetPedestal(channel);
+        PedPair = CALOwaves->GetPedestal(channel);
         _CALOPedestal[CrystalId] = PedPair.first;
         _CALOPedestalRMS[CrystalId] = PedPair.second;
-        _CALOAmplitude[CrystalId] = _WaveFormContainer[boardindex]->GetAmplitude(channel);
-        _CALOCharge[CrystalId] = _WaveFormContainer[boardindex]->GetChargeCALO(channel);
-        _CALORiseTime[CrystalId] = _WaveFormContainer[boardindex]->GetRiseTime(channel);
+        _CALOAmplitude[CrystalId] = CALOwaves->GetAmplitude(channel);
+        _CALOCharge[CrystalId] = CALOwaves->GetChargeCALO(channel);
+        _CALORiseTime[CrystalId] = CALOwaves->GetRiseTime(channel);
 
         if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
-            _CALOTimestamps[CrystalId] = _WaveFormContainer[boardindex]->GetTimeCFD(channel, board, _Event, fout, "CALO");
+            _CALOTimestamps[CrystalId] = CALOwaves->GetTimeCFD(channel, board, _Event, _fOut, "CALO");
         else
-            _CALOTimestamps[CrystalId] = _WaveFormContainer[boardindex]->GetTimeCFD(channel);
+            _CALOTimestamps[CrystalId] = CALOwaves->GetTimeCFD(channel);
 
         /*Analyze the clock if not done yet
         * The reason for the indexing is the mapping of clocks:
@@ -864,10 +887,10 @@ void WaveDaqReconstruction::AnalyzeWaveformsCALO(UShort_t board)
         if(!CLK_done[channel/8])
         {
             if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
-                _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8, board, _Event, fout);
+                _CLK_phase[boardindex][channel/8] = CALOwaves->GetCLKPhase(16 + channel/8, board, _Event, _fOut);
 
             else
-                _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8);
+                _CLK_phase[boardindex][channel/8] = CALOwaves->GetCLKPhase(16 + channel/8);
 
             CLK_done[channel/8] = true;
         }
@@ -896,11 +919,11 @@ void WaveDaqReconstruction::AnalyzeWaveformsNeutrons(UShort_t board)
         //Calculate the quantities of interest
         PedPair = _WaveFormContainer[boardindex]->GetPedestal(channel);
         Amp = _WaveFormContainer[boardindex]->GetAmplitude(channel);
-        Charge = _WaveFormContainer[boardindex]->GetChargeCALO(channel);
+        Charge = _WaveFormContainer[boardindex]->GetCharge(channel);
         RiseTime = _WaveFormContainer[boardindex]->GetRiseTime(channel);
 
         if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
-            Time = _WaveFormContainer[boardindex]->GetTimeCFD(channel, board, _Event, fout, "CALO");
+            Time = _WaveFormContainer[boardindex]->GetTimeCFD(channel, board, _Event, _fOut, "CALO");
         else
             Time = _WaveFormContainer[boardindex]->GetTimeCFD(channel);
 
@@ -912,7 +935,7 @@ void WaveDaqReconstruction::AnalyzeWaveformsNeutrons(UShort_t board)
         if(!CLK_done[channel/8])
         {
             if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
-                _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8, board, _Event, fout);
+                _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8, board, _Event, _fOut);
 
             else
                 _CLK_phase[boardindex][channel/8] = _WaveFormContainer[boardindex]->GetCLKPhase(16 + channel/8);
@@ -1115,58 +1138,58 @@ void WaveDaqReconstruction::CreateHistograms()
         _hitmap_Bars = new TH1F("hitmapBars", "Hitmap Bars", 40, -0.5, 39.5);
         _hitmap_Bars->SetFillColor(kBlue);
         _hitmap_Bars->SetStats(0);
-        _hitmap_Bars->SetDirectory( fout->GetDirectory("Histos") );
+        _hitmap_Bars->SetDirectory( _fOut->GetDirectory("Histos") );
 
         _hitmap_Channels_Rear = new TH1F("hitmapChRear", "Hitmap Channel Rear Layer", 40, -0.5, 39.5);
         _hitmap_Channels_Rear->SetStats(0);
         _hitmap_Channels_Rear->SetFillColor(kBlue);
-        _hitmap_Channels_Rear->SetDirectory( fout->GetDirectory("Histos") );
+        _hitmap_Channels_Rear->SetDirectory( _fOut->GetDirectory("Histos") );
 
         _hitmap_Channels_Front = new TH1F("hitmapChFront", "Hitmap Channel Front Layer", 40, 39.5, 79.5);
         _hitmap_Channels_Front->SetStats(0);
         _hitmap_Channels_Front->SetFillColor(kBlue);
-        _hitmap_Channels_Front->SetDirectory( fout->GetDirectory("Histos") );
+        _hitmap_Channels_Front->SetDirectory( _fOut->GetDirectory("Histos") );
 
         _hitmap_MB = new TH2F("hitmap_MB", "Hitmap_MB", 20, -0.5, 19.5, 20, 19.5, 39.5);
         _hitmap_MB->SetStats(0);
         _hitmap_MB->SetOption("text colz");
-        _hitmap_MB->SetDirectory( fout->GetDirectory("Histos") );
+        _hitmap_MB->SetDirectory( _fOut->GetDirectory("Histos") );
 
         _hitmap_frag = new TH2F("hitmap_frag", "Hitmap_frag", 20, -0.5, 19.5, 20, 19.5, 39.5);
         _hitmap_frag->SetStats(0);
         _hitmap_frag->SetOption("text colz");
-        _hitmap_frag->SetDirectory( fout->GetDirectory("Histos") );
+        _hitmap_frag->SetDirectory( _fOut->GetDirectory("Histos") );
 
         _hitmap_all = new TH2F("hitmap_all", "Hitmap_all", 20, -0.5, 19.5, 20, 19.5, 39.5);
         _hitmap_all->SetStats(0);
         _hitmap_all->SetOption("text colz");
-        _hitmap_all->SetDirectory( fout->GetDirectory("Histos") );
+        _hitmap_all->SetDirectory( _fOut->GetDirectory("Histos") );
     }
 
     if( _WDChannelMap.IsCALOMapLoaded() )
     {
         _hCALOMultiplicity = new TH1I("CALO_Multiplicity", "CALO_Multiplicity", 11, -0.5, 10.5);
-        _hCALOMultiplicity->SetDirectory( fout->GetDirectory("Histos") );
+        _hCALOMultiplicity->SetDirectory( _fOut->GetDirectory("Histos") );
     }
 
     //hTGEN is filled by the ReadBinary class so it doesn't need to use FillHistograms()
     _hTGEN_MB = new TH2F("hTGEN_MB", "Trigger Generation MB;CLK Tick;Algorithm Id", 34, -1.5, 32.5, 16, -1.5, 14.5);
     _hTGEN_MB->SetStats(11111111);
     _hTGEN_MB->SetOption("text colz");
-    _hTGEN_MB->SetDirectory( fout->GetDirectory("Histos") );
+    _hTGEN_MB->SetDirectory( _fOut->GetDirectory("Histos") );
 
     _hTGEN_frag = new TH2F("hTGEN_frag", "Trigger Generation frag;CLK Tick;Algorithm Id", 34, -1.5, 32.5, 16, -1.5, 14.5);
     _hTGEN_frag->SetStats(11111111);
     _hTGEN_frag->SetOption("text colz");
-    _hTGEN_frag->SetDirectory( fout->GetDirectory("Histos") );
+    _hTGEN_frag->SetDirectory( _fOut->GetDirectory("Histos") );
 
     _hTriggerPattern = new TH1I("hTriggerPattern", "Trigger Pattern;Trigger Id;Entries", 66, -1.5, 64.5);
     _hTriggerPattern->SetStats(0);
-    _hTriggerPattern->SetDirectory( fout->GetDirectory("Histos") );
+    _hTriggerPattern->SetDirectory( _fOut->GetDirectory("Histos") );
 
     _hTriggerRates = new TH1I("hTriggerRates", "Trigger Rates;Trigger Id;Trigger rate [Hz]", 66, -1.5, 64.5);
     _hTriggerRates->SetStats(0);
-    _hTriggerRates->SetDirectory( fout->GetDirectory("Histos") );
+    _hTriggerRates->SetDirectory( _fOut->GetDirectory("Histos") );
 
     if( _TriggerEnable )
     {
@@ -1174,7 +1197,7 @@ void WaveDaqReconstruction::CreateHistograms()
         {
             _hTrigAmp[i] = new TH1F(Form("hTrigAmp_%d",i), Form("hTrigAmp_%d;TrigAmp [V];Entries",i), 200, -0.2, 1.1);
             _hTrigAmp[i]->SetStats(11111111);
-            _hTrigAmp[i]->SetDirectory( fout->GetDirectory("Histos") );
+            _hTrigAmp[i]->SetDirectory( _fOut->GetDirectory("Histos") );
         }
     }
 }
@@ -1272,7 +1295,7 @@ void WaveDaqReconstruction::SetSaveNeutrons() { _SaveNeutrons = true; }
 
 void WaveDaqReconstruction::SetOutputFileName(std::string FileName)
 {
-    this->OutputFileName=FileName;
+    this->_OutputFileName=FileName;
 }
 
 
@@ -1282,4 +1305,4 @@ void WaveDaqReconstruction::SetGain(Float_t Gain){_Gain=Gain;}
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

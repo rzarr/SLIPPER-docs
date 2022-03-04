@@ -26,7 +26,6 @@ LinkDef of ChannelMap folder.
 #pragma link off all classes;
 #pragma link off all functions;
 
-#pragma link C++ class TXMLEngine+;
 #pragma link C++ class XmlParser+;
 #pragma link C++ class BaseMap+;
 #pragma link C++ class WDChannelMap+;
@@ -42,4 +41,4 @@ LinkDef of ChannelMap folder.
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

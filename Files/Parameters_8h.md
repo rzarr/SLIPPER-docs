@@ -207,7 +207,7 @@ Number of Start Counter channels.
 ### define SCSUMSTARTBIN
 
 ```cpp
-#define SCSUMSTARTBIN 100
+#define SCSUMSTARTBIN 5
 ```
 
 First bin for SC waveform sum. 
@@ -215,7 +215,7 @@ First bin for SC waveform sum.
 ### define SCSUMSTOPBIN
 
 ```cpp
-#define SCSUMSTOPBIN 700
+#define SCSUMSTOPBIN 1018
 ```
 
 Last bin for SC waveform sum. 
@@ -231,7 +231,7 @@ Threshold for Costant Fraction Discriminator in SC time calculation.
 ### define SCBOARD
 
 ```cpp
-#define SCBOARD 173
+#define SCBOARD 27
 ```
 
 Serial number of the SC WaveDREAM board. 
@@ -518,10 +518,10 @@ Maximum expected calibrated energy loss [MeV].
 
 //SC analysis parameters
 #define NUMBEROFSCCHANNELS 8                
-#define SCSUMSTARTBIN 100                   
-#define SCSUMSTOPBIN 700                    
+#define SCSUMSTARTBIN 5                 
+#define SCSUMSTOPBIN 1018                   
 #define SCCFDTHRESHOLD 0.2                  
-#define SCBOARD 173                         
+#define SCBOARD 27                          
 
 //Range of CLK analysis
 #define CLKSTARTBIN 500                     
@@ -578,4 +578,4 @@ static std::map<ParticleType, std::string> ParticleName={{None,"None"},{Proton,"
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000

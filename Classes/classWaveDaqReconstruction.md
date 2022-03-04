@@ -57,19 +57,21 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 
 |                | Name           |
 | -------------- | -------------- |
-| TFile * | **[fout](/Classes/classWaveDaqReconstruction.md#variable-fout)** <br>Pointer to output file.  |
-| std::string | **[OutputFileName](/Classes/classWaveDaqReconstruction.md#variable-outputfilename)** <br>Output file name.  |
+| TFile * | **[_fOut](/Classes/classWaveDaqReconstruction.md#variable--fout)** <br>Pointer to output file.  |
+| std::string | **[_OutputFileName](/Classes/classWaveDaqReconstruction.md#variable--outputfilename)** <br>Output file name.  |
+| std::string | **[_InputFileName](/Classes/classWaveDaqReconstruction.md#variable--inputfilename)** <br>Input file name.  |
 | [WDChannelMap](/Classes/classWDChannelMap.md) | **[_WDChannelMap](/Classes/classWaveDaqReconstruction.md#variable--wdchannelmap)** <br>WaveDAQ Channel Map.  |
 | TGlobalToBarChIDpairMap | **[_GlobalToBarChIDpairMap](/Classes/classWaveDaqReconstruction.md#variable--globaltobarchidpairmap)** <br>Map linking the TW global channel to the bar and side ("A"/"B")  |
-| std::map< int, int > | **[_TDCchMap](/Classes/classWaveDaqReconstruction.md#variable--tdcchmap)** <br>Channel Map of the TDC.  |
 | Float_t | **[_Gain](/Classes/classWaveDaqReconstruction.md#variable--gain)** <br>Frontend Gain of the WaveDAQ system.  |
 | bool | **[_IsTDAQ](/Classes/classWaveDaqReconstruction.md#variable--istdaq)** <br>Flag that signals if the file comes from the TDAQ.  |
-| std::map< UShort_t,Int_t > | **[_BoardIdToIdMap](/Classes/classWaveDaqReconstruction.md#variable--boardidtoidmap)** <br>Map that links the WaveDREAM board serial number to its index in the WaveFormContainer vector.  |
+| std::map< UShort_t,Int_t > | **[_BoardIdToIdMap](/Classes/classWaveDaqReconstruction.md#variable--boardidtoidmap)** <br>Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector.  |
 | std::map< UShort_t, Int_t > | **[_ActiveBoards](/Classes/classWaveDaqReconstruction.md#variable--activeboards)** <br>Subset of the _BoardIdtoIdMap containing only the boards w/ at least one active channel; This variable is updated at each event.  |
 | [CReadBinary](/Classes/classCReadBinary.md) * | **[_BinaryReader](/Classes/classWaveDaqReconstruction.md#variable--binaryreader)** <br>Pointer to binary reader object.  |
-| std::vector< [CWaveFormContainer](/Classes/classCWaveFormContainer.md) * > | **[_WaveFormContainer](/Classes/classWaveDaqReconstruction.md#variable--waveformcontainer)** <br>Container for WaveDREAM raw waveforms and signal processing methods.  |
+| std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > | **[_WaveFormContainer](/Classes/classWaveDaqReconstruction.md#variable--waveformcontainer)** <br>Container for WaveDREAM raw waveforms and signal processing methods.  |
 | std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > | **[_TCBdata](/Classes/classWaveDaqReconstruction.md#variable--tcbdata)** <br>Container for TCB raw data.  |
+| Bool_t | **[_IsPossiblePileUp](/Classes/classWaveDaqReconstruction.md#variable--ispossiblepileup)** <br>Flag for signaling possible Pile-Up events.  |
 | Float_t | **[_SCTime](/Classes/classWaveDaqReconstruction.md#variable--sctime)** <br>SC raw time [ns].  |
+| Float_t | **[_SCTotCharge](/Classes/classWaveDaqReconstruction.md#variable--sctotcharge)** <br>SC raw total energy loss [V*ns].  |
 | Float_t | **[_SCPedestal](/Classes/classWaveDaqReconstruction.md#variable--scpedestal)** <br>SC channel pedestal [V] **DEBUG ONLY** |
 | Float_t | **[_SCPedestalRMS](/Classes/classWaveDaqReconstruction.md#variable--scpedestalrms)** <br>SC channel pedestal RMS [V] **DEBUG ONLY** |
 | Float_t | **[_SCAmplitude](/Classes/classWaveDaqReconstruction.md#variable--scamplitude)** <br>SC channel amplitude (<0) [V] **DEBUG ONLY** |
@@ -127,7 +129,6 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | UShort_t | **[_NbFast](/Classes/classWaveDaqReconstruction.md#variable--nbfast)** <br>Serial number of Neutron Fast board.  |
 | Bool_t | **[_NeutronOn](/Classes/classWaveDaqReconstruction.md#variable--neutronon)** <br>Flag for Neutron detectors status in the event.  |
 | Bool_t | **[_SaveNeutrons](/Classes/classWaveDaqReconstruction.md#variable--saveneutrons)** <br>Global flag that checks if the neutron waveforms have to be saved or not in the output.  |
-| Float_t | **[_TDCTime](/Classes/classWaveDaqReconstruction.md#variable--tdctime)** <br>Time of the TDC [ns].  |
 | Int_t | **[_TriggerType](/Classes/classWaveDaqReconstruction.md#variable--triggertype)** <br>Trigger type of the event.  |
 | Bool_t | **[_IsFragTriggerOn](/Classes/classWaveDaqReconstruction.md#variable--isfragtriggeron)** <br>Flag that tells if the fragmentation trigger fired in the event.  |
 | Int_t | **[_TrigTP](/Classes/classWaveDaqReconstruction.md#variable--trigtp)** <br>Number of True Positive events in firmware-software quality checks.  |
@@ -344,7 +345,9 @@ Analysis of SC Waveforms (WFs)
 This function performs the whole anlysis of SC waveforms, which consists of two steps:
 
 * The channels of the SC are added together in a single WF.
+* The energy loss in the total SC signal is calculated and saved in a global variable.
 * The timestamp of the event is then evaluated applying the CFD method to this WF.
+* In debug mode, the routine processes also single SC waveforms one by one.
 
 
 ### function AnalyzeWaveformsTW
@@ -630,21 +633,29 @@ Fill the histograms.
 
 ## Protected Attributes Documentation
 
-### variable fout
+### variable _fOut
 
 ```cpp
-TFile * fout;
+TFile * _fOut;
 ```
 
 Pointer to output file. 
 
-### variable OutputFileName
+### variable _OutputFileName
 
 ```cpp
-std::string OutputFileName;
+std::string _OutputFileName;
 ```
 
 Output file name. 
+
+### variable _InputFileName
+
+```cpp
+std::string _InputFileName;
+```
+
+Input file name. 
 
 ### variable _WDChannelMap
 
@@ -661,14 +672,6 @@ TGlobalToBarChIDpairMap _GlobalToBarChIDpairMap;
 ```
 
 Map linking the TW global channel to the bar and side ("A"/"B") 
-
-### variable _TDCchMap
-
-```cpp
-std::map< int, int > _TDCchMap;
-```
-
-Channel Map of the TDC. 
 
 ### variable _Gain
 
@@ -692,7 +695,7 @@ Flag that signals if the file comes from the TDAQ.
 std::map< UShort_t,Int_t > _BoardIdToIdMap;
 ```
 
-Map that links the WaveDREAM board serial number to its index in the WaveFormContainer vector. 
+Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector. 
 
 ### variable _ActiveBoards
 
@@ -713,7 +716,7 @@ Pointer to binary reader object.
 ### variable _WaveFormContainer
 
 ```cpp
-std::vector< CWaveFormContainer * > _WaveFormContainer;
+std::vector< WaveFormContainer * > _WaveFormContainer;
 ```
 
 Container for WaveDREAM raw waveforms and signal processing methods. 
@@ -726,6 +729,14 @@ std::vector< TCBDATA * > _TCBdata;
 
 Container for TCB raw data. 
 
+### variable _IsPossiblePileUp
+
+```cpp
+Bool_t _IsPossiblePileUp;
+```
+
+Flag for signaling possible Pile-Up events. 
+
 ### variable _SCTime
 
 ```cpp
@@ -733,6 +744,14 @@ Float_t _SCTime;
 ```
 
 SC raw time [ns]. 
+
+### variable _SCTotCharge
+
+```cpp
+Float_t _SCTotCharge;
+```
+
+SC raw total energy loss [V*ns]. 
 
 ### variable _SCPedestal
 
@@ -1190,14 +1209,6 @@ Bool_t _SaveNeutrons;
 
 Global flag that checks if the neutron waveforms have to be saved or not in the output. 
 
-### variable _TDCTime
-
-```cpp
-Float_t _TDCTime;
-```
-
-Time of the TDC [ns]. 
-
 ### variable _TriggerType
 
 ```cpp
@@ -1424,4 +1435,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-02-10 at 12:05:07 +0000
+Updated on 2022-03-04 at 14:25:58 +0000
