@@ -10,7 +10,9 @@ title: Stand-aLone Identification of Particles through Partial Event Reonstructi
 
 # Project     : FOOT (FragmentatiOn Of Target)
 
-Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [_baltig page_](https://baltig.infn.it/zarrella/slipper/). At this stage, the code handles signals from the:
+Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [_baltig page_](https://baltig.infn.it/zarrella/slipper/). The previous link can also be used to acces the source code.
+
+At this stage, the code handles signals from the:
 
 * Start Counter (SC)
 * TOF-Wall (TW)
@@ -56,4 +58,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-03-07 at 17:56:09 +0100
+Updated on 2022-03-07 at 17:54:20 +0000
