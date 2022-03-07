@@ -42,12 +42,7 @@ WaveDaqReconstruction::WaveDaqReconstruction()
     _TrigTN = 0;
     _TrigFN = 0;
 
-    /* Modify these variables to save Waveforms:
-    * If _Debug is set to true, it saves additional branches and waveforms of CLK,
-    * SC, TW and CALO in the output tree
-    * _FirstEventToSave and _LastEventToSave define the range of events in which
-    * Waveforms are saved -> if _Debug is set to false, these are not used
-    */
+    // Modify these variables to save Waveforms
     _Debug = false;
     _EnableHisto = false;
     _TriggerEnable = false;
@@ -159,8 +154,6 @@ void WaveDaqReconstruction::LoopEvent(TTree* RecTree)
     {
         if( _WDChannelMap.IsSCMapLoaded() && it->first == _WDChannelMap.GetSCChannelMap()->GetSCBoard() )
             AnalyzeWaveformsSC( it->first );
-        else
-            continue;
     }
 
     if( _SaveNeutrons )
@@ -210,10 +203,8 @@ void WaveDaqReconstruction::LoopEvent(TTree* RecTree)
     else
         RecTree->Fill();
 
-    if( _TriggerEnable )
-    {
-        CheckFragTriggerConditions();
-    }
+    if( _TriggerEnable )    CheckFragTriggerConditions();
+
     _BinaryReader->ResetFragTrigger();
 
     //Clear data and increase event number
@@ -749,9 +740,6 @@ void WaveDaqReconstruction::AnalyzeWaveformsTW(UShort_t board)
         else
             _CTimestamps[globalch] = TWwaves->GetTimeLinear(channel);
 
-        // if(_CTimestamps[globalch] < 0 && !_IsPossiblePileUp)
-        //  Info("AnalyzeWaveformsTW()", "In file %s: global channel %d has negative time value for event %d!", this->_InputFileName.c_str(), globalch, _Event);
-
         /*Analyze the clock if not done yet
         * The reason for the indexing is the mapping of clocks:
         * CLK ch 16 ----> ch 0->7
@@ -819,8 +807,6 @@ void WaveDaqReconstruction::AnalyzeWaveformsSC(UShort_t board)
     std::vector<Int_t> SCChannels = _WDChannelMap.GetSCChannelMap()->GetSCChannels();
     SCWaveFormContainer* SCWaves = static_cast<SCWaveFormContainer*>(_WaveFormContainer[boardindex]);
 
-
-    std::pair<Float_t, Float_t> ChargeSC;
     _SCTotCharge = SCWaves->GetSCTotalCharge(&SCChannels);
 
     if(_Debug && _Event <= _LastEventToSave && _Event >= _FirstEventToSave)
@@ -1102,8 +1088,7 @@ void WaveDaqReconstruction::CheckFragTriggerConditions()
             _hTrigAmp[chId]->Fill(TrigAmp);
         }
     }
-    else
-        VetoOff = true;
+    else    VetoOff = true;
 
     if( _IsFragTriggerOn )
     {
@@ -1236,14 +1221,7 @@ void WaveDaqReconstruction::FillHistograms()
     }
 
     if( _WDChannelMap.IsCALOMapLoaded() )
-    {
-        int countCALO = 0;
-        for(int i=0; i<=NUMBEROFCRYSTALS; ++i)
-        {
-            if(_CALOCharge[i] != 0) countCALO++;
-        }
-        _hCALOMultiplicity->Fill(countCALO);
-    }
+        _hCALOMultiplicity = NUMBEROFCRYSTALS - std::count(std::begin(_CALOCharge), std::end(_CALOCharge), 0);
 }
 
 
@@ -1266,14 +1244,10 @@ void WaveDaqReconstruction::CheckLoadedBoards()
     for (auto it = _BoardIdToIdMap.begin(); it!=_BoardIdToIdMap.end(); ++it)
     {
         std::string detector;
-        if( _WDChannelMap.IsSCMapLoaded() && it->first == _WDChannelMap.GetSCChannelMap()->GetSCBoard())
-            detector = "SC";
-        else if(_WDChannelMap.GetTWChannelMap()->IsBoardLoaded(it->first))
-            detector = "TW";
-        else if(_WDChannelMap.GetCALOChannelMap()->IsBoardLoaded(it->first))
-            detector = "CALO";
-        else if(_WDChannelMap.GetNeutronChannelMap()->IsBoardLoaded(it->first))
-            detector = "NEUTRON";
+        if( _WDChannelMap.IsSCMapLoaded() && it->first == _WDChannelMap.GetSCChannelMap()->GetSCBoard())    detector = "SC";
+        else if(_WDChannelMap.GetTWChannelMap()->IsBoardLoaded(it->first))  detector = "TW";
+        else if(_WDChannelMap.GetCALOChannelMap()->IsBoardLoaded(it->first))    detector = "CALO";
+        else if(_WDChannelMap.GetNeutronChannelMap()->IsBoardLoaded(it->first)) detector = "NEUTRON";
         else
         {
             // Warning("CheckLoadedBoards()", "Found board %hu in data not included in the Channel Map!!", it->first);
@@ -1293,10 +1267,7 @@ void WaveDaqReconstruction::SetTDAQfile() {_IsTDAQ = true;}
 void WaveDaqReconstruction::SetSaveNeutrons() { _SaveNeutrons = true; }
 
 
-void WaveDaqReconstruction::SetOutputFileName(std::string FileName)
-{
-    this->_OutputFileName=FileName;
-}
+void WaveDaqReconstruction::SetOutputFileName(std::string FileName){this->_OutputFileName=FileName;}
 
 
 void WaveDaqReconstruction::SetGain(Float_t Gain){_Gain=Gain;}
@@ -1305,4 +1276,4 @@ void WaveDaqReconstruction::SetGain(Float_t Gain){_Gain=Gain;}
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:21 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

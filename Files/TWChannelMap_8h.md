@@ -6,7 +6,7 @@ summary: Header of TWChannelMap.cxx.
 
 # src/ChannelMap/TWChannelMap.h
 
-Header of [TWChannelMap.cxx](/Files/TWChannelMap_8cxx.md#file-twchannelmap.cxx).  [More...](#detailed-description)
+Header of TWChannelMap.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -18,13 +18,13 @@ Header of [TWChannelMap.cxx](/Files/TWChannelMap_8cxx.md#file-twchannelmap.cxx).
 
 |                | Name           |
 | -------------- | -------------- |
-| typedef std::map< Int_t, [TLayer](/Files/Parameters_8h.md#enum-tlayer) > | **[TMapBarIdLayerId](/Files/TWChannelMap_8h.md#typedef-tmapbaridlayerid)**  |
+| typedef std::map< Int_t, TLayer > | **[TMapBarIdLayerId](/Files/TWChannelMap_8h.md#typedef-tmapbaridlayerid)**  |
 | typedef std::map< std::pair< UShort_t, Int_t >, Int_t > | **[TBoardChannelToGlobalMap](/Files/TWChannelMap_8h.md#typedef-tboardchanneltoglobalmap)**  |
 | typedef std::map< Int_t, std::pair< Int_t, Char_t > > | **[TGlobalToBarChIDpairMap](/Files/TWChannelMap_8h.md#typedef-tglobaltobarchidpairmap)**  |
 
 ## Detailed Description
 
-Header of [TWChannelMap.cxx](/Files/TWChannelMap_8cxx.md#file-twchannelmap.cxx). 
+Header of TWChannelMap.cxx. 
 
 **Author**: R. Zarrella 
 ## Types Documentation
@@ -97,4 +97,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

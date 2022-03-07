@@ -6,7 +6,7 @@ summary: Header of TWWaveFormContainer.cxx.
 
 # src/WFProcessing/TWWaveFormContainer.h
 
-Header of [TWWaveFormContainer.cxx](/Files/TWWaveFormContainer_8cxx.md#file-twwaveformcontainer.cxx).  [More...](#detailed-description)
+Header of TWWaveFormContainer.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [TWWaveFormContainer.cxx](/Files/TWWaveFormContainer_8cxx.md#file-twwa
 
 ## Detailed Description
 
-Header of [TWWaveFormContainer.cxx](/Files/TWWaveFormContainer_8cxx.md#file-twwaveformcontainer.cxx). 
+Header of TWWaveFormContainer.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -48,4 +48,4 @@ virtual Float_t     GetTimeLinear(Int_t channel, UShort_t board = 0, Int_t event
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

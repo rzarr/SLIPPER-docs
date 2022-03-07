@@ -6,7 +6,7 @@ summary: Header of CALOChannelMap.cxx.
 
 # src/ChannelMap/CALOChannelMap.h
 
-Header of [CALOChannelMap.cxx](/Files/CALOChannelMap_8cxx.md#file-calochannelmap.cxx).  [More...](#detailed-description)
+Header of CALOChannelMap.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [CALOChannelMap.cxx](/Files/CALOChannelMap_8cxx.md#file-calochannelmap
 
 ## Detailed Description
 
-Header of [CALOChannelMap.cxx](/Files/CALOChannelMap_8cxx.md#file-calochannelmap.cxx). 
+Header of CALOChannelMap.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -61,4 +61,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

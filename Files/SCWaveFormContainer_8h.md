@@ -6,7 +6,7 @@ summary: Header of SCWaveFormContainer.cxx.
 
 # src/WFProcessing/SCWaveFormContainer.h
 
-Header of [SCWaveFormContainer.cxx](/Files/SCWaveFormContainer_8cxx.md#file-scwaveformcontainer.cxx).  [More...](#detailed-description)
+Header of SCWaveFormContainer.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [SCWaveFormContainer.cxx](/Files/SCWaveFormContainer_8cxx.md#file-scwa
 
 ## Detailed Description
 
-Header of [SCWaveFormContainer.cxx](/Files/SCWaveFormContainer_8cxx.md#file-scwaveformcontainer.cxx). 
+Header of SCWaveFormContainer.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -63,4 +63,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

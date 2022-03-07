@@ -6,7 +6,7 @@ summary: Header of TOFWallCalibration.cxx.
 
 # src/TOFWallCalibration.h
 
-Header of [TOFWallCalibration.cxx](/Files/TOFWallCalibration_8cxx.md#file-tofwallcalibration.cxx).  [More...](#detailed-description)
+Header of TOFWallCalibration.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -18,11 +18,11 @@ Header of [TOFWallCalibration.cxx](/Files/TOFWallCalibration_8cxx.md#file-tofwal
 
 |                | Name           |
 | -------------- | -------------- |
-| typedef std::pair< [ParticleType](/Files/Parameters_8h.md#enum-particletype), Float_t > | **[PartEnPairType](/Files/TOFWallCalibration_8h.md#typedef-partenpairtype)**  |
+| typedef std::pair< ParticleType, Float_t > | **[PartEnPairType](/Files/TOFWallCalibration_8h.md#typedef-partenpairtype)**  |
 
 ## Detailed Description
 
-Header of [TOFWallCalibration.cxx](/Files/TOFWallCalibration_8cxx.md#file-tofwallcalibration.cxx). 
+Header of TOFWallCalibration.cxx. 
 
 **Author**: R. Zarrella 
 ## Types Documentation
@@ -116,4 +116,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:21 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

@@ -6,7 +6,7 @@ summary: Header of WDChannelMap.cxx.
 
 # src/ChannelMap/WDChannelMap.h
 
-Header of [WDChannelMap.cxx](/Files/WDChannelMap_8cxx.md#file-wdchannelmap.cxx).  [More...](#detailed-description)
+Header of WDChannelMap.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [WDChannelMap.cxx](/Files/WDChannelMap_8cxx.md#file-wdchannelmap.cxx).
 
 ## Detailed Description
 
-Header of [WDChannelMap.cxx](/Files/WDChannelMap_8cxx.md#file-wdchannelmap.cxx). 
+Header of WDChannelMap.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -65,4 +65,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

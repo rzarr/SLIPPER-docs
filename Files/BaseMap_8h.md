@@ -6,7 +6,7 @@ summary: Header of BaseMap.cxx.
 
 # src/ChannelMap/BaseMap.h
 
-Header of [BaseMap.cxx](/Files/BaseMap_8cxx.md#file-basemap.cxx).  [More...](#detailed-description)
+Header of BaseMap.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [BaseMap.cxx](/Files/BaseMap_8cxx.md#file-basemap.cxx).  [More...](#de
 
 ## Detailed Description
 
-Header of [BaseMap.cxx](/Files/BaseMap_8cxx.md#file-basemap.cxx). 
+Header of BaseMap.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -58,4 +58,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

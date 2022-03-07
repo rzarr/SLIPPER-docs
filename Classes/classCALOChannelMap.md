@@ -266,7 +266,7 @@ Check the consistency of the CALO channel map.
 
 **Return**: True if the map is formed as expected, False otherwise 
 
-This function checks that the map has been loaded correctly, without repeated/double indices, and with the expected number of CALO modules/crystals (check [Parameters.h](/Files/Parameters_8h.md#file-parameters.h)) 
+This function checks that the map has been loaded correctly, without repeated/double indices, and with the expected number of CALO modules/crystals (check [Parameters.h]) 
 
 
 ## Protected Attributes Documentation
@@ -305,4 +305,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

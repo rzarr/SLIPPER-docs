@@ -6,7 +6,7 @@ summary: Header of WaveFormContainer.cxx.
 
 # src/WFProcessing/WaveFormContainer.h
 
-Header of [WaveFormContainer.cxx](/Files/WaveFormContainer_8cxx.md#file-waveformcontainer.cxx).  [More...](#detailed-description)
+Header of WaveFormContainer.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [WaveFormContainer.cxx](/Files/WaveFormContainer_8cxx.md#file-waveform
 
 ## Detailed Description
 
-Header of [WaveFormContainer.cxx](/Files/WaveFormContainer_8cxx.md#file-waveformcontainer.cxx). 
+Header of WaveFormContainer.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -81,4 +81,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

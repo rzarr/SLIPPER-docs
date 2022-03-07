@@ -24,7 +24,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual void | **[ClearData](/Classes/classTWWaveFormContainer.md#function-cleardata)**()<br>Clear data for new cycle.  |
 | virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classTWWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classTWWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
-| virtual Float_t | **[GetCharge](/Classes/classTWWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =[CHARGESTARTBIN](/Files/Parameters_8h.md#define-chargestartbin), Int_t stop_bin =[CHARGESTOPBIN](/Files/Parameters_8h.md#define-chargestopbin))<br>Find the integral charge of the waveform.  |
+| virtual Float_t | **[GetCharge](/Classes/classTWWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the waveform.  |
 | virtual Float_t | **[GetRiseTime](/Classes/classTWWaveFormContainer.md#function-getrisetime)**(Int_t channel)<br>Calucalte the 10% - 90% rise time of the waveform.  |
 | virtual Float_t | **[GetTimeCFD](/Classes/classTWWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
 | virtual Float_t | **[GetCLKPhase](/Classes/classTWWaveFormContainer.md#function-getclkphase)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr)<br>Get the phase of a CLK signal.  |
@@ -187,7 +187,7 @@ Find pedestal of the waveform.
 
 **Return**: Pair containing the value of the pedestal and its RMS [V] 
 
-The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN in [Parameters.h](/Files/Parameters_8h.md#file-parameters.h)
+The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN in [Parameters.h]
 
 
 ### function GetAmplitude
@@ -273,7 +273,7 @@ Calculate the timestamp of the waveform with the CFD method.
 
 **Return**: Time calculated with the CFD method [ns] 
 
-The default CFD threshold is set in [Parameters.h](/Files/Parameters_8h.md#file-parameters.h). If the optional parameters are used, the function also saves the WF 
+The default CFD threshold is set in [Parameters.h]. If the optional parameters are used, the function also saves the WF 
 
 
 ### function GetCLKPhase
@@ -428,4 +428,4 @@ Rise Time of the signals [ns].
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

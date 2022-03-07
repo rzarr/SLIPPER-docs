@@ -6,7 +6,7 @@ summary: Header of NeutronChannelMap.cxx.
 
 # src/ChannelMap/NeutronChannelMap.h
 
-Header of [NeutronChannelMap.cxx](/Files/NeutronChannelMap_8cxx.md#file-neutronchannelmap.cxx).  [More...](#detailed-description)
+Header of NeutronChannelMap.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [NeutronChannelMap.cxx](/Files/NeutronChannelMap_8cxx.md#file-neutronc
 
 ## Detailed Description
 
-Header of [NeutronChannelMap.cxx](/Files/NeutronChannelMap_8cxx.md#file-neutronchannelmap.cxx). 
+Header of NeutronChannelMap.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -66,4 +66,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

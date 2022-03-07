@@ -33,7 +33,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[AddBar](/Classes/classTWChannelMap.md#function-addbar)**(Int_t BarId, [TLayer](/Files/Parameters_8h.md#enum-tlayer) Layer, UShort_t BoardId, Int_t ChannelA, Int_t ChannelB, Int_t GlobalChannelA, Int_t GlobalChannelB)<br>Load the information of a single TW bar in the map.  |
+| void | **[AddBar](/Classes/classTWChannelMap.md#function-addbar)**(Int_t BarId, TLayer Layer, UShort_t BoardId, Int_t ChannelA, Int_t ChannelB, Int_t GlobalChannelA, Int_t GlobalChannelB)<br>Load the information of a single TW bar in the map.  |
 | virtual Bool_t | **[CheckMapConsistency](/Classes/classTWChannelMap.md#function-checkmapconsistency)**()<br>Check TW map consistency.  |
 
 ## Protected Attributes
@@ -241,7 +241,7 @@ Check TW map consistency.
 
 **Return**: True if the TW channel map is formed as expected, False otherwise 
 
-This function makes sure that there are no repeated/doubled indices and that the number of TW bars loaded is equal to the expected one (check [Parameters.h](/Files/Parameters_8h.md#file-parameters.h)) 
+This function makes sure that there are no repeated/doubled indices and that the number of TW bars loaded is equal to the expected one (check [Parameters.h]) 
 
 
 ## Protected Attributes Documentation
@@ -288,4 +288,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

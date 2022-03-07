@@ -6,7 +6,7 @@ summary: Header of XmlParser.cxx.
 
 # src/ChannelMap/XmlParser.h
 
-Header of [XmlParser.cxx](/Files/XmlParser_8cxx.md#file-xmlparser.cxx).  [More...](#detailed-description)
+Header of XmlParser.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [XmlParser.cxx](/Files/XmlParser_8cxx.md#file-xmlparser.cxx).  [More..
 
 ## Detailed Description
 
-Header of [XmlParser.cxx](/Files/XmlParser_8cxx.md#file-xmlparser.cxx). 
+Header of XmlParser.cxx. 
 
 **Author**: N. Camarlinghi and R. Zarrella 
 
@@ -65,4 +65,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

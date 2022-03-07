@@ -6,7 +6,7 @@ summary: Header of CReadBinary.cxx.
 
 # src/CReadBinary.h
 
-Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx).  [More...](#detailed-description)
+Header of CReadBinary.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -23,7 +23,7 @@ Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx).  [
 
 ## Detailed Description
 
-Header of [CReadBinary.cxx](/Files/CReadBinary_8cxx.md#file-creadbinary.cxx). 
+Header of CReadBinary.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -140,4 +140,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:21 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

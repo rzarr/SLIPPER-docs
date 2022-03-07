@@ -19,8 +19,8 @@ File containing all Parameters used in the processing and calibration executable
 
 |                | Name           |
 | -------------- | -------------- |
-| std::map< [TLayer](/Files/Parameters_8h.md#enum-tlayer), std::string > | **[LayerName](/Files/Parameters_8h.md#variable-layername)** <br>Map linking the TLayer enum to the TW layer name.  |
-| std::map< [ParticleType](/Files/Parameters_8h.md#enum-particletype), std::string > | **[ParticleName](/Files/Parameters_8h.md#variable-particlename)** <br>Map linking the ParticleType enum to the actual name of the particle.  |
+| std::map< TLayer, std::string > | **[LayerName](/Files/Parameters_8h.md#variable-layername)** <br>Map linking the TLayer enum to the TW layer name.  |
+| std::map< ParticleType, std::string > | **[ParticleName](/Files/Parameters_8h.md#variable-particlename)** <br>Map linking the ParticleType enum to the actual name of the particle.  |
 
 ## Defines
 
@@ -578,4 +578,4 @@ static std::map<ParticleType, std::string> ParticleName={{None,"None"},{Proton,"
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

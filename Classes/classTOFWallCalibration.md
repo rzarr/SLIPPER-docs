@@ -24,14 +24,14 @@ Main class used to handle the whole dE-TOF Calibration process.  [More...](#deta
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[InitHists](/Classes/classTOFWallCalibration.md#function-inithists)**([TLayer](/Files/Parameters_8h.md#enum-tlayer) Layer)<br>Function used to initialize the histograms of a new Particle-BeamEnergy pair.  |
+| void | **[InitHists](/Classes/classTOFWallCalibration.md#function-inithists)**(TLayer Layer)<br>Function used to initialize the histograms of a new Particle-BeamEnergy pair.  |
 | void | **[LoadSingleFileData](/Classes/classTOFWallCalibration.md#function-loadsinglefiledata)**(TString FileName)<br>Load the raw data from a single root file and store them in the histograms of the class.  |
 | void | **[EnergyCalibration](/Classes/classTOFWallCalibration.md#function-energycalibration)**(TString OutputDir)<br>Function that contains the routine used for the energy calibration of the TW.  |
-| void | **[CalibrateLayerDeltaE](/Classes/classTOFWallCalibration.md#function-calibratelayerdeltae)**(std::ofstream * ofsSHOE, [TLayer](/Files/Parameters_8h.md#enum-tlayer) layer, TString OutputDir, TFile * fOut)<br>Function containing the energy calibration routine used for one TW layer.  |
+| void | **[CalibrateLayerDeltaE](/Classes/classTOFWallCalibration.md#function-calibratelayerdeltae)**(std::ofstream * ofsSHOE, TLayer layer, TString OutputDir, TFile * fOut)<br>Function containing the energy calibration routine used for one TW layer.  |
 | void | **[TOFCalibration](/Classes/classTOFWallCalibration.md#function-tofcalibration)**(TString OutputDir)<br>Function that contains the routine used for the TOF calibration of the dE-TOF.  |
-| void | **[CalibrateLayerTOF](/Classes/classTOFWallCalibration.md#function-calibratelayertof)**(std::ofstream * ofsSHOE, PartEnPairType PartEn, [TLayer](/Files/Parameters_8h.md#enum-tlayer) layer, TString OutputDir, TFile * fOut)<br>Function containing the actual TOF calibration routine for single layers.  |
+| void | **[CalibrateLayerTOF](/Classes/classTOFWallCalibration.md#function-calibratelayertof)**(std::ofstream * ofsSHOE, PartEnPairType PartEn, TLayer layer, TString OutputDir, TFile * fOut)<br>Function containing the actual TOF calibration routine for single layers.  |
 | void | **[SaveRawHistograms](/Classes/classTOFWallCalibration.md#function-saverawhistograms)**(TString OutputDir)<br>Additional function that can be used to save the raw data histograms to a .root file in the outuput directory.  |
-| void | **[ClearData](/Classes/classTOFWallCalibration.md#function-cleardata)**([TLayer](/Files/Parameters_8h.md#enum-tlayer) layer)<br>Function used to clear histogram data.  |
+| void | **[ClearData](/Classes/classTOFWallCalibration.md#function-cleardata)**(TLayer layer)<br>Function used to clear histogram data.  |
 | Int_t | **[CalculatePositionID](/Classes/classTOFWallCalibration.md#function-calculatepositionid)**(Int_t XBar, Int_t YBar)<br>Function that calcualtes the Position ID form bar numbers.  |
 | void | **[CalculatePosIDtoBarsMap](/Classes/classTOFWallCalibration.md#function-calculateposidtobarsmap)**()<br>Function that fills the _PosIDtoXYBarsMap map with the actual values.  |
 
@@ -387,4 +387,4 @@ Flag used to set debug mode.
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

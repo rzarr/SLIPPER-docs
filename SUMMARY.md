@@ -70,6 +70,7 @@
     * [Reconstruction.cxx](Files/Reconstruction_8cxx.md)
     * [TOFWallCalibration.cxx](Files/TOFWallCalibration_8cxx.md)
     * [TOFWallCalibration.h](Files/TOFWallCalibration_8h.md)
+    * [WaveDaqReconstruction.cxx](Files/WaveDaqReconstruction_8cxx.md)
     * [WaveDaqReconstruction.h](Files/WaveDaqReconstruction_8h.md)
     * [README.md](Files/README_8md.md)
   * [Pages](Pages/index.md)

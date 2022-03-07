@@ -18,7 +18,7 @@ Class for WaveDREAM stand-alone files tagging.  [More...](#detailed-description)
 |                | Name           |
 | -------------- | -------------- |
 | Float_t | **[BeamEnergy](/Classes/classWDTag.md#variable-beamenergy)** <br>Kinetic energy per nucleon of the Primary beam.  |
-| [ParticleType](/Files/Parameters_8h.md#enum-particletype) | **[PrimaryParticle](/Classes/classWDTag.md#variable-primaryparticle)** <br>Primary particle identifier.  |
+| ParticleType | **[PrimaryParticle](/Classes/classWDTag.md#variable-primaryparticle)** <br>Primary particle identifier.  |
 | Int_t | **[FileNumber](/Classes/classWDTag.md#variable-filenumber)** <br>Number of the file.  |
 
 ## Detailed Description
@@ -66,4 +66,4 @@ Number of the file.
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

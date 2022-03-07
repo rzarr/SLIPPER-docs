@@ -6,7 +6,7 @@ summary: Header of SCChannelMap.cxx.
 
 # src/ChannelMap/SCChannelMap.h
 
-Header of [SCChannelMap.cxx](/Files/SCChannelMap_8cxx.md#file-scchannelmap.cxx).  [More...](#detailed-description)
+Header of SCChannelMap.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [SCChannelMap.cxx](/Files/SCChannelMap_8cxx.md#file-scchannelmap.cxx).
 
 ## Detailed Description
 
-Header of [SCChannelMap.cxx](/Files/SCChannelMap_8cxx.md#file-scchannelmap.cxx). 
+Header of SCChannelMap.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -56,4 +56,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

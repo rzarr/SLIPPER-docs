@@ -6,7 +6,7 @@ summary: Header of Message.cxx.
 
 # src/Utilities/Message.h
 
-Header of [Message.cxx](/Files/Message_8cxx.md#file-message.cxx).  [More...](#detailed-description)
+Header of Message.cxx.  [More...](#detailed-description)
 
 ## Namespaces
 
@@ -25,7 +25,7 @@ Header of [Message.cxx](/Files/Message_8cxx.md#file-message.cxx).  [More...](#de
 
 ## Detailed Description
 
-Header of [Message.cxx](/Files/Message_8cxx.md#file-message.cxx). 
+Header of Message.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -122,4 +122,4 @@ namespace Message {
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

@@ -268,7 +268,7 @@ Check the consistency of the Neutrons channel map.
 
 **Return**: True if the map is formed as expected, False otherwise 
 
-This functions checks that the Neutron detectors are connected to exactly one Slow and one Fast WaveDREAM board. Moreover, it checks that both slow and fast channels have been loaded and are exactly in the expected number (check [Parameters.h](/Files/Parameters_8h.md#file-parameters.h)) 
+This functions checks that the Neutron detectors are connected to exactly one Slow and one Fast WaveDREAM board. Moreover, it checks that both slow and fast channels have been loaded and are exactly in the expected number (check [Parameters.h]) 
 
 
 ## Protected Attributes Documentation
@@ -339,4 +339,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

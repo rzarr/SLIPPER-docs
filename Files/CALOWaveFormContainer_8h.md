@@ -6,7 +6,7 @@ summary: Header of CALOWaveFormContainer.cxx.
 
 # src/WFProcessing/CALOWaveFormContainer.h
 
-Header of [CALOWaveFormContainer.cxx](/Files/CALOWaveFormContainer_8cxx.md#file-calowaveformcontainer.cxx).  [More...](#detailed-description)
+Header of CALOWaveFormContainer.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [CALOWaveFormContainer.cxx](/Files/CALOWaveFormContainer_8cxx.md#file-
 
 ## Detailed Description
 
-Header of [CALOWaveFormContainer.cxx](/Files/CALOWaveFormContainer_8cxx.md#file-calowaveformcontainer.cxx). 
+Header of CALOWaveFormContainer.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -48,4 +48,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

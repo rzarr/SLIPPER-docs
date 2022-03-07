@@ -6,7 +6,7 @@ summary: Header of WaveDaqReconstruction.cxx.
 
 # src/WaveDaqReconstruction.h
 
-Header of [WaveDaqReconstruction.cxx](/Files/WaveDaqReconstruction_8cxx.md#file-wavedaqreconstruction.cxx).  [More...](#detailed-description)
+Header of WaveDaqReconstruction.cxx.  [More...](#detailed-description)
 
 ## Classes
 
@@ -16,7 +16,7 @@ Header of [WaveDaqReconstruction.cxx](/Files/WaveDaqReconstruction_8cxx.md#file-
 
 ## Detailed Description
 
-Header of [WaveDaqReconstruction.cxx](/Files/WaveDaqReconstruction_8cxx.md#file-wavedaqreconstruction.cxx). 
+Header of WaveDaqReconstruction.cxx. 
 
 **Author**: R. Zarrella 
 
@@ -236,4 +236,4 @@ public:
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:21 +0000
+Updated on 2022-03-07 at 17:56:09 +0100

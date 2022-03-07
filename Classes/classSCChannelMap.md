@@ -201,7 +201,7 @@ Check that the SC map has been loaded without errors.
 
 **Return**: True if the SC channel map is formed as expected, False otherwise 
 
-This function makes sure that there is only one WaveDREAM board in the Channel Map that is connected to the Start Counter and checks that the number of channels is the one expected from [Parameters.h](/Files/Parameters_8h.md#file-parameters.h)
+This function makes sure that there is only one WaveDREAM board in the Channel Map that is connected to the Start Counter and checks that the number of channels is the one expected from [Parameters.h]
 
 
 ## Protected Attributes Documentation
@@ -232,4 +232,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-03-05 at 18:47:20 +0000
+Updated on 2022-03-07 at 17:56:09 +0100
