@@ -28,13 +28,13 @@ At this stage, the code handles signals from the:
 * Marco Montefiori (MM) -> First implementation of WaveDAQ histograms and [DataAnalysis](/Classes/classDataAnalysis.md) class
 * Roberto Zarrella (RZ) -> Inclusion of all detectors and re-ordering of code; Currently main developer
 
-## Current developers
+## Current contibutors
 
 
 
 * Esther Ciarrocchi (EC)
 * Aafke Kraan (AK)
-* Roberto Zarrella (Mantainer)
+* Roberto Zarrella (RZ, Mantainer)
 
 ## Content
 
@@ -58,4 +58,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-03-07 at 17:54:20 +0000
+Updated on 2022-03-08 at 18:54:40 +0000

@@ -137,6 +137,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | Int_t | **[_TrigFN](/Classes/classWaveDaqReconstruction.md#variable--trigfn)** <br>Number of False Negative events in firmware-software quality checks.  |
 | std::map< Int_t, std::pair< Float_t, Float_t > > | **[_TrigCalMap](/Classes/classWaveDaqReconstruction.md#variable--trigcalmap)** <br>Fragmentation trigger discriminator amplitude calibration map.  |
 | Float_t | **[_TriggerTh](/Classes/classWaveDaqReconstruction.md#variable--triggerth)** <br>Calibrated trigger thresholds [V].  |
+| Float_t | **[_BeamRate](/Classes/classWaveDaqReconstruction.md#variable--beamrate)** <br>Beam Rate calculated as rate of minimum bia triggers [Hz].  |
 | [WDTag](/Classes/classWDTag.md) | **[_WDTags](/Classes/classWaveDaqReconstruction.md#variable--wdtags)** <br>Tags of WaveDREAM stand-alone files.  |
 | [TDAQTag](/Classes/classTDAQTag.md) | **[_TDAQTags](/Classes/classWaveDaqReconstruction.md#variable--tdaqtags)** <br>Tags of TDAQ files.  |
 | bool | **[_Debug](/Classes/classWaveDaqReconstruction.md#variable--debug)** <br>Global debug flag.  |
@@ -1273,6 +1274,14 @@ Float_t _TriggerTh;
 
 Calibrated trigger thresholds [V]. 
 
+### variable _BeamRate
+
+```cpp
+Float_t _BeamRate;
+```
+
+Beam Rate calculated as rate of minimum bia triggers [Hz]. 
+
 ### variable _WDTags
 
 ```cpp
@@ -1435,4 +1444,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-03-07 at 17:54:19 +0000
+Updated on 2022-03-08 at 18:54:39 +0000
