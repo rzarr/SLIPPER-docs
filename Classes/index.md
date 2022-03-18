@@ -11,11 +11,11 @@ title: Classes
 * **class [BaseMap](/Classes/classBaseMap.md)** <br>Base class for detector Channel Map. 
 * **class [CALOChannelMap](/Classes/classCALOChannelMap.md)** <br>Class that handles the Calorimeter Channel Map. 
 * **class [CALOWaveFormContainer](/Classes/classCALOWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms for the Calorimeter. 
-* **class [CReadBinary](/Classes/classCReadBinary.md)** <br>Class that handles all the decoding of WaveDAQ events from binary files. 
 * **class [DataAnalysis](/Classes/classDataAnalysis.md)** <br>Main class used by the Analysis executable. 
 * **namespace [Message](/Namespaces/namespaceMessage.md)** <br>Namespace that handles some os-independent output. 
 * **class [NeutronChannelMap](/Classes/classNeutronChannelMap.md)** <br>Class that handles all the WaveDREAM boards-channels connected to Neutron detectors. 
 * **class [NeutronWF](/Classes/classNeutronWF.md)** <br>Class for Neutron WaveForms storing. 
+* **class [ReadBinary](/Classes/classReadBinary.md)** <br>Class that handles all the decoding of WaveDAQ events from binary files. 
 * **class [SCChannelMap](/Classes/classSCChannelMap.md)** <br>Class that handles the Start Counter Channel Map. 
 * **class [SCWaveFormContainer](/Classes/classSCWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms for the Start Counter detector. 
 * **class [TCBDATA](/Classes/classTCBDATA.md)** <br>Class for Trigger Concentrator Board data container. 
@@ -34,4 +34,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2022-03-08 at 18:54:40 +0000
+Updated on 2022-03-18 at 17:55:07 +0000

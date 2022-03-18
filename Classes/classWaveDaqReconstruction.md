@@ -24,6 +24,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | void | **[SetTDAQfile](/Classes/classWaveDaqReconstruction.md#function-settdaqfile)**()<br>Signal that the file is produced through the TDAQ.  |
 | void | **[SetSaveNeutrons](/Classes/classWaveDaqReconstruction.md#function-setsaveneutrons)**()<br>Set the SaveNeutrons flag to true.  |
 | void | **[SetGain](/Classes/classWaveDaqReconstruction.md#function-setgain)**(Float_t Gain)<br>Set the frontend gain.  |
+| void | **[SetSaveBeamRate](/Classes/classWaveDaqReconstruction.md#function-setsavebeamrate)**()<br>Enable the saving of beam rate in an output txt file for online monitoring.  |
 
 ## Protected Functions
 
@@ -58,15 +59,17 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 |                | Name           |
 | -------------- | -------------- |
 | TFile * | **[_fOut](/Classes/classWaveDaqReconstruction.md#variable--fout)** <br>Pointer to output file.  |
+| std::ofstream | **[_ofsBeamRate](/Classes/classWaveDaqReconstruction.md#variable--ofsbeamrate)** <br>Ofstream file for beam rate output (online monitoring)  |
 | std::string | **[_OutputFileName](/Classes/classWaveDaqReconstruction.md#variable--outputfilename)** <br>Output file name.  |
 | std::string | **[_InputFileName](/Classes/classWaveDaqReconstruction.md#variable--inputfilename)** <br>Input file name.  |
 | [WDChannelMap](/Classes/classWDChannelMap.md) | **[_WDChannelMap](/Classes/classWaveDaqReconstruction.md#variable--wdchannelmap)** <br>WaveDAQ Channel Map.  |
 | TGlobalToBarChIDpairMap | **[_GlobalToBarChIDpairMap](/Classes/classWaveDaqReconstruction.md#variable--globaltobarchidpairmap)** <br>Map linking the TW global channel to the bar and side ("A"/"B")  |
 | Float_t | **[_Gain](/Classes/classWaveDaqReconstruction.md#variable--gain)** <br>Frontend Gain of the WaveDAQ system.  |
 | bool | **[_IsTDAQ](/Classes/classWaveDaqReconstruction.md#variable--istdaq)** <br>Flag that signals if the file comes from the TDAQ.  |
+| bool | **[_SaveBeamRate](/Classes/classWaveDaqReconstruction.md#variable--savebeamrate)** <br>Flag that signals if the executable has to save the beam rate (used for online monitoring)  |
 | std::map< UShort_t,Int_t > | **[_BoardIdToIdMap](/Classes/classWaveDaqReconstruction.md#variable--boardidtoidmap)** <br>Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector.  |
 | std::map< UShort_t, Int_t > | **[_ActiveBoards](/Classes/classWaveDaqReconstruction.md#variable--activeboards)** <br>Subset of the _BoardIdtoIdMap containing only the boards w/ at least one active channel; This variable is updated at each event.  |
-| [CReadBinary](/Classes/classCReadBinary.md) * | **[_BinaryReader](/Classes/classWaveDaqReconstruction.md#variable--binaryreader)** <br>Pointer to binary reader object.  |
+| [ReadBinary](/Classes/classReadBinary.md) * | **[_BinaryReader](/Classes/classWaveDaqReconstruction.md#variable--binaryreader)** <br>Pointer to binary reader object.  |
 | std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > | **[_WaveFormContainer](/Classes/classWaveDaqReconstruction.md#variable--waveformcontainer)** <br>Container for WaveDREAM raw waveforms and signal processing methods.  |
 | std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > | **[_TCBdata](/Classes/classWaveDaqReconstruction.md#variable--tcbdata)** <br>Container for TCB raw data.  |
 | Bool_t | **[_IsPossiblePileUp](/Classes/classWaveDaqReconstruction.md#variable--ispossiblepileup)** <br>Flag for signaling possible Pile-Up events.  |
@@ -310,6 +313,14 @@ Set the frontend gain.
 
   * **Gain** Frontend gain of the acquisition 
 
+
+### function SetSaveBeamRate
+
+```cpp
+void SetSaveBeamRate()
+```
+
+Enable the saving of beam rate in an output txt file for online monitoring. 
 
 ## Protected Functions Documentation
 
@@ -642,6 +653,14 @@ TFile * _fOut;
 
 Pointer to output file. 
 
+### variable _ofsBeamRate
+
+```cpp
+std::ofstream _ofsBeamRate;
+```
+
+Ofstream file for beam rate output (online monitoring) 
+
 ### variable _OutputFileName
 
 ```cpp
@@ -690,6 +709,14 @@ bool _IsTDAQ;
 
 Flag that signals if the file comes from the TDAQ. 
 
+### variable _SaveBeamRate
+
+```cpp
+bool _SaveBeamRate;
+```
+
+Flag that signals if the executable has to save the beam rate (used for online monitoring) 
+
 ### variable _BoardIdToIdMap
 
 ```cpp
@@ -709,7 +736,7 @@ Subset of the _BoardIdtoIdMap containing only the boards w/ at least one active 
 ### variable _BinaryReader
 
 ```cpp
-CReadBinary * _BinaryReader;
+ReadBinary * _BinaryReader;
 ```
 
 Pointer to binary reader object. 
@@ -1444,4 +1471,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-03-08 at 18:54:39 +0000
+Updated on 2022-03-18 at 17:55:07 +0000

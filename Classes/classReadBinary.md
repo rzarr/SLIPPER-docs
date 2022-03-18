@@ -1,10 +1,10 @@
 ---
-title: CReadBinary
+title: ReadBinary
 summary: Class that handles all the decoding of WaveDAQ events from binary files. 
 
 ---
 
-# CReadBinary
+# ReadBinary
 
 
 
@@ -14,69 +14,69 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[CReadBinary](/Classes/classCReadBinary.md#function-creadbinary)**(std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * wdb_data_ptr, std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * tcb_data_ptr, [WDChannelMap](/Classes/classWDChannelMap.md) * WDchMap, std::map< UShort_t, Int_t > * _WDBIdToIdMap, std::map< UShort_t, Int_t > * ActiveBoards)<br>Read binary constructor.  |
-| virtual | **[~CReadBinary](/Classes/classCReadBinary.md#function-~creadbinary)**()<br>Default destructor.  |
-| void | **[CheckBinaryFileHeader](/Classes/classCReadBinary.md#function-checkbinaryfileheader)**(FILE * f)<br>Check that the binary file header is correct.  |
-| void | **[LoadWaveDreamTimeCalibration](/Classes/classCReadBinary.md#function-loadwavedreamtimecalibration)**(FILE * f)<br>Load the time calibration of all WaveDAQ boards (WDBs and TCBs)  |
-| Int_t | **[DecodeEvent](/Classes/classCReadBinary.md#function-decodeevent)**(FILE * f)<br>Decode a single WaveDAQ event.  |
-| void | **[SetHistograms](/Classes/classCReadBinary.md#function-sethistograms)**(TH2F * hTGEN_MB, TH2F * hTGEN_frag, TH1I * hTriggerPattern, TH1I * hTriggerRates)<br>Propagate the histogram pointers for all variables observed directly during decoding.  |
-| void | **[FillHistoTrigRates](/Classes/classCReadBinary.md#function-fillhistotrigrates)**()<br>Fill histogram containing the mean trigger rates for the acquistion.  |
-| Float_t | **[GetBeamRate](/Classes/classCReadBinary.md#function-getbeamrate)**()<br>Get the rate of particles crossing the setup.  |
-| Bool_t | **[IsFragTriggerOn](/Classes/classCReadBinary.md#function-isfragtriggeron)**()<br>Check if the Fragmentation Trigger is enabled in the event.  |
-| void | **[ResetFragTrigger](/Classes/classCReadBinary.md#function-resetfragtrigger)**()<br>Reset the fragmentation trigger value to False.  |
-| Bool_t | **[ReadEvtStartWords](/Classes/classCReadBinary.md#function-readevtstartwords)**(FILE * f)<br>Read the initial words of the binary file and jump to the WaveDAQ event.  |
+| | **[ReadBinary](/Classes/classReadBinary.md#function-readbinary)**(std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * wdb_data_ptr, std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * tcb_data_ptr, [WDChannelMap](/Classes/classWDChannelMap.md) * WDchMap, std::map< UShort_t, Int_t > * _WDBIdToIdMap, std::map< UShort_t, Int_t > * ActiveBoards)<br>Read binary constructor.  |
+| virtual | **[~ReadBinary](/Classes/classReadBinary.md#function-~readbinary)**()<br>Default destructor.  |
+| void | **[CheckBinaryFileHeader](/Classes/classReadBinary.md#function-checkbinaryfileheader)**(FILE * f)<br>Check that the binary file header is correct.  |
+| void | **[LoadWaveDreamTimeCalibration](/Classes/classReadBinary.md#function-loadwavedreamtimecalibration)**(FILE * f)<br>Load the time calibration of all WaveDAQ boards (WDBs and TCBs)  |
+| Int_t | **[DecodeEvent](/Classes/classReadBinary.md#function-decodeevent)**(FILE * f)<br>Decode a single WaveDAQ event.  |
+| void | **[SetHistograms](/Classes/classReadBinary.md#function-sethistograms)**(TH2F * hTGEN_MB, TH2F * hTGEN_frag, TH1I * hTriggerPattern, TH1I * hTriggerRates)<br>Propagate the histogram pointers for all variables observed directly during decoding.  |
+| void | **[FillHistoTrigRates](/Classes/classReadBinary.md#function-fillhistotrigrates)**()<br>Fill histogram containing the mean trigger rates for the acquistion.  |
+| Float_t | **[GetBeamRate](/Classes/classReadBinary.md#function-getbeamrate)**()<br>Get the rate of particles crossing the setup.  |
+| Bool_t | **[IsFragTriggerOn](/Classes/classReadBinary.md#function-isfragtriggeron)**()<br>Check if the Fragmentation Trigger is enabled in the event.  |
+| void | **[ResetFragTrigger](/Classes/classReadBinary.md#function-resetfragtrigger)**()<br>Reset the fragmentation trigger value to False.  |
+| Bool_t | **[ReadEvtStartWords](/Classes/classReadBinary.md#function-readevtstartwords)**(FILE * f)<br>Read the initial words of the binary file and jump to the WaveDAQ event.  |
 
 ## Protected Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| Bool_t | **[ReadTDCData](/Classes/classCReadBinary.md#function-readtdcdata)**(FILE * f)<br>Read the data of the TDC.  |
-| void | **[ReadWDBEvent](/Classes/classCReadBinary.md#function-readwdbevent)**(FILE * f)<br>Decode data of a single WaveDREAM board.  |
-| void | **[ReadTCBEvent](/Classes/classCReadBinary.md#function-readtcbevent)**(FILE * f)<br>Read data for a TCB.  |
-| void | **[AlignTriggerCell](/Classes/classCReadBinary.md#function-aligntriggercell)**()<br>Align signals using trigger cell #0 of all channels as reference.  |
-| void | **[AlignSignalsRight](/Classes/classCReadBinary.md#function-alignsignalsright)**()<br>Align signals to the moment a write instruction arrives to the WaveDAQ.  |
-| void | **[CheckRangeOverflow](/Classes/classCReadBinary.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
-| void | **[FillHistoTGEN](/Classes/classCReadBinary.md#function-fillhistotgen)**(TH2F * hTGEN)<br>Fill Histograms with information from the TGEN bank of a TCB.  |
-| void | **[FillHistoTrigPattern](/Classes/classCReadBinary.md#function-fillhistotrigpattern)**(uint64_t TriggerPattern)<br>Fill histogram with trigger pattern from TRGI bank.  |
+| Bool_t | **[ReadTDCData](/Classes/classReadBinary.md#function-readtdcdata)**(FILE * f)<br>Read the data of the TDC.  |
+| void | **[ReadWDBEvent](/Classes/classReadBinary.md#function-readwdbevent)**(FILE * f)<br>Decode data of a single WaveDREAM board.  |
+| void | **[ReadTCBEvent](/Classes/classReadBinary.md#function-readtcbevent)**(FILE * f)<br>Read data for a TCB.  |
+| void | **[AlignTriggerCell](/Classes/classReadBinary.md#function-aligntriggercell)**()<br>Align signals using trigger cell #0 of all channels as reference.  |
+| void | **[AlignSignalsRight](/Classes/classReadBinary.md#function-alignsignalsright)**()<br>Align signals to the moment a write instruction arrives to the WaveDAQ.  |
+| void | **[CheckRangeOverflow](/Classes/classReadBinary.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
+| void | **[FillHistoTGEN](/Classes/classReadBinary.md#function-fillhistotgen)**(TH2F * hTGEN)<br>Fill Histograms with information from the TGEN bank of a TCB.  |
+| void | **[FillHistoTrigPattern](/Classes/classReadBinary.md#function-fillhistotrigpattern)**(uint64_t TriggerPattern)<br>Fill histogram with trigger pattern from TRGI bank.  |
 
 ## Protected Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| int | **[Nev](/Classes/classCReadBinary.md#variable-nev)** <br>Event number.  |
-| std::vector< WDBBIN > | **[_bins](/Classes/classCReadBinary.md#variable--bins)** <br>WaveDREAM time calibration container.  |
-| std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * | **[_data_wdb](/Classes/classCReadBinary.md#variable--data-wdb)** <br>WaveDREAM board data container.  |
-| std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * | **[_data_tcb](/Classes/classCReadBinary.md#variable--data-tcb)** <br>TCB data container.  |
-| [WDChannelMap](/Classes/classWDChannelMap.md) * | **[_WDChannelMap](/Classes/classCReadBinary.md#variable--wdchannelmap)** <br>pointer to WaveDAQ channel map  |
-| std::map< UShort_t, int > * | **[_wdb_index](/Classes/classCReadBinary.md#variable--wdb-index)**  |
-| std::map< UShort_t, int > | **[_tcb_index](/Classes/classCReadBinary.md#variable--tcb-index)** <br>Maps for WDB and TCB indexing: serial number -> index.  |
-| std::map< UShort_t, int > * | **[_ActiveBoards](/Classes/classCReadBinary.md#variable--activeboards)** <br>Map o the active WaveDREAM boards in the event: Serial number -> index.  |
-| TH2F * | **[_hTGEN_MB](/Classes/classCReadBinary.md#variable--htgen-mb)** <br>Histogram for trigger generation -> MINIMUM BIAS.  |
-| TH2F * | **[_hTGEN_frag](/Classes/classCReadBinary.md#variable--htgen-frag)** <br>Histogram for trigger generation -> FRAGMENTATION.  |
-| TH1I * | **[_hTriggerPattern](/Classes/classCReadBinary.md#variable--htriggerpattern)** <br>Histogram for trigger pattern.  |
-| TH1I * | **[_hTriggerRates](/Classes/classCReadBinary.md#variable--htriggerrates)** <br>Histogram for trigger rates.  |
-| UInt_t | **[_TotalTime](/Classes/classCReadBinary.md#variable--totaltime)** <br>Total time of the acquisition [us] -> used for trigger rates.  |
-| unsigned int | **[_TriggerCount](/Classes/classCReadBinary.md#variable--triggercount)** <br>Array containing the counts of each trigger implemented in the WaveDAQ firmware.  |
-| DRSBHEADER | **[drsbh](/Classes/classCReadBinary.md#variable-drsbh)** <br>DRS board header.  |
-| EHEADER | **[eh](/Classes/classCReadBinary.md#variable-eh)** <br>Event header.  |
-| CHEADER | **[ch](/Classes/classCReadBinary.md#variable-ch)** <br>Channel header.  |
-| THEADER | **[th](/Classes/classCReadBinary.md#variable-th)** <br>Time header.  |
-| BHEADER | **[bh](/Classes/classCReadBinary.md#variable-bh)** <br>WAVEDREAM Board header.  |
-| DRSCHEADER | **[drsch](/Classes/classCReadBinary.md#variable-drsch)** <br>DRS channel header.  |
-| unsigned short | **[voltage](/Classes/classCReadBinary.md#variable-voltage)** <br>Local variable for storing waveform raw amplitude values.  |
-| unsigned long | **[scaler_data](/Classes/classCReadBinary.md#variable-scaler-data)**  |
-| unsigned long | **[scaler_data_old](/Classes/classCReadBinary.md#variable-scaler-data-old)** <br>Scaler data.  |
-| unsigned long | **[scaler_time](/Classes/classCReadBinary.md#variable-scaler-time)**  |
-| unsigned long | **[scaler_time_old](/Classes/classCReadBinary.md#variable-scaler-time-old)** <br>Scaler time.  |
-| uint64_t | **[_TriggerGenerationBin](/Classes/classCReadBinary.md#variable--triggergenerationbin)** <br>Array used for TGEN bank decoding.  |
-| Bool_t | **[_IsFragTriggerOn](/Classes/classCReadBinary.md#variable--isfragtriggeron)** <br>Boolean flag that tells if the fragmentation trigger bit was enabled in the event.  |
-| Float_t * | **[_TDCTime](/Classes/classCReadBinary.md#variable--tdctime)** <br>TDC time.  |
-| std::map< int, int > * | **[_TDCchMap](/Classes/classCReadBinary.md#variable--tdcchmap)** <br>TCH channel map.  |
+| int | **[Nev](/Classes/classReadBinary.md#variable-nev)** <br>Event number.  |
+| std::vector< WDBBIN > | **[_bins](/Classes/classReadBinary.md#variable--bins)** <br>WaveDREAM time calibration container.  |
+| std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * | **[_data_wdb](/Classes/classReadBinary.md#variable--data-wdb)** <br>WaveDREAM board data container.  |
+| std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * | **[_data_tcb](/Classes/classReadBinary.md#variable--data-tcb)** <br>TCB data container.  |
+| [WDChannelMap](/Classes/classWDChannelMap.md) * | **[_WDChannelMap](/Classes/classReadBinary.md#variable--wdchannelmap)** <br>pointer to WaveDAQ channel map  |
+| std::map< UShort_t, int > * | **[_wdb_index](/Classes/classReadBinary.md#variable--wdb-index)**  |
+| std::map< UShort_t, int > | **[_tcb_index](/Classes/classReadBinary.md#variable--tcb-index)** <br>Maps for WDB and TCB indexing: serial number -> index.  |
+| std::map< UShort_t, int > * | **[_ActiveBoards](/Classes/classReadBinary.md#variable--activeboards)** <br>Map o the active WaveDREAM boards in the event: Serial number -> index.  |
+| TH2F * | **[_hTGEN_MB](/Classes/classReadBinary.md#variable--htgen-mb)** <br>Histogram for trigger generation -> MINIMUM BIAS.  |
+| TH2F * | **[_hTGEN_frag](/Classes/classReadBinary.md#variable--htgen-frag)** <br>Histogram for trigger generation -> FRAGMENTATION.  |
+| TH1I * | **[_hTriggerPattern](/Classes/classReadBinary.md#variable--htriggerpattern)** <br>Histogram for trigger pattern.  |
+| TH1I * | **[_hTriggerRates](/Classes/classReadBinary.md#variable--htriggerrates)** <br>Histogram for trigger rates.  |
+| UInt_t | **[_TotalTime](/Classes/classReadBinary.md#variable--totaltime)** <br>Total time of the acquisition [us] -> used for trigger rates.  |
+| unsigned int | **[_TriggerCount](/Classes/classReadBinary.md#variable--triggercount)** <br>Array containing the counts of each trigger implemented in the WaveDAQ firmware.  |
+| DRSBHEADER | **[drsbh](/Classes/classReadBinary.md#variable-drsbh)** <br>DRS board header.  |
+| EHEADER | **[eh](/Classes/classReadBinary.md#variable-eh)** <br>Event header.  |
+| CHEADER | **[ch](/Classes/classReadBinary.md#variable-ch)** <br>Channel header.  |
+| THEADER | **[th](/Classes/classReadBinary.md#variable-th)** <br>Time header.  |
+| BHEADER | **[bh](/Classes/classReadBinary.md#variable-bh)** <br>WAVEDREAM Board header.  |
+| DRSCHEADER | **[drsch](/Classes/classReadBinary.md#variable-drsch)** <br>DRS channel header.  |
+| unsigned short | **[voltage](/Classes/classReadBinary.md#variable-voltage)** <br>Local variable for storing waveform raw amplitude values.  |
+| unsigned long | **[scaler_data](/Classes/classReadBinary.md#variable-scaler-data)**  |
+| unsigned long | **[scaler_data_old](/Classes/classReadBinary.md#variable-scaler-data-old)** <br>Scaler data.  |
+| unsigned long | **[scaler_time](/Classes/classReadBinary.md#variable-scaler-time)**  |
+| unsigned long | **[scaler_time_old](/Classes/classReadBinary.md#variable-scaler-time-old)** <br>Scaler time.  |
+| uint64_t | **[_TriggerGenerationBin](/Classes/classReadBinary.md#variable--triggergenerationbin)** <br>Array used for TGEN bank decoding.  |
+| Bool_t | **[_IsFragTriggerOn](/Classes/classReadBinary.md#variable--isfragtriggeron)** <br>Boolean flag that tells if the fragmentation trigger bit was enabled in the event.  |
+| Float_t * | **[_TDCTime](/Classes/classReadBinary.md#variable--tdctime)** <br>TDC time.  |
+| std::map< int, int > * | **[_TDCchMap](/Classes/classReadBinary.md#variable--tdcchmap)** <br>TCH channel map.  |
 
 ## Detailed Description
 
 ```cpp
-class CReadBinary;
+class ReadBinary;
 ```
 
 Class that handles all the decoding of WaveDAQ events from binary files. 
@@ -85,10 +85,10 @@ The class is capable of handling both WaveDAQ stand-alone files and TDAQ files. 
 
 ## Public Functions Documentation
 
-### function CReadBinary
+### function ReadBinary
 
 ```cpp
-CReadBinary(
+ReadBinary(
     std::vector< WaveFormContainer * > * wdb_data_ptr,
     std::vector< TCBDATA * > * tcb_data_ptr,
     WDChannelMap * WDchMap,
@@ -108,13 +108,13 @@ Read binary constructor.
   * **ActiveBoards** Pointer to map of the Active boards in the event 
 
 
-Propagate all the needed pointers from main reconstruction class to ReadBinary 
+Propagate all the needed pointers from main reconstruction class to [ReadBinary](/Classes/classReadBinary.md)
 
 
-### function ~CReadBinary
+### function ~ReadBinary
 
 ```cpp
-virtual ~CReadBinary()
+virtual ~ReadBinary()
 ```
 
 Default destructor. 
@@ -616,4 +616,4 @@ TCH channel map.
 
 -------------------------------
 
-Updated on 2022-03-08 at 18:54:40 +0000
+Updated on 2022-03-18 at 17:55:07 +0000
