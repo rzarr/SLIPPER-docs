@@ -31,6 +31,9 @@ Class for WaveDREAM board data container.  [More...](#detailed-description)
 | UChar_t | **[tdc_waveform](/Classes/classWDBDATA.md#variable-tdc-waveform)** <br>TDC waveform.  |
 | ULong_t | **[trigger_data](/Classes/classWDBDATA.md#variable-trigger-data)** <br>Data on the trigger of the event.  |
 | Float_t | **[scaler](/Classes/classWDBDATA.md#variable-scaler)** <br>Waveform scaler.  |
+| Char_t | **[boardtype](/Classes/classWDBDATA.md#variable-boardtype)** <br>Board type.  |
+| Float_t * | **[min_ptr](/Classes/classWDBDATA.md#variable-min-ptr)** <br>Pointer to min element of Waveform.  |
+| Float_t * | **[max_ptr](/Classes/classWDBDATA.md#variable-max-ptr)** <br>Pointer to max element of Waveform.  |
 
 ## Detailed Description
 
@@ -118,6 +121,30 @@ Float_t scaler;
 
 Waveform scaler. 
 
+### variable boardtype
+
+```cpp
+Char_t boardtype;
+```
+
+Board type. 
+
+### variable min_ptr
+
+```cpp
+Float_t * min_ptr;
+```
+
+Pointer to min element of Waveform. 
+
+### variable max_ptr
+
+```cpp
+Float_t * max_ptr;
+```
+
+Pointer to max element of Waveform. 
+
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

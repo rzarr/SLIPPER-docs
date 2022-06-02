@@ -1,8 +1,8 @@
 User Manual
 ======
 
-# Stand-aLone Identification of Particles through Partial Event Reconstruction (v3.0)
-This is the version 3.0 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
+# Stand-aLone Identification of Particles through Partial Event Reconstruction (v3.1)
+This is the version 3.1 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
 
 **N.B.: Each time a new acquisition is processed, the associated configuration files (config/ChannelMap\*.xml, config/MCTable\*.txt and src/Utils/Parameters.h) should be carefully checked and tuned.**
 
@@ -340,7 +340,7 @@ will process all the files from run "xxxx" (with name "\*xxxx\*data\*") in the i
 
 **N.B.: To run on the Bologna Tier3, it is mandatory to call the right version of python, i.e. "python3"**
 
-From this version, it is also possible to reconstruct different runs acquirede with the TDAQ in parallel using the python script src/ReconstructMultipleRuns.py
+From this version, it is also possible to reconstruct different runs acquired with the TDAQ in parallel using the python script src/ReconstructMultipleRuns.py
 
 ```
 >> python src/ReconstructMultipleRuns.py [OPTION]
@@ -417,3 +417,25 @@ From version 2.5, a first analysis script has been implemented. This is meant to
   -h, --help              Print help
 ```
 As of today, the script produces a series of histograms to quickly check the correct functioning of TOF-Wall detector (channels/bars), as well as some preliminary time resolution studies.
+
+
+# LivePlotter (WORK IN PROGRESS)
+From version 3.1, a LivePlotter executable is available. This executable is called by the rc/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
+* TW hitmaps with MB and Fragmentation trigger
+* Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic. 
+* Raw Fragmentation dE spectra for all the TW bars involved in the fragmentation trigger, for the chosen trigger thresholds
+* Pile-Up percentage in each file
+
+The best way to run the LivePlotter is to call it through the dedicated Python routine:
+
+```
+python src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o OutputDir -w 1 -b 1 -t config/TriggerAmpMapCNAO2021.txt
+```
+This will launch a 3-thread process, with each of the involved threads dedicated to a specific task:
+* Online processing of data
+* Beam rate monitoring
+* Online plotting (LivePlotter)
+
+**The Plotter.py routine calls the RecoMonitor.py routine, which has not been completely tested on TDAQ files!! To run with this file format, the time calibration of WaveDAQ has to be saved somewhere!**
+
+**This tool is intended for online monitoring during data acquisitions ONLY!!**

@@ -19,6 +19,7 @@
     * [ReadBinary](Classes/classReadBinary.md)
     * [NeutronWF](Classes/classNeutronWF.md)
     * [NeutronChannelMap](Classes/classNeutronChannelMap.md)
+    * [LivePlots](Classes/classLivePlots.md)
     * [DataAnalysis](Classes/classDataAnalysis.md)
     * [CALOWaveFormContainer](Classes/classCALOWaveFormContainer.md)
     * [CALOChannelMap](Classes/classCALOChannelMap.md)

@@ -13,7 +13,7 @@ Namespace that handles some os-independent output.
 |                | Name           |
 | -------------- | -------------- |
 | void | **[DisplayWarning](/Namespaces/namespaceMessage.md#function-displaywarning)**(TString Message, std::ostream & os =std::cout)<br>Display a Warning.  |
-| void | **[DisplayFatalError](/Namespaces/namespaceMessage.md#function-displayfatalerror)**(TString Message, std::ostream & os =std::cout)<br>Throw a Fatal Error.  |
+| void | **[DisplayFatalError](/Namespaces/namespaceMessage.md#function-displayfatalerror)**(TString Message, std::ostream & os =std::cout)<br>Print a Fatal Error.  |
 | void | **[DisplayMessage](/Namespaces/namespaceMessage.md#function-displaymessage)**(TString Message, std::ostream & os =std::cout)<br>Display a [Message](/Namespaces/namespaceMessage.md).  |
 | void | **[DisplayMessageWithEmphasys](/Namespaces/namespaceMessage.md#function-displaymessagewithemphasys)**(TString Message, std::ostream & os =std::cout)<br>Display an emphsized message.  |
 
@@ -46,7 +46,7 @@ void DisplayFatalError(
 )
 ```
 
-Throw a Fatal Error. 
+Print a Fatal Error. 
 
 **Parameters**: 
 
@@ -94,4 +94,4 @@ Display an emphsized message.
 
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

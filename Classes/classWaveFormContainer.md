@@ -21,6 +21,8 @@ Inherited by [CALOWaveFormContainer](/Classes/classCALOWaveFormContainer.md), [S
 | virtual Bool_t | **[IsEmpty](/Classes/classWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual void | **[CopyWaveform](/Classes/classWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
+| virtual void | **[SetBoardSerialNumber](/Classes/classWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
+| virtual UShort_t | **[GetBoardSerialNumber](/Classes/classWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
 | virtual void | **[ClearData](/Classes/classWaveFormContainer.md#function-cleardata)**()<br>Clear data for new cycle.  |
 | virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
@@ -53,6 +55,7 @@ Inherited by [CALOWaveFormContainer](/Classes/classCALOWaveFormContainer.md), [S
 | Float_t | **[_Charge](/Classes/classWaveFormContainer.md#variable--charge)** <br>Integral charge of the signals [V*ns].  |
 | Float_t | **[_Time](/Classes/classWaveFormContainer.md#variable--time)** <br>Raw Time of the signals [ns].  |
 | Float_t | **[_RiseTime](/Classes/classWaveFormContainer.md#variable--risetime)** <br>Rise Time of the signals [ns].  |
+| UShort_t | **[_BoardSerialNumber](/Classes/classWaveFormContainer.md#variable--boardserialnumber)**  |
 
 ## Detailed Description
 
@@ -137,6 +140,31 @@ Copy a decoded waveform in the output container of neutrons.
   * **nWF** Pointer to output neutron waveform container 
   * **channel** WaveDREAM channel to be copied 
 
+
+### function SetBoardSerialNumber
+
+```cpp
+virtual void SetBoardSerialNumber(
+    UShort_t bsn
+)
+```
+
+Set the serial number of the WDB board. 
+
+**Parameters**: 
+
+  * **bsn** BoardSerialNumber 
+
+
+### function GetBoardSerialNumber
+
+```cpp
+virtual UShort_t GetBoardSerialNumber()
+```
+
+Get the serial number of the WDB board. 
+
+**Return**: Board Serial Number 
 
 ### function ClearData
 
@@ -405,6 +433,13 @@ Float_t _RiseTime;
 
 Rise Time of the signals [ns]. 
 
+### variable _BoardSerialNumber
+
+```cpp
+UShort_t _BoardSerialNumber;
+```
+
+
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

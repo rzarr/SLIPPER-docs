@@ -15,6 +15,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 |                | Name           |
 | -------------- | -------------- |
 | | **[WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md#function-wavedaqreconstruction)**()<br>Default constructor.  |
+| virtual | **[~WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md#function-~wavedaqreconstruction)**()<br>Default destructor.  |
 | void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(std::string FileName, std::string TimeCalFileName, int nEv)<br>Perform the whole WaveDAQ reconstruction.  |
 | void | **[LoadChannelMap](/Classes/classWaveDaqReconstruction.md#function-loadchannelmap)**(std::string FileName)<br>Load xml containing the channel map, i.e. the mapping between channels,boards and bar.  |
 | void | **[LoadTriggerCalibration](/Classes/classWaveDaqReconstruction.md#function-loadtriggercalibration)**(std::string FileName)<br>Load the trigger calibration map.  |
@@ -140,6 +141,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | Int_t | **[_TrigFN](/Classes/classWaveDaqReconstruction.md#variable--trigfn)** <br>Number of False Negative events in firmware-software quality checks.  |
 | std::map< Int_t, std::pair< Float_t, Float_t > > | **[_TrigCalMap](/Classes/classWaveDaqReconstruction.md#variable--trigcalmap)** <br>Fragmentation trigger discriminator amplitude calibration map.  |
 | Float_t | **[_TriggerTh](/Classes/classWaveDaqReconstruction.md#variable--triggerth)** <br>Calibrated trigger thresholds [V].  |
+| std::vector< Int_t > | **[_FragTrigBars](/Classes/classWaveDaqReconstruction.md#variable--fragtrigbars)** <br>List o TW bars connected to the fragmentation trigger.  |
 | Float_t | **[_BeamRate](/Classes/classWaveDaqReconstruction.md#variable--beamrate)** <br>Beam Rate calculated as rate of minimum bia triggers [Hz].  |
 | [WDTag](/Classes/classWDTag.md) | **[_WDTags](/Classes/classWaveDaqReconstruction.md#variable--wdtags)** <br>Tags of WaveDREAM stand-alone files.  |
 | [TDAQTag](/Classes/classTDAQTag.md) | **[_TDAQTags](/Classes/classWaveDaqReconstruction.md#variable--tdaqtags)** <br>Tags of TDAQ files.  |
@@ -160,6 +162,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | TH1I * | **[_hTriggerPattern](/Classes/classWaveDaqReconstruction.md#variable--htriggerpattern)** <br>Trigger pattern (TRGI) **HISTOGRAM** |
 | TH1I * | **[_hTriggerRates](/Classes/classWaveDaqReconstruction.md#variable--htriggerrates)** <br>Trigger rates (TRGC) **HISTOGRAM** |
 | TH1F ** | **[_hTrigAmp](/Classes/classWaveDaqReconstruction.md#variable--htrigamp)** <br>Trigger amplitude of Fragmentation trigger channels **HISTOGRAM** |
+| std::map< Int_t, TH1F * > | **[_hFragCharge](/Classes/classWaveDaqReconstruction.md#variable--hfragcharge)** <br>Charge histogram of fragmentation trigger bars with SW chosen threshold! **HISTOGRAM** |
 | TH1I * | **[_hCALOMultiplicity](/Classes/classWaveDaqReconstruction.md#variable--hcalomultiplicity)** <br>Multiplicity of CALO crystals **HISTOGRAM** |
 
 ## Detailed Description
@@ -190,6 +193,14 @@ Default constructor.
 
 Set some global variables to initial dummy values 
 
+
+### function ~WaveDaqReconstruction
+
+```cpp
+virtual ~WaveDaqReconstruction()
+```
+
+Default destructor. 
 
 ### function RunReconstruction
 
@@ -1192,7 +1203,7 @@ TW bar raw Time-Of-Flight [ns].
 ### variable _NS_WF
 
 ```cpp
-NeutronWF * _NS_WF;
+NeutronWF * _NS_WF = nullptr;
 ```
 
 Container for signals of Slow channels of Neutron detectors (only used when _SaveNeutrons is True) 
@@ -1200,7 +1211,7 @@ Container for signals of Slow channels of Neutron detectors (only used when _Sav
 ### variable _NF_WF
 
 ```cpp
-NeutronWF * _NF_WF;
+NeutronWF * _NF_WF = nullptr;
 ```
 
 Container for signals of Fast channels of Neutron detectors (only used when _SaveNeutrons is True) 
@@ -1300,6 +1311,14 @@ Float_t _TriggerTh;
 ```
 
 Calibrated trigger thresholds [V]. 
+
+### variable _FragTrigBars
+
+```cpp
+std::vector< Int_t > _FragTrigBars;
+```
+
+List o TW bars connected to the fragmentation trigger. 
 
 ### variable _BeamRate
 
@@ -1461,6 +1480,14 @@ TH1F ** _hTrigAmp = new TH1F*[NUMBEROFTRIGGERCHANNELS];
 
 Trigger amplitude of Fragmentation trigger channels **HISTOGRAM**
 
+### variable _hFragCharge
+
+```cpp
+std::map< Int_t, TH1F * > _hFragCharge;
+```
+
+Charge histogram of fragmentation trigger bars with SW chosen threshold! **HISTOGRAM**
+
 ### variable _hCALOMultiplicity
 
 ```cpp
@@ -1471,4 +1498,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

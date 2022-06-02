@@ -25,8 +25,6 @@ Class for Trigger Concentrator Board data container.  [More...](#detailed-descri
 |                | Name           |
 | -------------- | -------------- |
 | ULong_t | **[in_waveform](/Classes/classTCBDATA.md#variable-in-waveform)** <br>in_waveform  |
-| ULong_t | **[out_waveform](/Classes/classTCBDATA.md#variable-out-waveform)** <br>out_waveform  |
-| ULong_t | **[gent_waveform](/Classes/classTCBDATA.md#variable-gent-waveform)** <br>TGEN bank information.  |
 
 ## Detailed Description
 
@@ -66,22 +64,6 @@ ULong_t in_waveform;
 
 in_waveform 
 
-### variable out_waveform
-
-```cpp
-ULong_t out_waveform;
-```
-
-out_waveform 
-
-### variable gent_waveform
-
-```cpp
-ULong_t gent_waveform;
-```
-
-TGEN bank information. 
-
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

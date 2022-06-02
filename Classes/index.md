@@ -12,6 +12,7 @@ title: Classes
 * **class [CALOChannelMap](/Classes/classCALOChannelMap.md)** <br>Class that handles the Calorimeter Channel Map. 
 * **class [CALOWaveFormContainer](/Classes/classCALOWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms for the Calorimeter. 
 * **class [DataAnalysis](/Classes/classDataAnalysis.md)** <br>Main class used by the Analysis executable. 
+* **class [LivePlots](/Classes/classLivePlots.md)** <br>Class containing all the methods used in the LivePlotter executable. 
 * **namespace [Message](/Namespaces/namespaceMessage.md)** <br>Namespace that handles some os-independent output. 
 * **class [NeutronChannelMap](/Classes/classNeutronChannelMap.md)** <br>Class that handles all the WaveDREAM boards-channels connected to Neutron detectors. 
 * **class [NeutronWF](/Classes/classNeutronWF.md)** <br>Class for Neutron WaveForms storing. 
@@ -34,4 +35,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

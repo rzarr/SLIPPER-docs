@@ -21,8 +21,10 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | TBoardChannelToGlobalMap | **[GetBoardChannelToGlobalMap](/Classes/classTWChannelMap.md#function-getboardchanneltoglobalmap)**()<br>Get the WaveDREAM board-channel to TW global channel map.  |
 | TGlobalToBarChIDpairMap | **[GetGlobalToBarChIDpairMap](/Classes/classTWChannelMap.md#function-getglobaltobarchidpairmap)**()<br>Get the TW global channel to bar number-channel Id ("A"/"B") map.  |
 | TMapBarIdLayerId | **[GetBarLayerMap](/Classes/classTWChannelMap.md#function-getbarlayermap)**()<br>Get the TW bar to layer map.  |
+| TLayer | **[GetLayer](/Classes/classTWChannelMap.md#function-getlayer)**(Int_t bar)<br>Get the layer of a TW bar.  |
 | Int_t | **[GetGlobalFromBoardChannelPair](/Classes/classTWChannelMap.md#function-getglobalfromboardchannelpair)**(std::pair< UShort_t, Int_t > p)<br>Get the WaveDREAM board-channel pair connected to a TW global channel.  |
-| Int_t | **[GetNumberOfTWBars](/Classes/classTWChannelMap.md#function-getnumberoftwbars)**() |
+| Int_t | **[GetNumberOfTWBars](/Classes/classTWChannelMap.md#function-getnumberoftwbars)**()<br>Get the total number of TW bars loaded in the map.  |
+| std::pair< Int_t, Int_t > | **[GetBoardChsFromFragBar](/Classes/classTWChannelMap.md#function-getboardchsfromfragbar)**(Int_t barId)<br>Get the global channels connected to a bar involved in the fragmentation trigger logic.  |
 | virtual Bool_t | **[LoadMap](/Classes/classTWChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Load the TW channel map.  |
 | virtual void | **[Clear](/Classes/classTWChannelMap.md#function-clear)**()<br>Clear data of TW map.  |
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classTWChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
@@ -43,6 +45,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | TMapBarIdLayerId | **[_BarLayerMap](/Classes/classTWChannelMap.md#variable--barlayermap)** <br>Map that links the TW bar to its layer.  |
 | TBoardChannelToGlobalMap | **[_BoardChannelToGlobalMap](/Classes/classTWChannelMap.md#variable--boardchanneltoglobalmap)** <br>Map that links the WaveDREAM board-channel pair to the TW global channel.  |
 | TGlobalToBarChIDpairMap | **[_GlobalToBarChIDpairMap](/Classes/classTWChannelMap.md#variable--globaltobarchidpairmap)** <br>Map that links the TW global channel with the Bar number-channel id ("A"/"B") pair.  |
+| std::map< Int_t, std::pair< Int_t, Int_t > > | **[_FragBarToChPair](/Classes/classTWChannelMap.md#variable--fragbartochpair)** <br>Map that links fragmentation bars to their two global channels.  |
 | Bool_t | **[_IsMapLoaded](/Classes/classTWChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
 | std::vector< UShort_t > | **[_ListOfBoards](/Classes/classTWChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
@@ -114,6 +117,23 @@ Get the TW bar to layer map.
 
 **Return**: Map object 
 
+### function GetLayer
+
+```cpp
+TLayer GetLayer(
+    Int_t bar
+)
+```
+
+Get the layer of a TW bar. 
+
+**Parameters**: 
+
+  * **barId** TW bar number 
+
+
+**Return**: Layer of the TW bar 
+
 ### function GetGlobalFromBoardChannelPair
 
 ```cpp
@@ -137,8 +157,26 @@ Get the WaveDREAM board-channel pair connected to a TW global channel.
 Int_t GetNumberOfTWBars()
 ```
 
+Get the total number of TW bars loaded in the map. 
 
-**Return**: 
+**Return**: Number of TW bars loaded 
+
+### function GetBoardChsFromFragBar
+
+```cpp
+std::pair< Int_t, Int_t > GetBoardChsFromFragBar(
+    Int_t barId
+)
+```
+
+Get the global channels connected to a bar involved in the fragmentation trigger logic. 
+
+**Parameters**: 
+
+  * **barId** Number of the TW bar 
+
+
+**Return**: Pair of the two global channels connected to the bar 
 
 ### function LoadMap
 
@@ -270,6 +308,14 @@ TGlobalToBarChIDpairMap _GlobalToBarChIDpairMap;
 
 Map that links the TW global channel with the Bar number-channel id ("A"/"B") pair. 
 
+### variable _FragBarToChPair
+
+```cpp
+std::map< Int_t, std::pair< Int_t, Int_t > > _FragBarToChPair;
+```
+
+Map that links fragmentation bars to their two global channels. 
+
 ### variable _IsMapLoaded
 
 ```cpp
@@ -288,4 +334,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

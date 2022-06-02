@@ -22,6 +22,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 | void | **[SetHistograms](/Classes/classReadBinary.md#function-sethistograms)**(TH2F * hTGEN_MB, TH2F * hTGEN_frag, TH1I * hTriggerPattern, TH1I * hTriggerRates)<br>Propagate the histogram pointers for all variables observed directly during decoding.  |
 | void | **[FillHistoTrigRates](/Classes/classReadBinary.md#function-fillhistotrigrates)**()<br>Fill histogram containing the mean trigger rates for the acquistion.  |
 | Float_t | **[GetBeamRate](/Classes/classReadBinary.md#function-getbeamrate)**()<br>Get the rate of particles crossing the setup.  |
+| void | **[SaveBeamRate](/Classes/classReadBinary.md#function-savebeamrate)**(std::ofstream * ofsBeamRate)<br>Save the total time of the acquisition and the beam rate to an output file for online monitoring.  |
 | Bool_t | **[IsFragTriggerOn](/Classes/classReadBinary.md#function-isfragtriggeron)**()<br>Check if the Fragmentation Trigger is enabled in the event.  |
 | void | **[ResetFragTrigger](/Classes/classReadBinary.md#function-resetfragtrigger)**()<br>Reset the fragmentation trigger value to False.  |
 | Bool_t | **[ReadEvtStartWords](/Classes/classReadBinary.md#function-readevtstartwords)**(FILE * f)<br>Read the initial words of the binary file and jump to the WaveDAQ event.  |
@@ -56,6 +57,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 | TH1I * | **[_hTriggerPattern](/Classes/classReadBinary.md#variable--htriggerpattern)** <br>Histogram for trigger pattern.  |
 | TH1I * | **[_hTriggerRates](/Classes/classReadBinary.md#variable--htriggerrates)** <br>Histogram for trigger rates.  |
 | UInt_t | **[_TotalTime](/Classes/classReadBinary.md#variable--totaltime)** <br>Total time of the acquisition [us] -> used for trigger rates.  |
+| Float_t | **[_WDAQBeamRate](/Classes/classReadBinary.md#variable--wdaqbeamrate)** <br>Rate of Minimum Bias events calculated by the WaveDAQ (beam rate, Hz)  |
 | unsigned int | **[_TriggerCount](/Classes/classReadBinary.md#variable--triggercount)** <br>Array containing the counts of each trigger implemented in the WaveDAQ firmware.  |
 | DRSBHEADER | **[drsbh](/Classes/classReadBinary.md#variable-drsbh)** <br>DRS board header.  |
 | EHEADER | **[eh](/Classes/classReadBinary.md#variable-eh)** <br>Event header.  |
@@ -218,6 +220,21 @@ Get the rate of particles crossing the setup.
 **Return**: Rate of Minimum Bias events calculated by the WaveDAQ [Hz] 
 
 If either the TRGC or TRGI banks are not present in the input file, the function returns 0 
+
+
+### function SaveBeamRate
+
+```cpp
+void SaveBeamRate(
+    std::ofstream * ofsBeamRate
+)
+```
+
+Save the total time of the acquisition and the beam rate to an output file for online monitoring. 
+
+**Parameters**: 
+
+  * **std::ofstream*** Pointer to output ofstream object 
 
 
 ### function IsFragTriggerOn
@@ -488,6 +505,14 @@ UInt_t _TotalTime;
 
 Total time of the acquisition [us] -> used for trigger rates. 
 
+### variable _WDAQBeamRate
+
+```cpp
+Float_t _WDAQBeamRate;
+```
+
+Rate of Minimum Bias events calculated by the WaveDAQ (beam rate, Hz) 
+
 ### variable _TriggerCount
 
 ```cpp
@@ -616,4 +641,4 @@ TCH channel map.
 
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

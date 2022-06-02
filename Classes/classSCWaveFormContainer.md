@@ -17,6 +17,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 |                | Name           |
 | -------------- | -------------- |
 | | **[SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-scwaveformcontainer)**()<br>Default constructor.  |
+| virtual | **[~SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-~scwaveformcontainer)**()<br>Default destructor.  |
 | virtual Float_t | **[GetSCTotalCharge](/Classes/classSCWaveFormContainer.md#function-getsctotalcharge)**(std::vector< Int_t > * Channels)<br>Compute and get the total raw energy loss in the SC.  |
 | virtual Float_t | **[GetTimeSC](/Classes/classSCWaveFormContainer.md#function-gettimesc)**(Bool_t * IsPossiblePileUp, std::vector< Int_t > * Channels, UShort_t BoardId =0, Int_t event =-1, TFile * fOut =nullptr)<br>Analyze SC waveforms to extract its timestamp.  |
 | virtual Float_t | **[GetTimeSC_Linear](/Classes/classSCWaveFormContainer.md#function-gettimesc-linear)**(std::vector< Int_t > * Channels)<br>Analyze SC waveforms and extract the SC time with a linear extrapolation to the baseline.  |
@@ -25,6 +26,8 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual Bool_t | **[IsEmpty](/Classes/classSCWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classSCWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual void | **[CopyWaveform](/Classes/classSCWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
+| virtual void | **[SetBoardSerialNumber](/Classes/classSCWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
+| virtual UShort_t | **[GetBoardSerialNumber](/Classes/classSCWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
 | virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classSCWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classSCWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
 | virtual Float_t | **[GetCharge](/Classes/classSCWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the waveform.  |
@@ -36,7 +39,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| virtual void | **[SumSCWavefoms](/Classes/classSCWaveFormContainer.md#function-sumscwavefoms)**(std::vector< Int_t > * Channels)<br>Function that performs the sum of the SC waveforms and computes the baseline of the total waveform.  |
+| virtual void | **[SumSCWaveforms](/Classes/classSCWaveFormContainer.md#function-sumscwaveforms)**(std::vector< Int_t > * Channels)<br>Function that performs the sum of the SC waveforms and computes the baseline of the total waveform.  |
 | virtual Bool_t | **[CheckForPileUp](/Classes/classSCWaveFormContainer.md#function-checkforpileup)**(std::vector< Float_t > * w_ptr, std::vector< Float_t > * t_ptr, Int_t event =-1, TFile * fOut =nullptr)<br>Check for PileUp in the Start Counter total signal.  |
 | virtual void | **[RescaleTime](/Classes/classSCWaveFormContainer.md#function-rescaletime)**(std::vector< Float_t > * tmp_time)<br>Rescale channel time from s to ns.  |
 | virtual void | **[MedianFilter](/Classes/classSCWaveFormContainer.md#function-medianfilter)**(Int_t channel)<br>Apply a 7-point median filter to the WF if needed.  |
@@ -62,6 +65,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | Float_t | **[_Charge](/Classes/classSCWaveFormContainer.md#variable--charge)** <br>Integral charge of the signals [V*ns].  |
 | Float_t | **[_Time](/Classes/classSCWaveFormContainer.md#variable--time)** <br>Raw Time of the signals [ns].  |
 | Float_t | **[_RiseTime](/Classes/classSCWaveFormContainer.md#variable--risetime)** <br>Rise Time of the signals [ns].  |
+| UShort_t | **[_BoardSerialNumber](/Classes/classSCWaveFormContainer.md#variable--boardserialnumber)**  |
 
 ## Additional inherited members
 
@@ -82,6 +86,14 @@ SCWaveFormContainer()
 ```
 
 Default constructor. 
+
+### function ~SCWaveFormContainer
+
+```cpp
+virtual ~SCWaveFormContainer()
+```
+
+Default destructor. 
 
 ### function GetSCTotalCharge
 
@@ -243,6 +255,31 @@ Copy a decoded waveform in the output container of neutrons.
   * **channel** WaveDREAM channel to be copied 
 
 
+### function SetBoardSerialNumber
+
+```cpp
+virtual void SetBoardSerialNumber(
+    UShort_t bsn
+)
+```
+
+Set the serial number of the WDB board. 
+
+**Parameters**: 
+
+  * **bsn** BoardSerialNumber 
+
+
+### function GetBoardSerialNumber
+
+```cpp
+virtual UShort_t GetBoardSerialNumber()
+```
+
+Get the serial number of the WDB board. 
+
+**Return**: Board Serial Number 
+
 ### function GetPedestal
 
 ```cpp
@@ -381,10 +418,10 @@ This function analyzes the clock waveform and returns its phase.
 
 ## Protected Functions Documentation
 
-### function SumSCWavefoms
+### function SumSCWaveforms
 
 ```cpp
-virtual void SumSCWavefoms(
+virtual void SumSCWaveforms(
     std::vector< Int_t > * Channels
 )
 ```
@@ -575,6 +612,13 @@ Float_t _RiseTime;
 
 Rise Time of the signals [ns]. 
 
+### variable _BoardSerialNumber
+
+```cpp
+UShort_t _BoardSerialNumber;
+```
+
+
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200

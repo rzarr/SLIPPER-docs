@@ -20,11 +20,8 @@ Class that handles all the decoding of XML configuration files for Channel Maps.
 | void | **[PrintXmlContent](/Classes/classXmlParser.md#function-printxmlcontent)**()<br>Show the content of the xml file.  |
 | void | **[ExportToFile](/Classes/classXmlParser.md#function-exporttofile)**(std::string Filename, XMLDocPointer_t mainnode)<br>Export a main node to file.  |
 | std::vector< XMLNodePointer_t > | **[GetChildNodesByName](/Classes/classXmlParser.md#function-getchildnodesbyname)**(XMLNodePointer_t StartingNode, std::string NodeName)<br>Get all the first generation child of a node (StartingNode) whose name is (NodeName)  |
-| Int_t | **[GetContentAsInt](/Classes/classXmlParser.md#function-getcontentasint)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as Int_t.  |
-| std::vector< Int_t > | **[GetContentAsIntVec](/Classes/classXmlParser.md#function-getcontentasintvec)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as a vector of Int_t.  |
-| std::vector< UShort_t > | **[GetContentAsShortVec](/Classes/classXmlParser.md#function-getcontentasshortvec)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as a vector of UShort_t.  |
-| std::string | **[GetContentAsString](/Classes/classXmlParser.md#function-getcontentasstring)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as std::string.  |
-| Double_t | **[GetContentAsDouble](/Classes/classXmlParser.md#function-getcontentasdouble)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as a double.  |
+| template <class T \> <br>T | **[GetContentAs](/Classes/classXmlParser.md#function-getcontentas)**(std::string Name, XMLNodePointer_t Node)<br>Get the content of the XML node.  |
+| template <class T \> <br>std::vector< T > | **[GetContentAsVec](/Classes/classXmlParser.md#function-getcontentasvec)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as a vector of the indicated class Type.  |
 | XMLNodePointer_t | **[GetMainNode](/Classes/classXmlParser.md#function-getmainnode)**()<br>Get the document main node.  |
 | XMLNodePointer_t | **[AddElement](/Classes/classXmlParser.md#function-addelement)**(std::string Name, XMLNodePointer_t ParentNode)<br>Add an element to an xml Node.  |
 | XMLNodePointer_t | **[CreateMainNode](/Classes/classXmlParser.md#function-createmainnode)**(std::string Name)<br>Create a new main Node in the xml.  |
@@ -123,16 +120,17 @@ Get all the first generation child of a node (StartingNode) whose name is (NodeN
 Get the all the child node of StartingNode named NodeName 
 
 
-### function GetContentAsInt
+### function GetContentAs
 
 ```cpp
-Int_t GetContentAsInt(
+template <class T >
+T GetContentAs(
     std::string Name,
     XMLNodePointer_t Node
 )
 ```
 
-Return the content of a node as Int_t. 
+Get the content of the XML node. 
 
 **Parameters**: 
 
@@ -140,21 +138,27 @@ Return the content of a node as Int_t.
   * **Node** Pointer to parent node 
 
 
-**Return**: Content of the node as Int_t 
+**Template Parameters**: 
 
-Get content of a node as Int_t. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
+  * **T** Type of the variable to be retrieved from the node 
 
 
-### function GetContentAsIntVec
+**Return**: Content of the XML node with the specified type 
+
+Get content of an XML node with the type specified by the template parameter. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
+
+
+### function GetContentAsVec
 
 ```cpp
-std::vector< Int_t > GetContentAsIntVec(
+template <class T >
+std::vector< T > GetContentAsVec(
     std::string Name,
     XMLNodePointer_t Node
 )
 ```
 
-Return the content of a node as a vector of Int_t. 
+Return the content of a node as a vector of the indicated class Type. 
 
 **Parameters**: 
 
@@ -162,75 +166,14 @@ Return the content of a node as a vector of Int_t.
   * **Node** Pointer to parent node 
 
 
-**Return**: Content of the node as vector of Int_t 
+**Template Parameters**: 
 
-Get content of a node as vector of Int_t. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
-
-
-### function GetContentAsShortVec
-
-```cpp
-std::vector< UShort_t > GetContentAsShortVec(
-    std::string Name,
-    XMLNodePointer_t Node
-)
-```
-
-Return the content of a node as a vector of UShort_t. 
-
-**Parameters**: 
-
-  * **Name** Name of the child node where the content is stored 
-  * **Node** Pointer to parent node 
+  * **T** Type of the variables inside the node (int, short, etc.) 
 
 
-**Return**: Content of the node as vector of UShort_t 
+**Return**: Content of the node as vector 
 
-Get content of a node as vector of UShort_t. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
-
-
-### function GetContentAsString
-
-```cpp
-std::string GetContentAsString(
-    std::string Name,
-    XMLNodePointer_t Node
-)
-```
-
-Return the content of a node as std::string. 
-
-**Parameters**: 
-
-  * **Name** Name of the child node where the content is stored 
-  * **Node** Pointer to parent node 
-
-
-**Return**: Content of the node as std::string 
-
-Get content of a node as string. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
-
-
-### function GetContentAsDouble
-
-```cpp
-Double_t GetContentAsDouble(
-    std::string Name,
-    XMLNodePointer_t Node
-)
-```
-
-Return the content of a node as a double. 
-
-**Parameters**: 
-
-  * **Name** Name of the child node where the content is stored 
-  * **Node** Pointer to parent node 
-
-
-**Return**: Content of the node as double 
-
-Get content of a nodeas Float_t. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
+Get content of a node as vector. In case a node has no content an exception is thrown If there are none or multiple nodes named Name and exception is thrown 
 
 
 ### function GetMainNode
@@ -318,4 +261,4 @@ Pointer to the actual xmlfile.
 
 -------------------------------
 
-Updated on 2022-03-18 at 17:55:07 +0000
+Updated on 2022-06-02 at 14:53:40 +0200
