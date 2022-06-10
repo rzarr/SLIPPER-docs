@@ -58,4 +58,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-06-02 at 14:53:40 +0200
+Updated on 2022-06-10 at 15:11:49 +0000

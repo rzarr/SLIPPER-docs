@@ -21,6 +21,8 @@ In order to be able to compile this SW you will need to install:
 * gcc (version >= 7)
 * Python (version >= 3), with the multiprocessing package
 
+In alternative, from version 3.1, the SW is also available inside a Docker image. The instructions for this type of installation are given in a dedicated section below.
+
 ## Compilation
 In order to install the SW, clone the repository into your local computer and issue the commands
 ```
@@ -51,6 +53,65 @@ Then, move to the "slipper" directory and type:
 >> make
 ```
 At this point, the SW should be compiled and ready to be used. The Tier3 also supports multithreading with the python script as described below.
+
+# Docker image
+From version 3.1 on, the software provides also a Docker image for all the updated branches. The software has been successfully installed on Ubuntu, SL7 and some versions of MacOs. However, the Docker image provides a platform-indipendent environment to run the code without issues and with the needed ROOT (6.24) and Python (2 and 3) versions already installed.
+
+The repository were all the images are hosted can be found at [this link](https://hub.docker.com/repository/docker/zarrella/slipper-docker). All images are built from a base version of Ubuntu, which is the OS where the code was tested the most. The only requirement to use the image is a working [Docker](https://docs.docker.com/get-docker/) installation. Once this is set, the image can be pulled through the command:
+
+```
+>> docker pull zarrella/slipper-docker:tagname
+```
+
+where "tagname" has to be replaced with the proper version of the image. The "latest" tag is built from the master branch of SLIPPER.
+
+## Running docker containers with the executable (working on Linux and MacOS)
+
+If the "slipper" repository has been cloned, a docker container can be started launching the "run_docker.sh" executable found in the main folder of the repository. This executable launches a container of the "latest" tag of the slipper-docker image. (*if a different version of the image is needed, follow the steps in the next section*)
+
+The executable also mounts the **current** local directory in the "/home/footer/data" path inside the container. This feature can be exploited to process data inside the container and make them available in the local host folder. So, to process the data, step into the folder containing all the binary files and launch:
+
+```
+>> cd path/to/binary/files/folder
+>> ./path/to/slipper/run_docker.sh
+>> ...
+```
+
+To make the processed files available in the local host folder, save them in the shared folder ("data" inside the container).
+
+**WARNING!! All the changes made to the shared folder from the container WILL be propagated to the local folder!**
+
+## Running docker containers by hand 
+
+After pulling the image, it is possible to run a container using the command:
+
+```
+>> docker run -it zarrella/slipper-docker:tagname
+```
+
+The "-it" option tells docker to run the container in interactive mode, meaning that it will open a shell with the poperly set environment and the already compiled software. From this shell, it is possible to run SLIPPER immediately.
+
+In Docker, it is also possible to share a local folder with the container. To do so, step into the folder containing the input binary data and launch:
+
+```
+>> docker run -it -v $PWD:/home/footer/data zarrella/slipper-docker:tagname
+```
+
+This will mount the local current folder inside the container in "data". At this point, the binary input files can be processed from inside the container and the output can be saved in the "data" folder to make it accessible from outside docker.
+
+With the current docker image, it is also possible to use the ROOT TBrowser from inside the container to check the contents of processed files. To activate this functionality, the DISPLAY variable needs to be passed to docker. This can be done with the following command on Linux:
+
+```
+>> docker run -it --net=host -e DISPLAY=$DISPLAY -v $PWD:/home/footer/data zarrella/slipper-docker:tagname
+```
+
+and MacOs:
+
+```
+>> docker run -it --net=host -e DISPLAY=host.docker.internal:0.0 -v $PWD:/home/footer/data zarrella/slipper-docker:tagname
+```
+
+For Windows users, the first step is to install an operating system that actually works :)
 
 # Doxygen documentation for developers
 From version 3.0, the code has also been conceived to produce a developer documentation and update it each time a new push to the master branch is preformed. The developer documentation is currently hosted on GitBook at the following link: [https://roberto-zarrella2.gitbook.io/slipper-developer-manual/](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/).
