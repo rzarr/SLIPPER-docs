@@ -54,8 +54,9 @@ This manual contains all the information about classes, files and functions impl
 | 11/12/2018    | NC    | 1.1    | Developing of new features     |
 | 10/10/2019    | RZ    | 2.0+    | Changing code structure and adding SC-CALO     |
 | 01/06/2021    | MM    | 2.4+    | First implementation of histos and analysis script     |
-| 16/12/2021    | RZ    | 3.0+    | Added Neutron detectors, TDAQ handling and first full documentation    |
+| 16/12/2021    | RZ    | 3.0+    | Added Neutron detectors, TDAQ handling and first full documentation     |
+| 15/06/2022    | RZ    | 3.1+    | Added LivePlotter and Docker image support    |
 
 -------------------------------
 
-Updated on 2022-07-11 at 14:43:07 +0000
+Updated on 2022-07-11 at 18:28:26 +0000
