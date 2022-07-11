@@ -8,7 +8,7 @@ title: User Manual
 
 
 
-# Stand-aLone Identification of Particles through Partial Event Reconstruction (v3.1)
+# Software for Live Interactive Plotting and Partial Event Reconstruction (v3.1)
 
 This is the version 3.1 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
 
@@ -447,12 +447,12 @@ Different name conventions can be implemented for different campaigns containing
 
 ## File name convention and Running in batch
 
-If needed, it is possible to run in batch the reconstruction of several files using the RunReconstruction.py script found in the "src" folder. If the code is run in batch with the .py script, the needed parameters are
+If needed, it is possible to run in batch the reconstruction of several files using the RunReconstruction.py script found in the "src/PyRoutines" folder. If the code is run in batch with the .py script, the needed parameters are
 
 
 
 ```cpp
->> python src/RunReconstruction.py [OPTION]
+>> python src/PyRoutines/RunReconstruction.py [OPTION]
 
 -x, --channelmap      ChannelMap xml file
 -d, --datadir         path to directory containing input files
@@ -469,7 +469,7 @@ An example of bash command to run in batch on WaveDAQ files from the "slipper" d
 
 
 ```cpp
->> python src/RunReconstruction.py -x config/ChannelMap*.xml -d path/to/input/directory -o path/to/output/directory -w 1 -t 6 -f test.root
+>> python src/PyRoutines/RunReconstruction.py -x config/ChannelMap*.xml -d path/to/input/directory -o path/to/output/directory -w 1 -t 6 -f test.root
 ```
 
 This command will process all the *.bin files in the input directory using 6 threads and save both the single *.rec.root files and the merged one with name "test.root" in the output directory. Note that in batch-mode the writing of histograms is currently forced to 1, and the merging works for both the tree and the histos. Debug is forced to 0.
@@ -477,7 +477,7 @@ This command will process all the *.bin files in the input directory using 6 thr
 When processing TDAQ files, the python script requires an additional argument, i.e. the run number. For example, the command: 
 
 ```cpp
->> python src/RunReconstruction.py -x config/ChannelMap*.xml -d path/to/input/directory -o path/to/output/directory -w 0 -r xxxx -t 6
+>> python src/PyRoutines/RunReconstruction.py -x config/ChannelMap*.xml -d path/to/input/directory -o path/to/output/directory -w 0 -r xxxx -t 6
 ```
 
  will process all the files from run "xxxx" (with name "\*xxxx\*data\*") in the input directory and save the merged output into a single file (default name: "Merge_xxxx.root") in the output directory. The time calibration file for the run needs to be saved in the input directory. This file should have extension *.dat and contain the run number. If the time calibration file for the indicated run is not indicated, the script will look for corresponding files from previous runs.
@@ -486,12 +486,12 @@ When processing TDAQ files, the python script requires an additional argument, i
 
 **N.B.: To run on the Bologna Tier3, it is mandatory to call the right version of python, i.e. "python3"**
 
-From this version, it is also possible to reconstruct different runs acquired with the TDAQ in parallel using the python script src/ReconstructMultipleRuns.py
+From this version, it is also possible to reconstruct different runs acquired with the TDAQ in parallel using the python script src/PyRoutines/ReconstructMultipleRuns.py
 
 
 
 ```cpp
->> python src/ReconstructMultipleRuns.py [OPTION]
+>> python src/PyRoutines/ReconstructMultipleRuns.py [OPTION]
 
 -x, --channelmap      ChannelMap xml file
 -d, --datadir         path to directory containing input files
@@ -580,7 +580,7 @@ From version 2.5, a first analysis script has been implemented. This is meant to
 
 # LivePlotter (WORK IN PROGRESS)
 
-From version 3.1, a LivePlotter executable is available. This executable is called by the rc/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
+From version 3.1, a LivePlotter executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
 
 * TW hitmaps with MB and Fragmentation trigger
 * Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic.
@@ -605,4 +605,4 @@ python src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o Output
 
 -------------------------------
 
-Updated on 2022-06-16 at 09:42:14 +0000
+Updated on 2022-07-11 at 14:43:07 +0000

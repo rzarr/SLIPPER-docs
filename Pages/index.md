@@ -8,11 +8,11 @@ title: Pages
 
 
 
-* **page [Stand-aLone Identification of Particles through Partial Event Reonstruction](/)** 
+* **page [Software for Live Interactive Plotting and Partial Event Reconstruction](/)** 
 * **page [User Manual](/Pages/md_README.md#page-md-readme)** 
 
 
 
 -------------------------------
 
-Updated on 2022-06-16 at 09:42:14 +0000
+Updated on 2022-07-11 at 14:43:07 +0000

@@ -1,9 +1,9 @@
 ---
-title: Stand-aLone Identification of Particles through Partial Event Reonstruction
+title: Software for Live Interactive Plotting and Partial Event Reconstruction
 
 ---
 
-# Stand-aLone Identification of Particles through Partial Event Reonstruction
+# Software for Live Interactive Plotting and Partial Event Reconstruction
 
 
 
@@ -58,4 +58,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-06-16 at 09:42:14 +0000
+Updated on 2022-07-11 at 14:43:07 +0000
