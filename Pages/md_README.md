@@ -605,4 +605,4 @@ python src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o Output
 
 -------------------------------
 
-Updated on 2022-07-11 at 18:28:26 +0000
+Updated on 2022-07-12 at 12:03:36 +0000
