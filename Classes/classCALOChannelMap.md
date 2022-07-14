@@ -23,6 +23,8 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | std::pair< UShort_t, Int_t > | **[GetBoardChFromCrys](/Classes/classCALOChannelMap.md#function-getboardchfromcrys)**(Int_t CrysId)<br>Get the <board, channel> pair from the Id of the crystal.  |
 | std::vector< std::pair< UShort_t, Int_t > > | **[GetBoardChVec](/Classes/classCALOChannelMap.md#function-getboardchvec)**(Int_t ModuleId)<br>Get the <board, channel> vector of all the crystals in a CALO module.  |
 | Bool_t | **[GetCrystalId](/Classes/classCALOChannelMap.md#function-getcrystalid)**(UShort_t board, Int_t channel, Int_t * CrysId)<br>Get the Id of a crystal from its board and channel.  |
+| TVector2 | **[GetCrystalPosition](/Classes/classCALOChannelMap.md#function-getcrystalposition)**(Int_t CrysId)<br>Get the X-Y position of a CALO crystal.  |
+| Bool_t | **[CrystalHasPosition](/Classes/classCALOChannelMap.md#function-crystalhasposition)**(Int_t CrysId)<br>Check if a CALO crystal has position information in the ChannelMap.  |
 | virtual Bool_t | **[LoadMap](/Classes/classCALOChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x) |
 | virtual void | **[Clear](/Classes/classCALOChannelMap.md#function-clear)**() |
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classCALOChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
@@ -34,6 +36,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 |                | Name           |
 | -------------- | -------------- |
 | void | **[AddModule](/Classes/classCALOChannelMap.md#function-addmodule)**(Int_t ModuleId, std::vector< UShort_t > Boards, std::vector< Int_t > Channels, std::vector< Int_t > Crystals)<br>Add a CALO module to the channel map.  |
+| void | **[AddPositions](/Classes/classCALOChannelMap.md#function-addpositions)**([XmlParser](/Classes/classXmlParser.md) * x, XMLNodePointer_t x_child) |
 | virtual Bool_t | **[CheckMapConsistency](/Classes/classCALOChannelMap.md#function-checkmapconsistency)**()<br>Check the consistency of the CALO channel map.  |
 
 ## Protected Attributes
@@ -42,6 +45,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | -------------- | -------------- |
 | std::map< Int_t, std::vector< std::pair< UShort_t, Int_t > > > | **[_ModToBoardChMap](/Classes/classCALOChannelMap.md#variable--modtoboardchmap)** <br>Map that links a Calorimeter module with all the WaveDREAM board-channel pairs of the corresponding Crystals.  |
 | std::map< std::pair< UShort_t, Int_t >, Int_t > | **[_BoardChToCrysMap](/Classes/classCALOChannelMap.md#variable--boardchtocrysmap)** <br>Map that links the WaveDREAM board-channel pair to the corresponding CALO Crystal.  |
+| std::map< Int_t, TVector2 > | **[_CrysToPosMap](/Classes/classCALOChannelMap.md#variable--crystoposmap)** <br>Map that links the CALO crystal to its X-Y position.  |
 | Bool_t | **[_IsMapLoaded](/Classes/classCALOChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
 | std::vector< UShort_t > | **[_ListOfBoards](/Classes/classCALOChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
@@ -167,6 +171,40 @@ Get the Id of a crystal from its board and channel.
 
 **Return**: True if the crystal was found in the CALO channel map, False otherwise 
 
+### function GetCrystalPosition
+
+```cpp
+TVector2 GetCrystalPosition(
+    Int_t CrysId
+)
+```
+
+Get the X-Y position of a CALO crystal. 
+
+**Parameters**: 
+
+  * **CrysId** Index of the CALO crystal 
+
+
+**Return**: Vector of the X-Y position of the crystal 
+
+### function CrystalHasPosition
+
+```cpp
+Bool_t CrystalHasPosition(
+    Int_t CrysId
+)
+```
+
+Check if a CALO crystal has position information in the ChannelMap. 
+
+**Parameters**: 
+
+  * **CrysId** Index of the CALO crystal 
+
+
+**Return**: True if the crystal has position information; false otherwise 
+
 ### function LoadMap
 
 ```cpp
@@ -256,6 +294,16 @@ Add a CALO module to the channel map.
   * **Crystals** Vector of crystal Ids read from the XML file 
 
 
+### function AddPositions
+
+```cpp
+void AddPositions(
+    XmlParser * x,
+    XMLNodePointer_t x_child
+)
+```
+
+
 ### function CheckMapConsistency
 
 ```cpp
@@ -287,6 +335,14 @@ std::map< std::pair< UShort_t, Int_t >, Int_t > _BoardChToCrysMap;
 
 Map that links the WaveDREAM board-channel pair to the corresponding CALO Crystal. 
 
+### variable _CrysToPosMap
+
+```cpp
+std::map< Int_t, TVector2 > _CrysToPosMap;
+```
+
+Map that links the CALO crystal to its X-Y position. 
+
 ### variable _IsMapLoaded
 
 ```cpp
@@ -305,4 +361,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-07-14 at 10:44:12 +0000
+Updated on 2022-07-14 at 15:09:35 +0000

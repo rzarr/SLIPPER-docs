@@ -584,20 +584,28 @@ From version 3.1, a LivePlotter executable is available. This executable is call
 
 * TW hitmaps with MB and Fragmentation trigger
 * Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic.
-* Raw Fragmentation dE spectra for all the TW bars involved in the fragmentation trigger, for the chosen trigger thresholds
+* Raw Fragmentation dE spectra for all the TW bars involved in the fragmentation trigger, for the chosen trigger thresholds (set via the TriggerAmpMap.txt file )
 * Pile-Up percentage in each file
+* Total number of counts in the A-B channels of the TW
+* Total number of "saturated" counts (amplitude > 1V) in the A-B channels of the TW
+* Raw energy loss vs TOF at the center of the TW
+* Raw Energy deposition in all the CALO crystals
+* TW bars - CALO crystals multiplicity
+* _[preliminary]_ Comparison between raw CALO energy and TW raw energy loss
 The best way to run the LivePlotter is to call it through the dedicated Python routine:
 
 
 
 ```cpp
-python src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o OutputDir -w 1 -b 1 -t config/TriggerAmpMapCNAO2021.txt
+python3 src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o OutputDir -w 1 -b 1 -t config/TriggerAmpMap*.txt
 ```
 
- This will launch a 3-thread process, with each of the involved threads dedicated to a specific task:
+ where '*' indicates the acquisition campaign.
+
+This command will launch a 3-thread process, with each of the involved threads dedicated to a specific task:
 
 * Online processing of data
-* Beam rate monitoring
+* Beam rate monitoring (updated and plotted online)
 * Online plotting (LivePlotter)
 **The Plotter.py routine calls the RecoMonitor.py routine, which has not been completely tested on TDAQ files!! To run with this file format, the time calibration of WaveDAQ has to be saved somewhere!**
 
@@ -605,4 +613,4 @@ python src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o Output
 
 -------------------------------
 
-Updated on 2022-07-14 at 10:44:12 +0000
+Updated on 2022-07-14 at 15:09:35 +0000
