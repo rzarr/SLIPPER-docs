@@ -23,8 +23,11 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | std::pair< UShort_t, Int_t > | **[GetBoardChFromCrys](/Classes/classCALOChannelMap.md#function-getboardchfromcrys)**(Int_t CrysId)<br>Get the <board, channel> pair from the Id of the crystal.  |
 | std::vector< std::pair< UShort_t, Int_t > > | **[GetBoardChVec](/Classes/classCALOChannelMap.md#function-getboardchvec)**(Int_t ModuleId)<br>Get the <board, channel> vector of all the crystals in a CALO module.  |
 | Bool_t | **[GetCrystalId](/Classes/classCALOChannelMap.md#function-getcrystalid)**(UShort_t board, Int_t channel, Int_t * CrysId)<br>Get the Id of a crystal from its board and channel.  |
-| TVector2 | **[GetCrystalPosition](/Classes/classCALOChannelMap.md#function-getcrystalposition)**(Int_t CrysId)<br>Get the X-Y position of a CALO crystal.  |
+| Int_t | **[GetCrystalIdFromIndex](/Classes/classCALOChannelMap.md#function-getcrystalidfromindex)**(Int_t CrysIndex)<br>Get the Id of a crystal from its board and channel.  |
+| Int_t | **[GetCrystalIndexFromId](/Classes/classCALOChannelMap.md#function-getcrystalindexfromid)**(Int_t CrysId)<br>Get the index of a CALO crystal from its Id.  |
+| const TVector2 | **[GetCrystalPosition](/Classes/classCALOChannelMap.md#function-getcrystalposition)**(Int_t CrysId)<br>Get the X-Y position of a CALO crystal.  |
 | Bool_t | **[CrystalHasPosition](/Classes/classCALOChannelMap.md#function-crystalhasposition)**(Int_t CrysId)<br>Check if a CALO crystal has position information in the ChannelMap.  |
+| std::vector< Int_t > | **[GetListOfCrysIndex](/Classes/classCALOChannelMap.md#function-getlistofcrysindex)**(Int_t ModuleId)<br>Get the vector of crystal indices associated to a CALO module.  |
 | virtual Bool_t | **[LoadMap](/Classes/classCALOChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x) |
 | virtual void | **[Clear](/Classes/classCALOChannelMap.md#function-clear)**() |
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classCALOChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
@@ -46,6 +49,8 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | std::map< Int_t, std::vector< std::pair< UShort_t, Int_t > > > | **[_ModToBoardChMap](/Classes/classCALOChannelMap.md#variable--modtoboardchmap)** <br>Map that links a Calorimeter module with all the WaveDREAM board-channel pairs of the corresponding Crystals.  |
 | std::map< std::pair< UShort_t, Int_t >, Int_t > | **[_BoardChToCrysMap](/Classes/classCALOChannelMap.md#variable--boardchtocrysmap)** <br>Map that links the WaveDREAM board-channel pair to the corresponding CALO Crystal.  |
 | std::map< Int_t, TVector2 > | **[_CrysToPosMap](/Classes/classCALOChannelMap.md#variable--crystoposmap)** <br>Map that links the CALO crystal to its X-Y position.  |
+| std::map< Int_t, Int_t > | **[_CrysIndexToId](/Classes/classCALOChannelMap.md#variable--crysindextoid)** <br>Map that links a CALO crystal index to its Id in the ChannelMap.  |
+| std::map< Int_t, std::vector< Int_t > > | **[_ModToCrysIndex](/Classes/classCALOChannelMap.md#variable--modtocrysindex)** <br>Map that links a CALO module to the vector of crystal indices.  |
 | Bool_t | **[_IsMapLoaded](/Classes/classCALOChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
 | std::vector< UShort_t > | **[_ListOfBoards](/Classes/classCALOChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
@@ -171,10 +176,44 @@ Get the Id of a crystal from its board and channel.
 
 **Return**: True if the crystal was found in the CALO channel map, False otherwise 
 
+### function GetCrystalIdFromIndex
+
+```cpp
+Int_t GetCrystalIdFromIndex(
+    Int_t CrysIndex
+)
+```
+
+Get the Id of a crystal from its board and channel. 
+
+**Parameters**: 
+
+  * **CrysIndexd** Pointer to variable to write the crystal Id 
+
+
+**Return**: True if the crystal was found in the CALO channel map, False otherwise 
+
+### function GetCrystalIndexFromId
+
+```cpp
+Int_t GetCrystalIndexFromId(
+    Int_t CrysId
+)
+```
+
+Get the index of a CALO crystal from its Id. 
+
+**Parameters**: 
+
+  * **CrysId** Id of the CALO crystal 
+
+
+**Return**: Index of the crystal 
+
 ### function GetCrystalPosition
 
 ```cpp
-TVector2 GetCrystalPosition(
+const TVector2 GetCrystalPosition(
     Int_t CrysId
 )
 ```
@@ -204,6 +243,23 @@ Check if a CALO crystal has position information in the ChannelMap.
 
 
 **Return**: True if the crystal has position information; false otherwise 
+
+### function GetListOfCrysIndex
+
+```cpp
+std::vector< Int_t > GetListOfCrysIndex(
+    Int_t ModuleId
+)
+```
+
+Get the vector of crystal indices associated to a CALO module. 
+
+**Parameters**: 
+
+  * **ModuleId** Id of the module 
+
+
+**Return**: Vector of crystal indices of that CALO module 
 
 ### function LoadMap
 
@@ -343,6 +399,22 @@ std::map< Int_t, TVector2 > _CrysToPosMap;
 
 Map that links the CALO crystal to its X-Y position. 
 
+### variable _CrysIndexToId
+
+```cpp
+std::map< Int_t, Int_t > _CrysIndexToId;
+```
+
+Map that links a CALO crystal index to its Id in the ChannelMap. 
+
+### variable _ModToCrysIndex
+
+```cpp
+std::map< Int_t, std::vector< Int_t > > _ModToCrysIndex;
+```
+
+Map that links a CALO module to the vector of crystal indices. 
+
 ### variable _IsMapLoaded
 
 ```cpp
@@ -361,4 +433,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

@@ -17,10 +17,12 @@ Main class that handles the WaveDAQ Channel Map.  [More...](#detailed-descriptio
 | | **[WDChannelMap](/Classes/classWDChannelMap.md#function-wdchannelmap)**()<br>Default constructor for global channel map.  |
 | Bool_t | **[LoadMap](/Classes/classWDChannelMap.md#function-loadmap)**(std::string Filename)<br>Load the WaveDAQ channel map.  |
 | [SCChannelMap](/Classes/classSCChannelMap.md) * | **[GetSCChannelMap](/Classes/classWDChannelMap.md#function-getscchannelmap)**()<br>Get the Start Counter Channel Map.  |
+| [RCChannelMap](/Classes/classRCChannelMap.md) * | **[GetRCChannelMap](/Classes/classWDChannelMap.md#function-getrcchannelmap)**()<br>Get the Rome Counter Channel Map.  |
 | [TWChannelMap](/Classes/classTWChannelMap.md) * | **[GetTWChannelMap](/Classes/classWDChannelMap.md#function-gettwchannelmap)**()<br>Get the TOF-Wall Channel Map.  |
 | [CALOChannelMap](/Classes/classCALOChannelMap.md) * | **[GetCALOChannelMap](/Classes/classWDChannelMap.md#function-getcalochannelmap)**()<br>Get the Calorimeter Channel Map.  |
 | [NeutronChannelMap](/Classes/classNeutronChannelMap.md) * | **[GetNeutronChannelMap](/Classes/classWDChannelMap.md#function-getneutronchannelmap)**()<br>Get the Neutron detectors Channel Map.  |
 | Bool_t | **[IsSCMapLoaded](/Classes/classWDChannelMap.md#function-isscmaploaded)**()<br>Check if the SC Channel Map has been loaded.  |
+| Bool_t | **[IsRCMapLoaded](/Classes/classWDChannelMap.md#function-isrcmaploaded)**()<br>Check if the RC Channel Map has been loaded.  |
 | Bool_t | **[IsTWMapLoaded](/Classes/classWDChannelMap.md#function-istwmaploaded)**()<br>Check if the TW Channel Map has been loaded.  |
 | Bool_t | **[IsCALOMapLoaded](/Classes/classWDChannelMap.md#function-iscalomaploaded)**()<br>Check if the CALO Channel Map has been loaded.  |
 | Bool_t | **[IsNeutronMapLoaded](/Classes/classWDChannelMap.md#function-isneutronmaploaded)**()<br>Check if the Neutron Channel Map has been loaded.  |
@@ -37,6 +39,7 @@ Main class that handles the WaveDAQ Channel Map.  [More...](#detailed-descriptio
 |                | Name           |
 | -------------- | -------------- |
 | [SCChannelMap](/Classes/classSCChannelMap.md) | **[_SCChannelMap](/Classes/classWDChannelMap.md#variable--scchannelmap)** <br>Start Counter Channel Map.  |
+| [RCChannelMap](/Classes/classRCChannelMap.md) | **[_RCChannelMap](/Classes/classWDChannelMap.md#variable--rcchannelmap)** <br>Rome Counter Channel Map.  |
 | [TWChannelMap](/Classes/classTWChannelMap.md) | **[_TWChannelMap](/Classes/classWDChannelMap.md#variable--twchannelmap)** <br>TOF-Wall Channel Map.  |
 | [CALOChannelMap](/Classes/classCALOChannelMap.md) | **[_CALOChannelMap](/Classes/classWDChannelMap.md#variable--calochannelmap)** <br>Calorimeter Channel Map.  |
 | [NeutronChannelMap](/Classes/classNeutronChannelMap.md) | **[_NeutronChannelMap](/Classes/classWDChannelMap.md#variable--neutronchannelmap)** <br>Neutron detectors Channel Map.  |
@@ -100,6 +103,16 @@ Get the Start Counter Channel Map.
 
 **Return**: Pointer to SC Channel Map 
 
+### function GetRCChannelMap
+
+```cpp
+RCChannelMap * GetRCChannelMap()
+```
+
+Get the Rome Counter Channel Map. 
+
+**Return**: Pointer to RC Channel Map 
+
 ### function GetTWChannelMap
 
 ```cpp
@@ -137,6 +150,16 @@ Bool_t IsSCMapLoaded()
 ```
 
 Check if the SC Channel Map has been loaded. 
+
+**Return**: True if the map is loaded, False otherwise 
+
+### function IsRCMapLoaded
+
+```cpp
+Bool_t IsRCMapLoaded()
+```
+
+Check if the RC Channel Map has been loaded. 
 
 **Return**: True if the map is loaded, False otherwise 
 
@@ -203,6 +226,14 @@ SCChannelMap _SCChannelMap;
 
 Start Counter Channel Map. 
 
+### variable _RCChannelMap
+
+```cpp
+RCChannelMap _RCChannelMap;
+```
+
+Rome Counter Channel Map. 
+
 ### variable _TWChannelMap
 
 ```cpp
@@ -237,4 +268,4 @@ Boolean flag for WaveDAQ Channel Map status.
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

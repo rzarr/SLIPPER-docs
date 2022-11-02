@@ -17,16 +17,16 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 |                | Name           |
 | -------------- | -------------- |
 | | **[CALOWaveFormContainer](/Classes/classCALOWaveFormContainer.md#function-calowaveformcontainer)**()<br>Default constructor.  |
-| virtual Float_t | **[GetChargeCALO](/Classes/classCALOWaveFormContainer.md#function-getchargecalo)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of a Calorimeter waveform.  |
+| virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of a CALO waveform.  |
+| virtual Float_t | **[GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of a Calorimeter waveform [OVERLOADED].  |
 | virtual Bool_t | **[IsEmpty](/Classes/classCALOWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classCALOWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
+| virtual void | **[CheckRangeOverflow](/Classes/classCALOWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
 | virtual void | **[CopyWaveform](/Classes/classCALOWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
 | virtual void | **[SetBoardSerialNumber](/Classes/classCALOWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
 | virtual UShort_t | **[GetBoardSerialNumber](/Classes/classCALOWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
 | virtual void | **[ClearData](/Classes/classCALOWaveFormContainer.md#function-cleardata)**()<br>Clear data for new cycle.  |
-| virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classCALOWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
-| virtual Float_t | **[GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the waveform.  |
 | virtual Float_t | **[GetRiseTime](/Classes/classCALOWaveFormContainer.md#function-getrisetime)**(Int_t channel)<br>Calucalte the 10% - 90% rise time of the waveform.  |
 | virtual Float_t | **[GetTimeCFD](/Classes/classCALOWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
 | virtual Float_t | **[GetCLKPhase](/Classes/classCALOWaveFormContainer.md#function-getclkphase)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr)<br>Get the phase of a CLK signal.  |
@@ -55,7 +55,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | Float_t | **[_Charge](/Classes/classCALOWaveFormContainer.md#variable--charge)** <br>Integral charge of the signals [V*ns].  |
 | Float_t | **[_Time](/Classes/classCALOWaveFormContainer.md#variable--time)** <br>Raw Time of the signals [ns].  |
 | Float_t | **[_RiseTime](/Classes/classCALOWaveFormContainer.md#variable--risetime)** <br>Rise Time of the signals [ns].  |
-| UShort_t | **[_BoardSerialNumber](/Classes/classCALOWaveFormContainer.md#variable--boardserialnumber)**  |
+| UShort_t | **[_BoardSerialNumber](/Classes/classCALOWaveFormContainer.md#variable--boardserialnumber)** <br>Serial number of the associated WaveDREAM board.  |
 
 ## Additional inherited members
 
@@ -77,17 +77,40 @@ CALOWaveFormContainer()
 
 Default constructor. 
 
-### function GetChargeCALO
+### function GetPedestal
 
 ```cpp
-virtual Float_t GetChargeCALO(
+virtual std::pair< Float_t, Float_t > GetPedestal(
+    Int_t channel
+)
+```
+
+Find pedestal of a CALO waveform. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+
+
+**Return**: Pair containing the value of the pedestal and its RMS [V] 
+
+**Reimplements**: [WaveFormContainer::GetPedestal](/Classes/classWaveFormContainer.md#function-getpedestal)
+
+
+The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN in [Parameters.h] --> For CALO, only the first points are considered 
+
+
+### function GetCharge
+
+```cpp
+virtual Float_t GetCharge(
     Int_t channel,
     Int_t start_bin =CHARGESTARTBIN,
     Int_t stop_bin =CHARGESTOPBIN
 )
 ```
 
-Find the integral charge of a Calorimeter waveform. 
+Find the integral charge of a Calorimeter waveform [OVERLOADED]. 
 
 **Parameters**: 
 
@@ -97,6 +120,9 @@ Find the integral charge of a Calorimeter waveform.
 
 
 **Return**: Total charge (integral) of the WF [V*ns] 
+
+**Reimplements**: [WaveFormContainer::GetCharge](/Classes/classWaveFormContainer.md#function-getcharge)
+
 
 The integral is stopped when the WF crosses the baseline 
 
@@ -139,6 +165,21 @@ Check if a WaveDREAM channel is empty.
 **Return**: True if the channel is empty, false otherwise 
 
 AUX function 
+
+
+### function CheckRangeOverflow
+
+```cpp
+virtual void CheckRangeOverflow(
+    Float_t * w_ptr
+)
+```
+
+Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary. 
+
+**Parameters**: 
+
+  * **w_ptr** Pointer to element 1 (not 0) of the WF amplitude vector 
 
 
 ### function CopyWaveform
@@ -194,26 +235,6 @@ Clear data for new cycle.
 **Reimplemented by**: [SCWaveFormContainer::ClearData](/Classes/classSCWaveFormContainer.md#function-cleardata)
 
 
-### function GetPedestal
-
-```cpp
-virtual std::pair< Float_t, Float_t > GetPedestal(
-    Int_t channel
-)
-```
-
-Find pedestal of the waveform. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-
-
-**Return**: Pair containing the value of the pedestal and its RMS [V] 
-
-The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN in [Parameters.h]
-
-
 ### function GetAmplitude
 
 ```cpp
@@ -230,30 +251,6 @@ Find the max amplitude of the waveform.
 
 
 **Return**: Amplitude of the WF (<0) [V] 
-
-### function GetCharge
-
-```cpp
-virtual Float_t GetCharge(
-    Int_t channel,
-    Int_t start_bin =CHARGESTARTBIN,
-    Int_t stop_bin =CHARGESTOPBIN
-)
-```
-
-Find the integral charge of the waveform. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-  * **start_bin** Start bin (optional, default=CHARGESTARTBIN) 
-  * **stop_bin** Stop bin (optional, default=CHARGESTOPBIN) 
-
-
-**Return**: Total charge (integral) of the WF [V*ns] 
-
-The boundaries of the integral are useful when performing Pulse Shape Analysis 
-
 
 ### function GetRiseTime
 
@@ -456,7 +453,8 @@ Rise Time of the signals [ns].
 UShort_t _BoardSerialNumber;
 ```
 
+Serial number of the associated WaveDREAM board. 
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

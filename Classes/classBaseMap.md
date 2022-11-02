@@ -10,7 +10,7 @@ summary: Base class for detector Channel Map.
 
 Base class for detector Channel Map. 
 
-Inherited by [CALOChannelMap](/Classes/classCALOChannelMap.md), [NeutronChannelMap](/Classes/classNeutronChannelMap.md), [SCChannelMap](/Classes/classSCChannelMap.md), [TWChannelMap](/Classes/classTWChannelMap.md)
+Inherited by [CALOChannelMap](/Classes/classCALOChannelMap.md), [NeutronChannelMap](/Classes/classNeutronChannelMap.md), [RCChannelMap](/Classes/classRCChannelMap.md), [SCChannelMap](/Classes/classSCChannelMap.md), [TWChannelMap](/Classes/classTWChannelMap.md)
 
 ## Public Functions
 
@@ -140,4 +140,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

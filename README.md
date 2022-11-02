@@ -154,6 +154,8 @@ The Channel map should look like this:
   <BOARD_ID>164, 165</BOARD_ID>
   <CHANNELS>13,14,15,0,1,2,3,4,5</CHANNELS>
   <CRYSTALS>0,1,2,3,4,5,6,7,8</CRYSTALS>
+  <CRYSTAL_X>-1,0,1,-1,0,1,-1,0,1</CRYSTAL_X>
+  <CRYSTAL_Y>1,1,1,0,0,0,-1,-1,-1</CRYSTAL_Y>
 </MODULE>
 
 ...
@@ -201,6 +203,7 @@ The channel map can also contain some calorimeter <MODULE> elements in the forma
 * BOARD_ID: The WaveDREAM board(s) associated to the module. If two boards are indicated, the first channels up to number 15 are associated to the first board and the rest are linked to the second board
 * CHANNELS: the Id of each WaveDREAM channel used for the Module
 * CRYSTALS: the global Id of all the crystals of the module. Channels and crystals values have to be ordered in the same way because they are associated one-by-one.
+* CRYSTAL_X/Y: Physical X/Y coordinates o the CALO crystals in the SHOE reference frame \[OPTIONAL\]
 
 ### NEUTRON ---> Neutron detectors
 
@@ -244,6 +247,7 @@ The data saved in this version are:
 
 #### Start Counter
 * SC_Timestamp -> the timestamp [ns] of the event measured by the Start Counter.
+* SC_TotCharge -> the integral of the summed Start Counter Waveform \[V\*ns\].
 
 #### TOF-Wall
 * BAR_Ped* -> baseline [V] of the waveform.
@@ -276,10 +280,16 @@ The data saved in this version are:
 
 where the '*' stands for S/F for Slow and Fast channels.
 
+#### Trigger/TCB information
+* WD_TriggerType: the event trigger Id, such as 40 for Minimum Bias and 1 for fragmentation events. 
+* WD_FragTrigger: a boolean value that signals if the fragmentation trigger was activated in the event -> FIRMWARE 
+* WD_BeamRate: beam rate \[Hz\] measured by the WaveDAQ as rate of MB events.
+* WD_TotalTime: total time of the acquisition \[s\].
+* WD_FragTriggerSW: boolean flag that checks if the fragmentation trigger was switched on -> SOFTWARE
+* WD_FragTriggerCALO: boolean flag that performs a logical and of the firmware fragmentation trigger and a CALO or (IMPLEMENTED FOR HIT2022)
+
 There are also branches dedicated to:
 
-* TriggerType: the event trigger Id, such as 40 for Minimum Bias and 1 for fragmentation events. 
-* IsFragTriggerOn: a boolean value that signals if the fragmentation trigger was activated in the event. 
 * EventNumber: Number of the saved event.
 * Tags: this quantity depends on the files processed. For WaveDAQ files, the quantities saved are Gain, BeamEnergy [GeV/u], ParticleType, BeamPosition (PosX, PosY). The ParticleType tag is an integer indicating the primary particle as indicated in the "Parameters.h" file. For TDAQ files, the Tags contain RunNumber and FileNumber.
 

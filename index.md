@@ -10,7 +10,7 @@ title: Software for Live Interactive Plotting and Partial Event Reconstruction
 
 # Project     : FOOT (FragmentatiOn Of Target)
 
-Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [_baltig page_](https://baltig.infn.it/zarrella/slipper/). The previous link can also be used to acces the source code.
+Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [*baltig page*](https://baltig.infn.it/zarrella/slipper/). The previous link can also be used to acces the source code.
 
 At this stage, the code handles signals from the:
 
@@ -48,15 +48,15 @@ This manual contains all the information about classes, files and functions impl
 ------------------
 
 
-| Timestamp    | Author    | Version    | Description     |
+| Timestamp  | Author  | Version  | Description   |
 |  -------- | -------- | -------- | -------- |
-| 01/01/2018    | LG    | 1.00    | Initial creation.     |
-| 11/12/2018    | NC    | 1.1    | Developing of new features     |
-| 10/10/2019    | RZ    | 2.0+    | Changing code structure and adding SC-CALO     |
-| 01/06/2021    | MM    | 2.4+    | First implementation of histos and analysis script     |
-| 16/12/2021    | RZ    | 3.0+    | Added Neutron detectors, TDAQ handling and first full documentation     |
-| 15/06/2022    | RZ    | 3.1+    | Added LivePlotter and Docker image support    |
+| 01/01/2018  | LG  | 1.00  | Initial creation.   |
+| 11/12/2018  | NC  | 1.1  | Developing of new features   |
+| 10/10/2019  | RZ  | 2.0+  | Changing code structure and adding SC-CALO   |
+| 01/06/2021  | MM  | 2.4+  | First implementation of histos and analysis script   |
+| 16/12/2021  | RZ  | 3.0+  | Added Neutron detectors, TDAQ handling and first full documentation   |
+| 15/06/2022  | RZ  | 3.1+  | Added LivePlotter and Docker image support   |
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

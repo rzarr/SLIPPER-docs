@@ -20,6 +20,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual Float_t | **[GetTimeLinear](/Classes/classTWWaveFormContainer.md#function-gettimelinear)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with a linear extrapolation.  |
 | virtual Bool_t | **[IsEmpty](/Classes/classTWWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classTWWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
+| virtual void | **[CheckRangeOverflow](/Classes/classTWWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
 | virtual void | **[CopyWaveform](/Classes/classTWWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
 | virtual void | **[SetBoardSerialNumber](/Classes/classTWWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
 | virtual UShort_t | **[GetBoardSerialNumber](/Classes/classTWWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
@@ -55,7 +56,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | Float_t | **[_Charge](/Classes/classTWWaveFormContainer.md#variable--charge)** <br>Integral charge of the signals [V*ns].  |
 | Float_t | **[_Time](/Classes/classTWWaveFormContainer.md#variable--time)** <br>Raw Time of the signals [ns].  |
 | Float_t | **[_RiseTime](/Classes/classTWWaveFormContainer.md#variable--risetime)** <br>Rise Time of the signals [ns].  |
-| UShort_t | **[_BoardSerialNumber](/Classes/classTWWaveFormContainer.md#variable--boardserialnumber)**  |
+| UShort_t | **[_BoardSerialNumber](/Classes/classTWWaveFormContainer.md#variable--boardserialnumber)** <br>Serial number of the associated WaveDREAM board.  |
 
 ## Additional inherited members
 
@@ -145,6 +146,21 @@ Check if a WaveDREAM channel is empty.
 AUX function 
 
 
+### function CheckRangeOverflow
+
+```cpp
+virtual void CheckRangeOverflow(
+    Float_t * w_ptr
+)
+```
+
+Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary. 
+
+**Parameters**: 
+
+  * **w_ptr** Pointer to element 1 (not 0) of the WF amplitude vector 
+
+
 ### function CopyWaveform
 
 ```cpp
@@ -215,7 +231,10 @@ Find pedestal of the waveform.
 
 **Return**: Pair containing the value of the pedestal and its RMS [V] 
 
-The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN in [Parameters.h]
+**Reimplemented by**: [CALOWaveFormContainer::GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)
+
+
+The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN (left-right) in [Parameters.h]
 
 
 ### function GetAmplitude
@@ -255,6 +274,9 @@ Find the integral charge of the waveform.
 
 
 **Return**: Total charge (integral) of the WF [V*ns] 
+
+**Reimplemented by**: [CALOWaveFormContainer::GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)
+
 
 The boundaries of the integral are useful when performing Pulse Shape Analysis 
 
@@ -460,7 +482,8 @@ Rise Time of the signals [ns].
 UShort_t _BoardSerialNumber;
 ```
 
+Serial number of the associated WaveDREAM board. 
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

@@ -33,6 +33,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | -------------- | -------------- |
 | void | **[LoopEvent](/Classes/classWaveDaqReconstruction.md#function-loopevent)**(TTree * RecTree)<br>Main event loop.  |
 | void | **[AnalyzeWaveformsSC](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformssc)**(UShort_t board)<br>Analysis of SC Waveforms (WFs)  |
+| void | **[AnalyzeWaveformsRC](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformsrc)**(UShort_t board)<br>Analysis of RC Waveforms (WFs)  |
 | void | **[AnalyzeWaveformsTW](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformstw)**(UShort_t board)<br>Analyze the WFs of TW.  |
 | void | **[AnalyzeWaveformsCALO](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformscalo)**(UShort_t board)<br>Analysis of CALO Waveforms (WFs)  |
 | void | **[AnalyzeWaveformsNeutrons](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformsneutrons)**(UShort_t board)<br>Analysis of Neutron detector WFs.  |
@@ -81,6 +82,15 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | Float_t | **[_SCAmplitude](/Classes/classWaveDaqReconstruction.md#variable--scamplitude)** <br>SC channel amplitude (<0) [V] **DEBUG ONLY** |
 | Float_t | **[_SCCharge](/Classes/classWaveDaqReconstruction.md#variable--sccharge)** <br>SC channel integral charge [V*ns] **DEBUG ONLY** |
 | Float_t | **[_SCRiseTime](/Classes/classWaveDaqReconstruction.md#variable--scrisetime)** <br>SC channel rise time [ns] **DEBUG ONLY** |
+| Bool_t | **[_IsPossiblePileUpRC](/Classes/classWaveDaqReconstruction.md#variable--ispossiblepileuprc)** <br>Flag for signaling possible Pile-Up events.  |
+| Float_t | **[_RCTimeTot](/Classes/classWaveDaqReconstruction.md#variable--rctimetot)** <br>RC raw time [ns].  |
+| Float_t | **[_RCTotCharge](/Classes/classWaveDaqReconstruction.md#variable--rctotcharge)** <br>RC raw total energy loss [V*ns].  |
+| Float_t | **[_RCPedestal](/Classes/classWaveDaqReconstruction.md#variable--rcpedestal)** <br>RC channel pedestal [V].  |
+| Float_t | **[_RCPedestalRMS](/Classes/classWaveDaqReconstruction.md#variable--rcpedestalrms)** <br>RC channel pedestal RMS [V].  |
+| Float_t | **[_RCAmplitude](/Classes/classWaveDaqReconstruction.md#variable--rcamplitude)** <br>RC channel amplitude (<0) [V].  |
+| Float_t | **[_RCCharge](/Classes/classWaveDaqReconstruction.md#variable--rccharge)** <br>RC channel integral charge [V*ns].  |
+| Float_t | **[_RCRiseTime](/Classes/classWaveDaqReconstruction.md#variable--rcrisetime)** <br>RC channel rise time [ns].  |
+| Float_t | **[_RCTime](/Classes/classWaveDaqReconstruction.md#variable--rctime)** <br>RC channel time [ns].  |
 | Float_t | **[_CPedestal](/Classes/classWaveDaqReconstruction.md#variable--cpedestal)** <br>TW global channel pedestal [V] **DEBUG ONLY** |
 | Float_t | **[_CPedestalRMS](/Classes/classWaveDaqReconstruction.md#variable--cpedestalrms)** <br>TW global channel pedestal RMS [V] **DEBUG ONLY** |
 | Float_t | **[_CAmplitude](/Classes/classWaveDaqReconstruction.md#variable--camplitude)** <br>TW global channel amplitude [V] **DEBUG ONLY** |
@@ -91,6 +101,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | Float_t | **[_CLK_Jitter](/Classes/classWaveDaqReconstruction.md#variable--clk-jitter)** <br>TW global channel CLK jitter correction [ns] **DEBUG ONLY** |
 | Float_t | **[_CLK_phase](/Classes/classWaveDaqReconstruction.md#variable--clk-phase)** <br>CLK phase of all boards [ns] **DEBUG ONLY** |
 | Float_t | **[_SC_CLK_phase](/Classes/classWaveDaqReconstruction.md#variable--sc-clk-phase)** <br>Phase of Start Counter CLK [ns].  |
+| Float_t | **[_RC_CLK_phase](/Classes/classWaveDaqReconstruction.md#variable--rc-clk-phase)** <br>Phase of Rome Counter CLK [ns].  |
 | Float_t | **[_CPedA](/Classes/classWaveDaqReconstruction.md#variable--cpeda)** <br>TW channel "A" pedestal [V].  |
 | Float_t | **[_CPedB](/Classes/classWaveDaqReconstruction.md#variable--cpedb)** <br>TW channel "B" pedestal [V].  |
 | Float_t | **[_CPedRMSA](/Classes/classWaveDaqReconstruction.md#variable--cpedrmsa)** <br>TW channel "A" pedestal RMS [V].  |
@@ -135,6 +146,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | Bool_t | **[_SaveNeutrons](/Classes/classWaveDaqReconstruction.md#variable--saveneutrons)** <br>Global flag that checks if the neutron waveforms have to be saved or not in the output.  |
 | Int_t | **[_TriggerType](/Classes/classWaveDaqReconstruction.md#variable--triggertype)** <br>Trigger type of the event.  |
 | Bool_t | **[_IsFragTriggerOn](/Classes/classWaveDaqReconstruction.md#variable--isfragtriggeron)** <br>Flag that tells if the fragmentation trigger fired in the event.  |
+| Bool_t | **[_IsFragTriggerSWOn](/Classes/classWaveDaqReconstruction.md#variable--isfragtriggerswon)** <br>Flag that tells if the fragmentation trigger fired in the event.  |
 | Int_t | **[_TrigTP](/Classes/classWaveDaqReconstruction.md#variable--trigtp)** <br>Number of True Positive events in firmware-software quality checks.  |
 | Int_t | **[_TrigFP](/Classes/classWaveDaqReconstruction.md#variable--trigfp)** <br>Number of False Positive events in firmware-software quality checks.  |
 | Int_t | **[_TrigTN](/Classes/classWaveDaqReconstruction.md#variable--trigtn)** <br>Number of True Negative events in firmware-software quality checks.  |
@@ -143,6 +155,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | Float_t | **[_TriggerTh](/Classes/classWaveDaqReconstruction.md#variable--triggerth)** <br>Calibrated trigger thresholds [V].  |
 | std::vector< Int_t > | **[_FragTrigBars](/Classes/classWaveDaqReconstruction.md#variable--fragtrigbars)** <br>List o TW bars connected to the fragmentation trigger.  |
 | Float_t | **[_BeamRate](/Classes/classWaveDaqReconstruction.md#variable--beamrate)** <br>Beam Rate calculated as rate of minimum bia triggers [Hz].  |
+| UInt_t | **[_TotalTimeWD](/Classes/classWaveDaqReconstruction.md#variable--totaltimewd)** <br>Total acquisition time for current run [s].  |
 | [WDTag](/Classes/classWDTag.md) | **[_WDTags](/Classes/classWaveDaqReconstruction.md#variable--wdtags)** <br>Tags of WaveDREAM stand-alone files.  |
 | [TDAQTag](/Classes/classTDAQTag.md) | **[_TDAQTags](/Classes/classWaveDaqReconstruction.md#variable--tdaqtags)** <br>Tags of TDAQ files.  |
 | bool | **[_Debug](/Classes/classWaveDaqReconstruction.md#variable--debug)** <br>Global debug flag.  |
@@ -156,6 +169,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | TH1F * | **[_hitmap_Channels_Front](/Classes/classWaveDaqReconstruction.md#variable--hitmap-channels-front)** <br>1D Hitmap of TW channels in front layer **HISTOGRAM** |
 | TH2F * | **[_hitmap_MB](/Classes/classWaveDaqReconstruction.md#variable--hitmap-mb)** <br>2D Hitmap of TW for Minimum Bias events **HISTOGRAM** |
 | TH2F * | **[_hitmap_frag](/Classes/classWaveDaqReconstruction.md#variable--hitmap-frag)** <br>2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM** |
+| TH2F * | **[_hitmap_fragSW](/Classes/classWaveDaqReconstruction.md#variable--hitmap-fragsw)** <br>2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM** |
 | TH2F * | **[_hitmap_all](/Classes/classWaveDaqReconstruction.md#variable--hitmap-all)** <br>2D Hitmap of TW for all events **HISTOGRAM** |
 | TH2F * | **[_hTGEN_MB](/Classes/classWaveDaqReconstruction.md#variable--htgen-mb)** <br>Trigger generation (TGEN) for Minimum Bias Events **HISTOGRAM** |
 | TH2F * | **[_hTGEN_frag](/Classes/classWaveDaqReconstruction.md#variable--htgen-frag)** <br>Trigger generation (TGEN) for Fragmentation Trigger Events **HISTOGRAM** |
@@ -371,6 +385,24 @@ This function performs the whole anlysis of SC waveforms, which consists of two 
 * The energy loss in the total SC signal is calculated and saved in a global variable.
 * The timestamp of the event is then evaluated applying the CFD method to this WF.
 * In debug mode, the routine processes also single SC waveforms one by one.
+
+
+### function AnalyzeWaveformsRC
+
+```cpp
+void AnalyzeWaveformsRC(
+    UShort_t board
+)
+```
+
+Analysis of RC Waveforms (WFs) 
+
+**Parameters**: 
+
+  * **board** Serial number of the RC board 
+
+
+This function performs the whole anlysis of RC waveforms
 
 
 ### function AnalyzeWaveformsTW
@@ -832,6 +864,78 @@ Float_t _SCRiseTime;
 
 SC channel rise time [ns] **DEBUG ONLY**
 
+### variable _IsPossiblePileUpRC
+
+```cpp
+Bool_t _IsPossiblePileUpRC;
+```
+
+Flag for signaling possible Pile-Up events. 
+
+### variable _RCTimeTot
+
+```cpp
+Float_t _RCTimeTot;
+```
+
+RC raw time [ns]. 
+
+### variable _RCTotCharge
+
+```cpp
+Float_t _RCTotCharge;
+```
+
+RC raw total energy loss [V*ns]. 
+
+### variable _RCPedestal
+
+```cpp
+Float_t _RCPedestal;
+```
+
+RC channel pedestal [V]. 
+
+### variable _RCPedestalRMS
+
+```cpp
+Float_t _RCPedestalRMS;
+```
+
+RC channel pedestal RMS [V]. 
+
+### variable _RCAmplitude
+
+```cpp
+Float_t _RCAmplitude;
+```
+
+RC channel amplitude (<0) [V]. 
+
+### variable _RCCharge
+
+```cpp
+Float_t _RCCharge;
+```
+
+RC channel integral charge [V*ns]. 
+
+### variable _RCRiseTime
+
+```cpp
+Float_t _RCRiseTime;
+```
+
+RC channel rise time [ns]. 
+
+### variable _RCTime
+
+```cpp
+Float_t _RCTime;
+```
+
+RC channel time [ns]. 
+
 ### variable _CPedestal
 
 ```cpp
@@ -911,6 +1015,14 @@ Float_t _SC_CLK_phase;
 ```
 
 Phase of Start Counter CLK [ns]. 
+
+### variable _RC_CLK_phase
+
+```cpp
+Float_t _RC_CLK_phase;
+```
+
+Phase of Rome Counter CLK [ns]. 
 
 ### variable _CPedA
 
@@ -1264,6 +1376,14 @@ Bool_t _IsFragTriggerOn;
 
 Flag that tells if the fragmentation trigger fired in the event. 
 
+### variable _IsFragTriggerSWOn
+
+```cpp
+Bool_t _IsFragTriggerSWOn;
+```
+
+Flag that tells if the fragmentation trigger fired in the event. 
+
 ### variable _TrigTP
 
 ```cpp
@@ -1327,6 +1447,14 @@ Float_t _BeamRate;
 ```
 
 Beam Rate calculated as rate of minimum bia triggers [Hz]. 
+
+### variable _TotalTimeWD
+
+```cpp
+UInt_t _TotalTimeWD;
+```
+
+Total acquisition time for current run [s]. 
 
 ### variable _WDTags
 
@@ -1432,6 +1560,14 @@ TH2F * _hitmap_frag;
 
 2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM**
 
+### variable _hitmap_fragSW
+
+```cpp
+TH2F * _hitmap_fragSW;
+```
+
+2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM**
+
 ### variable _hitmap_all
 
 ```cpp
@@ -1498,4 +1634,4 @@ Multiplicity of CALO crystals **HISTOGRAM**
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:17 +0000

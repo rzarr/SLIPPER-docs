@@ -45,14 +45,14 @@ In order to install the SW, clone the repository into your local computer and is
 >> cd bin/
 ```
 
- then configure the build typing 
+then configure the build typing 
 
 ```cpp
 >> cmake ../src
 >> make
 ```
 
- Assuming no error has happened, you should end with two executable files named "Reconstruction" and "Calibration", which are the binary used to process WaveDAQ signals and calibrate the dE-TOF system
+Assuming no error has happened, you should end with two executable files named "Reconstruction" and "Calibration", which are the binary used to process WaveDAQ signals and calibrate the dE-TOF system
 
 N.B.: Tags are automatically added in the output tree if the file names convention (see below) is respected. If the name convention is not respected, Tags are initialized to 0 or None.
 
@@ -66,7 +66,7 @@ SLIPPER can be easily installed and run on the Bologna Tier3. The procedure is s
 >> source /opt/exp_software/foot/root4foot.sh
 ```
 
- Then, move to the "slipper" directory and type: 
+Then, move to the "slipper" directory and type: 
 
 ```cpp
 >> mkdir bin
@@ -75,7 +75,7 @@ SLIPPER can be easily installed and run on the Bologna Tier3. The procedure is s
 >> make
 ```
 
- At this point, the SW should be compiled and ready to be used. The Tier3 also supports multithreading with the python script as described below.
+At this point, the SW should be compiled and ready to be used. The Tier3 also supports multithreading with the python script as described below.
 
 
 # Docker image (working on Linux and MacOS)
@@ -109,7 +109,7 @@ To make the processed files available in the local host folder, save them in the
 **WARNING!! All the changes made to the shared folder from the container WILL be propagated to the local folder in the host system!**
 
 
-## Running docker containers by hand (<a href="https://tenor.com/view/donald-trump-responsibility-i-dont-take-any-responsibility-at-all-no-responsibility-usa-president-gif-16623875" >CLICK HERE BEFORE READING</a>)
+## Running docker containers by hand (<a href="https://tenor.com/view/donald-trump-responsibility-i-dont-take-any-responsibility-at-all-no-responsibility-usa-president-gif-16623875">CLICK HERE BEFORE READING</a>)
 
 After pulling the "latest" image and building the "local" version, it is possible to run a container using the command:
 
@@ -160,7 +160,7 @@ Alternatively, the documentation can be produced locally by the developer using 
 >> path/to/doxygen docs/Doxyfile
 ```
 
- This command will create a folder named "docs_temp/" containing all the documentation. To access the documentation, open the file "docs_temp/html/index.html" using any browser.
+This command will create a folder named "docs_temp/" containing all the documentation. To access the documentation, open the file "docs_temp/html/index.html" using any browser.
 
 
 # XML configuration file: Channel Map
@@ -197,6 +197,8 @@ These files (available in the "config/" folder) contain the mapping between chan
   <BOARD_ID>164, 165</BOARD_ID>
   <CHANNELS>13,14,15,0,1,2,3,4,5</CHANNELS>
   <CRYSTALS>0,1,2,3,4,5,6,7,8</CRYSTALS>
+  <CRYSTAL_X>-1,0,1,-1,0,1,-1,0,1</CRYSTAL_X>
+  <CRYSTAL_Y>1,1,1,0,0,0,-1,-1,-1</CRYSTAL_Y>
 </MODULE>
 
 ...
@@ -212,7 +214,7 @@ These files (available in the "config/" folder) contain the mapping between chan
 </NEUTRON>
 ```
 
- Each channel map MUST contain <DATE> and <DESCRIPITON> elements as parent of the main node (they can be empty). The elements of the channel map are:
+Each channel map MUST contain <DATE> and <DESCRIPITON> elements as parent of the main node (they can be empty). The elements of the channel map are:
 
 
 ### SC —> Start Counter
@@ -251,6 +253,7 @@ The channel map can also contain some calorimeter <MODULE> elements in the forma
 * BOARD_ID: The WaveDREAM board(s) associated to the module. If two boards are indicated, the first channels up to number 15 are associated to the first board and the rest are linked to the second board
 * CHANNELS: the Id of each WaveDREAM channel used for the Module
 * CRYSTALS: the global Id of all the crystals of the module. Channels and crystals values have to be ordered in the same way because they are associated one-by-one.
+* CRYSTAL_X/Y: Physical X/Y coordinates o the CALO crystals in the SHOE reference frame [OPTIONAL]
 
 ### NEUTRON —> Neutron detectors
 
@@ -303,6 +306,7 @@ The Reconstruction executable transforms the binary WaveDAQ or TDAQ files into r
 
 
 * SC_Timestamp -> the timestamp [ns] of the event measured by the Start Counter.
+* SC_TotCharge -> the integral of the summed Start Counter Waveform [V*ns].
 
 #### TOF-Wall
 
@@ -343,12 +347,21 @@ The Reconstruction executable transforms the binary WaveDAQ or TDAQ files into r
 * N*_RiseTime -> rise time [ns] of the waveform calculated with the 10%-90% method.
 where the '*' stands for S/F for Slow and Fast channels.
 
+
+#### Trigger/TCB information
+
+
+
+* WD_TriggerType: the event trigger Id, such as 40 for Minimum Bias and 1 for fragmentation events.
+* WD_FragTrigger: a boolean value that signals if the fragmentation trigger was activated in the event -> FIRMWARE
+* WD_BeamRate: beam rate [Hz] measured by the WaveDAQ as rate of MB events.
+* WD_TotalTime: total time of the acquisition [s].
+* WD_FragTriggerSW: boolean flag that checks if the fragmentation trigger was switched on -> SOFTWARE
+* WD_FragTriggerCALO: boolean flag that performs a logical and of the firmware fragmentation trigger and a CALO or (IMPLEMENTED FOR HIT2022)
 There are also branches dedicated to:
 
 
 
-* TriggerType: the event trigger Id, such as 40 for Minimum Bias and 1 for fragmentation events.
-* IsFragTriggerOn: a boolean value that signals if the fragmentation trigger was activated in the event.
 * EventNumber: Number of the saved event.
 * Tags: this quantity depends on the files processed. For WaveDAQ files, the quantities saved are Gain, BeamEnergy [GeV/u], ParticleType, BeamPosition (PosX, PosY). The ParticleType tag is an integer indicating the primary particle as indicated in the "Parameters.h" file. For TDAQ files, the Tags contain RunNumber and FileNumber.
 More quantities, and waveform plots, are included in debug mode. In particular, the final root tree in debug mode has:
@@ -393,7 +406,7 @@ For example, (starting in the slipper directory) the command
 >> ./bin/Reconstruction -x config/ChannelMap*.xml -i InputFile.data -t tcalibIn.dat -o OutputFile.root --histo 1 --debug 1 --first 100 --last 200
 ```
 
- analyzes the binary file InputFile.data with time calibration tcalibIn.dat in debug mode and saves the WFs of events from 100 to 200 in the file OutputFile.root. Moreover, it saves a series of histograms we can construct for fast-feedback on the acquisition in a folder named "Histos" in the output file. The argument "histo" is always set to 1 if "debug" is 1. The "*" in the channel map name indicates the corresponding campaign.
+analyzes the binary file InputFile.data with time calibration tcalibIn.dat in debug mode and saves the WFs of events from 100 to 200 in the file OutputFile.root. Moreover, it saves a series of histograms we can construct for fast-feedback on the acquisition in a folder named "Histos" in the output file. The argument "histo" is always set to 1 if "debug" is 1. The "*" in the channel map name indicates the corresponding campaign.
 
 **N.B.: the current version of the code can run on either WaveDAQ stand-alone files and TDAQ global files. Since the time calibration is in a separate file only when running on TDAQ acquisitions, whenever this parameter is indicated the program WILL expect a TDAQ file. Otherwise the input is treated as a WaveDAQ file.**
 
@@ -403,7 +416,7 @@ As an example, if we want to run as above on a WaveDAQ file, the command to issu
 >> ./bin/Reconstruction -x config/ChannelMap*.xml -i InputFile.bin -o OutputFile.root --debug 1 --first 100 --last 200
 ```
 
- which is exactly the same, but without specifying the time calibration file. Note also that the histo flag is not needed since the debug flag is active.
+which is exactly the same, but without specifying the time calibration file. Note also that the histo flag is not needed since the debug flag is active.
 
 The Reconstruction executable can also provide useful histograms to check the fragmentation trigger amplitudes. To obtain these plots, the "trig" flag needs to be used: 
 
@@ -411,7 +424,7 @@ The Reconstruction executable can also provide useful histograms to check the fr
 >> ./bin/Reconstruction -x config/ChannelMap*.xml -i InputFile.bin -o OutputFile.root --debug 1 --first 100 --last 200 --trig config/TriggerAmpMap.txt
 ```
 
- The "TriggerAmpMap.txt" file contains the calibration that links DRS amplitudes to triger amplitudes. When this flag is utilized, the trigger amplitudes for central bars are saved in the "Histos" folder and a comparison between Firmware-Software trigger efficiency is provided.
+The "TriggerAmpMap.txt" file contains the calibration that links DRS amplitudes to triger amplitudes. When this flag is utilized, the trigger amplitudes for central bars are saved in the "Histos" folder and a comparison between Firmware-Software trigger efficiency is provided.
 
 The "neutrons" flag needs to be used ONLY if the user wants to save the decoded waveforms of all neutron detectors in the output. The usage of this flag superseeds everything else, meaning that almost no reconstruction will be performed and almost only neutron WFs will be available in the output. The "neutrons" tree will contain:
 
@@ -480,7 +493,7 @@ When processing TDAQ files, the python script requires an additional argument, i
 >> python src/PyRoutines/RunReconstruction.py -x config/ChannelMap*.xml -d path/to/input/directory -o path/to/output/directory -w 0 -r xxxx -t 6
 ```
 
- will process all the files from run "xxxx" (with name "\*xxxx\*data\*") in the input directory and save the merged output into a single file (default name: "Merge_xxxx.root") in the output directory. The time calibration file for the run needs to be saved in the input directory. This file should have extension *.dat and contain the run number. If the time calibration file for the indicated run is not indicated, the script will look for corresponding files from previous runs.
+will process all the files from run "xxxx" (with name "\*xxxx\*data\*") in the input directory and save the merged output into a single file (default name: "Merge_xxxx.root") in the output directory. The time calibration file for the run needs to be saved in the input directory. This file should have extension *.dat and contain the run number. If the time calibration file for the indicated run is not indicated, the script will look for corresponding files from previous runs.
 
 **N.B.: The Python package "multiprocessing" is mandatory to run with multiple threads. Debug mode is not available when running in batch.**
 
@@ -575,7 +588,7 @@ From version 2.5, a first analysis script has been implemented. This is meant to
   -h, --help              Print help
 ```
 
- As of today, the script produces a series of histograms to quickly check the correct functioning of TOF-Wall detector (channels/bars), as well as some preliminary time resolution studies.
+As of today, the script produces a series of histograms to quickly check the correct functioning of TOF-Wall detector (channels/bars), as well as some preliminary time resolution studies.
 
 
 # LivePlotter (WORK IN PROGRESS)
@@ -600,7 +613,7 @@ The best way to run the LivePlotter is to call it through the dedicated Python r
 python3 src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o OutputDir -w 1 -b 1 -t config/TriggerAmpMap*.txt
 ```
 
- where '*' indicates the acquisition campaign.
+where '*' indicates the acquisition campaign.
 
 This command will launch a 3-thread process, with each of the involved threads dedicated to a specific task:
 
@@ -613,4 +626,4 @@ This command will launch a 3-thread process, with each of the involved threads d
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:18 +0000

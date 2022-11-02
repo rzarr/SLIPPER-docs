@@ -16,6 +16,7 @@ title: Classes
 * **namespace [Message](/Namespaces/namespaceMessage.md)** <br>Namespace that handles some os-independent output. 
 * **class [NeutronChannelMap](/Classes/classNeutronChannelMap.md)** <br>Class that handles all the WaveDREAM boards-channels connected to Neutron detectors. 
 * **class [NeutronWF](/Classes/classNeutronWF.md)** <br>Class for Neutron WaveForms storing. 
+* **class [RCChannelMap](/Classes/classRCChannelMap.md)** <br>Class that handles the Rome Counter Channel Map. 
 * **class [ReadBinary](/Classes/classReadBinary.md)** <br>Class that handles all the decoding of WaveDAQ events from binary files. 
 * **class [SCChannelMap](/Classes/classSCChannelMap.md)** <br>Class that handles the Start Counter Channel Map. 
 * **class [SCWaveFormContainer](/Classes/classSCWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms for the Start Counter detector. 
@@ -35,4 +36,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2022-07-14 at 15:09:35 +0000
+Updated on 2022-11-02 at 16:23:18 +0000
