@@ -18,15 +18,15 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | -------------- | -------------- |
 | | **[SCChannelMap](/Classes/classSCChannelMap.md#function-scchannelmap)**()<br>Default constructor.  |
 | virtual | **[~SCChannelMap](/Classes/classSCChannelMap.md#function-~scchannelmap)**()<br>Default destructor.  |
-| UShort_t | **[GetSCBoard](/Classes/classSCChannelMap.md#function-getscboard)**()<br>Get the WaveDREAM board used for SC readout.  |
-| Int_t | **[GetNumberOfChannels](/Classes/classSCChannelMap.md#function-getnumberofchannels)**()<br>Get the number of SC channels.  |
-| std::vector< Int_t > | **[GetSCChannels](/Classes/classSCChannelMap.md#function-getscchannels)**()<br>Get the vector of SC channels.  |
 | void | **[AddSCBoard](/Classes/classSCChannelMap.md#function-addscboard)**(UShort_t BoardId, std::vector< Int_t > * Channels)<br>Add board to the SC channel map w/ the associated channels.  |
-| virtual Bool_t | **[LoadMap](/Classes/classSCChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Load channel map for the SC.  |
 | virtual void | **[Clear](/Classes/classSCChannelMap.md#function-clear)**()<br>Clear SC Map.  |
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classSCChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
+| Int_t | **[GetNumberOfChannels](/Classes/classSCChannelMap.md#function-getnumberofchannels)**()<br>Get the number of SC channels.  |
+| UShort_t | **[GetSCBoard](/Classes/classSCChannelMap.md#function-getscboard)**()<br>Get the WaveDREAM board used for SC readout.  |
+| std::vector< Int_t > | **[GetSCChannels](/Classes/classSCChannelMap.md#function-getscchannels)**()<br>Get the vector of SC channels.  |
 | virtual Bool_t | **[IsBoardLoaded](/Classes/classSCChannelMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
 | Bool_t | **[IsLoaded](/Classes/classSCChannelMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
+| virtual Bool_t | **[LoadMap](/Classes/classSCChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Load channel map for the SC.  |
 
 ## Protected Functions
 
@@ -80,36 +80,6 @@ virtual ~SCChannelMap()
 
 Default destructor. 
 
-### function GetSCBoard
-
-```cpp
-UShort_t GetSCBoard()
-```
-
-Get the WaveDREAM board used for SC readout. 
-
-**Return**: Serial number of the SC board 
-
-### function GetNumberOfChannels
-
-```cpp
-Int_t GetNumberOfChannels()
-```
-
-Get the number of SC channels. 
-
-**Return**: Number of SC channels loaded in the Map 
-
-### function GetSCChannels
-
-```cpp
-std::vector< Int_t > GetSCChannels()
-```
-
-Get the vector of SC channels. 
-
-**Return**: Pointer to _Channels (vector of SC channels) 
-
 ### function AddSCBoard
 
 ```cpp
@@ -126,23 +96,6 @@ Add board to the SC channel map w/ the associated channels.
   * **BoardId** Serial number of the SC WaveDREAM board read from XML 
   * **Channels** Pointer to vector of WDB channels of the SC read from the XML file 
 
-
-### function LoadMap
-
-```cpp
-virtual Bool_t LoadMap(
-    XmlParser * x
-)
-```
-
-Load channel map for the SC. 
-
-**Parameters**: 
-
-  * **x** Pointer to [XmlParser](/Classes/classXmlParser.md) object 
-
-
-**Return**: True if the SC ChannelMap was loaded correctly, False otherwise 
 
 ### function Clear
 
@@ -161,6 +114,36 @@ virtual std::vector< UShort_t > * GetListOfBoards()
 Get the list of boards loaded in the Channel Map. 
 
 **Return**: Pointer to the vector of loaded boards 
+
+### function GetNumberOfChannels
+
+```cpp
+Int_t GetNumberOfChannels()
+```
+
+Get the number of SC channels. 
+
+**Return**: Number of SC channels loaded in the Map 
+
+### function GetSCBoard
+
+```cpp
+UShort_t GetSCBoard()
+```
+
+Get the WaveDREAM board used for SC readout. 
+
+**Return**: Serial number of the SC board 
+
+### function GetSCChannels
+
+```cpp
+std::vector< Int_t > GetSCChannels()
+```
+
+Get the vector of SC channels. 
+
+**Return**: Pointer to _Channels (vector of SC channels) 
 
 ### function IsBoardLoaded
 
@@ -188,6 +171,23 @@ Bool_t IsLoaded()
 Check if the Map has been loaded. 
 
 **Return**: True if the Map is loaded, False otherwise 
+
+### function LoadMap
+
+```cpp
+virtual Bool_t LoadMap(
+    XmlParser * x
+)
+```
+
+Load channel map for the SC. 
+
+**Parameters**: 
+
+  * **x** Pointer to [XmlParser](/Classes/classXmlParser.md) object 
+
+
+**Return**: True if the SC ChannelMap was loaded correctly, False otherwise 
 
 ## Protected Functions Documentation
 
@@ -232,4 +232,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

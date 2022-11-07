@@ -18,11 +18,11 @@ Inherited by [CALOChannelMap](/Classes/classCALOChannelMap.md), [NeutronChannelM
 | -------------- | -------------- |
 | | **[BaseMap](/Classes/classBaseMap.md#function-basemap)**()<br>Default constructor.  |
 | virtual | **[~BaseMap](/Classes/classBaseMap.md#function-~basemap)**()<br>Default destructor.  |
+| void | **[Clear](/Classes/classBaseMap.md#function-clear)**()<br>Clear the list of boards loaded in the Channel Map.  |
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classBaseMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
 | virtual Bool_t | **[IsBoardLoaded](/Classes/classBaseMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
-| Bool_t | **[LoadMap](/Classes/classBaseMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Base function for Channel Map loading.  |
 | Bool_t | **[IsLoaded](/Classes/classBaseMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
-| void | **[Clear](/Classes/classBaseMap.md#function-clear)**()<br>Clear the list of boards loaded in the Channel Map.  |
+| Bool_t | **[LoadMap](/Classes/classBaseMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Base function for Channel Map loading.  |
 
 ## Protected Functions
 
@@ -55,6 +55,14 @@ virtual ~BaseMap()
 
 Default destructor. 
 
+### function Clear
+
+```cpp
+void Clear()
+```
+
+Clear the list of boards loaded in the Channel Map. 
+
 ### function GetListOfBoards
 
 ```cpp
@@ -82,16 +90,6 @@ Check if the board has been loaded in the Channel Map.
 
 **Return**: True if the board is has been loaded in the corresponding Channel Map 
 
-### function LoadMap
-
-```cpp
-Bool_t LoadMap(
-    XmlParser * x
-)
-```
-
-Base function for Channel Map loading. 
-
 ### function IsLoaded
 
 ```cpp
@@ -102,13 +100,15 @@ Check if the Map has been loaded.
 
 **Return**: True if the Map is loaded, False otherwise 
 
-### function Clear
+### function LoadMap
 
 ```cpp
-void Clear()
+Bool_t LoadMap(
+    XmlParser * x
+)
 ```
 
-Clear the list of boards loaded in the Channel Map. 
+Base function for Channel Map loading. 
 
 ## Protected Functions Documentation
 
@@ -140,4 +140,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

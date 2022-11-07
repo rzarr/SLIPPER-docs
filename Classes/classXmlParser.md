@@ -16,23 +16,23 @@ Class that handles all the decoding of XML configuration files for Channel Maps.
 | -------------- | -------------- |
 | | **[XmlParser](/Classes/classXmlParser.md#function-xmlparser)**()<br>Default constructor.  |
 | | **[~XmlParser](/Classes/classXmlParser.md#function-~xmlparser)**()<br>Default destructor.  |
-| void | **[ReadFile](/Classes/classXmlParser.md#function-readfile)**(std::string FileName)<br>Open the xml file.  |
-| void | **[PrintXmlContent](/Classes/classXmlParser.md#function-printxmlcontent)**()<br>Show the content of the xml file.  |
+| XMLNodePointer_t | **[AddElement](/Classes/classXmlParser.md#function-addelement)**(std::string Name, XMLNodePointer_t ParentNode)<br>Add an element to an xml Node.  |
+| void | **[AddElementWithContent](/Classes/classXmlParser.md#function-addelementwithcontent)**(std::string Name, XMLNodePointer_t ParentNode, std::string Value)<br>Add an element with content to and xml Node.  |
+| XMLNodePointer_t | **[CreateMainNode](/Classes/classXmlParser.md#function-createmainnode)**(std::string Name)<br>Create a new main Node in the xml.  |
 | void | **[ExportToFile](/Classes/classXmlParser.md#function-exporttofile)**(std::string Filename, XMLDocPointer_t mainnode)<br>Export a main node to file.  |
 | std::vector< XMLNodePointer_t > | **[GetChildNodesByName](/Classes/classXmlParser.md#function-getchildnodesbyname)**(XMLNodePointer_t StartingNode, std::string NodeName)<br>Get all the first generation child of a node (StartingNode) whose name is (NodeName)  |
 | template <class T \> <br>T | **[GetContentAs](/Classes/classXmlParser.md#function-getcontentas)**(std::string Name, XMLNodePointer_t Node)<br>Get the content of the XML node.  |
 | template <class T \> <br>std::vector< T > | **[GetContentAsVec](/Classes/classXmlParser.md#function-getcontentasvec)**(std::string Name, XMLNodePointer_t Node)<br>Return the content of a node as a vector of the indicated class Type.  |
 | XMLNodePointer_t | **[GetMainNode](/Classes/classXmlParser.md#function-getmainnode)**()<br>Get the document main node.  |
-| XMLNodePointer_t | **[AddElement](/Classes/classXmlParser.md#function-addelement)**(std::string Name, XMLNodePointer_t ParentNode)<br>Add an element to an xml Node.  |
-| XMLNodePointer_t | **[CreateMainNode](/Classes/classXmlParser.md#function-createmainnode)**(std::string Name)<br>Create a new main Node in the xml.  |
-| void | **[AddElementWithContent](/Classes/classXmlParser.md#function-addelementwithcontent)**(std::string Name, XMLNodePointer_t ParentNode, std::string Value)<br>Add an element with content to and xml Node.  |
+| void | **[PrintXmlContent](/Classes/classXmlParser.md#function-printxmlcontent)**()<br>Show the content of the xml file.  |
+| void | **[ReadFile](/Classes/classXmlParser.md#function-readfile)**(std::string FileName)<br>Open the xml file.  |
 
 ## Protected Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| TXMLEngine * | **[_XMLEngine](/Classes/classXmlParser.md#variable--xmlengine)** <br>Object to handle xml parsing engine.  |
 | XMLDocPointer_t | **[_xmldoc](/Classes/classXmlParser.md#variable--xmldoc)** <br>Pointer to the actual xmlfile.  |
+| TXMLEngine * | **[_XMLEngine](/Classes/classXmlParser.md#variable--xmlengine)** <br>Object to handle xml parsing engine.  |
 
 ## Public Functions Documentation
 
@@ -58,28 +58,60 @@ Default destructor.
 Desctructor takes care of destroying the _XMLEngine and _xmldoc 
 
 
-### function ReadFile
+### function AddElement
 
 ```cpp
-void ReadFile(
-    std::string FileName
+XMLNodePointer_t AddElement(
+    std::string Name,
+    XMLNodePointer_t ParentNode
 )
 ```
 
-Open the xml file. 
+Add an element to an xml Node. 
 
 **Parameters**: 
 
-  * **FileName** Name of the input file 
+  * **Name** Name of the element to add 
+  * **ParentNode** Pointer to the parent node 
 
 
-### function PrintXmlContent
+**Return**: Pointer to the new element 
+
+### function AddElementWithContent
 
 ```cpp
-void PrintXmlContent()
+void AddElementWithContent(
+    std::string Name,
+    XMLNodePointer_t ParentNode,
+    std::string Value
+)
 ```
 
-Show the content of the xml file. 
+Add an element with content to and xml Node. 
+
+**Parameters**: 
+
+  * **Name** Name of the element to add 
+  * **ParentNode** Pointer to the parent node 
+  * **Content** Content of the new element 
+
+
+### function CreateMainNode
+
+```cpp
+XMLNodePointer_t CreateMainNode(
+    std::string Name
+)
+```
+
+Create a new main Node in the xml. 
+
+**Parameters**: 
+
+  * **Name** Name of the new main node 
+
+
+**Return**: Pointer to the new node 
 
 ### function ExportToFile
 
@@ -186,70 +218,30 @@ Get the document main node.
 
 **Return**: Pointer to the main node of the file 
 
-### function AddElement
+### function PrintXmlContent
 
 ```cpp
-XMLNodePointer_t AddElement(
-    std::string Name,
-    XMLNodePointer_t ParentNode
+void PrintXmlContent()
+```
+
+Show the content of the xml file. 
+
+### function ReadFile
+
+```cpp
+void ReadFile(
+    std::string FileName
 )
 ```
 
-Add an element to an xml Node. 
+Open the xml file. 
 
 **Parameters**: 
 
-  * **Name** Name of the element to add 
-  * **ParentNode** Pointer to the parent node 
-
-
-**Return**: Pointer to the new element 
-
-### function CreateMainNode
-
-```cpp
-XMLNodePointer_t CreateMainNode(
-    std::string Name
-)
-```
-
-Create a new main Node in the xml. 
-
-**Parameters**: 
-
-  * **Name** Name of the new main node 
-
-
-**Return**: Pointer to the new node 
-
-### function AddElementWithContent
-
-```cpp
-void AddElementWithContent(
-    std::string Name,
-    XMLNodePointer_t ParentNode,
-    std::string Value
-)
-```
-
-Add an element with content to and xml Node. 
-
-**Parameters**: 
-
-  * **Name** Name of the element to add 
-  * **ParentNode** Pointer to the parent node 
-  * **Content** Content of the new element 
+  * **FileName** Name of the input file 
 
 
 ## Protected Attributes Documentation
-
-### variable _XMLEngine
-
-```cpp
-TXMLEngine * _XMLEngine;
-```
-
-Object to handle xml parsing engine. 
 
 ### variable _xmldoc
 
@@ -259,6 +251,14 @@ XMLDocPointer_t _xmldoc;
 
 Pointer to the actual xmlfile. 
 
+### variable _XMLEngine
+
+```cpp
+TXMLEngine * _XMLEngine;
+```
+
+Object to handle xml parsing engine. 
+
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

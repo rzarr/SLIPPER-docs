@@ -18,35 +18,35 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | -------------- | -------------- |
 | | **[SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-scwaveformcontainer)**()<br>Default constructor.  |
 | virtual | **[~SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-~scwaveformcontainer)**()<br>Default destructor.  |
-| virtual Float_t | **[GetSCTotalCharge](/Classes/classSCWaveFormContainer.md#function-getsctotalcharge)**(std::vector< Int_t > * Channels)<br>Compute and get the total raw energy loss in the SC.  |
-| virtual Float_t | **[GetTimeSC](/Classes/classSCWaveFormContainer.md#function-gettimesc)**(Bool_t * IsPossiblePileUp, std::vector< Int_t > * Channels, UShort_t BoardId =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="SC")<br>Analyze SC waveforms to extract its timestamp.  |
-| virtual Float_t | **[GetTimeSC_Linear](/Classes/classSCWaveFormContainer.md#function-gettimesc-linear)**(std::vector< Int_t > * Channels)<br>Analyze SC waveforms and extract the SC time with a linear extrapolation to the baseline.  |
-| virtual Float_t | **[GetChargeSC](/Classes/classSCWaveFormContainer.md#function-getchargesc)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the single channel SC waveform.  |
+| virtual void | **[CheckRangeOverflow](/Classes/classSCWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
 | virtual void | **[ClearData](/Classes/classSCWaveFormContainer.md#function-cleardata)**()<br>Clear data for new cycle.  |
 | virtual void | **[ClearOutputData](/Classes/classSCWaveFormContainer.md#function-clearoutputdata)**()<br>Clear output data for new cycle.  |
+| virtual void | **[CopyWaveform](/Classes/classSCWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
+| virtual Float_t | **[GetAmplitude](/Classes/classSCWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
+| virtual UShort_t | **[GetBoardSerialNumber](/Classes/classSCWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
+| virtual Float_t | **[GetCharge](/Classes/classSCWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the waveform.  |
+| virtual Float_t | **[GetChargeSC](/Classes/classSCWaveFormContainer.md#function-getchargesc)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the single channel SC waveform.  |
+| virtual Float_t | **[GetCLKPhase](/Classes/classSCWaveFormContainer.md#function-getclkphase)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr)<br>Get the phase of a CLK signal.  |
+| virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classSCWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
+| virtual Float_t | **[GetRiseTime](/Classes/classSCWaveFormContainer.md#function-getrisetime)**(Int_t channel)<br>Calucalte the 10% - 90% rise time of the waveform.  |
+| virtual Float_t | **[GetSCTotalCharge](/Classes/classSCWaveFormContainer.md#function-getsctotalcharge)**(std::vector< Int_t > * Channels)<br>Compute and get the total raw energy loss in the SC.  |
+| virtual Float_t | **[GetTimeCFD](/Classes/classSCWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
+| virtual Float_t | **[GetTimeSC](/Classes/classSCWaveFormContainer.md#function-gettimesc)**(Bool_t * IsPossiblePileUp, std::vector< Int_t > * Channels, UShort_t BoardId =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="SC")<br>Analyze SC waveforms to extract its timestamp.  |
+| virtual Float_t | **[GetTimeSC_Linear](/Classes/classSCWaveFormContainer.md#function-gettimesc-linear)**(std::vector< Int_t > * Channels)<br>Analyze SC waveforms and extract the SC time with a linear extrapolation to the baseline.  |
 | virtual Bool_t | **[IsEmpty](/Classes/classSCWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classSCWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
-| virtual void | **[CheckRangeOverflow](/Classes/classSCWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
-| virtual void | **[CopyWaveform](/Classes/classSCWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
 | virtual void | **[SetBoardSerialNumber](/Classes/classSCWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
-| virtual UShort_t | **[GetBoardSerialNumber](/Classes/classSCWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
-| virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classSCWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
-| virtual Float_t | **[GetAmplitude](/Classes/classSCWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
-| virtual Float_t | **[GetCharge](/Classes/classSCWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the waveform.  |
-| virtual Float_t | **[GetRiseTime](/Classes/classSCWaveFormContainer.md#function-getrisetime)**(Int_t channel)<br>Calucalte the 10% - 90% rise time of the waveform.  |
-| virtual Float_t | **[GetTimeCFD](/Classes/classSCWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
-| virtual Float_t | **[GetCLKPhase](/Classes/classSCWaveFormContainer.md#function-getclkphase)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr)<br>Get the phase of a CLK signal.  |
 
 ## Protected Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| virtual void | **[CheckSignals](/Classes/classSCWaveFormContainer.md#function-checksignals)**(std::vector< Int_t > * Channels)<br>Function that checks if any SC channel has undergone dynamic range bit overflow and corrects it.  |
-| virtual void | **[SumSCWaveforms](/Classes/classSCWaveFormContainer.md#function-sumscwaveforms)**(std::vector< Int_t > * Channels)<br>Function that performs the sum of the SC waveforms and computes the baseline of the total waveform.  |
 | virtual Bool_t | **[CheckForPileUp](/Classes/classSCWaveFormContainer.md#function-checkforpileup)**(std::vector< Float_t > * w_ptr, std::vector< Float_t > * t_ptr, Int_t event =-1, TFile * fOut =nullptr)<br>Check for PileUp in the Start Counter total signal.  |
-| virtual void | **[RescaleTime](/Classes/classSCWaveFormContainer.md#function-rescaletime)**(std::vector< Float_t > * tmp_time)<br>Rescale channel time from s to ns.  |
+| virtual void | **[CheckSignals](/Classes/classSCWaveFormContainer.md#function-checksignals)**(std::vector< Int_t > * Channels)<br>Function that checks if any SC channel has undergone dynamic range bit overflow and corrects it.  |
 | virtual void | **[MedianFilter](/Classes/classSCWaveFormContainer.md#function-medianfilter)**(Int_t channel)<br>Apply a 7-point median filter to the WF if needed.  |
+| virtual void | **[RescaleTime](/Classes/classSCWaveFormContainer.md#function-rescaletime)**(std::vector< Float_t > * tmp_time)<br>Rescale channel time from s to ns.  |
 | virtual void | **[SaveWF](/Classes/classSCWaveFormContainer.md#function-savewf)**(Int_t board, Int_t channel, Int_t event, TFile * fOut, TString detector, TString tag ="")<br>Save the waveform to a folder in the output file.  |
+| virtual void | **[SumSCWaveforms](/Classes/classSCWaveFormContainer.md#function-sumscwaveforms)**(std::vector< Int_t > * Channels)<br>Function that performs the sum of the SC waveforms and computes the baseline of the total waveform.  |
 
 ## Public Attributes
 
@@ -58,20 +58,20 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| Bool_t | **[_SignalsChecked](/Classes/classSCWaveFormContainer.md#variable--signalschecked)** <br>Boolean flag that signals if SC channels have been checked for dynamic range overflow.  |
+| Float_t | **[_Amp](/Classes/classSCWaveFormContainer.md#variable--amp)** <br>Amplitude of the signals (<0) [V].  |
+| UShort_t | **[_BoardSerialNumber](/Classes/classSCWaveFormContainer.md#variable--boardserialnumber)** <br>Serial number of the associated WaveDREAM board.  |
+| Float_t | **[_Charge](/Classes/classSCWaveFormContainer.md#variable--charge)** <br>Integral charge of the signals [V*ns].  |
 | std::vector< Float_t > | **[_DerT](/Classes/classSCWaveFormContainer.md#variable--dert)** <br>Time vector for SC total signal derivative.  |
 | std::vector< Float_t > | **[_DerW](/Classes/classSCWaveFormContainer.md#variable--derw)** <br>Amplitude vector for SC total signal derivative.  |
-| std::vector< Float_t > | **[_SC_Sum_W](/Classes/classSCWaveFormContainer.md#variable--sc-sum-w)** <br>Amplitude vector for SC total signal.  |
-| std::vector< Float_t > | **[_SC_Sum_T](/Classes/classSCWaveFormContainer.md#variable--sc-sum-t)** <br>Time vector for SC total signal.  |
-| Float_t | **[_SCped](/Classes/classSCWaveFormContainer.md#variable--scped)** <br>Pedestal of the SC total signal.  |
-| Float_t | **[_SCpedRMS](/Classes/classSCWaveFormContainer.md#variable--scpedrms)** <br>Pedestal of the SC total signal.  |
 | Float_t | **[_Ped](/Classes/classSCWaveFormContainer.md#variable--ped)** <br>Pedestal of the WFs [V].  |
 | Float_t | **[_PedRMS](/Classes/classSCWaveFormContainer.md#variable--pedrms)** <br>Pedestal Root Mean Square [V].  |
-| Float_t | **[_Amp](/Classes/classSCWaveFormContainer.md#variable--amp)** <br>Amplitude of the signals (<0) [V].  |
-| Float_t | **[_Charge](/Classes/classSCWaveFormContainer.md#variable--charge)** <br>Integral charge of the signals [V*ns].  |
-| Float_t | **[_Time](/Classes/classSCWaveFormContainer.md#variable--time)** <br>Raw Time of the signals [ns].  |
 | Float_t | **[_RiseTime](/Classes/classSCWaveFormContainer.md#variable--risetime)** <br>Rise Time of the signals [ns].  |
-| UShort_t | **[_BoardSerialNumber](/Classes/classSCWaveFormContainer.md#variable--boardserialnumber)** <br>Serial number of the associated WaveDREAM board.  |
+| std::vector< Float_t > | **[_SC_Sum_T](/Classes/classSCWaveFormContainer.md#variable--sc-sum-t)** <br>Time vector for SC total signal.  |
+| std::vector< Float_t > | **[_SC_Sum_W](/Classes/classSCWaveFormContainer.md#variable--sc-sum-w)** <br>Amplitude vector for SC total signal.  |
+| Float_t | **[_SCped](/Classes/classSCWaveFormContainer.md#variable--scped)** <br>Pedestal of the SC total signal.  |
+| Float_t | **[_SCpedRMS](/Classes/classSCWaveFormContainer.md#variable--scpedrms)** <br>Pedestal of the SC total signal.  |
+| Bool_t | **[_SignalsChecked](/Classes/classSCWaveFormContainer.md#variable--signalschecked)** <br>Boolean flag that signals if SC channels have been checked for dynamic range overflow.  |
+| Float_t | **[_Time](/Classes/classSCWaveFormContainer.md#variable--time)** <br>Raw Time of the signals [ns].  |
 
 ## Additional inherited members
 
@@ -101,6 +101,205 @@ virtual ~SCWaveFormContainer()
 
 Default destructor. 
 
+### function CheckRangeOverflow
+
+```cpp
+virtual void CheckRangeOverflow(
+    Float_t * w_ptr
+)
+```
+
+Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary. 
+
+**Parameters**: 
+
+  * **w_ptr** Pointer to element 1 (not 0) of the WF amplitude vector 
+
+
+### function ClearData
+
+```cpp
+virtual void ClearData()
+```
+
+Clear data for new cycle. 
+
+**Reimplements**: [WaveFormContainer::ClearData](/Classes/classWaveFormContainer.md#function-cleardata)
+
+
+### function ClearOutputData
+
+```cpp
+virtual void ClearOutputData()
+```
+
+Clear output data for new cycle. 
+
+### function CopyWaveform
+
+```cpp
+virtual void CopyWaveform(
+    NeutronWF * nWF,
+    int channel
+)
+```
+
+Copy a decoded waveform in the output container of neutrons. 
+
+**Parameters**: 
+
+  * **nWF** Pointer to output neutron waveform container 
+  * **channel** WaveDREAM channel to be copied 
+
+
+### function GetAmplitude
+
+```cpp
+virtual Float_t GetAmplitude(
+    Int_t channel
+)
+```
+
+Find the max amplitude of the waveform. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+
+
+**Return**: Amplitude of the WF (<0) [V] 
+
+### function GetBoardSerialNumber
+
+```cpp
+virtual UShort_t GetBoardSerialNumber()
+```
+
+Get the serial number of the WDB board. 
+
+**Return**: Board Serial Number 
+
+### function GetCharge
+
+```cpp
+virtual Float_t GetCharge(
+    Int_t channel,
+    Int_t start_bin =CHARGESTARTBIN,
+    Int_t stop_bin =CHARGESTOPBIN
+)
+```
+
+Find the integral charge of the waveform. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+  * **start_bin** Start bin (optional, default=CHARGESTARTBIN) 
+  * **stop_bin** Stop bin (optional, default=CHARGESTOPBIN) 
+
+
+**Return**: Total charge (integral) of the WF [V*ns] 
+
+**Reimplemented by**: [CALOWaveFormContainer::GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)
+
+
+The boundaries of the integral are useful when performing Pulse Shape Analysis 
+
+
+### function GetChargeSC
+
+```cpp
+virtual Float_t GetChargeSC(
+    Int_t channel,
+    Int_t start_bin =CHARGESTARTBIN,
+    Int_t stop_bin =CHARGESTOPBIN
+)
+```
+
+Find the integral charge of the single channel SC waveform. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+  * **start_bin** Start bin (optional, default=CHARGESTARTBIN) 
+  * **stop_bin** Stop bin (optional, default=CHARGESTOPBIN) 
+
+
+**Return**: Total charge (integral) of the WF [V*ns] 
+
+The integral is performed only in the region where the waveform is less than the baseline + 2*PedRMS 
+
+
+### function GetCLKPhase
+
+```cpp
+virtual Float_t GetCLKPhase(
+    Int_t channel,
+    UShort_t board =0,
+    Int_t event =-1,
+    TFile * fOut =nullptr
+)
+```
+
+Get the phase of a CLK signal. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+  * **board** Board serial number 
+  * **event** Event number 
+  * **fOut** Pointer to output file 
+
+
+**Return**: Phase of the CLK signal [ns] 
+
+This function analyzes the clock waveform and returns its phase.
+
+* Each rising edge of the waveform is analyzed -> the zero-crossing points are found using linear interpolation
+* These timestamps are then plotted versus the number of clock cycles elapsed
+* This graph is linearly fitted -> the clock phase is the intercept of the fit
+
+
+### function GetPedestal
+
+```cpp
+virtual std::pair< Float_t, Float_t > GetPedestal(
+    Int_t channel
+)
+```
+
+Find pedestal of the waveform. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+
+
+**Return**: Pair containing the value of the pedestal and its RMS [V] 
+
+**Reimplemented by**: [CALOWaveFormContainer::GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)
+
+
+The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN (left-right) in [Parameters.h]
+
+
+### function GetRiseTime
+
+```cpp
+virtual Float_t GetRiseTime(
+    Int_t channel
+)
+```
+
+Calucalte the 10% - 90% rise time of the waveform. 
+
+**Parameters**: 
+
+  * **channel** Channel Id 
+
+
+**Return**: Rise time of the signal [ns] 
+
 ### function GetSCTotalCharge
 
 ```cpp
@@ -119,6 +318,34 @@ Compute and get the total raw energy loss in the SC.
 **Return**: Integral charge of the total SC Waveform 
 
 The energy loss of single SC channels is computed as the integral of the total SC WaveForm, i.e. the sum of all the 8 channels waveforms 
+
+
+### function GetTimeCFD
+
+```cpp
+virtual Float_t GetTimeCFD(
+    Int_t channel,
+    UShort_t board =0,
+    Int_t event =-1,
+    TFile * fOut =nullptr,
+    TString detector =""
+)
+```
+
+Calculate the timestamp of the waveform with the CFD method. 
+
+**Parameters**: 
+
+  * **channel** WaveDREAM channel Id 
+  * **board** Board serial number (optional, default = 0) 
+  * **event** Event number (optional, default = -1) 
+  * **fOut** Pointer to output file (optional, default = nullptr) 
+  * **detector** Name of the analyzed detector (optional, default = "") 
+
+
+**Return**: Time calculated with the CFD method [ns] 
+
+The default CFD threshold is set in [Parameters.h]. If the optional parameters are used, the function also saves the WF 
 
 
 ### function GetTimeSC
@@ -171,49 +398,6 @@ Analyze SC waveforms and extract the SC time with a linear extrapolation to the 
 This function is the new template one for linear extrapolation to the baseline. CURRENTLY NOT USED 
 
 
-### function GetChargeSC
-
-```cpp
-virtual Float_t GetChargeSC(
-    Int_t channel,
-    Int_t start_bin =CHARGESTARTBIN,
-    Int_t stop_bin =CHARGESTOPBIN
-)
-```
-
-Find the integral charge of the single channel SC waveform. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-  * **start_bin** Start bin (optional, default=CHARGESTARTBIN) 
-  * **stop_bin** Stop bin (optional, default=CHARGESTOPBIN) 
-
-
-**Return**: Total charge (integral) of the WF [V*ns] 
-
-The integral is performed only in the region where the waveform is less than the baseline + 2*PedRMS 
-
-
-### function ClearData
-
-```cpp
-virtual void ClearData()
-```
-
-Clear data for new cycle. 
-
-**Reimplements**: [WaveFormContainer::ClearData](/Classes/classWaveFormContainer.md#function-cleardata)
-
-
-### function ClearOutputData
-
-```cpp
-virtual void ClearOutputData()
-```
-
-Clear output data for new cycle. 
-
 ### function IsEmpty
 
 ```cpp
@@ -254,38 +438,6 @@ Check if a WaveDREAM channel is empty.
 AUX function 
 
 
-### function CheckRangeOverflow
-
-```cpp
-virtual void CheckRangeOverflow(
-    Float_t * w_ptr
-)
-```
-
-Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary. 
-
-**Parameters**: 
-
-  * **w_ptr** Pointer to element 1 (not 0) of the WF amplitude vector 
-
-
-### function CopyWaveform
-
-```cpp
-virtual void CopyWaveform(
-    NeutronWF * nWF,
-    int channel
-)
-```
-
-Copy a decoded waveform in the output container of neutrons. 
-
-**Parameters**: 
-
-  * **nWF** Pointer to output neutron waveform container 
-  * **channel** WaveDREAM channel to be copied 
-
-
 ### function SetBoardSerialNumber
 
 ```cpp
@@ -301,192 +453,7 @@ Set the serial number of the WDB board.
   * **bsn** BoardSerialNumber 
 
 
-### function GetBoardSerialNumber
-
-```cpp
-virtual UShort_t GetBoardSerialNumber()
-```
-
-Get the serial number of the WDB board. 
-
-**Return**: Board Serial Number 
-
-### function GetPedestal
-
-```cpp
-virtual std::pair< Float_t, Float_t > GetPedestal(
-    Int_t channel
-)
-```
-
-Find pedestal of the waveform. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-
-
-**Return**: Pair containing the value of the pedestal and its RMS [V] 
-
-**Reimplemented by**: [CALOWaveFormContainer::GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)
-
-
-The value is computed as the median of the points from PEDESTALSTARTBIN to PEDESTALSTOPBIN (left-right) in [Parameters.h]
-
-
-### function GetAmplitude
-
-```cpp
-virtual Float_t GetAmplitude(
-    Int_t channel
-)
-```
-
-Find the max amplitude of the waveform. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-
-
-**Return**: Amplitude of the WF (<0) [V] 
-
-### function GetCharge
-
-```cpp
-virtual Float_t GetCharge(
-    Int_t channel,
-    Int_t start_bin =CHARGESTARTBIN,
-    Int_t stop_bin =CHARGESTOPBIN
-)
-```
-
-Find the integral charge of the waveform. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-  * **start_bin** Start bin (optional, default=CHARGESTARTBIN) 
-  * **stop_bin** Stop bin (optional, default=CHARGESTOPBIN) 
-
-
-**Return**: Total charge (integral) of the WF [V*ns] 
-
-**Reimplemented by**: [CALOWaveFormContainer::GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)
-
-
-The boundaries of the integral are useful when performing Pulse Shape Analysis 
-
-
-### function GetRiseTime
-
-```cpp
-virtual Float_t GetRiseTime(
-    Int_t channel
-)
-```
-
-Calucalte the 10% - 90% rise time of the waveform. 
-
-**Parameters**: 
-
-  * **channel** Channel Id 
-
-
-**Return**: Rise time of the signal [ns] 
-
-### function GetTimeCFD
-
-```cpp
-virtual Float_t GetTimeCFD(
-    Int_t channel,
-    UShort_t board =0,
-    Int_t event =-1,
-    TFile * fOut =nullptr,
-    TString detector =""
-)
-```
-
-Calculate the timestamp of the waveform with the CFD method. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-  * **board** Board serial number (optional, default = 0) 
-  * **event** Event number (optional, default = -1) 
-  * **fOut** Pointer to output file (optional, default = nullptr) 
-  * **detector** Name of the analyzed detector (optional, default = "") 
-
-
-**Return**: Time calculated with the CFD method [ns] 
-
-The default CFD threshold is set in [Parameters.h]. If the optional parameters are used, the function also saves the WF 
-
-
-### function GetCLKPhase
-
-```cpp
-virtual Float_t GetCLKPhase(
-    Int_t channel,
-    UShort_t board =0,
-    Int_t event =-1,
-    TFile * fOut =nullptr
-)
-```
-
-Get the phase of a CLK signal. 
-
-**Parameters**: 
-
-  * **channel** WaveDREAM channel Id 
-  * **board** Board serial number 
-  * **event** Event number 
-  * **fOut** Pointer to output file 
-
-
-**Return**: Phase of the CLK signal [ns] 
-
-This function analyzes the clock waveform and returns its phase.
-
-* Each rising edge of the waveform is analyzed -> the zero-crossing points are found using linear interpolation
-* These timestamps are then plotted versus the number of clock cycles elapsed
-* This graph is linearly fitted -> the clock phase is the intercept of the fit
-
-
 ## Protected Functions Documentation
-
-### function CheckSignals
-
-```cpp
-virtual void CheckSignals(
-    std::vector< Int_t > * Channels
-)
-```
-
-Function that checks if any SC channel has undergone dynamic range bit overflow and corrects it. 
-
-**Parameters**: 
-
-  * **Channels** Pointer to vector of SC channels 
-
-
-### function SumSCWaveforms
-
-```cpp
-virtual void SumSCWaveforms(
-    std::vector< Int_t > * Channels
-)
-```
-
-Function that performs the sum of the SC waveforms and computes the baseline of the total waveform. 
-
-**Parameters**: 
-
-  * **Channels** Pointer to vector of SC channels 
-
-
-Both the amplitude-time values of the total signal and its baseline are stored in private variables of the CWaveformContainer class 
-
 
 ### function CheckForPileUp
 
@@ -514,6 +481,36 @@ Check for PileUp in the Start Counter total signal.
 The implemented algorithm is dervied from the n_TOF collaboration and exploits the derivative of the signal. If the derivative crosses a certain threshold exactly 4 times, then there is a single signal. Otherwise, the event is flagged as a possible pile-up. 
 
 
+### function CheckSignals
+
+```cpp
+virtual void CheckSignals(
+    std::vector< Int_t > * Channels
+)
+```
+
+Function that checks if any SC channel has undergone dynamic range bit overflow and corrects it. 
+
+**Parameters**: 
+
+  * **Channels** Pointer to vector of SC channels 
+
+
+### function MedianFilter
+
+```cpp
+virtual void MedianFilter(
+    Int_t channel
+)
+```
+
+Apply a 7-point median filter to the WF if needed. 
+
+**Parameters**: 
+
+  * **channel** Channel Id 
+
+
 ### function RescaleTime
 
 ```cpp
@@ -530,21 +527,6 @@ Rescale channel time from s to ns.
 
 
 Function called only by SaveWF at the moment 
-
-
-### function MedianFilter
-
-```cpp
-virtual void MedianFilter(
-    Int_t channel
-)
-```
-
-Apply a 7-point median filter to the WF if needed. 
-
-**Parameters**: 
-
-  * **channel** Channel Id 
 
 
 ### function SaveWF
@@ -572,6 +554,24 @@ Save the waveform to a folder in the output file.
   * **tag** Additional tags (optional) 
 
 
+### function SumSCWaveforms
+
+```cpp
+virtual void SumSCWaveforms(
+    std::vector< Int_t > * Channels
+)
+```
+
+Function that performs the sum of the SC waveforms and computes the baseline of the total waveform. 
+
+**Parameters**: 
+
+  * **Channels** Pointer to vector of SC channels 
+
+
+Both the amplitude-time values of the total signal and its baseline are stored in private variables of the CWaveformContainer class 
+
+
 ## Public Attributes Documentation
 
 ### variable data
@@ -584,13 +584,29 @@ Object containing the raw Waveforms of a single WaveDREAM board.
 
 ## Protected Attributes Documentation
 
-### variable _SignalsChecked
+### variable _Amp
 
 ```cpp
-Bool_t _SignalsChecked;
+Float_t _Amp;
 ```
 
-Boolean flag that signals if SC channels have been checked for dynamic range overflow. 
+Amplitude of the signals (<0) [V]. 
+
+### variable _BoardSerialNumber
+
+```cpp
+UShort_t _BoardSerialNumber;
+```
+
+Serial number of the associated WaveDREAM board. 
+
+### variable _Charge
+
+```cpp
+Float_t _Charge;
+```
+
+Integral charge of the signals [V*ns]. 
 
 ### variable _DerT
 
@@ -608,13 +624,29 @@ std::vector< Float_t > _DerW;
 
 Amplitude vector for SC total signal derivative. 
 
-### variable _SC_Sum_W
+### variable _Ped
 
 ```cpp
-std::vector< Float_t > _SC_Sum_W;
+Float_t _Ped;
 ```
 
-Amplitude vector for SC total signal. 
+Pedestal of the WFs [V]. 
+
+### variable _PedRMS
+
+```cpp
+Float_t _PedRMS;
+```
+
+Pedestal Root Mean Square [V]. 
+
+### variable _RiseTime
+
+```cpp
+Float_t _RiseTime;
+```
+
+Rise Time of the signals [ns]. 
 
 ### variable _SC_Sum_T
 
@@ -623,6 +655,14 @@ std::vector< Float_t > _SC_Sum_T;
 ```
 
 Time vector for SC total signal. 
+
+### variable _SC_Sum_W
+
+```cpp
+std::vector< Float_t > _SC_Sum_W;
+```
+
+Amplitude vector for SC total signal. 
 
 ### variable _SCped
 
@@ -640,37 +680,13 @@ Float_t _SCpedRMS;
 
 Pedestal of the SC total signal. 
 
-### variable _Ped
+### variable _SignalsChecked
 
 ```cpp
-Float_t _Ped;
+Bool_t _SignalsChecked;
 ```
 
-Pedestal of the WFs [V]. 
-
-### variable _PedRMS
-
-```cpp
-Float_t _PedRMS;
-```
-
-Pedestal Root Mean Square [V]. 
-
-### variable _Amp
-
-```cpp
-Float_t _Amp;
-```
-
-Amplitude of the signals (<0) [V]. 
-
-### variable _Charge
-
-```cpp
-Float_t _Charge;
-```
-
-Integral charge of the signals [V*ns]. 
+Boolean flag that signals if SC channels have been checked for dynamic range overflow. 
 
 ### variable _Time
 
@@ -680,22 +696,6 @@ Float_t _Time;
 
 Raw Time of the signals [ns]. 
 
-### variable _RiseTime
-
-```cpp
-Float_t _RiseTime;
-```
-
-Rise Time of the signals [ns]. 
-
-### variable _BoardSerialNumber
-
-```cpp
-UShort_t _BoardSerialNumber;
-```
-
-Serial number of the associated WaveDREAM board. 
-
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

@@ -35,7 +35,7 @@ In order to be able to compile this SW you will need to install:
 In alternative, from version 3.1, the SW is also available inside a Docker image. The instructions for this type of installation are given in a dedicated section below.
 
 
-## Compilation
+## Installation
 
 In order to install the SW, clone the repository into your local computer and issue the commands 
 
@@ -52,8 +52,12 @@ then configure the build typing
 >> make
 ```
 
-Assuming no error has happened, you should end with two executable files named "Reconstruction" and "Calibration", which are the binary used to process WaveDAQ signals and calibrate the dE-TOF system
+Assuming no error has happened, you should end with a set of executable files named:
 
+* "Reconstruction", for WaveDAQ signal processing
+* "LivePlotter", for the online plotting used during data takings
+* "Calibration", for TW dE and TOF calibration
+* "Analysis", for offline analysis of processed data
 N.B.: Tags are automatically added in the output tree if the file names convention (see below) is respected. If the name convention is not respected, Tags are initialized to 0 or None.
 
 
@@ -76,6 +80,17 @@ Then, move to the "slipper" directory and type:
 ```
 
 At this point, the SW should be compiled and ready to be used. The Tier3 also supports multithreading with the python script as described below.
+
+
+## Release vs Debug build of the software
+
+The above instructions for installation create executable files with the intent of directly running on data. The default type of build ("Release") is way faster (~3x) then a "Debug" build, which should only be used when developing the code. To obtain a "Debug" build of SLIPPER, the build type can be forced in the compiler option via the command: 
+
+```cpp
+>> cmake ../src -DCMAKE_BUILD_TYPE=Debug
+```
+
+This type of build creates more verbose outputs, useful for code testing and bug solving.
 
 
 # Docker image (working on Linux and MacOS)
@@ -152,7 +167,7 @@ For Windows users, the first step is to install an operating system that actuall
 
 # Doxygen documentation for developers
 
-From version 3.0, the code has also been conceived to produce a developer documentation and update it each time a new push to the master branch is preformed. The developer documentation is currently hosted on GitBook at the following link: [https://roberto-zarrella2.gitbook.io/slipper-developer-manual/](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/).
+From version 3.0, the code has also been conceived to produce a developer documentation and update it each time a new push to the master branch is preformed. The developer documentation is currently hosted on GitBook at [this link](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/).
 
 Alternatively, the documentation can be produced locally by the developer using the **[Doxygen](https://www.doxygen.nl/index.html)** toolkit. Once Doxygen is installed, the documentation can be created by running the following command in the "slipper" directory: 
 
@@ -253,7 +268,7 @@ The channel map can also contain some calorimeter <MODULE> elements in the forma
 * BOARD_ID: The WaveDREAM board(s) associated to the module. If two boards are indicated, the first channels up to number 15 are associated to the first board and the rest are linked to the second board
 * CHANNELS: the Id of each WaveDREAM channel used for the Module
 * CRYSTALS: the global Id of all the crystals of the module. Channels and crystals values have to be ordered in the same way because they are associated one-by-one.
-* CRYSTAL_X/Y: Physical X/Y coordinates o the CALO crystals in the SHOE reference frame [OPTIONAL]
+* CRYSTAL_X/Y: Physical X/Y coordinates of the CALO crystals in the SHOE reference frame [OPTIONAL]
 
 ### NEUTRON —> Neutron detectors
 
@@ -267,33 +282,6 @@ Neutron detectors can be added to the channel map as above with fields:
 * CHANNELS_SLOW: List of channels for slow signals
 * GLOBAL_CH_SLOW: Global channel Ids for slow channels
 Note that the combination of (BOARD_ID,CHANNEL) should not appear more than once in the in the ChannelMap file. Moreover, crystal IDs MUST be numbered from 0 to NUMBEROFCRYSTALS - 1 (set in src/Parameters.h). The same applies to global channel Ids for the neutron detectors.
-
-
-# MC Table
-
-This is a .txt file (available in the "config/" folder) that contains the Monte Carlo dE and TOF reference values needed to perform the calibrations. **This file is MANDATORY to run the Calibration executable.** The current version (>= 2.2) of the software needs an MC table file containing, in each line, the quantities:
-
-
-
-* ParticleID: ID of the beam particle (0 = Proton, 1 = Helium, 2 = Carbon, 3 = Oxygen)
-* Beam energy [GeV/u]
-* dEx: mean value of the MC energy loss in the LayerX of the TW [MeV]
-* dEy: mean value of the MC energy loss in the LayerY of the TW [MeV]
-* TOFx: mean value of the MC Time-Of-Flight measured in the LayerX of the TW [ns]
-* TOFy: mean value of the MC Time-Of-Flight measured in the LayerY of the TW [ns]
-More flags could be added in future (e.g. a "campaign" string, errors on MC values). Each line starting with a "#" is ignored by the reader, so comments can be freely added to the file. An example of the MC table containing the CNAO03-2019 and GSI04-2019 MC values is reported below
-
-
-
-```cpp
-#MC Table with the CNAO03-2019 and GSI04-2019 reference values
-#ParticleID En [GeV/u]  dEx [MeV]   dEy [MeV]  TOFx [ns]   TOFy [ns]
-0  0.060  3.47  3.65  4.19  4.22
-2  0.115  78.6  82.6  3.19  3.22
-2  0.260  42.7  43.0  2.28  2.30
-2  0.400  33.5  33.6  1.99  2.00
-3  0.400  59.7  60.0  10.43  10.45
-```
 
 
 # Reconstruction
@@ -518,6 +506,54 @@ From this version, it is also possible to reconstruct different runs acquired wi
 If this script is used, the single runs are reconstructed with 1 thread each. The number of threads tells the script how many runs it can reconstruct in parallel.
 
 
+# Online processing and LivePlotter (WORK IN PROGRESS)
+
+From version 3.1, a LivePlotter executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
+
+* TW hitmaps with MB and Fragmentation trigger
+* Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic.
+* Raw Fragmentation dE spectra for all the TW bars involved in the fragmentation trigger, for the chosen trigger thresholds (set via the TriggerAmpMap.txt file )
+* Pile-Up percentage in each file
+* Total number of counts in the A-B channels of the TW
+* Total number of "saturated" counts (amplitude > 1V) in the A-B channels of the TW
+* Raw energy loss vs TOF at the center of the TW
+* Raw Energy deposition in all the CALO crystals
+* TW bars - CALO crystals multiplicity
+* _[preliminary]_ Comparison between raw CALO energy and TW raw energy loss
+The best way to run the LivePlotter is to call it through the dedicated Python routine src/PyRoutines/Plotter.py. The options available for this routine are listed below:
+
+
+
+```cpp
+>> python3 src/PyRoutines/Plotter.py [OPTION...]
+
+  -x, --channelmap      Channel Map of the acquisition
+  -i, --inputdir        Input files directory
+  -o, --outputdir       Output files directory
+  -c, --timecal         (optional) Time calibration file 
+  -b, --beam            (optional) Wether to activate (1) or not (0) the online plot of beam rate (default=0)
+  -t, --trig            (optional) Trigger calibration file (default="")
+  -p, --plots           (optional) Wether to activate (1) or not (0) the online plots (default=1)
+```
+
+A typical command line for the Plotter.py routine is: 
+
+```cpp
+python3 src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o OutputDir -c tcalib*.dat -b 1 -t config/TriggerAmpMap*.txt
+```
+
+where '*' indicates the acquisition campaign.
+
+This command will launch a 3-thread process, with each of the involved threads dedicated to a specific task:
+
+* Online processing of data: this thread is handled propagating the options to the "src/PyRoutines/RecoMonitor.py" routine. This program continuously checks the input folder and runs the reconstruction on all the new files found.
+* Beam rate monitoring (updated and plotted online): this thread can be switched off with the option "-b 0".
+* Online plotting (LivePlotter): this thread takes care of handling all the configured online plots. It can be switched off with the option "-p 0".
+The online monitoring of data can be performed on both WaveDAQ and TDAQ files. The difference, as for the other executables, is given by the need of a WaveDAQ time calibration file in the latter case. If no time calibration file is specified, the executable expects WaveDAQ binary files as input.
+
+**This tool is intended for online monitoring during data acquisitions ONLY!!**
+
+
 # Calibration (WORK IN PROGRESS!)
 
 The Calibration executable takes the output ROOT files created with the Reconstruction binary and produces the calibration maps needed to convert raw Energy and Time-Of-Flight data from the dE-TOF system in physical units. This executable requires:
@@ -546,6 +582,33 @@ The debug mode saves additional txt and ROOT files in the output directory conta
 
 ```cpp
 >> ./bin/Calibration -m config/MCTable.txt -i path/to/input/dir -o path/to/output/dir --debug 1
+```
+
+
+## MC Table
+
+This is a .txt file (available in the "config/" folder) that contains the Monte Carlo dE and TOF reference values needed to perform the calibrations. **This file is MANDATORY to run the Calibration executable.** The current version (>= 2.2) of the software needs an MC table file containing, in each line, the quantities:
+
+
+
+* ParticleID: ID of the beam particle (0 = Proton, 1 = Helium, 2 = Carbon, 3 = Oxygen)
+* Beam energy [GeV/u]
+* dEx: mean value of the MC energy loss in the LayerX of the TW [MeV]
+* dEy: mean value of the MC energy loss in the LayerY of the TW [MeV]
+* TOFx: mean value of the MC Time-Of-Flight measured in the LayerX of the TW [ns]
+* TOFy: mean value of the MC Time-Of-Flight measured in the LayerY of the TW [ns]
+More flags could be added in future (e.g. a "campaign" string, errors on MC values). Each line starting with a "#" is ignored by the reader, so comments can be freely added to the file. An example of the MC table containing the CNAO03-2019 and GSI04-2019 MC values is reported below
+
+
+
+```cpp
+#MC Table with the CNAO03-2019 and GSI04-2019 reference values
+#ParticleID En [GeV/u]  dEx [MeV]   dEy [MeV]  TOFx [ns]   TOFy [ns]
+0  0.060  3.47  3.65  4.19  4.22
+2  0.115  78.6  82.6  3.19  3.22
+2  0.260  42.7  43.0  2.28  2.30
+2  0.400  33.5  33.6  1.99  2.00
+3  0.400  59.7  60.0  10.43  10.45
 ```
 
 
@@ -588,42 +651,8 @@ From version 2.5, a first analysis script has been implemented. This is meant to
   -h, --help              Print help
 ```
 
-As of today, the script produces a series of histograms to quickly check the correct functioning of TOF-Wall detector (channels/bars), as well as some preliminary time resolution studies.
-
-
-# LivePlotter (WORK IN PROGRESS)
-
-From version 3.1, a LivePlotter executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
-
-* TW hitmaps with MB and Fragmentation trigger
-* Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic.
-* Raw Fragmentation dE spectra for all the TW bars involved in the fragmentation trigger, for the chosen trigger thresholds (set via the TriggerAmpMap.txt file )
-* Pile-Up percentage in each file
-* Total number of counts in the A-B channels of the TW
-* Total number of "saturated" counts (amplitude > 1V) in the A-B channels of the TW
-* Raw energy loss vs TOF at the center of the TW
-* Raw Energy deposition in all the CALO crystals
-* TW bars - CALO crystals multiplicity
-* _[preliminary]_ Comparison between raw CALO energy and TW raw energy loss
-The best way to run the LivePlotter is to call it through the dedicated Python routine:
-
-
-
-```cpp
-python3 src/PyRoutines/Plotter.py -x config/ChannelMap*.xml -i InputDir -o OutputDir -w 1 -b 1 -t config/TriggerAmpMap*.txt
-```
-
-where '*' indicates the acquisition campaign.
-
-This command will launch a 3-thread process, with each of the involved threads dedicated to a specific task:
-
-* Online processing of data
-* Beam rate monitoring (updated and plotted online)
-* Online plotting (LivePlotter)
-**The Plotter.py routine calls the RecoMonitor.py routine, which has not been completely tested on TDAQ files!! To run with this file format, the time calibration of WaveDAQ has to be saved somewhere!**
-
-**This tool is intended for online monitoring during data acquisitions ONLY!!**
+As of today, the script produces a series of histograms to quickly check the correct functioning of TOF-Wall detector (channels/bars), as well as some preliminary time resolution studies. 
 
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:18 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

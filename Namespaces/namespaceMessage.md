@@ -12,30 +12,13 @@ Namespace that handles some os-independent output.
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[DisplayWarning](/Namespaces/namespaceMessage.md#function-displaywarning)**(TString Message, std::ostream & os =std::cout)<br>Display a Warning.  |
 | void | **[DisplayFatalError](/Namespaces/namespaceMessage.md#function-displayfatalerror)**(TString Message, std::ostream & os =std::cout)<br>Print a Fatal Error.  |
 | void | **[DisplayMessage](/Namespaces/namespaceMessage.md#function-displaymessage)**(TString Message, std::ostream & os =std::cout)<br>Display a [Message](/Namespaces/namespaceMessage.md).  |
 | void | **[DisplayMessageWithEmphasys](/Namespaces/namespaceMessage.md#function-displaymessagewithemphasys)**(TString Message, std::ostream & os =std::cout)<br>Display an emphsized message.  |
+| void | **[DisplayWarning](/Namespaces/namespaceMessage.md#function-displaywarning)**(TString Message, std::ostream & os =std::cout)<br>Display a Warning.  |
 
 
 ## Functions Documentation
-
-### function DisplayWarning
-
-```cpp
-void DisplayWarning(
-    TString Message,
-    std::ostream & os =std::cout
-)
-```
-
-Display a Warning. 
-
-**Parameters**: 
-
-  * **[Message](/Namespaces/namespaceMessage.md)** Text of the warning 
-  * **os** ostream object 
-
 
 ### function DisplayFatalError
 
@@ -88,10 +71,27 @@ Display an emphsized message.
   * **os** ostream object 
 
 
+### function DisplayWarning
+
+```cpp
+void DisplayWarning(
+    TString Message,
+    std::ostream & os =std::cout
+)
+```
+
+Display a Warning. 
+
+**Parameters**: 
+
+  * **[Message](/Namespaces/namespaceMessage.md)** Text of the warning 
+  * **os** ostream object 
+
+
 
 
 
 
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

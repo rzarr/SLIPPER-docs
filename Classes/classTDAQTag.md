@@ -17,8 +17,8 @@ Class for TDAQ files tagging.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| Int_t | **[RunNumber](/Classes/classTDAQTag.md#variable-runnumber)** <br>Number of the run.  |
 | Int_t | **[FileNumber](/Classes/classTDAQTag.md#variable-filenumber)** <br>Number of the file inside a run.  |
+| Int_t | **[RunNumber](/Classes/classTDAQTag.md#variable-runnumber)** <br>Number of the run.  |
 
 ## Detailed Description
 
@@ -35,14 +35,6 @@ The variables currently implemented are:
 
 ## Public Attributes Documentation
 
-### variable RunNumber
-
-```cpp
-Int_t RunNumber;
-```
-
-Number of the run. 
-
 ### variable FileNumber
 
 ```cpp
@@ -51,6 +43,14 @@ Int_t FileNumber;
 
 Number of the file inside a run. 
 
+### variable RunNumber
+
+```cpp
+Int_t RunNumber;
+```
+
+Number of the run. 
+
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000

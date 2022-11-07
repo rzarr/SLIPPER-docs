@@ -24,9 +24,9 @@ Class for Neutron WaveForms storing.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| Float_t | **[V](/Classes/classNeutronWF.md#variable-v)** <br>Amplitude values of the Waveforms.  |
-| Float_t | **[T](/Classes/classNeutronWF.md#variable-t)** <br>Time values of the Waveforms.  |
 | Bool_t | **[IsOn](/Classes/classNeutronWF.md#variable-ison)** <br>Boolean flag for WaveDAQ zero-suppression.  |
+| Float_t | **[T](/Classes/classNeutronWF.md#variable-t)** <br>Time values of the Waveforms.  |
+| Float_t | **[V](/Classes/classNeutronWF.md#variable-v)** <br>Amplitude values of the Waveforms.  |
 
 ## Detailed Description
 
@@ -58,13 +58,13 @@ Clear all data in the container.
 
 ## Public Attributes Documentation
 
-### variable V
+### variable IsOn
 
 ```cpp
-Float_t V;
+Bool_t IsOn;
 ```
 
-Amplitude values of the Waveforms. 
+Boolean flag for WaveDAQ zero-suppression. 
 
 ### variable T
 
@@ -74,14 +74,14 @@ Float_t T;
 
 Time values of the Waveforms. 
 
-### variable IsOn
+### variable V
 
 ```cpp
-Bool_t IsOn;
+Float_t V;
 ```
 
-Boolean flag for WaveDAQ zero-suppression. 
+Amplitude values of the Waveforms. 
 
 -------------------------------
 
-Updated on 2022-11-02 at 16:23:17 +0000
+Updated on 2022-11-07 at 16:17:36 +0000
