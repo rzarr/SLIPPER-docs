@@ -10,7 +10,8 @@ title: Software for Live Interactive Plotting and Partial Event Reconstruction
 
 # Project     : FOOT (FragmentatiOn Of Target)
 
-Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [*baltig page*](https://baltig.infn.it/zarrella/slipper/). The previous link can also be used to acces the source code.
+![FOOT_logo.png](/images/FOOT_logo.png)
+ Software for stand-alone signal processing of the WaveDAQ system. For a detailed user guide, check the dedicated page in this manual or at the [*baltig page*](https://baltig.infn.it/zarrella/slipper/). The previous link can also be used to acces the source code.
 
 At this stage, the code handles signals from the:
 
@@ -59,4 +60,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-11-07 at 19:12:57 +0000
+Updated on 2022-11-08 at 13:56:41 +0000

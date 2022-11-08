@@ -23,7 +23,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | std::pair< UShort_t, Int_t > | **[GetBoardChFromCrys](/Classes/classCALOChannelMap.md#function-getboardchfromcrys)**(Int_t CrysId)<br>Get the <board, channel> pair from the Id of the crystal.  |
 | std::vector< std::pair< UShort_t, Int_t > > | **[GetBoardChVec](/Classes/classCALOChannelMap.md#function-getboardchvec)**(Int_t ModuleId)<br>Get the <board, channel> vector of all the crystals in a CALO module.  |
 | Bool_t | **[GetCrystalId](/Classes/classCALOChannelMap.md#function-getcrystalid)**(UShort_t board, Int_t channel, Int_t * CrysId)<br>Get the Id of a crystal from its board and channel.  |
-| Int_t | **[GetCrystalIdFromIndex](/Classes/classCALOChannelMap.md#function-getcrystalidfromindex)**(Int_t CrysIndex)<br>Get the Id of a crystal from its board and channel.  |
+| Int_t | **[GetCrystalIdFromIndex](/Classes/classCALOChannelMap.md#function-getcrystalidfromindex)**(Int_t CrysIndex)<br>Get the Id of a crystal from its index in the output arrays.  |
 | Int_t | **[GetCrystalIndexFromId](/Classes/classCALOChannelMap.md#function-getcrystalindexfromid)**(Int_t CrysId)<br>Get the index of a CALO crystal from its Id.  |
 | const TVector2 | **[GetCrystalPosition](/Classes/classCALOChannelMap.md#function-getcrystalposition)**(Int_t CrysId)<br>Get the X-Y position of a CALO crystal.  |
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classCALOChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
@@ -182,14 +182,14 @@ Int_t GetCrystalIdFromIndex(
 )
 ```
 
-Get the Id of a crystal from its board and channel. 
+Get the Id of a crystal from its index in the output arrays. 
 
 **Parameters**: 
 
-  * **CrysIndexd** Pointer to variable to write the crystal Id 
+  * **CrysIndex** Index of the crystal in the output arrays 
 
 
-**Return**: True if the crystal was found in the CALO channel map, False otherwise 
+**Return**: Crystal Id in the channel map 
 
 ### function GetCrystalIndexFromId
 
@@ -433,4 +433,4 @@ Map that links a CALO module to the vector of crystal indices.
 
 -------------------------------
 
-Updated on 2022-11-07 at 19:12:57 +0000
+Updated on 2022-11-08 at 13:56:41 +0000

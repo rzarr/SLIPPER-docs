@@ -257,7 +257,7 @@ This function currently saves 3 rates to the output ofstream:
 
 * Minimum Bias trigger rate (40), which also resembles the actual beam rate
 * Clipped Minimum Bias trigger rate (42)
-* Fragmentation trigger rate (1), as set at firmware level std::ofstream*Pointer to output ofstream object 
+* Fragmentation trigger rate (1), as set at firmware level ofsBeamRatePointer to output ofstream object 
 
 
 ### function SetHistograms
@@ -637,4 +637,4 @@ Local variable for storing waveform raw amplitude values.
 
 -------------------------------
 
-Updated on 2022-11-07 at 19:12:57 +0000
+Updated on 2022-11-08 at 13:56:41 +0000
