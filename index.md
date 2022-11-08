@@ -27,7 +27,7 @@ At this stage, the code handles signals from the:
 * Niccolo' Camarlinghi (NC) -> Development of first Software structure
 * Luca Galli (LC) -> First implementation
 * Marco Montefiori (MM) -> First implementation of WaveDAQ histograms and [DataAnalysis](/Classes/classDataAnalysis.md) class
-* Roberto Zarrella (RZ) -> Inclusion of all detectors and re-ordering of code; Currently main developer
+* Roberto Zarrella (RZ) -> Inclusion of all detectors, optimization and documentation of the code; Currently main developer
 
 ## Current contibutors
 
@@ -39,7 +39,7 @@ At this stage, the code handles signals from the:
 
 ## Content
 
-This manual contains all the information about classes, files and functions implemented in SLIPPER. The manual is generated using Doxygen and Doxybook2.
+This manual contains all the information about classes, files and functions implemented in SLIPPER. The manual is generated using Doxygen and Doxybook2 or Baltig pages.
 
 
 ## Revisions
@@ -60,4 +60,4 @@ This manual contains all the information about classes, files and functions impl
 
 -------------------------------
 
-Updated on 2022-11-08 at 13:56:41 +0000
+Updated on 2022-11-08 at 16:20:13 +0000

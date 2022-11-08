@@ -2,7 +2,7 @@ User Manual
 ======
 
 # Software for Live Interactive Plotting and Partial Event Reconstruction (v3.1)
-This is the version 3.1 of the stand-alone SW used by the Pisa group of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
+This is the version 3.1 of the stand-alone SW of the FOOT experiment. The code is meant to run on data acquired by the WaveDAQ system. The repository contains a folder with source code "src/", one with configuration files "config/" and one for code documentation "docs/".
 
 **N.B.: Each time a new acquisition is processed, the associated configuration files (config/ChannelMap\*.xml, config/MCTable\*.txt and src/Utils/Parameters.h) should be carefully checked and tuned.**
 
@@ -12,6 +12,7 @@ Branches (updated 24/02/2022):
 
 Tags:
 - CNAO2021 -> For processing of CNAO run in 11/2021
+- hit2022 -> For processing of HIT run in 07/2022
 
 ## Requirements
 In order to be able to compile this SW you will need to install:
@@ -123,7 +124,7 @@ and MacOs:
 For Windows users, the first step is to install an operating system that actually works :)
 
 # Doxygen documentation for developers
-From version 3.0, the code has also been conceived to produce a developer documentation and update it each time a new push to the master branch is preformed. The developer documentation is currently hosted on GitBook at [this link](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/).
+From version 3.0, the code has also been conceived to produce a developer documentation and update it each time a new push to the master branch is preformed. The developer documentation is currently hosted on [Gitbook](https://roberto-zarrella2.gitbook.io/slipper-developer-manual/) and [Baltig pages](https://zarrella.baltig-pages.infn.it/slipper).
 
 Alternatively, the documentation can be produced locally by the developer using the **[Doxygen](https://www.doxygen.nl/index.html)** toolkit. Once Doxygen is installed, the documentation can be created by running the following command in the "slipper" directory:
 ```
