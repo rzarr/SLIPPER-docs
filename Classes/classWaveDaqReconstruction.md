@@ -22,7 +22,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(std::string FileName, std::string TimeCalFileName, int nEv)<br>Perform the whole WaveDAQ reconstruction.  |
 | void | **[SetDebugMode](/Classes/classWaveDaqReconstruction.md#function-setdebugmode)**(Int_t first_ev, Int_t last_ev)<br>Activate debug mode if requested and set event range.  |
 | void | **[SetGain](/Classes/classWaveDaqReconstruction.md#function-setgain)**(Float_t Gain)<br>Set the frontend gain.  |
-| void | **[SetOutputFileName](/Classes/classWaveDaqReconstruction.md#function-setoutputfilename)**(std::string FileName)<br>Set the output file name.  |
+| void | **[SetOutputFileName](/Classes/classWaveDaqReconstruction.md#function-setoutputfilename)**(const std::string & FileName)<br>Set the output file name.  |
 | void | **[SetSaveBeamRate](/Classes/classWaveDaqReconstruction.md#function-setsavebeamrate)**()<br>Enable the saving of beam rate in an output txt file for online monitoring.  |
 | void | **[SetSaveNeutrons](/Classes/classWaveDaqReconstruction.md#function-setsaveneutrons)**()<br>Set the SaveNeutrons flag to true.  |
 | void | **[SetTDAQfile](/Classes/classWaveDaqReconstruction.md#function-settdaqfile)**()<br>Signal that the file is produced through the TDAQ.  |
@@ -108,6 +108,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | std::map< Int_t, TH1F * > | **[_hFragCharge](/Classes/classWaveDaqReconstruction.md#variable--hfragcharge)** <br>Charge histogram of fragmentation trigger bars with SW chosen threshold! **HISTOGRAM** |
 | TH2F * | **[_hitmap_all](/Classes/classWaveDaqReconstruction.md#variable--hitmap-all)** <br>2D Hitmap of TW for all events **HISTOGRAM** |
 | TH1F * | **[_hitmap_Bars](/Classes/classWaveDaqReconstruction.md#variable--hitmap-bars)** <br>1D Hitmap of TW bars **HISTOGRAM** |
+| TH2F * | **[_hitmap_CALO](/Classes/classWaveDaqReconstruction.md#variable--hitmap-calo)** <br>2D Hitmap of TW for Minimum Bias events **HISTOGRAM** |
 | TH1F * | **[_hitmap_Channels_Front](/Classes/classWaveDaqReconstruction.md#variable--hitmap-channels-front)** <br>1D Hitmap of TW channels in front layer **HISTOGRAM** |
 | TH1F * | **[_hitmap_Channels_Rear](/Classes/classWaveDaqReconstruction.md#variable--hitmap-channels-rear)** <br>1D Hitmap of TW channels in rear layer **HISTOGRAM** |
 | TH2F * | **[_hitmap_frag](/Classes/classWaveDaqReconstruction.md#variable--hitmap-frag)** <br>2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM** |
@@ -312,7 +313,7 @@ Set the frontend gain.
 
 ```cpp
 void SetOutputFileName(
-    std::string FileName
+    const std::string & FileName
 )
 ```
 
@@ -1072,6 +1073,14 @@ TH1F * _hitmap_Bars;
 
 1D Hitmap of TW bars **HISTOGRAM**
 
+### variable _hitmap_CALO
+
+```cpp
+TH2F * _hitmap_CALO;
+```
+
+2D Hitmap of TW for Minimum Bias events **HISTOGRAM**
+
 ### variable _hitmap_Channels_Front
 
 ```cpp
@@ -1115,7 +1124,7 @@ TH2F * _hitmap_MB;
 ### variable _hTGEN_frag
 
 ```cpp
-TH2F * _hTGEN_frag = nullptr;
+TH2F * _hTGEN_frag;
 ```
 
 Trigger generation (TGEN) for Fragmentation Trigger Events **HISTOGRAM**
@@ -1123,7 +1132,7 @@ Trigger generation (TGEN) for Fragmentation Trigger Events **HISTOGRAM**
 ### variable _hTGEN_MB
 
 ```cpp
-TH2F * _hTGEN_MB = nullptr;
+TH2F * _hTGEN_MB;
 ```
 
 Trigger generation (TGEN) for Minimum Bias Events **HISTOGRAM**
@@ -1131,7 +1140,7 @@ Trigger generation (TGEN) for Minimum Bias Events **HISTOGRAM**
 ### variable _hTrigAmp
 
 ```cpp
-TH1F ** _hTrigAmp = new TH1F*[NUMBEROFTRIGGERCHANNELS];
+TH1F ** _hTrigAmp;
 ```
 
 Trigger amplitude of Fragmentation trigger channels **HISTOGRAM**
@@ -1139,7 +1148,7 @@ Trigger amplitude of Fragmentation trigger channels **HISTOGRAM**
 ### variable _hTriggerPattern
 
 ```cpp
-TH1I * _hTriggerPattern = nullptr;
+TH1I * _hTriggerPattern;
 ```
 
 Trigger pattern (TRGI) **HISTOGRAM**
@@ -1147,7 +1156,7 @@ Trigger pattern (TRGI) **HISTOGRAM**
 ### variable _hTriggerRates
 
 ```cpp
-TH1I * _hTriggerRates = nullptr;
+TH1I * _hTriggerRates;
 ```
 
 Trigger rates (TRGC) **HISTOGRAM**
@@ -1634,4 +1643,4 @@ Tags of WaveDREAM stand-alone files.
 
 -------------------------------
 
-Updated on 2022-11-08 at 16:20:13 +0000
+Updated on 2023-03-20 at 18:25:25 +0000

@@ -18,6 +18,7 @@
     * [SCChannelMap](Classes/classSCChannelMap.md)
     * [ReadBinary](Classes/classReadBinary.md)
     * [RCChannelMap](Classes/classRCChannelMap.md)
+    * [PositionCalibration](Classes/classPositionCalibration.md)
     * [NeutronWF](Classes/classNeutronWF.md)
     * [NeutronChannelMap](Classes/classNeutronChannelMap.md)
     * [LivePlots](Classes/classLivePlots.md)

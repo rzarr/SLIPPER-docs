@@ -19,7 +19,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | | **[SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-scwaveformcontainer)**()<br>Default constructor.  |
 | virtual | **[~SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-~scwaveformcontainer)**()<br>Default destructor.  |
 | virtual void | **[CheckRangeOverflow](/Classes/classSCWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
-| virtual void | **[ClearData](/Classes/classSCWaveFormContainer.md#function-cleardata)**()<br>Clear data for new cycle.  |
+| virtual void | **[ClearData](/Classes/classSCWaveFormContainer.md#function-cleardata)**() override<br>Clear data for new cycle.  |
 | virtual void | **[ClearOutputData](/Classes/classSCWaveFormContainer.md#function-clearoutputdata)**()<br>Clear output data for new cycle.  |
 | virtual void | **[CopyWaveform](/Classes/classSCWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classSCWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
@@ -41,7 +41,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| virtual Bool_t | **[CheckForPileUp](/Classes/classSCWaveFormContainer.md#function-checkforpileup)**(std::vector< Float_t > * w_ptr, std::vector< Float_t > * t_ptr, Int_t event =-1, TFile * fOut =nullptr)<br>Check for PileUp in the Start Counter total signal.  |
+| virtual Bool_t | **[CheckForPileUp](/Classes/classSCWaveFormContainer.md#function-checkforpileup)**(std::vector< Float_t > * w_ptr, std::vector< Float_t > * t_ptr, Int_t event =-1, TFile * fOut =nullptr, TString detector ="SC")<br>Check for PileUp in the Start Counter total signal.  |
 | virtual void | **[CheckSignals](/Classes/classSCWaveFormContainer.md#function-checksignals)**(std::vector< Int_t > * Channels)<br>Function that checks if any SC channel has undergone dynamic range bit overflow and corrects it.  |
 | virtual void | **[MedianFilter](/Classes/classSCWaveFormContainer.md#function-medianfilter)**(Int_t channel)<br>Apply a 7-point median filter to the WF if needed.  |
 | virtual void | **[RescaleTime](/Classes/classSCWaveFormContainer.md#function-rescaletime)**(std::vector< Float_t > * tmp_time)<br>Rescale channel time from s to ns.  |
@@ -119,7 +119,7 @@ Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct
 ### function ClearData
 
 ```cpp
-virtual void ClearData()
+virtual void ClearData() override
 ```
 
 Clear data for new cycle. 
@@ -462,7 +462,8 @@ virtual Bool_t CheckForPileUp(
     std::vector< Float_t > * w_ptr,
     std::vector< Float_t > * t_ptr,
     Int_t event =-1,
-    TFile * fOut =nullptr
+    TFile * fOut =nullptr,
+    TString detector ="SC"
 )
 ```
 
@@ -698,4 +699,4 @@ Raw Time of the signals [ns].
 
 -------------------------------
 
-Updated on 2022-11-08 at 16:20:13 +0000
+Updated on 2023-03-20 at 18:25:25 +0000

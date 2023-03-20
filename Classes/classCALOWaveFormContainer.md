@@ -22,9 +22,9 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual void | **[CopyWaveform](/Classes/classCALOWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classCALOWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
 | virtual UShort_t | **[GetBoardSerialNumber](/Classes/classCALOWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
-| virtual Float_t | **[GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of a Calorimeter waveform [OVERLOADED].  |
+| virtual Float_t | **[GetCharge](/Classes/classCALOWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN) override<br>Find the integral charge of a Calorimeter waveform [OVERLOADED].  |
 | virtual Float_t | **[GetCLKPhase](/Classes/classCALOWaveFormContainer.md#function-getclkphase)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr)<br>Get the phase of a CLK signal.  |
-| virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of a CALO waveform.  |
+| virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classCALOWaveFormContainer.md#function-getpedestal)**(Int_t channel) override<br>Find pedestal of a CALO waveform.  |
 | virtual Float_t | **[GetRiseTime](/Classes/classCALOWaveFormContainer.md#function-getrisetime)**(Int_t channel)<br>Calucalte the 10% - 90% rise time of the waveform.  |
 | virtual Float_t | **[GetTimeCFD](/Classes/classCALOWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
 | virtual Bool_t | **[IsEmpty](/Classes/classCALOWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
@@ -154,7 +154,7 @@ virtual Float_t GetCharge(
     Int_t channel,
     Int_t start_bin =CHARGESTARTBIN,
     Int_t stop_bin =CHARGESTOPBIN
-)
+) override
 ```
 
 Find the integral charge of a Calorimeter waveform [OVERLOADED]. 
@@ -209,7 +209,7 @@ This function analyzes the clock waveform and returns its phase.
 ```cpp
 virtual std::pair< Float_t, Float_t > GetPedestal(
     Int_t channel
-)
+) override
 ```
 
 Find pedestal of a CALO waveform. 
@@ -457,4 +457,4 @@ Raw Time of the signals [ns].
 
 -------------------------------
 
-Updated on 2022-11-08 at 16:20:13 +0000
+Updated on 2023-03-20 at 18:25:25 +0000
