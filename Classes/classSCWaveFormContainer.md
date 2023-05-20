@@ -36,6 +36,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual Bool_t | **[IsEmpty](/Classes/classSCWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classSCWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual void | **[SetBoardSerialNumber](/Classes/classSCWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
+| virtual void | **[SumSCWaveforms](/Classes/classSCWaveFormContainer.md#function-sumscwaveforms)**(std::vector< Int_t > * Channels)<br>Function that performs the sum of the SC waveforms and computes the baseline of the total waveform.  |
 
 ## Protected Functions
 
@@ -46,12 +47,13 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual void | **[MedianFilter](/Classes/classSCWaveFormContainer.md#function-medianfilter)**(Int_t channel)<br>Apply a 7-point median filter to the WF if needed.  |
 | virtual void | **[RescaleTime](/Classes/classSCWaveFormContainer.md#function-rescaletime)**(std::vector< Float_t > * tmp_time)<br>Rescale channel time from s to ns.  |
 | virtual void | **[SaveWF](/Classes/classSCWaveFormContainer.md#function-savewf)**(Int_t board, Int_t channel, Int_t event, TFile * fOut, TString detector, TString tag ="")<br>Save the waveform to a folder in the output file.  |
-| virtual void | **[SumSCWaveforms](/Classes/classSCWaveFormContainer.md#function-sumscwaveforms)**(std::vector< Int_t > * Channels)<br>Function that performs the sum of the SC waveforms and computes the baseline of the total waveform.  |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
+| std::vector< Float_t > | **[_SC_Sum_T](/Classes/classSCWaveFormContainer.md#variable--sc-sum-t)** <br>Time vector for SC total signal.  |
+| std::vector< Float_t > | **[_SC_Sum_W](/Classes/classSCWaveFormContainer.md#variable--sc-sum-w)** <br>Amplitude vector for SC total signal.  |
 | [WDBDATA](/Classes/classWDBDATA.md) | **[data](/Classes/classSCWaveFormContainer.md#variable-data)** <br>Object containing the raw Waveforms of a single WaveDREAM board.  |
 
 ## Protected Attributes
@@ -66,8 +68,6 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | Float_t | **[_Ped](/Classes/classSCWaveFormContainer.md#variable--ped)** <br>Pedestal of the WFs [V].  |
 | Float_t | **[_PedRMS](/Classes/classSCWaveFormContainer.md#variable--pedrms)** <br>Pedestal Root Mean Square [V].  |
 | Float_t | **[_RiseTime](/Classes/classSCWaveFormContainer.md#variable--risetime)** <br>Rise Time of the signals [ns].  |
-| std::vector< Float_t > | **[_SC_Sum_T](/Classes/classSCWaveFormContainer.md#variable--sc-sum-t)** <br>Time vector for SC total signal.  |
-| std::vector< Float_t > | **[_SC_Sum_W](/Classes/classSCWaveFormContainer.md#variable--sc-sum-w)** <br>Amplitude vector for SC total signal.  |
 | Float_t | **[_SCped](/Classes/classSCWaveFormContainer.md#variable--scped)** <br>Pedestal of the SC total signal.  |
 | Float_t | **[_SCpedRMS](/Classes/classSCWaveFormContainer.md#variable--scpedrms)** <br>Pedestal of the SC total signal.  |
 | Bool_t | **[_SignalsChecked](/Classes/classSCWaveFormContainer.md#variable--signalschecked)** <br>Boolean flag that signals if SC channels have been checked for dynamic range overflow.  |
@@ -453,6 +453,24 @@ Set the serial number of the WDB board.
   * **bsn** BoardSerialNumber 
 
 
+### function SumSCWaveforms
+
+```cpp
+virtual void SumSCWaveforms(
+    std::vector< Int_t > * Channels
+)
+```
+
+Function that performs the sum of the SC waveforms and computes the baseline of the total waveform. 
+
+**Parameters**: 
+
+  * **Channels** Pointer to vector of SC channels 
+
+
+Both the amplitude-time values of the total signal and its baseline are stored in private variables of the CWaveformContainer class 
+
+
 ## Protected Functions Documentation
 
 ### function CheckForPileUp
@@ -555,25 +573,23 @@ Save the waveform to a folder in the output file.
   * **tag** Additional tags (optional) 
 
 
-### function SumSCWaveforms
+## Public Attributes Documentation
+
+### variable _SC_Sum_T
 
 ```cpp
-virtual void SumSCWaveforms(
-    std::vector< Int_t > * Channels
-)
+std::vector< Float_t > _SC_Sum_T;
 ```
 
-Function that performs the sum of the SC waveforms and computes the baseline of the total waveform. 
+Time vector for SC total signal. 
 
-**Parameters**: 
+### variable _SC_Sum_W
 
-  * **Channels** Pointer to vector of SC channels 
+```cpp
+std::vector< Float_t > _SC_Sum_W;
+```
 
-
-Both the amplitude-time values of the total signal and its baseline are stored in private variables of the CWaveformContainer class 
-
-
-## Public Attributes Documentation
+Amplitude vector for SC total signal. 
 
 ### variable data
 
@@ -649,22 +665,6 @@ Float_t _RiseTime;
 
 Rise Time of the signals [ns]. 
 
-### variable _SC_Sum_T
-
-```cpp
-std::vector< Float_t > _SC_Sum_T;
-```
-
-Time vector for SC total signal. 
-
-### variable _SC_Sum_W
-
-```cpp
-std::vector< Float_t > _SC_Sum_W;
-```
-
-Amplitude vector for SC total signal. 
-
 ### variable _SCped
 
 ```cpp
@@ -699,4 +699,4 @@ Raw Time of the signals [ns].
 
 -------------------------------
 
-Updated on 2023-03-21 at 11:26:06 +0000
+Updated on 2023-05-20 at 18:19:18 +0000

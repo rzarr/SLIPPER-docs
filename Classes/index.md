@@ -29,6 +29,7 @@ title: Classes
 * **class [WDBDATA](/Classes/classWDBDATA.md)** <br>Class for WaveDREAM board data container. 
 * **class [WDChannelMap](/Classes/classWDChannelMap.md)** <br>Main class that handles the WaveDAQ Channel Map. 
 * **class [WDTag](/Classes/classWDTag.md)** <br>Class for WaveDREAM stand-alone files tagging. 
+* **class [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)** <br>Class that handles the creation and display of the plots for SC, TW and CALO in the EventDisplay executable. 
 * **class [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md)** <br>Main class used to handle the whole Reconstruction process. 
 * **class [WaveFormContainer](/Classes/classWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms. 
 * **class [XmlParser](/Classes/classXmlParser.md)** <br>Class that handles all the decoding of XML configuration files for Channel Maps. 
@@ -37,4 +38,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2023-03-21 at 11:26:07 +0000
+Updated on 2023-05-20 at 18:19:18 +0000

@@ -39,6 +39,8 @@ then configure the build typing
 Assuming no error has happened, you should end with a set of executable files named:
 - "Reconstruction", for WaveDAQ signal processing
 - "LivePlotter", for the online plotting used during data takings
+- "EventDisplay", for the waveform event display
+- "CalibratePosition", for the TW time-position calibration
 - "Calibration", for TW dE and TOF calibration
 - "Analysis", for offline analysis of processed data
 
@@ -76,6 +78,14 @@ The repository were all the images are hosted can be found at [this link](https:
 ```
 
 **N.B.: This step is mandatory since the "latest" tag of the slipper-docker image DOES NOT contain an installation of the software. It is only used as base image for faster build of the "local" version, which is the ONLY ONE that has a functioning SLIPPER installation. After this step is completed, the "latest" image can be removed.**
+
+The SLIPPER version built inside the "local" docker image is by default the one of the "master" branch. If a different branch is needed, it can be set in the installation step via the command:
+```
+>> ./path/to/slipper/docker/install_docker.sh <branch-name>
+```
+where \<branch-name\> is the name of the SLIPPER repositiory branch you want to install. Otherwise, when running the docker, one can change the repository branch and recompile the software.
+
+**N.B.: if the change of branch happens from inside the docker image, keep in mind that this step is only temporary and must be performed every time the docker is run. If the branch is chosen at the installation step, the choice is permanent.**
 
 After the installation is finished, a docker container can be started launching the "run_docker.sh" executable found in the "docker" folder of the repository. This executable launches a container of the "local" tag of the slipper-docker image.
 
@@ -304,7 +314,7 @@ E.g.,
 -i, --inputfilename arg     WaveDAQ binary (.bin) input filename,
 -o, --outputfilename arg    output filename (should be .root),
 -t, --timecalfile arg       (optional) WaveDAQ time calibration (.dat) filename,
--g, --gain arg              (optional default=1) gain set to perform the acquisition (default: 1),
+-g, --gain arg              (optional) gain set to perform the acquisition (default: 1),
     --nev arg               (optional) how many events to process (default: 1E6),
     --trig arg              (optional) calibration map for trigger amplitudes (default: ""),
     --neutrons arg          (optional) wethet to save neutron decoded waveforms in the output (1) or not (0) (default: 0)
@@ -414,7 +424,7 @@ From this version, it is also possible to reconstruct different runs acquired wi
 
 If this script is used, the single runs are reconstructed with 1 thread each. The number of threads tells the script how many runs it can reconstruct in parallel.
 
-# Online processing and LivePlotter (WORK IN PROGRESS)
+# Online processing and LivePlotter
 From version 3.1, a LivePlotter executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
 * TW hitmaps with MB and Fragmentation trigger
 * Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic. 
@@ -435,7 +445,7 @@ The best way to run the LivePlotter is to call it through the dedicated Python r
   -x, --channelmap      Channel Map of the acquisition
   -i, --inputdir        Input files directory
   -o, --outputdir       Output files directory
-  -c, --timecal         (optional) Time calibration file 
+  -c, --timecal         (optional) WaveDAQ time calibration file (.dat)
   -b, --beam            (optional) Wether to activate (1) or not (0) the online plot of beam rate (default=0)
   -t, --trig            (optional) Trigger calibration file (default="")
   -p, --plots           (optional) Wether to activate (1) or not (0) the online plots (default=1)
@@ -454,6 +464,26 @@ This command will launch a 3-thread process, with each of the involved threads d
 The online monitoring of data can be performed on both WaveDAQ and TDAQ files. The difference, as for the other executables, is given by the need of a WaveDAQ time calibration file in the latter case. If no time calibration file is specified, the executable expects WaveDAQ binary files as input.
 
 **This tool is intended for online monitoring during data acquisitions ONLY!!**
+
+# Event Display
+The "EventDisplay" executable can be used to open an event display dedicated to the control of the signals acquired by the SC, TW and CALO detectors. The basic functioning of this executable is straightforward: it opens a canvas for each detector present in the channel map and plots all the waveforms from that detector in the dedicated canvas. There is the possibility to move to the following event via a dedicated input dialog window that opens when the executable is launched.
+
+The parameters needed by the EventDisplay executable can be seen through the help function. To see it, run the code with no options:
+
+```
+>> ./EventDisplay [OPTION...]
+
+  -x, --channelmap       Channel Map XML file
+  -i, --inputfilename    WaveDAQ binary (.bin) input filename
+  -c, --timecalfile      (optional) WaveDAQ time calibration filename
+      --clk              (optional) Include clock plots (default: 0)
+```
+The first three parameters are the same described for the "Reconstruction" executable. By default, the CLK signals are not displayed in the canvases. The "--clk" option can be used to enable the display of the CLK signals by launching
+
+```
+>> ./bin/EventDisplay -x config/ChannelMap*.xml -i path/to/InputFile -c path/to/TimeCalibrationFile --clk 1
+```
+The "EventDisplay" executable is also capable of saving the output canvases and single waveforms for a specific event to a ROOT file. This feature can be exploited via the input dialog box.
 
 # Position Calibration
 The "CalibratePosition" executable takes the output ROOT files created with the Reconstruction binary and produces the maps needed to correlate the hit position of particles along TW bars and the time difference between its A-B channels. This executable requires a Reconstruction output rootfile containing an homogenous scan of the TW with the same particle beam. An example of such runs are the so-called "Screensaver" runs tested at CNAO2022 or the TW scans of GSI2021 campaign.

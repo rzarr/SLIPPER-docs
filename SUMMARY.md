@@ -9,6 +9,7 @@
     * [WDBDATA](Classes/classWDBDATA.md)
     * [WaveFormContainer](Classes/classWaveFormContainer.md)
     * [WaveDaqReconstruction](Classes/classWaveDaqReconstruction.md)
+    * [WaveDaqDisplay](Classes/classWaveDaqDisplay.md)
     * [TWWaveFormContainer](Classes/classTWWaveFormContainer.md)
     * [TWChannelMap](Classes/classTWChannelMap.md)
     * [TOFWallCalibration](Classes/classTOFWallCalibration.md)

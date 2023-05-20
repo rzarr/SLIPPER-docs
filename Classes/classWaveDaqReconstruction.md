@@ -10,6 +10,8 @@ summary: Main class used to handle the whole Reconstruction process.
 
 Main class used to handle the whole Reconstruction process.  [More...](#detailed-description)
 
+Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
+
 ## Public Functions
 
 |                | Name           |
@@ -19,7 +21,7 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | void | **[EnableHistograms](/Classes/classWaveDaqReconstruction.md#function-enablehistograms)**()<br>Enable histogram writing in the output.  |
 | void | **[LoadChannelMap](/Classes/classWaveDaqReconstruction.md#function-loadchannelmap)**(std::string FileName)<br>Load xml containing the channel map, i.e. the mapping between channels,boards and bar.  |
 | void | **[LoadTriggerCalibration](/Classes/classWaveDaqReconstruction.md#function-loadtriggercalibration)**(std::string FileName)<br>Load the trigger calibration map.  |
-| void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(std::string FileName, std::string TimeCalFileName, int nEv)<br>Perform the whole WaveDAQ reconstruction.  |
+| virtual void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(std::string FileName, std::string TimeCalFileName, int nEv)<br>Perform the whole WaveDAQ reconstruction.  |
 | void | **[SetDebugMode](/Classes/classWaveDaqReconstruction.md#function-setdebugmode)**(Int_t first_ev, Int_t last_ev)<br>Activate debug mode if requested and set event range.  |
 | void | **[SetGain](/Classes/classWaveDaqReconstruction.md#function-setgain)**(Float_t Gain)<br>Set the frontend gain.  |
 | void | **[SetOutputFileName](/Classes/classWaveDaqReconstruction.md#function-setoutputfilename)**(const std::string & FileName)<br>Set the output file name.  |
@@ -38,7 +40,8 @@ Main class used to handle the whole Reconstruction process.  [More...](#detailed
 | void | **[AnalyzeWaveformsSC](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformssc)**(UShort_t board)<br>Analysis of SC Waveforms (WFs)  |
 | void | **[AnalyzeWaveformsTW](/Classes/classWaveDaqReconstruction.md#function-analyzewaveformstw)**(UShort_t board)<br>Analyze the WFs of TW.  |
 | void | **[CheckFragTriggerConditions](/Classes/classWaveDaqReconstruction.md#function-checkfragtriggerconditions)**()<br>Check if the fragmentation trigger conditions are satisfied.  |
-| void | **[CheckLoadedBoards](/Classes/classWaveDaqReconstruction.md#function-checkloadedboards)**()<br>Check and print all the loaded WaveDREAM boars.  |
+| virtual void | **[CheckLoadedBoards](/Classes/classWaveDaqReconstruction.md#function-checkloadedboards)**()<br>Check and print all the loaded WaveDREAM boars.  |
+| void | **[ClearWFdata](/Classes/classWaveDaqReconstruction.md#function-clearwfdata)**()<br>Clear all the Waveforms.  |
 | Float_t | **[CLKAnalysis](/Classes/classWaveDaqReconstruction.md#function-clkanalysis)**(int boardindex, int channel) |
 | void | **[CreateHistograms](/Classes/classWaveDaqReconstruction.md#function-createhistograms)**()<br>Booking of the histograms.  |
 | void | **[EvalCLKJitter](/Classes/classWaveDaqReconstruction.md#function-evalclkjitter)**(int boardindex, Int_t globalch, int channel)<br>Calculate the clock phase jitter between TW and SC.  |
@@ -261,7 +264,7 @@ Load the trigger calibration map.
 ### function RunReconstruction
 
 ```cpp
-void RunReconstruction(
+virtual void RunReconstruction(
     std::string FileName,
     std::string TimeCalFileName,
     int nEv
@@ -275,6 +278,9 @@ Perform the whole WaveDAQ reconstruction.
   * **FileName** Name of the input binary file 
   * **TimeCalFileName** Name of the time calibration file. Equal to the previous parameter for WaveDAQ files 
   * **nEv** Number of events to be processed (optional, default=-1) 
+
+
+**Reimplemented by**: [WaveDaqDisplay::RunReconstruction](/Classes/classWaveDaqDisplay.md#function-runreconstruction)
 
 
 ### function SetDebugMode
@@ -468,10 +474,21 @@ Check if the fragmentation trigger conditions are satisfied.
 ### function CheckLoadedBoards
 
 ```cpp
-void CheckLoadedBoards()
+virtual void CheckLoadedBoards()
 ```
 
 Check and print all the loaded WaveDREAM boars. 
+
+**Reimplemented by**: [WaveDaqDisplay::CheckLoadedBoards](/Classes/classWaveDaqDisplay.md#function-checkloadedboards)
+
+
+### function ClearWFdata
+
+```cpp
+void ClearWFdata()
+```
+
+Clear all the Waveforms. 
 
 ### function CLKAnalysis
 
@@ -1643,4 +1660,4 @@ Tags of WaveDREAM stand-alone files.
 
 -------------------------------
 
-Updated on 2023-03-21 at 11:26:06 +0000
+Updated on 2023-05-20 at 18:19:18 +0000
