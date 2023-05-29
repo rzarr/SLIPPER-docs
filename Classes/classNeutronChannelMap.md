@@ -25,9 +25,6 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | std::vector< Int_t > * | **[GetChSlow](/Classes/classNeutronChannelMap.md#function-getchslow)**()<br>Get the Slow channels of the Neutron detectors.  |
 | std::string | **[GetDetFromBoardCh](/Classes/classNeutronChannelMap.md#function-getdetfromboardch)**(std::pair< UShort_t, Int_t > BoardChPair)<br>Get the neutron detector name from board-chanel pair.  |
 | Bool_t | **[GetGlobFromBoardCh](/Classes/classNeutronChannelMap.md#function-getglobfromboardch)**(std::pair< UShort_t, Int_t > BoardChPair, Int_t * globCh)<br>Get the global channel Id from board-chanel pair.  |
-| virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classNeutronChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
-| virtual Bool_t | **[IsBoardLoaded](/Classes/classNeutronChannelMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
-| Bool_t | **[IsLoaded](/Classes/classNeutronChannelMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
 | virtual Bool_t | **[LoadMap](/Classes/classNeutronChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Load the Neutron detector in the channel Map.  |
 
 ## Protected Functions
@@ -46,8 +43,6 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | UShort_t | **[_BoardFast](/Classes/classNeutronChannelMap.md#variable--boardfast)** <br>WaveDREAM board of neutron fast channels.  |
 | UShort_t | **[_BoardSlow](/Classes/classNeutronChannelMap.md#variable--boardslow)** <br>WaveDREAM board of neutron slow channels.  |
 | std::vector< Int_t > | **[_FastCh](/Classes/classNeutronChannelMap.md#variable--fastch)** <br>List of channels used in the fast board.  |
-| Bool_t | **[_IsMapLoaded](/Classes/classNeutronChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
-| std::vector< UShort_t > | **[_ListOfBoards](/Classes/classNeutronChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 | std::vector< Int_t > | **[_SlowCh](/Classes/classNeutronChannelMap.md#variable--slowch)** <br>List of channels used in the slow board.  |
 
 ## Additional inherited members
@@ -58,6 +53,16 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | -------------- | -------------- |
 | | **[BaseMap](/Classes/classBaseMap.md#function-basemap)**()<br>Default constructor.  |
 | virtual | **[~BaseMap](/Classes/classBaseMap.md#function-~basemap)**()<br>Default destructor.  |
+| virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classBaseMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
+| virtual Bool_t | **[IsBoardLoaded](/Classes/classBaseMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
+| Bool_t | **[IsLoaded](/Classes/classBaseMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
+
+**Protected Attributes inherited from [BaseMap](/Classes/classBaseMap.md)**
+
+|                | Name           |
+| -------------- | -------------- |
+| Bool_t | **[_IsMapLoaded](/Classes/classBaseMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
+| std::vector< UShort_t > | **[_ListOfBoards](/Classes/classBaseMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
 
 ## Detailed Description
@@ -175,43 +180,6 @@ Get the global channel Id from board-chanel pair.
 
 **Return**: True if the board-channel pair exists in the neutron map, false otherwise 
 
-### function GetListOfBoards
-
-```cpp
-virtual std::vector< UShort_t > * GetListOfBoards()
-```
-
-Get the list of boards loaded in the Channel Map. 
-
-**Return**: Pointer to the vector of loaded boards 
-
-### function IsBoardLoaded
-
-```cpp
-virtual Bool_t IsBoardLoaded(
-    UShort_t BoardId
-)
-```
-
-Check if the board has been loaded in the Channel Map. 
-
-**Parameters**: 
-
-  * **BoardId** Board serial number 
-
-
-**Return**: True if the board is has been loaded in the corresponding Channel Map 
-
-### function IsLoaded
-
-```cpp
-Bool_t IsLoaded()
-```
-
-Check if the Map has been loaded. 
-
-**Return**: True if the Map is loaded, False otherwise 
-
 ### function LoadMap
 
 ```cpp
@@ -313,22 +281,6 @@ std::vector< Int_t > _FastCh;
 
 List of channels used in the fast board. 
 
-### variable _IsMapLoaded
-
-```cpp
-Bool_t _IsMapLoaded;
-```
-
-Boolean flag that checks if the map has been loaded. 
-
-### variable _ListOfBoards
-
-```cpp
-std::vector< UShort_t > _ListOfBoards;
-```
-
-List of the WaveDREAM boards in the Channel Map. 
-
 ### variable _SlowCh
 
 ```cpp
@@ -339,4 +291,4 @@ List of channels used in the slow board.
 
 -------------------------------
 
-Updated on 2023-05-22 at 10:49:05 +0000
+Updated on 2023-05-29 at 17:57:10 +0000

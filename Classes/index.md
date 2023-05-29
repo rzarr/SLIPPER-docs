@@ -33,9 +33,10 @@ title: Classes
 * **class [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md)** <br>Main class used to handle the whole Reconstruction process. 
 * **class [WaveFormContainer](/Classes/classWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms. 
 * **class [XmlParser](/Classes/classXmlParser.md)** <br>Class that handles all the decoding of XML configuration files for Channel Maps. 
+* **namespace [std](/Namespaces/namespacestd.md)** <br>STL namespace. 
 
 
 
 -------------------------------
 
-Updated on 2023-05-22 at 10:49:05 +0000
+Updated on 2023-05-29 at 17:57:10 +0000

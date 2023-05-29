@@ -25,10 +25,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | Int_t | **[GetGlobalFromBoardChannelPair](/Classes/classTWChannelMap.md#function-getglobalfromboardchannelpair)**(std::pair< UShort_t, Int_t > p)<br>Get the WaveDREAM board-channel pair connected to a TW global channel.  |
 | TGlobalToBarChIDpairMap | **[GetGlobalToBarChIDpairMap](/Classes/classTWChannelMap.md#function-getglobaltobarchidpairmap)**()<br>Get the TW global channel to bar number-channel Id ("A"/"B") map.  |
 | TLayer | **[GetLayer](/Classes/classTWChannelMap.md#function-getlayer)**(Int_t bar)<br>Get the layer of a TW bar.  |
-| virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classTWChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
 | Int_t | **[GetNumberOfTWBars](/Classes/classTWChannelMap.md#function-getnumberoftwbars)**()<br>Get the total number of TW bars loaded in the map.  |
-| virtual Bool_t | **[IsBoardLoaded](/Classes/classTWChannelMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
-| Bool_t | **[IsLoaded](/Classes/classTWChannelMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
 | virtual Bool_t | **[LoadMap](/Classes/classTWChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Load the TW channel map.  |
 
 ## Protected Functions
@@ -46,8 +43,6 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | TBoardChannelToGlobalMap | **[_BoardChannelToGlobalMap](/Classes/classTWChannelMap.md#variable--boardchanneltoglobalmap)** <br>Map that links the WaveDREAM board-channel pair to the TW global channel.  |
 | std::map< Int_t, std::pair< Int_t, Int_t > > | **[_FragBarToChPair](/Classes/classTWChannelMap.md#variable--fragbartochpair)** <br>Map that links fragmentation bars to their two global channels.  |
 | TGlobalToBarChIDpairMap | **[_GlobalToBarChIDpairMap](/Classes/classTWChannelMap.md#variable--globaltobarchidpairmap)** <br>Map that links the TW global channel with the Bar number-channel id ("A"/"B") pair.  |
-| Bool_t | **[_IsMapLoaded](/Classes/classTWChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
-| std::vector< UShort_t > | **[_ListOfBoards](/Classes/classTWChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
 ## Additional inherited members
 
@@ -57,6 +52,16 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | -------------- | -------------- |
 | | **[BaseMap](/Classes/classBaseMap.md#function-basemap)**()<br>Default constructor.  |
 | virtual | **[~BaseMap](/Classes/classBaseMap.md#function-~basemap)**()<br>Default destructor.  |
+| virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classBaseMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
+| virtual Bool_t | **[IsBoardLoaded](/Classes/classBaseMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
+| Bool_t | **[IsLoaded](/Classes/classBaseMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
+
+**Protected Attributes inherited from [BaseMap](/Classes/classBaseMap.md)**
+
+|                | Name           |
+| -------------- | -------------- |
+| Bool_t | **[_IsMapLoaded](/Classes/classBaseMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
+| std::vector< UShort_t > | **[_ListOfBoards](/Classes/classBaseMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
 
 ## Detailed Description
@@ -176,16 +181,6 @@ Get the layer of a TW bar.
 
 **Return**: Layer of the TW bar 
 
-### function GetListOfBoards
-
-```cpp
-virtual std::vector< UShort_t > * GetListOfBoards()
-```
-
-Get the list of boards loaded in the Channel Map. 
-
-**Return**: Pointer to the vector of loaded boards 
-
 ### function GetNumberOfTWBars
 
 ```cpp
@@ -195,33 +190,6 @@ Int_t GetNumberOfTWBars()
 Get the total number of TW bars loaded in the map. 
 
 **Return**: Number of TW bars loaded 
-
-### function IsBoardLoaded
-
-```cpp
-virtual Bool_t IsBoardLoaded(
-    UShort_t BoardId
-)
-```
-
-Check if the board has been loaded in the Channel Map. 
-
-**Parameters**: 
-
-  * **BoardId** Board serial number 
-
-
-**Return**: True if the board is has been loaded in the corresponding Channel Map 
-
-### function IsLoaded
-
-```cpp
-Bool_t IsLoaded()
-```
-
-Check if the Map has been loaded. 
-
-**Return**: True if the Map is loaded, False otherwise 
 
 ### function LoadMap
 
@@ -316,22 +284,6 @@ TGlobalToBarChIDpairMap _GlobalToBarChIDpairMap;
 
 Map that links the TW global channel with the Bar number-channel id ("A"/"B") pair. 
 
-### variable _IsMapLoaded
-
-```cpp
-Bool_t _IsMapLoaded;
-```
-
-Boolean flag that checks if the map has been loaded. 
-
-### variable _ListOfBoards
-
-```cpp
-std::vector< UShort_t > _ListOfBoards;
-```
-
-List of the WaveDREAM boards in the Channel Map. 
-
 -------------------------------
 
-Updated on 2023-05-22 at 10:49:05 +0000
+Updated on 2023-05-29 at 17:57:10 +0000

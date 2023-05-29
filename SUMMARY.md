@@ -28,6 +28,7 @@
     * [CALOChannelMap](Classes/classCALOChannelMap.md)
     * [BaseMap](Classes/classBaseMap.md)
   * [Namespaces](Namespaces/index.md)
+    * [std](Namespaces/namespacestd.md)
     * [Message](Namespaces/namespaceMessage.md)
   * [Pages](Pages/index.md)
     * [md_README](Pages/md_README.md)

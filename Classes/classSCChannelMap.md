@@ -20,12 +20,9 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | virtual | **[~SCChannelMap](/Classes/classSCChannelMap.md#function-~scchannelmap)**()<br>Default destructor.  |
 | void | **[AddSCBoard](/Classes/classSCChannelMap.md#function-addscboard)**(UShort_t BoardId, std::vector< Int_t > * Channels)<br>Add board to the SC channel map w/ the associated channels.  |
 | virtual void | **[Clear](/Classes/classSCChannelMap.md#function-clear)**()<br>Clear SC Map.  |
-| virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classSCChannelMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
 | Int_t | **[GetNumberOfChannels](/Classes/classSCChannelMap.md#function-getnumberofchannels)**()<br>Get the number of SC channels.  |
 | UShort_t | **[GetSCBoard](/Classes/classSCChannelMap.md#function-getscboard)**()<br>Get the WaveDREAM board used for SC readout.  |
 | std::vector< Int_t > | **[GetSCChannels](/Classes/classSCChannelMap.md#function-getscchannels)**()<br>Get the vector of SC channels.  |
-| virtual Bool_t | **[IsBoardLoaded](/Classes/classSCChannelMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
-| Bool_t | **[IsLoaded](/Classes/classSCChannelMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
 | virtual Bool_t | **[LoadMap](/Classes/classSCChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Load channel map for the SC.  |
 
 ## Protected Functions
@@ -39,8 +36,6 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 |                | Name           |
 | -------------- | -------------- |
 | std::vector< Int_t > | **[_Channels](/Classes/classSCChannelMap.md#variable--channels)** <br>Vector of the SC channels.  |
-| Bool_t | **[_IsMapLoaded](/Classes/classSCChannelMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
-| std::vector< UShort_t > | **[_ListOfBoards](/Classes/classSCChannelMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
 ## Additional inherited members
 
@@ -50,6 +45,16 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | -------------- | -------------- |
 | | **[BaseMap](/Classes/classBaseMap.md#function-basemap)**()<br>Default constructor.  |
 | virtual | **[~BaseMap](/Classes/classBaseMap.md#function-~basemap)**()<br>Default destructor.  |
+| virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classBaseMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
+| virtual Bool_t | **[IsBoardLoaded](/Classes/classBaseMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
+| Bool_t | **[IsLoaded](/Classes/classBaseMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
+
+**Protected Attributes inherited from [BaseMap](/Classes/classBaseMap.md)**
+
+|                | Name           |
+| -------------- | -------------- |
+| Bool_t | **[_IsMapLoaded](/Classes/classBaseMap.md#variable--ismaploaded)** <br>Boolean flag that checks if the map has been loaded.  |
+| std::vector< UShort_t > | **[_ListOfBoards](/Classes/classBaseMap.md#variable--listofboards)** <br>List of the WaveDREAM boards in the Channel Map.  |
 
 
 ## Detailed Description
@@ -105,16 +110,6 @@ virtual void Clear()
 
 Clear SC Map. 
 
-### function GetListOfBoards
-
-```cpp
-virtual std::vector< UShort_t > * GetListOfBoards()
-```
-
-Get the list of boards loaded in the Channel Map. 
-
-**Return**: Pointer to the vector of loaded boards 
-
 ### function GetNumberOfChannels
 
 ```cpp
@@ -144,33 +139,6 @@ std::vector< Int_t > GetSCChannels()
 Get the vector of SC channels. 
 
 **Return**: Pointer to _Channels (vector of SC channels) 
-
-### function IsBoardLoaded
-
-```cpp
-virtual Bool_t IsBoardLoaded(
-    UShort_t BoardId
-)
-```
-
-Check if the board has been loaded in the Channel Map. 
-
-**Parameters**: 
-
-  * **BoardId** Board serial number 
-
-
-**Return**: True if the board is has been loaded in the corresponding Channel Map 
-
-### function IsLoaded
-
-```cpp
-Bool_t IsLoaded()
-```
-
-Check if the Map has been loaded. 
-
-**Return**: True if the Map is loaded, False otherwise 
 
 ### function LoadMap
 
@@ -214,22 +182,6 @@ std::vector< Int_t > _Channels;
 
 Vector of the SC channels. 
 
-### variable _IsMapLoaded
-
-```cpp
-Bool_t _IsMapLoaded;
-```
-
-Boolean flag that checks if the map has been loaded. 
-
-### variable _ListOfBoards
-
-```cpp
-std::vector< UShort_t > _ListOfBoards;
-```
-
-List of the WaveDREAM boards in the Channel Map. 
-
 -------------------------------
 
-Updated on 2023-05-22 at 10:49:05 +0000
+Updated on 2023-05-29 at 17:57:10 +0000
