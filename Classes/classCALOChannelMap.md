@@ -26,8 +26,9 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 | Int_t | **[GetCrystalIdFromIndex](/Classes/classCALOChannelMap.md#function-getcrystalidfromindex)**(Int_t CrysIndex)<br>Get the Id of a crystal from its index in the output arrays.  |
 | Int_t | **[GetCrystalIndexFromId](/Classes/classCALOChannelMap.md#function-getcrystalindexfromid)**(Int_t CrysId)<br>Get the index of a CALO crystal from its Id.  |
 | const TVector2 | **[GetCrystalPosition](/Classes/classCALOChannelMap.md#function-getcrystalposition)**(Int_t CrysId)<br>Get the X-Y position of a CALO crystal.  |
+| std::vector< Int_t > | **[GetListOfCALOModules](/Classes/classCALOChannelMap.md#function-getlistofcalomodules)**()<br>Get the list of loaded Calorimeter Modules.  |
 | std::vector< Int_t > | **[GetListOfCrysIndex](/Classes/classCALOChannelMap.md#function-getlistofcrysindex)**(Int_t ModuleId)<br>Get the vector of crystal indices associated to a CALO module.  |
-| Int_t | **[GetModuleFromCrys](/Classes/classCALOChannelMap.md#function-getmodulefromcrys)**(Int_t CrysId) |
+| Int_t | **[GetModuleFromCrys](/Classes/classCALOChannelMap.md#function-getmodulefromcrys)**(Int_t CrysId)<br>Get the Id of a CALO module from its crystal.  |
 | Int_t | **[GetNumberOfCALOModules](/Classes/classCALOChannelMap.md#function-getnumberofcalomodules)**()<br>Get the number of Calorimeter Modules.  |
 | virtual Bool_t | **[LoadMap](/Classes/classCALOChannelMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x) |
 
@@ -36,7 +37,7 @@ Inherits from [BaseMap](/Classes/classBaseMap.md)
 |                | Name           |
 | -------------- | -------------- |
 | void | **[AddModule](/Classes/classCALOChannelMap.md#function-addmodule)**(Int_t ModuleId, std::vector< UShort_t > Boards, std::vector< Int_t > Channels, std::vector< Int_t > Crystals)<br>Add a CALO module to the channel map.  |
-| void | **[AddPositions](/Classes/classCALOChannelMap.md#function-addpositions)**([XmlParser](/Classes/classXmlParser.md) * x, XMLNodePointer_t x_child) |
+| void | **[AddModuleNonSequential](/Classes/classCALOChannelMap.md#function-addmodulenonsequential)**(Int_t ModuleId, std::vector< UShort_t > Boards, std::vector< Int_t > Channels, std::vector< Int_t > Crystals)<br>Add a CALO module to the channel map when channels are not connected in sequential order.  |
 | virtual Bool_t | **[CheckMapConsistency](/Classes/classCALOChannelMap.md#function-checkmapconsistency)**()<br>Check the consistency of the CALO channel map.  |
 
 ## Protected Attributes
@@ -230,6 +231,16 @@ Get the X-Y position of a CALO crystal.
 
 **Return**: Vector of the X-Y position of the crystal 
 
+### function GetListOfCALOModules
+
+```cpp
+std::vector< Int_t > GetListOfCALOModules()
+```
+
+Get the list of loaded Calorimeter Modules. 
+
+**Return**: List of the modules as std::vector 
+
 ### function GetListOfCrysIndex
 
 ```cpp
@@ -255,6 +266,7 @@ Int_t GetModuleFromCrys(
 )
 ```
 
+Get the Id of a CALO module from its crystal. 
 
 **Parameters**: 
 
@@ -262,9 +274,6 @@ Int_t GetModuleFromCrys(
 
 
 **Return**: Id of the corresponding module 
-
-Get the Id of a CALO module from its crystal 
-
 
 ### function GetNumberOfCALOModules
 
@@ -313,19 +322,36 @@ Add a CALO module to the channel map.
 **Parameters**: 
 
   * **ModuleId** Id of the module read from the XML file 
+  * **Boards** Vector of the boards' serial numbers read from the XML file (max size = 2) 
+  * **Channels** Vector of channels Ids read from the XML file 
+  * **Crystals** Vector of crystal Ids read from the XML file 
+
+
+To add a module through this function, the map needs to have at most 2 boards. 
+
+
+### function AddModuleNonSequential
+
+```cpp
+void AddModuleNonSequential(
+    Int_t ModuleId,
+    std::vector< UShort_t > Boards,
+    std::vector< Int_t > Channels,
+    std::vector< Int_t > Crystals
+)
+```
+
+Add a CALO module to the channel map when channels are not connected in sequential order. 
+
+**Parameters**: 
+
+  * **ModuleId** Id of the module read from the XML file 
   * **Boards** Vector of the boards' serial numbers read from the XML file 
   * **Channels** Vector of channels Ids read from the XML file 
   * **Crystals** Vector of crystal Ids read from the XML file 
 
 
-### function AddPositions
-
-```cpp
-void AddPositions(
-    XmlParser * x,
-    XMLNodePointer_t x_child
-)
-```
+To add a module through this function, the map needs to have exactly the same number of boards/channels/crystals 
 
 
 ### function CheckMapConsistency
@@ -385,4 +411,4 @@ Map that links a CALO module to the vector of crystal indices.
 
 -------------------------------
 
-Updated on 2023-05-29 at 17:57:10 +0000
+Updated on 2023-11-05 at 19:17:59 +0000

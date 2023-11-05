@@ -32,15 +32,17 @@ Inherits from [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md)
 | void | **[AddTWPlots](/Classes/classWaveDaqDisplay.md#function-addtwplots)**(UShort_t board)<br>Add the waveform plots of the TW.  |
 | void | **[ClearPlots](/Classes/classWaveDaqDisplay.md#function-clearplots)**()<br>Clear all the plots for the next event.  |
 | void | **[DisplayWaveForms](/Classes/classWaveDaqDisplay.md#function-displaywaveforms)**()<br>Display all the waveforms in their dedicated canvas.  |
+| Bool_t | **[GoToPreviousEvent](/Classes/classWaveDaqDisplay.md#function-gotopreviousevent)**()<br>Go to the previous event of the file.  |
 | void | **[PlotAll](/Classes/classWaveDaqDisplay.md#function-plotall)**()<br>Plot all the waveforms in their canvas.  |
 | void | **[SavePlots](/Classes/classWaveDaqDisplay.md#function-saveplots)**()<br>Save the plots to a file for the current event.  |
-| void | **[WaitForNextEventSignal](/Classes/classWaveDaqDisplay.md#function-waitfornexteventsignal)**()<br>Create the input dialog window and wait for a command.  |
+| void | **[WaitForNextEventSignal](/Classes/classWaveDaqDisplay.md#function-waitfornexteventsignal)**()<br>Wait until a command is given to the input.  |
 
 ## Protected Attributes
 
 |                | Name           |
 | -------------- | -------------- |
 | std::map< TString, TCanvas * > | **[_CanvasMap](/Classes/classWaveDaqDisplay.md#variable--canvasmap)** <br>Map containing all the canvas for the WaveDAQ detectors.  |
+| std::vector< UInt_t > | **[_EventSize](/Classes/classWaveDaqDisplay.md#variable--eventsize)** <br>Vector of read event sizes in bytes.  |
 | Bool_t | **[_IncludeCLKs](/Classes/classWaveDaqDisplay.md#variable--includeclks)** <br>Flag to check wether to display CLK signals or not.  |
 | std::map< TString, std::vector< TGraph * > > | **[_WFmap](/Classes/classWaveDaqDisplay.md#variable--wfmap)** <br>Map containing all the TGraphs for the WaveDAQ detectors.  |
 
@@ -99,7 +101,6 @@ Inherits from [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md)
 | Float_t | **[_BCharge](/Classes/classWaveDaqReconstruction.md#variable--bcharge)** <br>TW bar charge (raw energy loss) [V*ns].  |
 | Float_t | **[_BCratio](/Classes/classWaveDaqReconstruction.md#variable--bcratio)** <br>TW bar logarithmic ratio of charge "A" over charge "B" [ns].  |
 | Float_t | **[_BDeltaT](/Classes/classWaveDaqReconstruction.md#variable--bdeltat)** <br>TW bar raw time difference between channels "A" and "B" [ns].  |
-| Float_t | **[_BeamRate](/Classes/classWaveDaqReconstruction.md#variable--beamrate)** <br>Beam Rate calculated as rate of minimum bia triggers [Hz].  |
 | [ReadBinary](/Classes/classReadBinary.md) * | **[_BinaryReader](/Classes/classWaveDaqReconstruction.md#variable--binaryreader)** <br>Pointer to binary reader object.  |
 | std::map< UShort_t,Int_t > | **[_BoardIdToIdMap](/Classes/classWaveDaqReconstruction.md#variable--boardidtoidmap)** <br>Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector.  |
 | Float_t | **[_BTimestamps](/Classes/classWaveDaqReconstruction.md#variable--btimestamps)** <br>TW bar raw time [ns].  |
@@ -140,7 +141,7 @@ Inherits from [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md)
 | Float_t | **[_Gain](/Classes/classWaveDaqReconstruction.md#variable--gain)** <br>Frontend Gain of the WaveDAQ system.  |
 | TGlobalToBarChIDpairMap | **[_GlobalToBarChIDpairMap](/Classes/classWaveDaqReconstruction.md#variable--globaltobarchidpairmap)** <br>Map linking the TW global channel to the bar and side ("A"/"B")  |
 | TH1I * | **[_hCALOMultiplicity](/Classes/classWaveDaqReconstruction.md#variable--hcalomultiplicity)** <br>Multiplicity of CALO crystals **HISTOGRAM** |
-| std::map< Int_t, TH1F * > | **[_hFragCharge](/Classes/classWaveDaqReconstruction.md#variable--hfragcharge)** <br>Charge histogram of fragmentation trigger bars with SW chosen threshold! **HISTOGRAM** |
+| std::map< Int_t, TH1F * > | **[_hFragSWCharge](/Classes/classWaveDaqReconstruction.md#variable--hfragswcharge)** <br>Charge histogram of fragmentation trigger bars with SW chosen threshold! **HISTOGRAM** |
 | TH2F * | **[_hitmap_all](/Classes/classWaveDaqReconstruction.md#variable--hitmap-all)** <br>2D Hitmap of TW for all events **HISTOGRAM** |
 | TH1F * | **[_hitmap_Bars](/Classes/classWaveDaqReconstruction.md#variable--hitmap-bars)** <br>1D Hitmap of TW bars **HISTOGRAM** |
 | TH2F * | **[_hitmap_CALO](/Classes/classWaveDaqReconstruction.md#variable--hitmap-calo)** <br>2D Hitmap of TW for Minimum Bias events **HISTOGRAM** |
@@ -207,6 +208,7 @@ Inherits from [WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md)
 | Int_t | **[_TrigFN](/Classes/classWaveDaqReconstruction.md#variable--trigfn)** <br>Number of False Negative events in firmware-software quality checks.  |
 | Int_t | **[_TrigFP](/Classes/classWaveDaqReconstruction.md#variable--trigfp)** <br>Number of False Positive events in firmware-software quality checks.  |
 | bool | **[_TriggerEnable](/Classes/classWaveDaqReconstruction.md#variable--triggerenable)** <br>Flag for enabling studies on fragmentation trigger.  |
+| Float_t | **[_TriggerRates](/Classes/classWaveDaqReconstruction.md#variable--triggerrates)** <br>Trigger rates [Hz].  |
 | Float_t | **[_TriggerTh](/Classes/classWaveDaqReconstruction.md#variable--triggerth)** <br>Calibrated trigger thresholds [V].  |
 | Int_t | **[_TriggerType](/Classes/classWaveDaqReconstruction.md#variable--triggertype)** <br>Trigger type of the event.  |
 | Int_t | **[_TrigTN](/Classes/classWaveDaqReconstruction.md#variable--trigtn)** <br>Number of True Negative events in firmware-software quality checks.  |
@@ -358,6 +360,16 @@ void DisplayWaveForms()
 
 Display all the waveforms in their dedicated canvas. 
 
+### function GoToPreviousEvent
+
+```cpp
+Bool_t GoToPreviousEvent()
+```
+
+Go to the previous event of the file. 
+
+**Return**: True if previous event is found, False if it is the first event of the file 
+
 ### function PlotAll
 
 ```cpp
@@ -380,7 +392,7 @@ Save the plots to a file for the current event.
 void WaitForNextEventSignal()
 ```
 
-Create the input dialog window and wait for a command. 
+Wait until a command is given to the input. 
 
 ## Protected Attributes Documentation
 
@@ -391,6 +403,14 @@ std::map< TString, TCanvas * > _CanvasMap;
 ```
 
 Map containing all the canvas for the WaveDAQ detectors. 
+
+### variable _EventSize
+
+```cpp
+std::vector< UInt_t > _EventSize;
+```
+
+Vector of read event sizes in bytes. 
 
 ### variable _IncludeCLKs
 
@@ -410,4 +430,4 @@ Map containing all the TGraphs for the WaveDAQ detectors.
 
 -------------------------------
 
-Updated on 2023-05-29 at 17:57:10 +0000
+Updated on 2023-11-05 at 19:17:59 +0000

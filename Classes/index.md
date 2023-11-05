@@ -21,6 +21,7 @@ title: Classes
 * **class [ReadBinary](/Classes/classReadBinary.md)** <br>Class that handles all the decoding of WaveDAQ events from binary files. 
 * **class [SCChannelMap](/Classes/classSCChannelMap.md)** <br>Class that handles the Start Counter Channel Map. 
 * **class [SCWaveFormContainer](/Classes/classSCWaveFormContainer.md)** <br>Class that handles all the processing of raw WaveDAQ waveforms for the Start Counter detector. 
+* **class [SlipperGUI](/Classes/classSlipperGUI.md)** <br>Class containing all the methods needed to build the SLIPPER Graphical User Interface. 
 * **class [TCBDATA](/Classes/classTCBDATA.md)** <br>Class for Trigger Concentrator Board data container. 
 * **class [TDAQTag](/Classes/classTDAQTag.md)** <br>Class for TDAQ files tagging. 
 * **class [TOFWallCalibration](/Classes/classTOFWallCalibration.md)** <br>Main class used to handle the whole dE-TOF Calibration process. 
@@ -39,4 +40,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2023-05-29 at 17:57:10 +0000
+Updated on 2023-11-05 at 19:17:59 +0000

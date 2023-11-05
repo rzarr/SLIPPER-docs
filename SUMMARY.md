@@ -15,6 +15,7 @@
     * [TOFWallCalibration](Classes/classTOFWallCalibration.md)
     * [TDAQTag](Classes/classTDAQTag.md)
     * [TCBDATA](Classes/classTCBDATA.md)
+    * [SlipperGUI](Classes/classSlipperGUI.md)
     * [SCWaveFormContainer](Classes/classSCWaveFormContainer.md)
     * [SCChannelMap](Classes/classSCChannelMap.md)
     * [ReadBinary](Classes/classReadBinary.md)

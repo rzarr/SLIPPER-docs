@@ -14,7 +14,7 @@ Class containing all the methods used in the LivePlotter executable.
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[LivePlots](/Classes/classLivePlots.md#function-liveplots)**()<br>Default constructor.  |
+| | **[LivePlots](/Classes/classLivePlots.md#function-liveplots)**([SlipperGUI](/Classes/classSlipperGUI.md) * GUI)<br>Default constructor.  |
 | virtual | **[~LivePlots](/Classes/classLivePlots.md#function-~liveplots)**()<br>Default destructor.  |
 | virtual void | **[LoadChannelMap](/Classes/classLivePlots.md#function-loadchannelmap)**(std::string channelmap)<br>Load the WaveDAQ channel map of the campaign.  |
 | virtual void | **[Run](/Classes/classLivePlots.md#function-run)**()<br>Run the online plotting.  |
@@ -27,8 +27,6 @@ Class containing all the methods used in the LivePlotter executable.
 | virtual void | **[AttachInputVariables](/Classes/classLivePlots.md#function-attachinputvariables)**(TTree * t)<br>Attach all the needed input variables, depending on the loaded detectors.  |
 | virtual void | **[BookPlots](/Classes/classLivePlots.md#function-bookplots)**()<br>Book the plots to be updated online.  |
 | virtual Float_t | **[GetGamma](/Classes/classLivePlots.md#function-getgamma)**(Float_t tof)<br>Return the Lorentz gamma factor for a specific TOF value.  |
-| virtual void | **[ResetHistos](/Classes/classLivePlots.md#function-resethistos)**()<br>Reset all histogram contents.  |
-| virtual void | **[UpdateCanvas](/Classes/classLivePlots.md#function-updatecanvas)**()<br>Update all the Canvas objects in the class.  |
 | virtual Bool_t | **[UpdateFileList](/Classes/classLivePlots.md#function-updatefilelist)**()<br>Update the list of files in the directory.  |
 | virtual void | **[UpdatePlots](/Classes/classLivePlots.md#function-updateplots)**()<br>Update the booked plots.  |
 
@@ -38,84 +36,74 @@ Class containing all the methods used in the LivePlotter executable.
 | -------------- | -------------- |
 | Float_t | **[_CALOAmp](/Classes/classLivePlots.md#variable--caloamp)** <br>Variable for CALO amplitude reading.  |
 | Float_t | **[_CALOEnergy](/Classes/classLivePlots.md#variable--caloenergy)** <br>Variable for CALO energy reading.  |
-| std::map< Int_t, TCanvas * > | **[_cCALOAmp](/Classes/classLivePlots.md#variable--ccaloamp)** <br>Canvas for CALO Amplitude.  |
-| TCanvas * | **[_cCALOenCorr](/Classes/classLivePlots.md#variable--ccaloencorr)** <br>Canvas for CALO enegry correlation plots.  |
-| TCanvas * | **[_cCALOenTOF](/Classes/classLivePlots.md#variable--ccaloentof)** <br>Canvas for CALO energy vs TOF plots.  |
-| TCanvas * | **[_cCALOhitmap](/Classes/classLivePlots.md#variable--ccalohitmap)** <br>Canvas for CALO hitmap.  |
-| TCanvas * | **[_cDeltaEvsE](/Classes/classLivePlots.md#variable--cdeltaevse)** <br>Canvas for dE vs E plot.  |
-| TCanvas * | **[_cDeltaEvsE_angle](/Classes/classLivePlots.md#variable--cdeltaevse-angle)** <br>Canvas for dE vs E plot.  |
-| TCanvas * | **[_cDeltaEvsMass](/Classes/classLivePlots.md#variable--cdeltaevsmass)**  |
-| TCanvas * | **[_cDeltaT_FR](/Classes/classLivePlots.md#variable--cdeltat-fr)** <br>Canvas for DeltaT Front-Rear at TW center.  |
-| TCanvas * | **[_cdEvsTOFcenter](/Classes/classLivePlots.md#variable--cdevstofcenter)** <br>Canvas for front/rear layer raw dEvsTOF.  |
-| std::map< Int_t, TCanvas * > | **[_cFragCharge](/Classes/classLivePlots.md#variable--cfragcharge)** <br>Canvas of Fragmentation Trigger charge spectra.  |
-| std::map< Int_t, TCanvas * > | **[_cMBCharge](/Classes/classLivePlots.md#variable--cmbcharge)** <br>Canvas of MB charge spectra.  |
-| TCanvas * | **[_cMultiplicity](/Classes/classLivePlots.md#variable--cmultiplicity)** <br>Canvas for TW-CALO multiplivity plot.  |
-| TCanvas * | **[_cMultiplicityCh](/Classes/classLivePlots.md#variable--cmultiplicitych)** <br>Canvas for TW-CALO multiplivity plot.  |
-| TCanvas * | **[_cPileUp](/Classes/classLivePlots.md#variable--cpileup)** <br>Canvas for Pile-Up monitoring.  |
-| TCanvas * | **[_cPileUpRC](/Classes/classLivePlots.md#variable--cpileuprc)** <br>Canvas for RC Pile-Up monitoring.  |
-| TCanvas * | **[_cRC_SC_TOF](/Classes/classLivePlots.md#variable--crc-sc-tof)** <br>Canvas for RC-SC TOF plots.  |
-| TCanvas * | **[_cRC_TW_TOF](/Classes/classLivePlots.md#variable--crc-tw-tof)** <br>Canvas for RC-TW TOF plots.  |
-| TCanvas * | **[_cRCcharge](/Classes/classLivePlots.md#variable--crccharge)** <br>Canvas for RC charge plots.  |
-| TCanvas * | **[_cTWchCounts](/Classes/classLivePlots.md#variable--ctwchcounts)** <br>Canvas for TW channel counts monitoring.  |
-| TCanvas * | **[_cTWchSat](/Classes/classLivePlots.md#variable--ctwchsat)** <br>Canvas for TW channel saturation monitoring.  |
-| TCanvas * | **[_cTWhitmapFrag](/Classes/classLivePlots.md#variable--ctwhitmapfrag)** <br>Canvas for TW hitmap w/ fragmentation trigger.  |
-| TCanvas * | **[_cTWhitmapFragSW](/Classes/classLivePlots.md#variable--ctwhitmapfragsw)** <br>Canvas for TW hitmap w/ fragmentation trigger.  |
-| TCanvas * | **[_cTWhitmapMB](/Classes/classLivePlots.md#variable--ctwhitmapmb)** <br>Canvas for TW hitmap w/ MB trigger.  |
 | UInt_t | **[_FileCount](/Classes/classLivePlots.md#variable--filecount)** <br>Counter for number of files found.  |
 | TGraph * | **[_gPileUp](/Classes/classLivePlots.md#variable--gpileup)** <br>Graph for Pile-Up monitoring.  |
 | TGraph * | **[_gPileUpRC](/Classes/classLivePlots.md#variable--gpileuprc)** <br>Graph for RC Pile-Up monitoring.  |
+| std::map< Int_t, TGraph * > | **[_gTrigRate](/Classes/classLivePlots.md#variable--gtrigrate)** <br>Map of Graphs for single trigger rate plots.  |
+| TMultiGraph * | **[_gTrigRatesAll](/Classes/classLivePlots.md#variable--gtrigratesall)** <br>MultiGraph for cumulative trigger rate monitoring.  |
+| std::map< Int_t, THStack * > | **[_hAllvsFragSW](/Classes/classLivePlots.md#variable--hallvsfragsw)** <br>Stack for comparison in TW charge spectra w/ or w/out or SW-simulated fargmentation trigger.  |
 | std::map< Int_t, TH1F * > | **[_hCALOAmp](/Classes/classLivePlots.md#variable--hcaloamp)** <br>Histograms for CALO amplitude.  |
+| std::map< Int_t, THStack * > | **[_hCALOAmpStack](/Classes/classLivePlots.md#variable--hcaloampstack)** <br>Histograms stacks for CALO amplitude.  |
 | TH2F * | **[_hCALOenCorr](/Classes/classLivePlots.md#variable--hcaloencorr)** <br>Histogram for CALO energy correlation plots in events with multiplicity = 2.  |
+| std::map< Int_t, TH1F * > | **[_hCALOEnergy](/Classes/classLivePlots.md#variable--hcaloenergy)** <br>Histograms for CALO energy release.  |
+| std::map< Int_t, THStack * > | **[_hCALOEnStack](/Classes/classLivePlots.md#variable--hcaloenstack)** <br>Histograms stacks for CALO energy release.  |
 | TH2F * | **[_hCALOenTOF](/Classes/classLivePlots.md#variable--hcaloentof)** <br>Histogram for CALO energy vs TOF plots.  |
 | TH2D * | **[_hCALOhitmap](/Classes/classLivePlots.md#variable--hcalohitmap)** <br>2D histogram for CALO hitmap  |
-| TH2D * | **[_hDeltaEvsE](/Classes/classLivePlots.md#variable--hdeltaevse)** <br>Histogram for dE vs E plot.  |
-| TH2D * | **[_hDeltaEvsE_angle](/Classes/classLivePlots.md#variable--hdeltaevse-angle)** <br>Histogram for dE vs E plot.  |
-| TH2D * | **[_hDeltaEvsMass](/Classes/classLivePlots.md#variable--hdeltaevsmass)**  |
 | TH1F * | **[_hDeltaT_FR](/Classes/classLivePlots.md#variable--hdeltat-fr)** <br>Histogram for DeltaT Front-Rear at TW center.  |
+| TH2F * | **[_hdEvsTOFbar](/Classes/classLivePlots.md#variable--hdevstofbar)** <br>histogram for front/rear layer raw dEvsTOF  |
 | TH2F * | **[_hdEvsTOFcenter](/Classes/classLivePlots.md#variable--hdevstofcenter)** <br>histogram for front/rear layer raw dEvsTOF  |
 | std::map< Int_t, TH1F * > | **[_hFragCharge](/Classes/classLivePlots.md#variable--hfragcharge)** <br>Histograms of Fragmentation Trigger charge spectra.  |
-| std::map< Int_t, TH1F * > | **[_hMBCharge](/Classes/classLivePlots.md#variable--hmbcharge)** <br>Histograms of MBB charge spectra.  |
+| THStack * | **[_hFragChargeStack](/Classes/classLivePlots.md#variable--hfragchargestack)** <br>Stacks for TW charge spectra of central bars w/ Frag trigger.  |
+| std::map< Int_t, TH1F * > | **[_hFragSWCharge](/Classes/classLivePlots.md#variable--hfragswcharge)** <br>Histograms of SW-simulated Fragmentation Trigger charge spectra.  |
+| THStack * | **[_hFragSWChargeStack](/Classes/classLivePlots.md#variable--hfragswchargestack)** <br>Stacks for TW charge spectra of central bars w/ Frag trigger simulated with SW.  |
+| std::map< Int_t, TH1F * > | **[_hMBCharge](/Classes/classLivePlots.md#variable--hmbcharge)** <br>Histograms of MB charge spectra.  |
+| THStack * | **[_hMBChargeStack](/Classes/classLivePlots.md#variable--hmbchargestack)** <br>Stacks for TW charge spectra of central bars w/ MB trigger.  |
 | std::map< Int_t, TH1F * > | **[_hRC_SC_TOF](/Classes/classLivePlots.md#variable--hrc-sc-tof)** <br>Histograms for RC-SC TOF plots.  |
+| THStack * | **[_hRC_SC_TOF_Stack](/Classes/classLivePlots.md#variable--hrc-sc-tof-stack)** <br>Stack for RC-SC TOF plots.  |
 | std::map< Int_t, TH1F * > | **[_hRC_TW_TOF](/Classes/classLivePlots.md#variable--hrc-tw-tof)** <br>Histograms for RC-TW TOF plots.  |
+| THStack * | **[_hRC_TW_TOF_Stack](/Classes/classLivePlots.md#variable--hrc-tw-tof-stack)** <br>Stack for RC-TW TOF plots.  |
 | std::map< Int_t, TH1F * > | **[_hRCcharge](/Classes/classLivePlots.md#variable--hrccharge)** <br>Histograms for RC charge plots.  |
+| THStack * | **[_hRCchargeStack](/Classes/classLivePlots.md#variable--hrcchargestack)** <br>Stack for RC charge plots.  |
+| std::map< Int_t, TH1F * > | **[_hSCchAmp](/Classes/classLivePlots.md#variable--hscchamp)** <br>Histograms for channel amplitudes in SC.  |
+| THStack * | **[_hSCchAmpStack](/Classes/classLivePlots.md#variable--hscchampstack)** <br>Histogram stack for SC channel amplitudes.  |
+| TH1F * | **[_hSCcharge](/Classes/classLivePlots.md#variable--hsccharge)** <br>Histogram for charge spectra in SC.  |
+| TH1F * | **[_hSCchargeNoPU](/Classes/classLivePlots.md#variable--hscchargenopu)** <br>Histogram for charge spectra in SC w/out Pile-Up.  |
+| THStack * | **[_hSCchargeStack](/Classes/classLivePlots.md#variable--hscchargestack)** <br>Histogram stack for charge spectra in SC w/ and w/out Pile-Up.  |
+| TH1F * | **[_hTrigAmp](/Classes/classLivePlots.md#variable--htrigamp)** <br>Histogram to check triggre amplitudes.  |
+| std::map< Int_t, TH1F * > | **[_hTWCharge](/Classes/classLivePlots.md#variable--htwcharge)** <br>Histograms of TW charge spectra of central bars.  |
+| THStack * | **[_hTWChargeStack](/Classes/classLivePlots.md#variable--htwchargestack)** <br>Stacks for TW charge spectra of central bars.  |
 | TH1I * | **[_hTWchCounts](/Classes/classLivePlots.md#variable--htwchcounts)** <br>Histograms for TW channel counts monitoring.  |
+| THStack * | **[_hTWchCountsStack](/Classes/classLivePlots.md#variable--htwchcountsstack)** <br>Histogram stack for TW channel counts.  |
 | TH1I * | **[_hTWchSat](/Classes/classLivePlots.md#variable--htwchsat)** <br>Histograms for TW channel saturation monitoring.  |
+| THStack * | **[_hTWchSatStack](/Classes/classLivePlots.md#variable--htwchsatstack)** <br>Histogram stack for TW channel saturation counts.  |
+| TH2F * | **[_hTWhitmapAll](/Classes/classLivePlots.md#variable--htwhitmapall)** <br>Histogram for TW hitmap w/ MB trigger.  |
 | TH2F * | **[_hTWhitmapFrag](/Classes/classLivePlots.md#variable--htwhitmapfrag)** <br>Histogram for TW hitmap w/ fragmentation trigger.  |
 | TH2F * | **[_hTWhitmapFragSW](/Classes/classLivePlots.md#variable--htwhitmapfragsw)** <br>Histogram for TW hitmap w/ fragmentation trigger.  |
-| TH2F * | **[_hTWhitmapMB](/Classes/classLivePlots.md#variable--htwhitmapmb)** <br>Histogram for TW hitmap w/ MB trigger.  |
+| TH2F * | **[_hTWhitmapMB](/Classes/classLivePlots.md#variable--htwhitmapmb)** <br>Histogram for TW hitmap w/ MB trigger and NOT Fragmentation.  |
 | TH2I * | **[_hTWmultiChVsCALOmulti](/Classes/classLivePlots.md#variable--htwmultichvscalomulti)** <br>2D histogram for TW-CALO multiplivity  |
 | TH2I * | **[_hTWmultiVsCALOmulti](/Classes/classLivePlots.md#variable--htwmultivscalomulti)** <br>2D histogram for TW-CALO multiplivity  |
-| Bool_t | **[_IsFragTriggerSWOn](/Classes/classLivePlots.md#variable--isfragtriggerswon)**  |
-| std::map< Int_t, TLegend * > | **[_lCALOAmp](/Classes/classLivePlots.md#variable--lcaloamp)** <br>Legend for CALO amplitude plots.  |
-| std::map< Int_t, TLegend * > | **[_lFragCharge](/Classes/classLivePlots.md#variable--lfragcharge)** <br>Legend of Fragmentation Trigger charge spectra.  |
-| std::vector< TCanvas * > | **[_ListOfCanvas](/Classes/classLivePlots.md#variable--listofcanvas)** <br>List of Canvas to update.  |
 | std::vector< TString > | **[_ListOfFiles](/Classes/classLivePlots.md#variable--listoffiles)** <br>List of the .root files in the wanted directory.  |
-| std::vector< TH1 * > | **[_ListOfHistos](/Classes/classLivePlots.md#variable--listofhistos)** <br>List of Histos.  |
-| std::map< Int_t, TLegend * > | **[_lMBCharge](/Classes/classLivePlots.md#variable--lmbcharge)** <br>Legend of MB charge spectra.  |
-| TLegend * | **[_lRC_SC_TOF](/Classes/classLivePlots.md#variable--lrc-sc-tof)** <br>Legend for RC-SC TOF plots.  |
-| TLegend * | **[_lRC_TW_TOF](/Classes/classLivePlots.md#variable--lrc-tw-tof)** <br>Legend for RC-TW TOF plots.  |
-| TLegend * | **[_lRCcharge](/Classes/classLivePlots.md#variable--lrccharge)** <br>Legend for RC charge plots.  |
-| TLegend * | **[_lTWchCounts](/Classes/classLivePlots.md#variable--ltwchcounts)** <br>Legend for TW channel counts monitoring.  |
-| TLegend * | **[_lTWchSat](/Classes/classLivePlots.md#variable--ltwchsat)** <br>Legend for TW channel saturation monitoring.  |
-| std::map< Int_t, Double_t > | **[_maxFragCharge](/Classes/classLivePlots.md#variable--maxfragcharge)** <br>Maximum of charge plots for axis rescaling.  |
-| std::map< Int_t, Double_t > | **[_maxMBCharge](/Classes/classLivePlots.md#variable--maxmbcharge)** <br>Maximum of charge plots for axis rescaling.  |
+| [SlipperGUI](/Classes/classSlipperGUI.md) * | **[_MyGUI](/Classes/classLivePlots.md#variable--mygui)** <br>Pointer to Graphical User Interface object.  |
 | TSystemDirectory * | **[_OutDir](/Classes/classLivePlots.md#variable--outdir)** <br>Output directory of the reconstruction executable.  |
 | Bool_t | **[_pUpFlag](/Classes/classLivePlots.md#variable--pupflag)** <br>Variable for pile-up flagging in SC.  |
 | Bool_t | **[_pUpFlagRC](/Classes/classLivePlots.md#variable--pupflagrc)** <br>Variable for pile-up flagging in RC.  |
 | Float_t | **[_RCCharge](/Classes/classLivePlots.md#variable--rccharge)** <br>Variable for RC raw channel charge.  |
 | Float_t | **[_RCTime](/Classes/classLivePlots.md#variable--rctime)** <br>Variable for RC raw time readout.  |
 | Float_t | **[_RCTotCharge](/Classes/classLivePlots.md#variable--rctotcharge)** <br>Variable for RC raw total charge.  |
+| Float_t | **[_SCchAmp](/Classes/classLivePlots.md#variable--scchamp)** <br>Variable for SC channel amplitude.  |
 | Float_t | **[_SCTime](/Classes/classLivePlots.md#variable--sctime)** <br>Variable for SC raw time readout.  |
 | Float_t | **[_SCTotCharge](/Classes/classLivePlots.md#variable--sctotcharge)** <br>Variable for SC raw total charge.  |
+| std::map< TString, Int_t > | **[_TriggersToPlot](/Classes/classLivePlots.md#variable--triggerstoplot)** <br>Map of trigger rates to monitor with WaveDAQ Id.  |
 | Float_t | **[_TWampA](/Classes/classLivePlots.md#variable--twampa)** <br>Variable for TW channel A amplitude.  |
 | Float_t | **[_TWampB](/Classes/classLivePlots.md#variable--twampb)** <br>Variable for TW channel B amplitude.  |
 | Float_t | **[_TWCharge](/Classes/classLivePlots.md#variable--twcharge)** <br>Variable for TW raw dE readout.  |
 | Float_t | **[_TWTime](/Classes/classLivePlots.md#variable--twtime)** <br>Variable for TW raw bar time readout.  |
 | Float_t | **[_TWtof](/Classes/classLivePlots.md#variable--twtof)** <br>Variable for TW raw TOF readout.  |
 | [WDChannelMap](/Classes/classWDChannelMap.md) | **[_WDChannelMap](/Classes/classLivePlots.md#variable--wdchannelmap)** <br>Channel Map.  |
-| std::vector< Int_t > | **[_xPileUp](/Classes/classLivePlots.md#variable--xpileup)** <br>x-values of Pile-Up plot  |
+| UInt_t | **[_WDtime](/Classes/classLivePlots.md#variable--wdtime)** <br>variable for WaveDAQ acquisition time  |
+| Int_t | **[_WDtriggerType](/Classes/classLivePlots.md#variable--wdtriggertype)** <br>variable for WaveDAQ trigger type  |
+| Float_t | **[_WDtrigRates](/Classes/classLivePlots.md#variable--wdtrigrates)** <br>Variable for trigger rates.  |
 | std::vector< Int_t > | **[_xPileUpRC](/Classes/classLivePlots.md#variable--xpileuprc)** <br>x-values of RC Pile-Up plot  |
-| std::vector< Float_t > | **[_yPileUp](/Classes/classLivePlots.md#variable--ypileup)** <br>y-values of Pile-Up plot  |
 | std::vector< Float_t > | **[_yPileUpRC](/Classes/classLivePlots.md#variable--ypileuprc)** <br>y-values of RC Pile-Up plot  |
 
 ## Public Functions Documentation
@@ -123,7 +111,9 @@ Class containing all the methods used in the LivePlotter executable.
 ### function LivePlots
 
 ```cpp
-LivePlots()
+LivePlots(
+    SlipperGUI * GUI
+)
 ```
 
 Default constructor. 
@@ -225,25 +215,6 @@ Return the Lorentz gamma factor for a specific TOF value.
 
 **Return**: Lorentz gamma factor 
 
-### function ResetHistos
-
-```cpp
-virtual void ResetHistos()
-```
-
-Reset all histogram contents. 
-
-This function checks periodically if a file is created in the output directory to signal the sw the need to reset the histograms 
-
-
-### function UpdateCanvas
-
-```cpp
-virtual void UpdateCanvas()
-```
-
-Update all the Canvas objects in the class. 
-
 ### function UpdateFileList
 
 ```cpp
@@ -283,189 +254,6 @@ Float_t _CALOEnergy;
 
 Variable for CALO energy reading. 
 
-### variable _cCALOAmp
-
-```cpp
-std::map< Int_t, TCanvas * > _cCALOAmp;
-```
-
-Canvas for CALO Amplitude. 
-
-### variable _cCALOenCorr
-
-```cpp
-TCanvas * _cCALOenCorr;
-```
-
-Canvas for CALO enegry correlation plots. 
-
-### variable _cCALOenTOF
-
-```cpp
-TCanvas * _cCALOenTOF;
-```
-
-Canvas for CALO energy vs TOF plots. 
-
-### variable _cCALOhitmap
-
-```cpp
-TCanvas * _cCALOhitmap;
-```
-
-Canvas for CALO hitmap. 
-
-### variable _cDeltaEvsE
-
-```cpp
-TCanvas * _cDeltaEvsE;
-```
-
-Canvas for dE vs E plot. 
-
-### variable _cDeltaEvsE_angle
-
-```cpp
-TCanvas * _cDeltaEvsE_angle;
-```
-
-Canvas for dE vs E plot. 
-
-### variable _cDeltaEvsMass
-
-```cpp
-TCanvas * _cDeltaEvsMass;
-```
-
-
-### variable _cDeltaT_FR
-
-```cpp
-TCanvas * _cDeltaT_FR;
-```
-
-Canvas for DeltaT Front-Rear at TW center. 
-
-### variable _cdEvsTOFcenter
-
-```cpp
-TCanvas * _cdEvsTOFcenter;
-```
-
-Canvas for front/rear layer raw dEvsTOF. 
-
-### variable _cFragCharge
-
-```cpp
-std::map< Int_t, TCanvas * > _cFragCharge;
-```
-
-Canvas of Fragmentation Trigger charge spectra. 
-
-### variable _cMBCharge
-
-```cpp
-std::map< Int_t, TCanvas * > _cMBCharge;
-```
-
-Canvas of MB charge spectra. 
-
-### variable _cMultiplicity
-
-```cpp
-TCanvas * _cMultiplicity;
-```
-
-Canvas for TW-CALO multiplivity plot. 
-
-### variable _cMultiplicityCh
-
-```cpp
-TCanvas * _cMultiplicityCh;
-```
-
-Canvas for TW-CALO multiplivity plot. 
-
-### variable _cPileUp
-
-```cpp
-TCanvas * _cPileUp;
-```
-
-Canvas for Pile-Up monitoring. 
-
-### variable _cPileUpRC
-
-```cpp
-TCanvas * _cPileUpRC;
-```
-
-Canvas for RC Pile-Up monitoring. 
-
-### variable _cRC_SC_TOF
-
-```cpp
-TCanvas * _cRC_SC_TOF;
-```
-
-Canvas for RC-SC TOF plots. 
-
-### variable _cRC_TW_TOF
-
-```cpp
-TCanvas * _cRC_TW_TOF;
-```
-
-Canvas for RC-TW TOF plots. 
-
-### variable _cRCcharge
-
-```cpp
-TCanvas * _cRCcharge;
-```
-
-Canvas for RC charge plots. 
-
-### variable _cTWchCounts
-
-```cpp
-TCanvas * _cTWchCounts;
-```
-
-Canvas for TW channel counts monitoring. 
-
-### variable _cTWchSat
-
-```cpp
-TCanvas * _cTWchSat;
-```
-
-Canvas for TW channel saturation monitoring. 
-
-### variable _cTWhitmapFrag
-
-```cpp
-TCanvas * _cTWhitmapFrag;
-```
-
-Canvas for TW hitmap w/ fragmentation trigger. 
-
-### variable _cTWhitmapFragSW
-
-```cpp
-TCanvas * _cTWhitmapFragSW;
-```
-
-Canvas for TW hitmap w/ fragmentation trigger. 
-
-### variable _cTWhitmapMB
-
-```cpp
-TCanvas * _cTWhitmapMB;
-```
-
-Canvas for TW hitmap w/ MB trigger. 
-
 ### variable _FileCount
 
 ```cpp
@@ -490,6 +278,30 @@ TGraph * _gPileUpRC;
 
 Graph for RC Pile-Up monitoring. 
 
+### variable _gTrigRate
+
+```cpp
+std::map< Int_t, TGraph * > _gTrigRate;
+```
+
+Map of Graphs for single trigger rate plots. 
+
+### variable _gTrigRatesAll
+
+```cpp
+TMultiGraph * _gTrigRatesAll;
+```
+
+MultiGraph for cumulative trigger rate monitoring. 
+
+### variable _hAllvsFragSW
+
+```cpp
+std::map< Int_t, THStack * > _hAllvsFragSW;
+```
+
+Stack for comparison in TW charge spectra w/ or w/out or SW-simulated fargmentation trigger. 
+
 ### variable _hCALOAmp
 
 ```cpp
@@ -498,6 +310,14 @@ std::map< Int_t, TH1F * > _hCALOAmp;
 
 Histograms for CALO amplitude. 
 
+### variable _hCALOAmpStack
+
+```cpp
+std::map< Int_t, THStack * > _hCALOAmpStack;
+```
+
+Histograms stacks for CALO amplitude. 
+
 ### variable _hCALOenCorr
 
 ```cpp
@@ -505,6 +325,22 @@ TH2F * _hCALOenCorr;
 ```
 
 Histogram for CALO energy correlation plots in events with multiplicity = 2. 
+
+### variable _hCALOEnergy
+
+```cpp
+std::map< Int_t, TH1F * > _hCALOEnergy;
+```
+
+Histograms for CALO energy release. 
+
+### variable _hCALOEnStack
+
+```cpp
+std::map< Int_t, THStack * > _hCALOEnStack;
+```
+
+Histograms stacks for CALO energy release. 
 
 ### variable _hCALOenTOF
 
@@ -522,29 +358,6 @@ TH2D * _hCALOhitmap;
 
 2D histogram for CALO hitmap 
 
-### variable _hDeltaEvsE
-
-```cpp
-TH2D * _hDeltaEvsE;
-```
-
-Histogram for dE vs E plot. 
-
-### variable _hDeltaEvsE_angle
-
-```cpp
-TH2D * _hDeltaEvsE_angle;
-```
-
-Histogram for dE vs E plot. 
-
-### variable _hDeltaEvsMass
-
-```cpp
-TH2D * _hDeltaEvsMass;
-```
-
-
 ### variable _hDeltaT_FR
 
 ```cpp
@@ -552,6 +365,14 @@ TH1F * _hDeltaT_FR;
 ```
 
 Histogram for DeltaT Front-Rear at TW center. 
+
+### variable _hdEvsTOFbar
+
+```cpp
+TH2F * _hdEvsTOFbar;
+```
+
+histogram for front/rear layer raw dEvsTOF 
 
 ### variable _hdEvsTOFcenter
 
@@ -569,13 +390,45 @@ std::map< Int_t, TH1F * > _hFragCharge;
 
 Histograms of Fragmentation Trigger charge spectra. 
 
+### variable _hFragChargeStack
+
+```cpp
+THStack * _hFragChargeStack;
+```
+
+Stacks for TW charge spectra of central bars w/ Frag trigger. 
+
+### variable _hFragSWCharge
+
+```cpp
+std::map< Int_t, TH1F * > _hFragSWCharge;
+```
+
+Histograms of SW-simulated Fragmentation Trigger charge spectra. 
+
+### variable _hFragSWChargeStack
+
+```cpp
+THStack * _hFragSWChargeStack;
+```
+
+Stacks for TW charge spectra of central bars w/ Frag trigger simulated with SW. 
+
 ### variable _hMBCharge
 
 ```cpp
 std::map< Int_t, TH1F * > _hMBCharge;
 ```
 
-Histograms of MBB charge spectra. 
+Histograms of MB charge spectra. 
+
+### variable _hMBChargeStack
+
+```cpp
+THStack * _hMBChargeStack;
+```
+
+Stacks for TW charge spectra of central bars w/ MB trigger. 
 
 ### variable _hRC_SC_TOF
 
@@ -585,6 +438,14 @@ std::map< Int_t, TH1F * > _hRC_SC_TOF;
 
 Histograms for RC-SC TOF plots. 
 
+### variable _hRC_SC_TOF_Stack
+
+```cpp
+THStack * _hRC_SC_TOF_Stack;
+```
+
+Stack for RC-SC TOF plots. 
+
 ### variable _hRC_TW_TOF
 
 ```cpp
@@ -592,6 +453,14 @@ std::map< Int_t, TH1F * > _hRC_TW_TOF;
 ```
 
 Histograms for RC-TW TOF plots. 
+
+### variable _hRC_TW_TOF_Stack
+
+```cpp
+THStack * _hRC_TW_TOF_Stack;
+```
+
+Stack for RC-TW TOF plots. 
 
 ### variable _hRCcharge
 
@@ -601,6 +470,78 @@ std::map< Int_t, TH1F * > _hRCcharge;
 
 Histograms for RC charge plots. 
 
+### variable _hRCchargeStack
+
+```cpp
+THStack * _hRCchargeStack;
+```
+
+Stack for RC charge plots. 
+
+### variable _hSCchAmp
+
+```cpp
+std::map< Int_t, TH1F * > _hSCchAmp;
+```
+
+Histograms for channel amplitudes in SC. 
+
+### variable _hSCchAmpStack
+
+```cpp
+THStack * _hSCchAmpStack;
+```
+
+Histogram stack for SC channel amplitudes. 
+
+### variable _hSCcharge
+
+```cpp
+TH1F * _hSCcharge;
+```
+
+Histogram for charge spectra in SC. 
+
+### variable _hSCchargeNoPU
+
+```cpp
+TH1F * _hSCchargeNoPU;
+```
+
+Histogram for charge spectra in SC w/out Pile-Up. 
+
+### variable _hSCchargeStack
+
+```cpp
+THStack * _hSCchargeStack;
+```
+
+Histogram stack for charge spectra in SC w/ and w/out Pile-Up. 
+
+### variable _hTrigAmp
+
+```cpp
+TH1F * _hTrigAmp;
+```
+
+Histogram to check triggre amplitudes. 
+
+### variable _hTWCharge
+
+```cpp
+std::map< Int_t, TH1F * > _hTWCharge;
+```
+
+Histograms of TW charge spectra of central bars. 
+
+### variable _hTWChargeStack
+
+```cpp
+THStack * _hTWChargeStack;
+```
+
+Stacks for TW charge spectra of central bars. 
+
 ### variable _hTWchCounts
 
 ```cpp
@@ -609,6 +550,14 @@ TH1I * _hTWchCounts;
 
 Histograms for TW channel counts monitoring. 
 
+### variable _hTWchCountsStack
+
+```cpp
+THStack * _hTWchCountsStack;
+```
+
+Histogram stack for TW channel counts. 
+
 ### variable _hTWchSat
 
 ```cpp
@@ -616,6 +565,22 @@ TH1I * _hTWchSat;
 ```
 
 Histograms for TW channel saturation monitoring. 
+
+### variable _hTWchSatStack
+
+```cpp
+THStack * _hTWchSatStack;
+```
+
+Histogram stack for TW channel saturation counts. 
+
+### variable _hTWhitmapAll
+
+```cpp
+TH2F * _hTWhitmapAll;
+```
+
+Histogram for TW hitmap w/ MB trigger. 
 
 ### variable _hTWhitmapFrag
 
@@ -639,7 +604,7 @@ Histogram for TW hitmap w/ fragmentation trigger.
 TH2F * _hTWhitmapMB;
 ```
 
-Histogram for TW hitmap w/ MB trigger. 
+Histogram for TW hitmap w/ MB trigger and NOT Fragmentation. 
 
 ### variable _hTWmultiChVsCALOmulti
 
@@ -657,37 +622,6 @@ TH2I * _hTWmultiVsCALOmulti;
 
 2D histogram for TW-CALO multiplivity 
 
-### variable _IsFragTriggerSWOn
-
-```cpp
-Bool_t _IsFragTriggerSWOn;
-```
-
-
-### variable _lCALOAmp
-
-```cpp
-std::map< Int_t, TLegend * > _lCALOAmp;
-```
-
-Legend for CALO amplitude plots. 
-
-### variable _lFragCharge
-
-```cpp
-std::map< Int_t, TLegend * > _lFragCharge;
-```
-
-Legend of Fragmentation Trigger charge spectra. 
-
-### variable _ListOfCanvas
-
-```cpp
-std::vector< TCanvas * > _ListOfCanvas;
-```
-
-List of Canvas to update. 
-
 ### variable _ListOfFiles
 
 ```cpp
@@ -696,77 +630,13 @@ std::vector< TString > _ListOfFiles;
 
 List of the .root files in the wanted directory. 
 
-### variable _ListOfHistos
+### variable _MyGUI
 
 ```cpp
-std::vector< TH1 * > _ListOfHistos;
+SlipperGUI * _MyGUI;
 ```
 
-List of Histos. 
-
-### variable _lMBCharge
-
-```cpp
-std::map< Int_t, TLegend * > _lMBCharge;
-```
-
-Legend of MB charge spectra. 
-
-### variable _lRC_SC_TOF
-
-```cpp
-TLegend * _lRC_SC_TOF;
-```
-
-Legend for RC-SC TOF plots. 
-
-### variable _lRC_TW_TOF
-
-```cpp
-TLegend * _lRC_TW_TOF;
-```
-
-Legend for RC-TW TOF plots. 
-
-### variable _lRCcharge
-
-```cpp
-TLegend * _lRCcharge;
-```
-
-Legend for RC charge plots. 
-
-### variable _lTWchCounts
-
-```cpp
-TLegend * _lTWchCounts;
-```
-
-Legend for TW channel counts monitoring. 
-
-### variable _lTWchSat
-
-```cpp
-TLegend * _lTWchSat;
-```
-
-Legend for TW channel saturation monitoring. 
-
-### variable _maxFragCharge
-
-```cpp
-std::map< Int_t, Double_t > _maxFragCharge;
-```
-
-Maximum of charge plots for axis rescaling. 
-
-### variable _maxMBCharge
-
-```cpp
-std::map< Int_t, Double_t > _maxMBCharge;
-```
-
-Maximum of charge plots for axis rescaling. 
+Pointer to Graphical User Interface object. 
 
 ### variable _OutDir
 
@@ -816,6 +686,14 @@ Float_t _RCTotCharge;
 
 Variable for RC raw total charge. 
 
+### variable _SCchAmp
+
+```cpp
+Float_t _SCchAmp;
+```
+
+Variable for SC channel amplitude. 
+
 ### variable _SCTime
 
 ```cpp
@@ -831,6 +709,14 @@ Float_t _SCTotCharge;
 ```
 
 Variable for SC raw total charge. 
+
+### variable _TriggersToPlot
+
+```cpp
+std::map< TString, Int_t > _TriggersToPlot;
+```
+
+Map of trigger rates to monitor with WaveDAQ Id. 
 
 ### variable _TWampA
 
@@ -880,13 +766,29 @@ WDChannelMap _WDChannelMap;
 
 Channel Map. 
 
-### variable _xPileUp
+### variable _WDtime
 
 ```cpp
-std::vector< Int_t > _xPileUp;
+UInt_t _WDtime;
 ```
 
-x-values of Pile-Up plot 
+variable for WaveDAQ acquisition time 
+
+### variable _WDtriggerType
+
+```cpp
+Int_t _WDtriggerType;
+```
+
+variable for WaveDAQ trigger type 
+
+### variable _WDtrigRates
+
+```cpp
+Float_t _WDtrigRates;
+```
+
+Variable for trigger rates. 
 
 ### variable _xPileUpRC
 
@@ -895,14 +797,6 @@ std::vector< Int_t > _xPileUpRC;
 ```
 
 x-values of RC Pile-Up plot 
-
-### variable _yPileUp
-
-```cpp
-std::vector< Float_t > _yPileUp;
-```
-
-y-values of Pile-Up plot 
 
 ### variable _yPileUpRC
 
@@ -914,4 +808,4 @@ y-values of RC Pile-Up plot
 
 -------------------------------
 
-Updated on 2023-05-29 at 17:57:10 +0000
+Updated on 2023-11-05 at 19:17:59 +0000

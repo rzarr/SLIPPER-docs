@@ -25,7 +25,7 @@ In order to be able to compile this SW you will need to install:
 In alternative, from version 3.1, the SW is also available inside a Docker image. The instructions for this type of installation are given in a dedicated section below.
 
 ## Installation
-In order to install the SW, clone the repository into your local computer and issue the commands
+In order to install the SW, clone the repository into your local machine and issue the commands
 ```
 >> cd slipper/
 >> mkdir bin
@@ -45,6 +45,21 @@ Assuming no error has happened, you should end with a set of executable files na
 - "Analysis", for offline analysis of processed data
 
 N.B.: Tags are automatically added in the output tree if the file names convention (see below) is respected. If the name convention is not respected, Tags are initialized to 0 or None.
+
+## Tier1 setup and install
+SLIPPER can be installed and run on the Bologna Tier1. The procedure is similar to the one described above, with the addtion of a few steps to set the environment. To do this, a common file has been created and the environment can be set just by typing:
+```
+>> source /opt/exp_software/foot/root_shoe_foot.sh
+```
+On the Tier1, the software files have to be stored under the "/opt/exp_software/foot/\${USER}" folder, where "\${USER}" is you username on the machine. Clone the repository inside this folder, step inside it and issue:
+```
+>> mkdir bin
+>> cd bin/
+>> cmake3 ../src
+>> make
+```
+At this point, the SW should be compiled and ready to be used.
+
 
 ## Tier3 setup and install
 SLIPPER can be easily installed and run on the Bologna Tier3. The procedure is similar to the one described above, with the addtion of a few steps. First, the bash and ROOT configurations have to be loaded. To do this, type:
@@ -423,6 +438,25 @@ From this version, it is also possible to reconstruct different runs acquired wi
 ```
 
 If this script is used, the single runs are reconstructed with 1 thread each. The number of threads tells the script how many runs it can reconstruct in parallel.
+
+## Batch running on the Tier1 HTCondor resources
+A bash script to run the SLIPPER "Reconstruction" executable in batch on the HTCondor resources of Tier1, called "runSlipperBatchT1.sh", is now available in the repository. The detailed usage instructions are written at the beginning of the file, here only a summary of the possible options is reported:
+
+```
+>> ./runSlipperBatch.sh
+
+-i      path to directory containing the input files
+-o      path to directosy where to write the output files
+-x      channel map XML file
+-f      first run to process
+-l      last run to process (optional)
+```
+
+The script creates a ".sh" and a ".sub" file for each run you want to process and submits the corresponding job. These files are stored in an auxiliarry directory "HTCfiles" created inside the chosen output folder.
+
+The only real requirement for the script is the presence of the WaveDAQ time calibration file inside the output folder.
+
+**N.B.: Carefully read the instructions written inside the script before running it**
 
 # Online processing and LivePlotter
 From version 3.1, a LivePlotter executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:

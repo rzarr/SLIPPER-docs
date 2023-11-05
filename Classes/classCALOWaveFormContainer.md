@@ -27,7 +27,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 |                | Name           |
 | -------------- | -------------- |
 | | **[WaveFormContainer](/Classes/classWaveFormContainer.md#function-waveformcontainer)**()<br>Default constructor.  |
-| virtual | **[~WaveFormContainer](/Classes/classWaveFormContainer.md#function-~waveformcontainer)**() |
+| virtual | **[~WaveFormContainer](/Classes/classWaveFormContainer.md#function-~waveformcontainer)**()<br>Default destructor.  |
 | virtual void | **[CheckRangeOverflow](/Classes/classWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
 | virtual void | **[ClearData](/Classes/classWaveFormContainer.md#function-cleardata)**()<br>Clear data for new cycle.  |
 | virtual void | **[CopyWaveform](/Classes/classWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
@@ -129,4 +129,4 @@ The value is computed as the median of the points from PEDESTALSTARTBIN to PEDES
 
 -------------------------------
 
-Updated on 2023-05-29 at 17:57:10 +0000
+Updated on 2023-11-05 at 19:17:59 +0000

@@ -27,7 +27,7 @@ class PositionCalibration;
 
 Main class used by the CalibratePosition executable. 
 
-This class performs all the operations needed to produce the TW position calibration maps in SHOE format. These maps allow to reconstruct the hit position of a particle along TW bars from the time difference between the TWO channels of the bar. 
+This class performs all the operations needed to produce the TW position calibration maps in SHOE format. These maps allow to reconstruct the hit position of a particle along TW bars from the time difference between the two channels of the bar. 
 
 ## Public Functions Documentation
 
@@ -73,9 +73,9 @@ void SetSavePlots()
 
 Declare a dedicated output rootfile where to save output plots. 
 
-If this function is called, all position plots and fits are sent to this file 
+If this function is called, all position plots and fits are saved in an output file 
 
 
 -------------------------------
 
-Updated on 2023-05-29 at 17:57:10 +0000
+Updated on 2023-11-05 at 19:17:59 +0000
