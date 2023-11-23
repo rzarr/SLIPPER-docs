@@ -116,6 +116,7 @@ Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
 | TH2F * | **[_hitmap_frag](/Classes/classWaveDaqReconstruction.md#variable--hitmap-frag)** <br>2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM** |
 | TH2F * | **[_hitmap_fragSW](/Classes/classWaveDaqReconstruction.md#variable--hitmap-fragsw)** <br>2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM** |
 | TH2F * | **[_hitmap_MB](/Classes/classWaveDaqReconstruction.md#variable--hitmap-mb)** <br>2D Hitmap of TW for Minimum Bias events **HISTOGRAM** |
+| TH2F * | **[_hTGEN_all](/Classes/classWaveDaqReconstruction.md#variable--htgen-all)** <br>Trigger generation (TGEN) for all acquired events **HISTOGRAM** |
 | TH2F * | **[_hTGEN_frag](/Classes/classWaveDaqReconstruction.md#variable--htgen-frag)** <br>Trigger generation (TGEN) for Fragmentation Trigger Events **HISTOGRAM** |
 | TH2F * | **[_hTGEN_MB](/Classes/classWaveDaqReconstruction.md#variable--htgen-mb)** <br>Trigger generation (TGEN) for Minimum Bias Events **HISTOGRAM** |
 | TH1F ** | **[_hTrigAmp](/Classes/classWaveDaqReconstruction.md#variable--htrigamp)** <br>Trigger amplitude of Fragmentation trigger channels **HISTOGRAM** |
@@ -1130,6 +1131,14 @@ TH2F * _hitmap_MB;
 
 2D Hitmap of TW for Minimum Bias events **HISTOGRAM**
 
+### variable _hTGEN_all
+
+```cpp
+TH2F * _hTGEN_all;
+```
+
+Trigger generation (TGEN) for all acquired events **HISTOGRAM**
+
 ### variable _hTGEN_frag
 
 ```cpp
@@ -1660,4 +1669,4 @@ Tags of WaveDREAM stand-alone files.
 
 -------------------------------
 
-Updated on 2023-11-05 at 19:17:59 +0000
+Updated on 2023-11-23 at 12:12:56 +0000

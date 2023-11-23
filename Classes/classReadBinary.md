@@ -26,7 +26,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 | Bool_t | **[ReadEvtStartWords](/Classes/classReadBinary.md#function-readevtstartwords)**(FILE * f)<br>Read the initial words of the binary file and jump to the WaveDAQ event.  |
 | void | **[ResetFragTrigger](/Classes/classReadBinary.md#function-resetfragtrigger)**()<br>Reset the fragmentation trigger value to False.  |
 | void | **[SaveBeamRate](/Classes/classReadBinary.md#function-savebeamrate)**(std::ofstream * ofsBeamRate)<br>Save the total time of the acquisition and the beam rates to an output file for online monitoring.  |
-| void | **[SetHistograms](/Classes/classReadBinary.md#function-sethistograms)**(TH2F * hTGEN_MB, TH2F * hTGEN_frag, TH1I * hTriggerPattern, TH1I * hTriggerRates)<br>Propagate the histogram pointers for all variables observed directly during decoding.  |
+| void | **[SetHistograms](/Classes/classReadBinary.md#function-sethistograms)**(TH2F * hTGEN_all, TH2F * hTGEN_MB, TH2F * hTGEN_frag, TH1I * hTriggerPattern, TH1I * hTriggerRates)<br>Propagate the histogram pointers for all variables observed directly during decoding.  |
 
 ## Protected Functions
 
@@ -49,6 +49,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 | std::vector< WDBBIN > | **[_bins](/Classes/classReadBinary.md#variable--bins)** <br>WaveDREAM time calibration container.  |
 | std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * | **[_data_tcb](/Classes/classReadBinary.md#variable--data-tcb)** <br>TCB data container.  |
 | std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * | **[_data_wdb](/Classes/classReadBinary.md#variable--data-wdb)** <br>WaveDREAM board data container.  |
+| TH2F * | **[_hTGEN_all](/Classes/classReadBinary.md#variable--htgen-all)** <br>Histogram for trigger generation.  |
 | TH2F * | **[_hTGEN_frag](/Classes/classReadBinary.md#variable--htgen-frag)** <br>Histogram for trigger generation -> FRAGMENTATION.  |
 | TH2F * | **[_hTGEN_MB](/Classes/classReadBinary.md#variable--htgen-mb)** <br>Histogram for trigger generation -> MINIMUM BIAS.  |
 | TH1I * | **[_hTriggerPattern](/Classes/classReadBinary.md#variable--htriggerpattern)** <br>Histogram for trigger pattern.  |
@@ -283,6 +284,7 @@ This function currently saves 3 rates to the output ofstream:
 
 ```cpp
 void SetHistograms(
+    TH2F * hTGEN_all,
     TH2F * hTGEN_MB,
     TH2F * hTGEN_frag,
     TH1I * hTriggerPattern,
@@ -294,6 +296,7 @@ Propagate the histogram pointers for all variables observed directly during deco
 
 **Parameters**: 
 
+  * **hTGEN_all** Pointer to histo filled by TGEN bank 
   * **hTGEN_MB** Pointer to histo filled by TGEN bank -> MB trigger 
   * **hTGEN_frag** Pointer to histo filled by TGEN bank -> Frag trigger 
   * **hTriggerPattern** Pointer to histo filled by TRGI bank -> Trigger pattern 
@@ -449,6 +452,14 @@ std::vector< WaveFormContainer * > * _data_wdb;
 ```
 
 WaveDREAM board data container. 
+
+### variable _hTGEN_all
+
+```cpp
+TH2F * _hTGEN_all;
+```
+
+Histogram for trigger generation. 
 
 ### variable _hTGEN_frag
 
@@ -665,4 +676,4 @@ Local variable for storing waveform raw amplitude values.
 
 -------------------------------
 
-Updated on 2023-11-05 at 19:17:59 +0000
+Updated on 2023-11-23 at 12:12:56 +0000

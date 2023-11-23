@@ -69,6 +69,9 @@ Class containing all the methods used in the LivePlotter executable.
 | TH1F * | **[_hSCcharge](/Classes/classLivePlots.md#variable--hsccharge)** <br>Histogram for charge spectra in SC.  |
 | TH1F * | **[_hSCchargeNoPU](/Classes/classLivePlots.md#variable--hscchargenopu)** <br>Histogram for charge spectra in SC w/out Pile-Up.  |
 | THStack * | **[_hSCchargeStack](/Classes/classLivePlots.md#variable--hscchargestack)** <br>Histogram stack for charge spectra in SC w/ and w/out Pile-Up.  |
+| TH2F * | **[_hTGEN_all](/Classes/classLivePlots.md#variable--htgen-all)** <br>Trigger generation (TGEN) for all acquired events.  |
+| TH2F * | **[_hTGEN_frag](/Classes/classLivePlots.md#variable--htgen-frag)** <br>Trigger generation (TGEN) for Fragmentation Trigger Events.  |
+| TH2F * | **[_hTGEN_MB](/Classes/classLivePlots.md#variable--htgen-mb)** <br>Trigger generation (TGEN) for Minimum Bias Events.  |
 | TH1F * | **[_hTrigAmp](/Classes/classLivePlots.md#variable--htrigamp)** <br>Histogram to check triggre amplitudes.  |
 | std::map< Int_t, TH1F * > | **[_hTWCharge](/Classes/classLivePlots.md#variable--htwcharge)** <br>Histograms of TW charge spectra of central bars.  |
 | THStack * | **[_hTWChargeStack](/Classes/classLivePlots.md#variable--htwchargestack)** <br>Stacks for TW charge spectra of central bars.  |
@@ -518,6 +521,30 @@ THStack * _hSCchargeStack;
 
 Histogram stack for charge spectra in SC w/ and w/out Pile-Up. 
 
+### variable _hTGEN_all
+
+```cpp
+TH2F * _hTGEN_all;
+```
+
+Trigger generation (TGEN) for all acquired events. 
+
+### variable _hTGEN_frag
+
+```cpp
+TH2F * _hTGEN_frag;
+```
+
+Trigger generation (TGEN) for Fragmentation Trigger Events. 
+
+### variable _hTGEN_MB
+
+```cpp
+TH2F * _hTGEN_MB;
+```
+
+Trigger generation (TGEN) for Minimum Bias Events. 
+
 ### variable _hTrigAmp
 
 ```cpp
@@ -808,4 +835,4 @@ y-values of RC Pile-Up plot
 
 -------------------------------
 
-Updated on 2023-11-05 at 19:17:59 +0000
+Updated on 2023-11-23 at 12:12:56 +0000
