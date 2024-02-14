@@ -23,7 +23,7 @@ Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
 | void | **[LoadTriggerCalibration](/Classes/classWaveDaqReconstruction.md#function-loadtriggercalibration)**(std::string FileName)<br>Load the trigger calibration map.  |
 | virtual void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(std::string FileName, std::string TimeCalFileName, int nEv)<br>Perform the whole WaveDAQ reconstruction.  |
 | void | **[SetDebugMode](/Classes/classWaveDaqReconstruction.md#function-setdebugmode)**(Int_t first_ev, Int_t last_ev)<br>Activate debug mode if requested and set event range.  |
-| void | **[SetGain](/Classes/classWaveDaqReconstruction.md#function-setgain)**(Float_t Gain)<br>Set the frontend gain.  |
+| void | **[SetGain](/Classes/classWaveDaqReconstruction.md#function-setgain)**(Float_t Gain) |
 | void | **[SetOutputFileName](/Classes/classWaveDaqReconstruction.md#function-setoutputfilename)**(const std::string & FileName)<br>Set the output file name.  |
 | void | **[SetSaveBeamRate](/Classes/classWaveDaqReconstruction.md#function-setsavebeamrate)**()<br>Enable the saving of beam rate in an output txt file for online monitoring.  |
 | void | **[SetSaveNeutrons](/Classes/classWaveDaqReconstruction.md#function-setsaveneutrons)**()<br>Set the SaveNeutrons flag to true.  |
@@ -308,12 +308,6 @@ void SetGain(
     Float_t Gain
 )
 ```
-
-Set the frontend gain. 
-
-**Parameters**: 
-
-  * **Gain** Frontend gain of the acquisition 
 
 
 ### function SetOutputFileName
@@ -1669,4 +1663,4 @@ Tags of WaveDREAM stand-alone files.
 
 -------------------------------
 
-Updated on 2023-11-23 at 12:12:56 +0000
+Updated on 2024-02-14 at 13:20:17 +0000
