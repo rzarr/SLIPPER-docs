@@ -35,3 +35,4 @@
     * [md_README](Pages/md_README.md)
 
 * [User manual](README.md)
+* [Docker4SLIPPER](Pages-docker.md)
