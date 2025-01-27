@@ -33,7 +33,6 @@
     * [Message](Namespaces/namespaceMessage.md)
   * [Pages](Pages/index.md)
     * [md_docs_Pages-docker](Pages/md_docs_Pages-docker.md)
-    * [md_docs_Docs-index](Pages/md_docs_Docs-index.md)
     * [md_README](Pages/md_README.md)
 
 * [User manual](README.md)
