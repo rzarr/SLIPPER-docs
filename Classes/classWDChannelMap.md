@@ -20,6 +20,7 @@ Main class that handles the WaveDAQ Channel Map.  [More...](#detailed-descriptio
 | [RCChannelMap](/Classes/classRCChannelMap.md) * | **[GetRCChannelMap](/Classes/classWDChannelMap.md#function-getrcchannelmap)**()<br>Get the Rome Counter Channel Map.  |
 | [SCChannelMap](/Classes/classSCChannelMap.md) * | **[GetSCChannelMap](/Classes/classWDChannelMap.md#function-getscchannelmap)**()<br>Get the Start Counter Channel Map.  |
 | [TWChannelMap](/Classes/classTWChannelMap.md) * | **[GetTWChannelMap](/Classes/classWDChannelMap.md#function-gettwchannelmap)**()<br>Get the TOF-Wall Channel Map.  |
+| Bool_t | **[IsBoardLoaded](/Classes/classWDChannelMap.md#function-isboardloaded)**(UShort_t board)<br>Check if a WDB board has been loaded in the channel map.  |
 | Bool_t | **[IsCALOMapLoaded](/Classes/classWDChannelMap.md#function-iscalomaploaded)**()<br>Check if the CALO Channel Map has been loaded.  |
 | Bool_t | **[IsNeutronMapLoaded](/Classes/classWDChannelMap.md#function-isneutronmaploaded)**()<br>Check if the Neutron Channel Map has been loaded.  |
 | Bool_t | **[IsRCMapLoaded](/Classes/classWDChannelMap.md#function-isrcmaploaded)**()<br>Check if the RC Channel Map has been loaded.  |
@@ -122,6 +123,23 @@ TWChannelMap * GetTWChannelMap()
 Get the TOF-Wall Channel Map. 
 
 **Return**: Pointer to TW Channel Map 
+
+### function IsBoardLoaded
+
+```cpp
+Bool_t IsBoardLoaded(
+    UShort_t board
+)
+```
+
+Check if a WDB board has been loaded in the channel map. 
+
+**Parameters**: 
+
+  * **board** Id of the WDB board 
+
+
+**Return**: True if the board is present in the channel map 
 
 ### function IsCALOMapLoaded
 
@@ -268,4 +286,4 @@ TOF-Wall Channel Map.
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

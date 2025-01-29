@@ -22,13 +22,13 @@ Inherited by [CALOChannelMap](/Classes/classCALOChannelMap.md), [NeutronChannelM
 | virtual std::vector< UShort_t > * | **[GetListOfBoards](/Classes/classBaseMap.md#function-getlistofboards)**()<br>Get the list of boards loaded in the Channel Map.  |
 | virtual Bool_t | **[IsBoardLoaded](/Classes/classBaseMap.md#function-isboardloaded)**(UShort_t BoardId)<br>Check if the board has been loaded in the Channel Map.  |
 | Bool_t | **[IsLoaded](/Classes/classBaseMap.md#function-isloaded)**()<br>Check if the Map has been loaded.  |
-| Bool_t | **[LoadMap](/Classes/classBaseMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Base function for Channel Map loading.  |
+| Bool_t | **[LoadMap](/Classes/classBaseMap.md#function-loadmap)**([XmlParser](/Classes/classXmlParser.md) * x)<br>Base function (pure-virtual) for Channel Map loading.  |
 
 ## Protected Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| Bool_t | **[CheckMapConsistency](/Classes/classBaseMap.md#function-checkmapconsistency)**()<br>Base function for internal Channel Map checks.  |
+| virtual Bool_t | **[CheckMapConsistency](/Classes/classBaseMap.md#function-checkmapconsistency)**()<br>Base function (pure-virtual) for internal Channel Map checks.  |
 
 ## Protected Attributes
 
@@ -103,22 +103,25 @@ Check if the Map has been loaded.
 ### function LoadMap
 
 ```cpp
-Bool_t LoadMap(
+inline Bool_t LoadMap(
     XmlParser * x
 )
 ```
 
-Base function for Channel Map loading. 
+Base function (pure-virtual) for Channel Map loading. 
 
 ## Protected Functions Documentation
 
 ### function CheckMapConsistency
 
 ```cpp
-Bool_t CheckMapConsistency()
+inline virtual Bool_t CheckMapConsistency()
 ```
 
-Base function for internal Channel Map checks. 
+Base function (pure-virtual) for internal Channel Map checks. 
+
+**Reimplemented by**: [SCChannelMap::CheckMapConsistency](/Classes/classSCChannelMap.md#function-checkmapconsistency), [RCChannelMap::CheckMapConsistency](/Classes/classRCChannelMap.md#function-checkmapconsistency), [NeutronChannelMap::CheckMapConsistency](/Classes/classNeutronChannelMap.md#function-checkmapconsistency), [CALOChannelMap::CheckMapConsistency](/Classes/classCALOChannelMap.md#function-checkmapconsistency), [TWChannelMap::CheckMapConsistency](/Classes/classTWChannelMap.md#function-checkmapconsistency)
+
 
 ## Protected Attributes Documentation
 
@@ -140,4 +143,4 @@ List of the WaveDREAM boards in the Channel Map.
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

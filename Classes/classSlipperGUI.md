@@ -24,8 +24,10 @@ Inherits from TGMainFrame
 | void | **[DrawDividedOnNewCanvas](/Classes/classSlipperGUI.md#function-drawdividedonnewcanvas)**()<br>Draw object on a separate canvas and show all the sub-objects of the container into different pads.  |
 | void | **[DrawOnEmbeddedCanvas](/Classes/classSlipperGUI.md#function-drawonembeddedcanvas)**()<br>Draw an object on the canvas embedded in the GUI window.  |
 | void | **[DrawOnSeparateCanvas](/Classes/classSlipperGUI.md#function-drawonseparatecanvas)**()<br>Spawn an additional canvas and draw the last selected object onto it.  |
+| Bool_t | **[HandleConfigureNotify](/Classes/classSlipperGUI.md#function-handleconfigurenotify)**(Event_t * event)<br>Handle a modification of the GUI window.  |
 | void | **[ResetCurrentPlot](/Classes/classSlipperGUI.md#function-resetcurrentplot)**()<br>Reset current or last selected plot.  |
 | void | **[ResetPlots](/Classes/classSlipperGUI.md#function-resetplots)**()<br>Reset all plots.  |
+| void | **[SetEventStatusBar](/Classes/classSlipperGUI.md#function-seteventstatusbar)**(Int_t event, Int_t px, Int_t py, TObject * obj)<br>Update the information on the canvas status bar.  |
 | void | **[ShowListOfDetectorPlots](/Classes/classSlipperGUI.md#function-showlistofdetectorplots)**()<br>Show the list of plots associated with the chosen detector.  |
 | void | **[UpdatePlots](/Classes/classSlipperGUI.md#function-updateplots)**()<br>Update all the pads spawned by the GUI.  |
 
@@ -42,6 +44,7 @@ Inherits from TGMainFrame
 
 |                | Name           |
 | -------------- | -------------- |
+| TGHorizontalFrame * | **[_ButtonsFrame](/Classes/classSlipperGUI.md#variable--buttonsframe)** <br>Frame for GUI buttons.  |
 | std::map< TObject *, bool > | **[_CanDrawOnDividedCanvas](/Classes/classSlipperGUI.md#variable--candrawondividedcanvas)** <br>Boolean flag indicating if an object can be drawn on the divided canvas.  |
 | TGComboBox * | **[_DetComboBox](/Classes/classSlipperGUI.md#variable--detcombobox)** <br>ComboBox with list of the detectors.  |
 | std::map< Int_t, std::string > | **[_DetIdToNameMap](/Classes/classSlipperGUI.md#variable--detidtonamemap)** <br>Map of the included detectors with their entryId in the ComboBox.  |
@@ -51,9 +54,10 @@ Inherits from TGMainFrame
 | TGButton * | **[_ExitButton](/Classes/classSlipperGUI.md#variable--exitbutton)** <br>Exit Button.  |
 | TGGroupFrame * | **[_GroupFrameCombo](/Classes/classSlipperGUI.md#variable--groupframecombo)** <br>Group frame for the ComboBox of the detectors.  |
 | std::map< std::string, TGGroupFrame * > | **[_GroupFrameDet](/Classes/classSlipperGUI.md#variable--groupframedet)** <br>Map of group frames for singe detectors.  |
+| TGHorizontalFrame * | **[_HTabsFrame](/Classes/classSlipperGUI.md#variable--htabsframe)** <br>GUI horizontal frame for list of plots and embedded canvas.  |
 | TGVerticalFrame * | **[_LeftFrame](/Classes/classSlipperGUI.md#variable--leftframe)** <br>Left frame of the GUI, containing buttons and frames for plot choice.  |
 | std::map< std::string, TGListBox * > | **[_ListBoxDet](/Classes/classSlipperGUI.md#variable--listboxdet)** <br>Map of ListBoxes for detectors.  |
-| TGMainFrame * | **[_MainFrame](/Classes/classSlipperGUI.md#variable--mainframe)** <br>GUI main frame.  |
+| TGHorizontalFrame * | **[_LogoFrame](/Classes/classSlipperGUI.md#variable--logoframe)** <br>Frame for SLIPPER and FOOT logos.  |
 | std::map< TGLBEntry *, TGraph * > | **[_MapOfGraphs](/Classes/classSlipperGUI.md#variable--mapofgraphs)** <br>Map of the TGraph (and derived) objects.  |
 | std::map< TGLBEntry *, TH1 * > | **[_MapOfHistos](/Classes/classSlipperGUI.md#variable--mapofhistos)** <br>Map of the TH1 (and derived) objects.  |
 | std::map< TGLBEntry *, THStack * > | **[_MapOfHistoStacks](/Classes/classSlipperGUI.md#variable--mapofhistostacks)** <br>Map of the THStack (and derived) objects.  |
@@ -61,6 +65,8 @@ Inherits from TGMainFrame
 | std::vector< TVirtualPad * > | **[_PadsToUpdate](/Classes/classSlipperGUI.md#variable--padstoupdate)** <br>List of Pads spawned by the GUI, useful for Pad update.  |
 | TGButton * | **[_ResetButton](/Classes/classSlipperGUI.md#variable--resetbutton)** <br>Reset Button.  |
 | TGButton * | **[_ResetCurrentButton](/Classes/classSlipperGUI.md#variable--resetcurrentbutton)** <br>Reset Button.  |
+| TGVerticalFrame * | **[_RightFrame](/Classes/classSlipperGUI.md#variable--rightframe)** <br>Right frame of the GUI, containing the embedded canvas and its status bar.  |
+| TGStatusBar * | **[_StatusBar](/Classes/classSlipperGUI.md#variable--statusbar)** <br>GUI status bar for the embedded canvas.  |
 
 ## Public Functions Documentation
 
@@ -177,6 +183,26 @@ Spawn an additional canvas and draw the last selected object onto it.
 This function is called by the "Draw on another canvas" button 
 
 
+### function HandleConfigureNotify
+
+```cpp
+Bool_t HandleConfigureNotify(
+    Event_t * event
+)
+```
+
+Handle a modification of the GUI window. 
+
+**Parameters**: 
+
+  * **event** Ptr to event object (signal) 
+
+
+**Return**: True if the event is correctly handled 
+
+Overload of TGMainFrame::HandleConfigureNotify() needed to correctly handle the resizing of all parts of the GUI 
+
+
 ### function ResetCurrentPlot
 
 ```cpp
@@ -197,6 +223,30 @@ void ResetPlots()
 Reset all plots. 
 
 This function is called by the "Reset plots" button 
+
+
+### function SetEventStatusBar
+
+```cpp
+void SetEventStatusBar(
+    Int_t event,
+    Int_t px,
+    Int_t py,
+    TObject * obj
+)
+```
+
+Update the information on the canvas status bar. 
+
+**Parameters**: 
+
+  * **event** Event type 
+  * **px** X position of cursor on screen 
+  * **py** Y position of cursor on screen 
+  * **obj** Pointer to the object below the cursor 
+
+
+The parameters of this method are taken automatically from the ProcessedEvent() method implemented in the TCanvas class 
 
 
 ### function ShowListOfDetectorPlots
@@ -288,6 +338,14 @@ Auxiliary function used for frame titles. Currently available detector are: "SC"
 
 ## Protected Attributes Documentation
 
+### variable _ButtonsFrame
+
+```cpp
+TGHorizontalFrame * _ButtonsFrame;
+```
+
+Frame for GUI buttons. 
+
 ### variable _CanDrawOnDividedCanvas
 
 ```cpp
@@ -360,6 +418,14 @@ std::map< std::string, TGGroupFrame * > _GroupFrameDet;
 
 Map of group frames for singe detectors. 
 
+### variable _HTabsFrame
+
+```cpp
+TGHorizontalFrame * _HTabsFrame;
+```
+
+GUI horizontal frame for list of plots and embedded canvas. 
+
 ### variable _LeftFrame
 
 ```cpp
@@ -376,13 +442,13 @@ std::map< std::string, TGListBox * > _ListBoxDet;
 
 Map of ListBoxes for detectors. 
 
-### variable _MainFrame
+### variable _LogoFrame
 
 ```cpp
-TGMainFrame * _MainFrame;
+TGHorizontalFrame * _LogoFrame;
 ```
 
-GUI main frame. 
+Frame for SLIPPER and FOOT logos. 
 
 ### variable _MapOfGraphs
 
@@ -440,6 +506,22 @@ TGButton * _ResetCurrentButton;
 
 Reset Button. 
 
+### variable _RightFrame
+
+```cpp
+TGVerticalFrame * _RightFrame;
+```
+
+Right frame of the GUI, containing the embedded canvas and its status bar. 
+
+### variable _StatusBar
+
+```cpp
+TGStatusBar * _StatusBar;
+```
+
+GUI status bar for the embedded canvas. 
+
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

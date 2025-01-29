@@ -20,7 +20,11 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual | **[~SCWaveFormContainer](/Classes/classSCWaveFormContainer.md#function-~scwaveformcontainer)**()<br>Default destructor.  |
 | virtual void | **[ClearData](/Classes/classSCWaveFormContainer.md#function-cleardata)**() override<br>Clear data for new cycle.  |
 | virtual void | **[ClearOutputData](/Classes/classSCWaveFormContainer.md#function-clearoutputdata)**()<br>Clear output data for new cycle.  |
+| virtual void | **[ComputeSCsumDerivative](/Classes/classSCWaveFormContainer.md#function-computescsumderivative)**()<br>Compute the derivative of the summed SC signal.  |
 | virtual Float_t | **[GetChargeSC](/Classes/classSCWaveFormContainer.md#function-getchargesc)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the single channel SC waveform.  |
+| std::vector< Float_t > & | **[GetDerivativeAmpVec](/Classes/classSCWaveFormContainer.md#function-getderivativeampvec)**()<br>Get the amplitude vector for SC summed signal derivative.  |
+| Float_t | **[GetDerivativeThreshold](/Classes/classSCWaveFormContainer.md#function-getderivativethreshold)**()<br>Get the value of the derivative threshold for pile-up check.  |
+| std::vector< Float_t > & | **[GetDerivativeTimeVec](/Classes/classSCWaveFormContainer.md#function-getderivativetimevec)**()<br>Get the time vector for SC summed signal derivative.  |
 | virtual Float_t | **[GetSCTotalCharge](/Classes/classSCWaveFormContainer.md#function-getsctotalcharge)**(std::vector< Int_t > * Channels)<br>Compute and get the total raw energy loss in the SC.  |
 | virtual Float_t | **[GetTimeSC](/Classes/classSCWaveFormContainer.md#function-gettimesc)**(Bool_t * IsPossiblePileUp, std::vector< Int_t > * Channels, UShort_t BoardId =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="SC")<br>Analyze SC waveforms to extract its timestamp.  |
 | virtual Float_t | **[GetTimeSC_Linear](/Classes/classSCWaveFormContainer.md#function-gettimesc-linear)**(std::vector< Int_t > * Channels)<br>Analyze SC waveforms and extract the SC time with a linear extrapolation to the baseline.  |
@@ -30,7 +34,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| virtual Bool_t | **[CheckForPileUp](/Classes/classSCWaveFormContainer.md#function-checkforpileup)**(std::vector< Float_t > * w_ptr, std::vector< Float_t > * t_ptr, Int_t event =-1, TFile * fOut =nullptr, TString detector ="SC")<br>Check for PileUp in the Start Counter total signal.  |
+| virtual Bool_t | **[CheckForPileUp](/Classes/classSCWaveFormContainer.md#function-checkforpileup)**(Int_t event =-1, TFile * fOut =nullptr, TString detector ="SC")<br>Check for PileUp in the Start Counter total signal.  |
 | virtual void | **[CheckSignals](/Classes/classSCWaveFormContainer.md#function-checksignals)**(std::vector< Int_t > * Channels)<br>Function that checks if any SC channel has undergone dynamic range bit overflow and corrects it.  |
 
 ## Public Attributes
@@ -44,8 +48,10 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 
 |                | Name           |
 | -------------- | -------------- |
+| Bool_t | **[_DerivativeComputed](/Classes/classSCWaveFormContainer.md#variable--derivativecomputed)** <br>Boolean flag signaling if the derivative of the summed SC signal has been calculated or not.  |
 | std::vector< Float_t > | **[_DerT](/Classes/classSCWaveFormContainer.md#variable--dert)** <br>Time vector for SC total signal derivative.  |
 | std::vector< Float_t > | **[_DerW](/Classes/classSCWaveFormContainer.md#variable--derw)** <br>Amplitude vector for SC total signal derivative.  |
+| Int_t | **[_nSignals](/Classes/classSCWaveFormContainer.md#variable--nsignals)** <br>Integer counting the number of SC channels/signals used for the summed waveform.  |
 | Float_t | **[_SCped](/Classes/classSCWaveFormContainer.md#variable--scped)** <br>Pedestal of the SC total signal.  |
 | Float_t | **[_SCpedRMS](/Classes/classSCWaveFormContainer.md#variable--scpedrms)** <br>Pedestal of the SC total signal.  |
 | Bool_t | **[_SignalsChecked](/Classes/classSCWaveFormContainer.md#variable--signalschecked)** <br>Boolean flag that signals if SC channels have been checked for dynamic range overflow.  |
@@ -61,7 +67,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual void | **[CheckRangeOverflow](/Classes/classWaveFormContainer.md#function-checkrangeoverflow)**(Float_t * w_ptr)<br>Check if the Waveform read from WDB overflows the WDAQ dynamic range and correct if necessary.  |
 | virtual void | **[CopyWaveform](/Classes/classWaveFormContainer.md#function-copywaveform)**([NeutronWF](/Classes/classNeutronWF.md) * nWF, int channel)<br>Copy a decoded waveform in the output container of neutrons.  |
 | virtual Float_t | **[GetAmplitude](/Classes/classWaveFormContainer.md#function-getamplitude)**(Int_t channel)<br>Find the max amplitude of the waveform.  |
-| virtual UShort_t | **[GetBoardSerialNumber](/Classes/classWaveFormContainer.md#function-getboardserialnumber)**()<br>Get the serial number of the WDB board.  |
+| UShort_t | **[GetBoardSerialNumber](/Classes/classWaveFormContainer.md#function-getboardserialnumber)**() const<br>Get the serial number of the WDB board.  |
 | virtual Float_t | **[GetCharge](/Classes/classWaveFormContainer.md#function-getcharge)**(Int_t channel, Int_t start_bin =CHARGESTARTBIN, Int_t stop_bin =CHARGESTOPBIN)<br>Find the integral charge of the waveform.  |
 | virtual Float_t | **[GetCLKPhase](/Classes/classWaveFormContainer.md#function-getclkphase)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr)<br>Get the phase of a CLK signal.  |
 | virtual std::pair< Float_t, Float_t > | **[GetPedestal](/Classes/classWaveFormContainer.md#function-getpedestal)**(Int_t channel)<br>Find pedestal of the waveform.  |
@@ -69,7 +75,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | virtual Float_t | **[GetTimeCFD](/Classes/classWaveFormContainer.md#function-gettimecfd)**(Int_t channel, UShort_t board =0, Int_t event =-1, TFile * fOut =nullptr, TString detector ="")<br>Calculate the timestamp of the waveform with the CFD method.  |
 | virtual Bool_t | **[IsEmpty](/Classes/classWaveFormContainer.md#function-isempty)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
 | virtual Bool_t | **[IsEmptyTest](/Classes/classWaveFormContainer.md#function-isemptytest)**(Int_t channel)<br>Check if a WaveDREAM channel is empty.  |
-| virtual void | **[SetBoardSerialNumber](/Classes/classWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
+| void | **[SetBoardSerialNumber](/Classes/classWaveFormContainer.md#function-setboardserialnumber)**(UShort_t bsn)<br>Set the serial number of the WDB board.  |
 
 **Protected Functions inherited from [WaveFormContainer](/Classes/classWaveFormContainer.md)**
 
@@ -77,7 +83,7 @@ Inherits from [WaveFormContainer](/Classes/classWaveFormContainer.md)
 | -------------- | -------------- |
 | virtual void | **[MedianFilter](/Classes/classWaveFormContainer.md#function-medianfilter)**(Int_t channel)<br>Apply a 7-point median filter to the WF if needed.  |
 | virtual void | **[RescaleTime](/Classes/classWaveFormContainer.md#function-rescaletime)**(std::vector< Float_t > * tmp_time)<br>Rescale channel time from s to ns.  |
-| virtual void | **[SaveWF](/Classes/classWaveFormContainer.md#function-savewf)**(Int_t board, Int_t channel, Int_t event, TFile * fOut, TString detector, TString tag ="")<br>Save the waveform to a folder in the output file.  |
+| virtual void | **[SaveWF](/Classes/classWaveFormContainer.md#function-savewf)**(UShort_t board, Int_t channel, Int_t event, TFile * fOut, TString detector, TString tag ="")<br>Save the waveform to a folder in the output file.  |
 
 **Public Attributes inherited from [WaveFormContainer](/Classes/classWaveFormContainer.md)**
 
@@ -135,6 +141,20 @@ virtual void ClearOutputData()
 
 Clear output data for new cycle. 
 
+### function ComputeSCsumDerivative
+
+```cpp
+virtual void ComputeSCsumDerivative()
+```
+
+Compute the derivative of the summed SC signal. 
+
+**Parameters**: 
+
+  * **w_ptr** Pointer to first element of amplitude vector 
+  * **t_ptr** Pointer to first element of time vector 
+
+
 ### function GetChargeSC
 
 ```cpp
@@ -158,6 +178,36 @@ Find the integral charge of the single channel SC waveform.
 
 The integral is performed only in the region where the waveform is less than the baseline + 2*PedRMS 
 
+
+### function GetDerivativeAmpVec
+
+```cpp
+std::vector< Float_t > & GetDerivativeAmpVec()
+```
+
+Get the amplitude vector for SC summed signal derivative. 
+
+**Return**: Amplitude vector 
+
+### function GetDerivativeThreshold
+
+```cpp
+Float_t GetDerivativeThreshold()
+```
+
+Get the value of the derivative threshold for pile-up check. 
+
+**Return**: Value of derivative threshold 
+
+### function GetDerivativeTimeVec
+
+```cpp
+std::vector< Float_t > & GetDerivativeTimeVec()
+```
+
+Get the time vector for SC summed signal derivative. 
+
+**Return**: Time vector 
 
 ### function GetSCTotalCharge
 
@@ -253,8 +303,6 @@ Both the amplitude-time values of the total signal and its baseline are stored i
 
 ```cpp
 virtual Bool_t CheckForPileUp(
-    std::vector< Float_t > * w_ptr,
-    std::vector< Float_t > * t_ptr,
     Int_t event =-1,
     TFile * fOut =nullptr,
     TString detector ="SC"
@@ -265,10 +313,9 @@ Check for PileUp in the Start Counter total signal.
 
 **Parameters**: 
 
-  * **w_ptr** Pointer to first element of amplitude vector 
-  * **t_ptr** Pointer to first element of time vector 
   * **event** Event number (optional, default=-1) 
   * **fOut** Pointer to output file (optional, default=nullptr) 
+  * **detector** Name of the detector (optional, deafult="") 
 
 
 **Return**: True if there is possible PileUp in the event, false otherwise 
@@ -311,6 +358,14 @@ Amplitude vector for SC total signal.
 
 ## Protected Attributes Documentation
 
+### variable _DerivativeComputed
+
+```cpp
+Bool_t _DerivativeComputed;
+```
+
+Boolean flag signaling if the derivative of the summed SC signal has been calculated or not. 
+
 ### variable _DerT
 
 ```cpp
@@ -326,6 +381,14 @@ std::vector< Float_t > _DerW;
 ```
 
 Amplitude vector for SC total signal derivative. 
+
+### variable _nSignals
+
+```cpp
+Int_t _nSignals;
+```
+
+Integer counting the number of SC channels/signals used for the summed waveform. 
 
 ### variable _SCped
 
@@ -353,4 +416,4 @@ Boolean flag that signals if SC channels have been checked for dynamic range ove
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

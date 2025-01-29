@@ -7,10 +7,7 @@ title: Channel Map
 
 
 
-
-# XML configuration file: Channel Map
-
-These files (available in the "config/" folder) contain the mapping between channels and SC, BARS and MODULES (wiring) for each campaign currently supported by the code. **This file is MANDATORY to run the Reconstrucion, EventDisplay and LivePlotter executables.** The Channel map should look like this: 
+These XML configuration files (available in the "config/" folder) contain the mapping between channels and SC, BARS and MODULES (wiring) for each campaign currently supported by the code. **This file is MANDATORY to run the Reconstrucion, EventDisplay and LivePlotter executables.** The Channel map should look like this: 
 
 ```cpp
 <CHANNEL_MAP>
@@ -62,7 +59,7 @@ These files (available in the "config/" folder) contain the mapping between chan
 Each channel map MUST contain <DATE> and <DESCRIPITON> elements as parent of the main node (they can be empty). The elements of the channel map are:
 
 
-### SC —> Start Counter
+## SC —> Start Counter
 
 This field must contain:
 
@@ -71,7 +68,7 @@ This field must contain:
 * BOARD_ID: serial number of the SC board
 * CHANNELS: list of the SC channels in the above board
 
-### BAR —> TW bars
+## BAR —> TW bars
 
 The channel map MUST contain at least one <BAR> element, and each bar MUST contain the following attributes:
 
@@ -88,7 +85,7 @@ The channel map MUST contain at least one <BAR> element, and each bar MUST conta
 * PHYS_COORD_Y: to be implemented
 * PHYS_COORD_Z: to be implemented
 
-### MODULE —> Calorimeter modules
+## MODULE —> Calorimeter modules
 
 The channel map can also contain some calorimeter <MODULE> elements in the format shown above:
 
@@ -100,7 +97,7 @@ The channel map can also contain some calorimeter <MODULE> elements in the forma
 * CRYSTALS: the global Id of all the crystals of the module. Channels and crystals values have to be ordered in the same way because they are associated one-by-one.
 * CRYSTAL_X/Y: Physical X/Y coordinates of the CALO crystals in the SHOE reference frame [OPTIONAL]
 
-### NEUTRON —> Neutron detectors
+## NEUTRON —> Neutron detectors
 
 Neutron detectors can be added to the channel map as above with fields:
 
@@ -115,4 +112,4 @@ Note that the combination of (BOARD_ID,CHANNEL) should not appear more than once
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

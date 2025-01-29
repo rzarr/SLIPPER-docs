@@ -247,6 +247,9 @@ Check TW map consistency.
 
 **Return**: True if the TW channel map is formed as expected, False otherwise 
 
+**Reimplements**: [BaseMap::CheckMapConsistency](/Classes/classBaseMap.md#function-checkmapconsistency)
+
+
 This function makes sure that there are no repeated/doubled indices and that the number of TW bars loaded is equal to the expected one (check [Parameters.h]) 
 
 
@@ -286,4 +289,4 @@ Map that links the TW global channel with the Bar number-channel id ("A"/"B") pa
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

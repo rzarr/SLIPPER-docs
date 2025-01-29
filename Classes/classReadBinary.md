@@ -14,7 +14,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[ReadBinary](/Classes/classReadBinary.md#function-readbinary)**(std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * wdb_data_ptr, std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * tcb_data_ptr, [WDChannelMap](/Classes/classWDChannelMap.md) * WDchMap, std::map< UShort_t, Int_t > * _WDBIdToIdMap, std::map< UShort_t, Int_t > * ActiveBoards)<br>Read binary constructor.  |
+| | **[ReadBinary](/Classes/classReadBinary.md#function-readbinary)**(std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * wdb_data_ptr, std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * tcb_data_ptr, [WDChannelMap](/Classes/classWDChannelMap.md) * WDchMap, std::map< UShort_t, UInt_t > * _WDBIdToIdMap, std::map< UShort_t, UInt_t > * ActiveBoards)<br>Read binary constructor.  |
 | virtual | **[~ReadBinary](/Classes/classReadBinary.md#function-~readbinary)**()<br>Default destructor.  |
 | void | **[CheckBinaryFileHeader](/Classes/classReadBinary.md#function-checkbinaryfileheader)**(FILE * f)<br>Check that the binary file header is correct.  |
 | void | **[ComputeTriggerRates](/Classes/classReadBinary.md#function-computetriggerrates)**(Float_t * Rate, UInt_t * Time)<br>Calculate the rate of all different trigger types.  |
@@ -32,7 +32,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[AddBoardToDataContainer](/Classes/classReadBinary.md#function-addboardtodatacontainer)**(UShort_t board) |
+| void | **[AddBoardToDataContainer](/Classes/classReadBinary.md#function-addboardtodatacontainer)**(UShort_t board)<br>Allocate memory for all channels of a newfound WaveDREAM board.  |
 | void | **[AlignSignalsRight](/Classes/classReadBinary.md#function-alignsignalsright)**()<br>Align signals to the moment a write instruction arrives to the WaveDAQ.  |
 | void | **[AlignTriggerCell](/Classes/classReadBinary.md#function-aligntriggercell)**()<br>Align signals using trigger cell #0 of all channels as reference.  |
 | void | **[FillHistoTGEN](/Classes/classReadBinary.md#function-fillhistotgen)**(TH2F * hTGEN)<br>Fill Histograms with information from the TGEN bank of a TCB.  |
@@ -45,7 +45,7 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 
 |                | Name           |
 | -------------- | -------------- |
-| std::map< UShort_t, int > * | **[_ActiveBoards](/Classes/classReadBinary.md#variable--activeboards)** <br>Map o the active WaveDREAM boards in the event: Serial number -> index.  |
+| std::map< UShort_t, UInt_t > * | **[_ActiveBoards](/Classes/classReadBinary.md#variable--activeboards)** <br>Map o the active WaveDREAM boards in the event: Serial number -> index.  |
 | std::vector< WDBBIN > | **[_bins](/Classes/classReadBinary.md#variable--bins)** <br>WaveDREAM time calibration container.  |
 | std::vector< [TCBDATA](/Classes/classTCBDATA.md) * > * | **[_data_tcb](/Classes/classReadBinary.md#variable--data-tcb)** <br>TCB data container.  |
 | std::vector< [WaveFormContainer](/Classes/classWaveFormContainer.md) * > * | **[_data_wdb](/Classes/classReadBinary.md#variable--data-wdb)** <br>WaveDREAM board data container.  |
@@ -57,14 +57,14 @@ Class that handles all the decoding of WaveDAQ events from binary files.  [More.
 | Bool_t | **[_IsFragTriggerOn](/Classes/classReadBinary.md#variable--isfragtriggeron)** <br>Boolean flag that tells if the fragmentation trigger bit was enabled in the event.  |
 | UInt_t | **[_LastEventSize](/Classes/classReadBinary.md#variable--lasteventsize)** <br>Size of the last event read in number of words.  |
 | uint | **[_Nev](/Classes/classReadBinary.md#variable--nev)** <br>Event number.  |
-| std::map< UShort_t, int > | **[_tcb_index](/Classes/classReadBinary.md#variable--tcb-index)** <br>Maps for WDB and TCB indexing: serial number -> index.  |
+| std::map< UShort_t, UInt_t > | **[_tcb_index](/Classes/classReadBinary.md#variable--tcb-index)** <br>Maps for WDB and TCB indexing: serial number -> index.  |
 | std::map< int, int > * | **[_TDCchMap](/Classes/classReadBinary.md#variable--tdcchmap)** <br>TCH channel map.  |
 | Float_t * | **[_TDCTime](/Classes/classReadBinary.md#variable--tdctime)** <br>TDC time.  |
 | UInt_t | **[_TotalTime](/Classes/classReadBinary.md#variable--totaltime)** <br>Total time of the acquisition [us] -> used for trigger rates.  |
 | unsigned int | **[_TriggerCount](/Classes/classReadBinary.md#variable--triggercount)** <br>Array containing the counts of each trigger implemented in the WaveDAQ firmware.  |
 | uint64_t | **[_TriggerGenerationBin](/Classes/classReadBinary.md#variable--triggergenerationbin)** <br>Array used for TGEN bank decoding.  |
 | short | **[_Ttype](/Classes/classReadBinary.md#variable--ttype)** <br>TriggerType.  |
-| std::map< UShort_t, int > * | **[_wdb_index](/Classes/classReadBinary.md#variable--wdb-index)**  |
+| std::map< UShort_t, UInt_t > * | **[_wdb_index](/Classes/classReadBinary.md#variable--wdb-index)**  |
 | [WDChannelMap](/Classes/classWDChannelMap.md) * | **[_WDChannelMap](/Classes/classReadBinary.md#variable--wdchannelmap)** <br>pointer to WaveDAQ channel map  |
 | BHEADER | **[bh](/Classes/classReadBinary.md#variable-bh)** <br>WAVEDREAM Board header.  |
 | CHEADER | **[ch](/Classes/classReadBinary.md#variable-ch)** <br>Channel header.  |
@@ -97,8 +97,8 @@ ReadBinary(
     std::vector< WaveFormContainer * > * wdb_data_ptr,
     std::vector< TCBDATA * > * tcb_data_ptr,
     WDChannelMap * WDchMap,
-    std::map< UShort_t, Int_t > * _WDBIdToIdMap,
-    std::map< UShort_t, Int_t > * ActiveBoards
+    std::map< UShort_t, UInt_t > * _WDBIdToIdMap,
+    std::map< UShort_t, UInt_t > * ActiveBoards
 )
 ```
 
@@ -313,6 +313,12 @@ void AddBoardToDataContainer(
 )
 ```
 
+Allocate memory for all channels of a newfound WaveDREAM board. 
+
+**Parameters**: 
+
+  * **board** Serial number of the WaveDREAM board 
+
 
 ### function AlignSignalsRight
 
@@ -424,7 +430,7 @@ Decode data of a single WaveDREAM board.
 ### variable _ActiveBoards
 
 ```cpp
-std::map< UShort_t, int > * _ActiveBoards;
+std::map< UShort_t, UInt_t > * _ActiveBoards;
 ```
 
 Map o the active WaveDREAM boards in the event: Serial number -> index. 
@@ -520,7 +526,7 @@ Event number.
 ### variable _tcb_index
 
 ```cpp
-std::map< UShort_t, int > _tcb_index;
+std::map< UShort_t, UInt_t > _tcb_index;
 ```
 
 Maps for WDB and TCB indexing: serial number -> index. 
@@ -576,7 +582,7 @@ TriggerType.
 ### variable _wdb_index
 
 ```cpp
-std::map< UShort_t, int > * _wdb_index;
+std::map< UShort_t, UInt_t > * _wdb_index;
 ```
 
 
@@ -676,4 +682,4 @@ Local variable for storing waveform raw amplitude values.
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

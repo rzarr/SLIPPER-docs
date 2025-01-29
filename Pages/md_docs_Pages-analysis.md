@@ -7,9 +7,6 @@ title: Analysis
 
 
 
-
-# Analysis
-
 From version 2.5, a first analysis script has been implemented. This is meant to provide some fast information on the output of the Reconstruction executable and it's used as a run control routine. The parameters required by the executable are: 
 
 ```cpp
@@ -24,4 +21,4 @@ As of today, the script produces a series of histograms to quickly check the cor
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

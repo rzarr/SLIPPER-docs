@@ -1,8 +1,7 @@
 Online Processing
 ======
 
-# Online processing and LivePlotter
-From version 3.1, a LivePlotter executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
+From version 3.1, a **LivePlotter** executable is available. This executable is called by the src/PyRoutines/Plotter.py routine in a dedicated thread and its purpose is to provide some online information during data takings. The only argument needed by the LivePlotter is the directory containing output files from the Reconstruction executable. The routine will then check the directory continuously and update the online plots as soon as a new ".root" file is added. Right now the plots implemented in the LivePlotter are:
 * TW hitmaps with MB and Fragmentation trigger
 * Calibrated trigger amplitude seen by the TCB discriminators for all the channels involved in the fragmentation trigger logic. 
 * Raw Fragmentation dE spectra for all the TW bars involved in the fragmentation trigger, for the chosen trigger thresholds (set via the TriggerAmpMap.txt file )

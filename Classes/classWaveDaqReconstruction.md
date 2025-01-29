@@ -19,9 +19,9 @@ Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
 | | **[WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md#function-wavedaqreconstruction)**()<br>Default constructor.  |
 | virtual | **[~WaveDaqReconstruction](/Classes/classWaveDaqReconstruction.md#function-~wavedaqreconstruction)**()<br>Default destructor.  |
 | void | **[EnableHistograms](/Classes/classWaveDaqReconstruction.md#function-enablehistograms)**()<br>Enable histogram writing in the output.  |
-| void | **[LoadChannelMap](/Classes/classWaveDaqReconstruction.md#function-loadchannelmap)**(std::string FileName)<br>Load xml containing the channel map, i.e. the mapping between channels,boards and bar.  |
-| void | **[LoadTriggerCalibration](/Classes/classWaveDaqReconstruction.md#function-loadtriggercalibration)**(std::string FileName)<br>Load the trigger calibration map.  |
-| virtual void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(std::string FileName, std::string TimeCalFileName, int nEv)<br>Perform the whole WaveDAQ reconstruction.  |
+| void | **[LoadChannelMap](/Classes/classWaveDaqReconstruction.md#function-loadchannelmap)**(const std::string & FileName)<br>Load xml containing the channel map, i.e. the mapping between channels,boards and bar.  |
+| void | **[LoadTriggerCalibration](/Classes/classWaveDaqReconstruction.md#function-loadtriggercalibration)**(const std::string & FileName)<br>Load the trigger calibration map.  |
+| virtual void | **[RunReconstruction](/Classes/classWaveDaqReconstruction.md#function-runreconstruction)**(const std::string & FileName, const std::string & TimeCalFileName, int nEv =-1)<br>Perform the whole WaveDAQ reconstruction.  |
 | void | **[SetDebugMode](/Classes/classWaveDaqReconstruction.md#function-setdebugmode)**(Int_t first_ev, Int_t last_ev)<br>Activate debug mode if requested and set event range.  |
 | void | **[SetGain](/Classes/classWaveDaqReconstruction.md#function-setgain)**(Float_t Gain) |
 | void | **[SetOutputFileName](/Classes/classWaveDaqReconstruction.md#function-setoutputfilename)**(const std::string & FileName)<br>Set the output file name.  |
@@ -42,16 +42,15 @@ Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
 | void | **[CheckFragTriggerConditions](/Classes/classWaveDaqReconstruction.md#function-checkfragtriggerconditions)**()<br>Check if the fragmentation trigger conditions are satisfied.  |
 | virtual void | **[CheckLoadedBoards](/Classes/classWaveDaqReconstruction.md#function-checkloadedboards)**()<br>Check and print all the loaded WaveDREAM boars.  |
 | void | **[ClearWFdata](/Classes/classWaveDaqReconstruction.md#function-clearwfdata)**()<br>Clear all the Waveforms.  |
-| Float_t | **[CLKAnalysis](/Classes/classWaveDaqReconstruction.md#function-clkanalysis)**(int boardindex, int channel) |
 | void | **[CreateHistograms](/Classes/classWaveDaqReconstruction.md#function-createhistograms)**()<br>Booking of the histograms.  |
-| void | **[EvalCLKJitter](/Classes/classWaveDaqReconstruction.md#function-evalclkjitter)**(int boardindex, Int_t globalch, int channel)<br>Calculate the clock phase jitter between TW and SC.  |
+| void | **[EvalCLKJitter](/Classes/classWaveDaqReconstruction.md#function-evalclkjitter)**(UInt_t boardindex, Int_t globalch, Int_t channel)<br>Calculate the clock phase jitter between TW and SC.  |
 | void | **[FillHistograms](/Classes/classWaveDaqReconstruction.md#function-fillhistograms)**()<br>Fill the histograms.  |
 | void | **[FillNeutronWaveforms](/Classes/classWaveDaqReconstruction.md#function-fillneutronwaveforms)**(UShort_t board)<br>Fill the output objects with neutron waveforms.  |
 | Float_t | **[GetCRatio](/Classes/classWaveDaqReconstruction.md#function-getcratio)**(Int_t BarId)<br>Charge logarithmic ratio.  |
 | Float_t | **[GetDeltaT](/Classes/classWaveDaqReconstruction.md#function-getdeltat)**(Int_t BarId)<br>Time difference between the two channels.  |
 | Float_t | **[GetEventRawEnergy](/Classes/classWaveDaqReconstruction.md#function-geteventrawenergy)**(Int_t BarId)<br>Raw energy of the event: geometric mean of the A-B charges.  |
 | Float_t | **[GetEventRawTimestamp](/Classes/classWaveDaqReconstruction.md#function-geteventrawtimestamp)**(Int_t BarId)<br>Bar timestamp of the event: mean of the channels' timestamps.  |
-| void | **[GetFileTags](/Classes/classWaveDaqReconstruction.md#function-getfiletags)**(std::string FileName)<br>Get the file tags.  |
+| void | **[GetFileTags](/Classes/classWaveDaqReconstruction.md#function-getfiletags)**(const std::string & FileName)<br>Get the file tags.  |
 | void | **[LoopEvent](/Classes/classWaveDaqReconstruction.md#function-loopevent)**(TTree * RecTree)<br>Main event loop.  |
 | void | **[PrintTriggerEfficiency](/Classes/classWaveDaqReconstruction.md#function-printtriggerefficiency)**()<br>Print the fragmentation trigger efficiency.  |
 | void | **[SetOutputDataToZero](/Classes/classWaveDaqReconstruction.md#function-setoutputdatatozero)**()<br>Function called at the beginning of each event to reset the output data.  |
@@ -63,12 +62,12 @@ Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
 
 |                | Name           |
 | -------------- | -------------- |
-| std::map< UShort_t, Int_t > | **[_ActiveBoards](/Classes/classWaveDaqReconstruction.md#variable--activeboards)** <br>Subset of the _BoardIdtoIdMap containing only the boards w/ at least one active channel; This variable is updated at each event.  |
+| std::map< UShort_t, UInt_t > | **[_ActiveBoards](/Classes/classWaveDaqReconstruction.md#variable--activeboards)** <br>Subset of the _BoardIdtoIdMap containing only the boards w/ at least one active channel; This variable is updated at each event.  |
 | Float_t | **[_BCharge](/Classes/classWaveDaqReconstruction.md#variable--bcharge)** <br>TW bar charge (raw energy loss) [V*ns].  |
 | Float_t | **[_BCratio](/Classes/classWaveDaqReconstruction.md#variable--bcratio)** <br>TW bar logarithmic ratio of charge "A" over charge "B" [ns].  |
 | Float_t | **[_BDeltaT](/Classes/classWaveDaqReconstruction.md#variable--bdeltat)** <br>TW bar raw time difference between channels "A" and "B" [ns].  |
 | [ReadBinary](/Classes/classReadBinary.md) * | **[_BinaryReader](/Classes/classWaveDaqReconstruction.md#variable--binaryreader)** <br>Pointer to binary reader object.  |
-| std::map< UShort_t,Int_t > | **[_BoardIdToIdMap](/Classes/classWaveDaqReconstruction.md#variable--boardidtoidmap)** <br>Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector.  |
+| std::map< UShort_t, UInt_t > | **[_BoardIdToIdMap](/Classes/classWaveDaqReconstruction.md#variable--boardidtoidmap)** <br>Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector.  |
 | Float_t | **[_BTimestamps](/Classes/classWaveDaqReconstruction.md#variable--btimestamps)** <br>TW bar raw time [ns].  |
 | Float_t | **[_CALOAmplitude](/Classes/classWaveDaqReconstruction.md#variable--caloamplitude)** <br>CALO crystal amplitude (<0) [V].  |
 | Float_t | **[_CALOCharge](/Classes/classWaveDaqReconstruction.md#variable--calocharge)** <br>CALO crystal integral charge [V*ns].  |
@@ -109,8 +108,11 @@ Inherited by [WaveDaqDisplay](/Classes/classWaveDaqDisplay.md)
 | TH1I * | **[_hCALOMultiplicity](/Classes/classWaveDaqReconstruction.md#variable--hcalomultiplicity)** <br>Multiplicity of CALO crystals **HISTOGRAM** |
 | std::map< Int_t, TH1F * > | **[_hFragSWCharge](/Classes/classWaveDaqReconstruction.md#variable--hfragswcharge)** <br>Charge histogram of fragmentation trigger bars with SW chosen threshold! **HISTOGRAM** |
 | TH2F * | **[_hitmap_all](/Classes/classWaveDaqReconstruction.md#variable--hitmap-all)** <br>2D Hitmap of TW for all events **HISTOGRAM** |
+| TH2F * | **[_hitmap_all_MM](/Classes/classWaveDaqReconstruction.md#variable--hitmap-all-mm)** <br>2D Hitmap of TW for all events in Michela view **HISTOGRAM** |
 | TH1F * | **[_hitmap_Bars](/Classes/classWaveDaqReconstruction.md#variable--hitmap-bars)** <br>1D Hitmap of TW bars **HISTOGRAM** |
-| TH2F * | **[_hitmap_CALO](/Classes/classWaveDaqReconstruction.md#variable--hitmap-calo)** <br>2D Hitmap of TW for Minimum Bias events **HISTOGRAM** |
+| TH2F * | **[_hitmap_CALO](/Classes/classWaveDaqReconstruction.md#variable--hitmap-calo)** <br>2D Hitmap of CALO hits for Minimum Bias events **HISTOGRAM** |
+| TH2F * | **[_hitmap_CALO1hit_MM](/Classes/classWaveDaqReconstruction.md#variable--hitmap-calo1hit-mm)** <br>2D Hitmap of CALO hits for Minimum Bias events w/ multiplicity 1 in the Michela view!! **HISTOGRAM** |
+| TH2F * | **[_hitmap_CALO_MM](/Classes/classWaveDaqReconstruction.md#variable--hitmap-calo-mm)** <br>2D Hitmap of CALO hits for Minimum Bias events in the Michela view!! **HISTOGRAM** |
 | TH1F * | **[_hitmap_Channels_Front](/Classes/classWaveDaqReconstruction.md#variable--hitmap-channels-front)** <br>1D Hitmap of TW channels in front layer **HISTOGRAM** |
 | TH1F * | **[_hitmap_Channels_Rear](/Classes/classWaveDaqReconstruction.md#variable--hitmap-channels-rear)** <br>1D Hitmap of TW channels in rear layer **HISTOGRAM** |
 | TH2F * | **[_hitmap_frag](/Classes/classWaveDaqReconstruction.md#variable--hitmap-frag)** <br>2D Hitmap of TW for Fragmentation Trigger events **HISTOGRAM** |
@@ -233,7 +235,7 @@ Enable histogram writing in the output.
 
 ```cpp
 void LoadChannelMap(
-    std::string FileName
+    const std::string & FileName
 )
 ```
 
@@ -251,7 +253,7 @@ Channel map is needed in order to run the Reconstruction executable
 
 ```cpp
 void LoadTriggerCalibration(
-    std::string FileName
+    const std::string & FileName
 )
 ```
 
@@ -266,9 +268,9 @@ Load the trigger calibration map.
 
 ```cpp
 virtual void RunReconstruction(
-    std::string FileName,
-    std::string TimeCalFileName,
-    int nEv
+    const std::string & FileName,
+    const std::string & TimeCalFileName,
+    int nEv =-1
 )
 ```
 
@@ -279,9 +281,6 @@ Perform the whole WaveDAQ reconstruction.
   * **FileName** Name of the input binary file 
   * **TimeCalFileName** Name of the time calibration file. Equal to the previous parameter for WaveDAQ files 
   * **nEv** Number of events to be processed (optional, default=-1) 
-
-
-**Reimplemented by**: [WaveDaqDisplay::RunReconstruction](/Classes/classWaveDaqDisplay.md#function-runreconstruction)
 
 
 ### function SetDebugMode
@@ -485,16 +484,6 @@ void ClearWFdata()
 
 Clear all the Waveforms. 
 
-### function CLKAnalysis
-
-```cpp
-Float_t CLKAnalysis(
-    int boardindex,
-    int channel
-)
-```
-
-
 ### function CreateHistograms
 
 ```cpp
@@ -507,9 +496,9 @@ Booking of the histograms.
 
 ```cpp
 void EvalCLKJitter(
-    int boardindex,
+    UInt_t boardindex,
     Int_t globalch,
-    int channel
+    Int_t channel
 )
 ```
 
@@ -609,7 +598,7 @@ Bar timestamp of the event: mean of the channels' timestamps.
 
 ```cpp
 void GetFileTags(
-    std::string FileName
+    const std::string & FileName
 )
 ```
 
@@ -704,7 +693,7 @@ Uncorrected TOF of the event in ns.
 ### variable _ActiveBoards
 
 ```cpp
-std::map< UShort_t, Int_t > _ActiveBoards;
+std::map< UShort_t, UInt_t > _ActiveBoards;
 ```
 
 Subset of the _BoardIdtoIdMap containing only the boards w/ at least one active channel; This variable is updated at each event. 
@@ -744,7 +733,7 @@ Pointer to binary reader object.
 ### variable _BoardIdToIdMap
 
 ```cpp
-std::map< UShort_t,Int_t > _BoardIdToIdMap;
+std::map< UShort_t, UInt_t > _BoardIdToIdMap;
 ```
 
 Map that links the WaveDREAM board serial number to its index in the [WaveFormContainer](/Classes/classWaveFormContainer.md) vector. 
@@ -1069,6 +1058,14 @@ TH2F * _hitmap_all;
 
 2D Hitmap of TW for all events **HISTOGRAM**
 
+### variable _hitmap_all_MM
+
+```cpp
+TH2F * _hitmap_all_MM;
+```
+
+2D Hitmap of TW for all events in Michela view **HISTOGRAM**
+
 ### variable _hitmap_Bars
 
 ```cpp
@@ -1083,7 +1080,23 @@ TH1F * _hitmap_Bars;
 TH2F * _hitmap_CALO;
 ```
 
-2D Hitmap of TW for Minimum Bias events **HISTOGRAM**
+2D Hitmap of CALO hits for Minimum Bias events **HISTOGRAM**
+
+### variable _hitmap_CALO1hit_MM
+
+```cpp
+TH2F * _hitmap_CALO1hit_MM;
+```
+
+2D Hitmap of CALO hits for Minimum Bias events w/ multiplicity 1 in the Michela view!! **HISTOGRAM**
+
+### variable _hitmap_CALO_MM
+
+```cpp
+TH2F * _hitmap_CALO_MM;
+```
+
+2D Hitmap of CALO hits for Minimum Bias events in the Michela view!! **HISTOGRAM**
 
 ### variable _hitmap_Channels_Front
 
@@ -1663,4 +1676,4 @@ Tags of WaveDREAM stand-alone files.
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

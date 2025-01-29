@@ -1,7 +1,6 @@
 Analysis
 ======
 
-# Analysis
 From version 2.5, a first analysis script has been implemented. This is meant to provide some fast information on the output of the Reconstruction executable and it's used as a run control routine. The parameters required by the executable are:
 ```
 >> ./Analysis [OPTION...]

@@ -7,10 +7,10 @@ title: Docker4SLIPPER
 
 
 
+From version 3.1 on, the software provides also a Docker image for all the updated branches. The software has been successfully installed on Ubuntu, SL7 and some versions of MacOs. However, the Docker image provides a platform-indipendent environment to run the code without issues and with the needed ROOT (6.24) and Python (2 and 3) versions already installed.
+
 
 # Docker image (working on Linux and MacOS)
-
-From version 3.1 on, the software provides also a Docker image for all the updated branches. The software has been successfully installed on Ubuntu, SL7 and some versions of MacOs. However, the Docker image provides a platform-indipendent environment to run the code without issues and with the needed ROOT (6.24) and Python (2 and 3) versions already installed.
 
 The repository were all the images are hosted can be found at [this link](https://hub.docker.com/repository/docker/zarrella/slipper-docker). All images are built from a base version of Ubuntu, which is the OS where the code was tested the most and are continuously updated through GitLab Pipelines. The only requirement to use the image is a working [Docker](https://docs.docker.com/get-docker/) installation. The repository provides an executable that takes care of pulling the "latest" tag of the SLIPPER base image and build the "local" version. To get the images, run:
 
@@ -49,7 +49,7 @@ To make the processed files available in the local host folder, save them in the
 **WARNING!! All the changes made to the shared folder from the container WILL be propagated to the local folder in the host system!**
 
 
-## Running docker containers by hand (<a href="https://tenor.com/view/donald-trump-responsibility-i-dont-take-any-responsibility-at-all-no-responsibility-usa-president-gif-16623875">CLICK HERE BEFORE READING</a>)
+# Running docker containers by hand (<a href="https://tenor.com/view/donald-trump-responsibility-i-dont-take-any-responsibility-at-all-no-responsibility-usa-president-gif-16623875">CLICK HERE BEFORE READING</a>)
 
 After pulling the "latest" image and building the "local" version, it is possible to run a container using the command:
 
@@ -91,4 +91,4 @@ For Windows users, the first step is to install an operating system that actuall
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

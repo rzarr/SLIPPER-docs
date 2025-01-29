@@ -1,9 +1,7 @@
 Channel Map
 ======
 
-# XML configuration file: Channel Map
-
-These files (available in the "config/" folder) contain the mapping between channels and SC, BARS and MODULES (wiring) for each campaign currently supported by the code. **This file is MANDATORY to run the Reconstrucion, EventDisplay and LivePlotter executables.**
+These XML configuration files (available in the "config/" folder) contain the mapping between channels and SC, BARS and MODULES (wiring) for each campaign currently supported by the code. **This file is MANDATORY to run the Reconstrucion, EventDisplay and LivePlotter executables.**
 The Channel map should look like this:
 ```
 <CHANNEL_MAP>

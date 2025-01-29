@@ -43,12 +43,16 @@ Class containing all the methods used in the LivePlotter executable.
 | TMultiGraph * | **[_gTrigRatesAll](/Classes/classLivePlots.md#variable--gtrigratesall)** <br>MultiGraph for cumulative trigger rate monitoring.  |
 | std::map< Int_t, THStack * > | **[_hAllvsFragSW](/Classes/classLivePlots.md#variable--hallvsfragsw)** <br>Stack for comparison in TW charge spectra w/ or w/out or SW-simulated fargmentation trigger.  |
 | std::map< Int_t, TH1F * > | **[_hCALOAmp](/Classes/classLivePlots.md#variable--hcaloamp)** <br>Histograms for CALO amplitude.  |
+| std::map< Int_t, TH1F * > | **[_hCALOAmp1hit](/Classes/classLivePlots.md#variable--hcaloamp1hit)** <br>Histograms for CALO amplitude with multiplicity 1.  |
+| std::map< Int_t, THStack * > | **[_hCALOAmp1hitStack](/Classes/classLivePlots.md#variable--hcaloamp1hitstack)** <br>Histograms stacks for CALO amplitude with multiplicity 1.  |
 | std::map< Int_t, THStack * > | **[_hCALOAmpStack](/Classes/classLivePlots.md#variable--hcaloampstack)** <br>Histograms stacks for CALO amplitude.  |
 | TH2F * | **[_hCALOenCorr](/Classes/classLivePlots.md#variable--hcaloencorr)** <br>Histogram for CALO energy correlation plots in events with multiplicity = 2.  |
 | std::map< Int_t, TH1F * > | **[_hCALOEnergy](/Classes/classLivePlots.md#variable--hcaloenergy)** <br>Histograms for CALO energy release.  |
 | std::map< Int_t, THStack * > | **[_hCALOEnStack](/Classes/classLivePlots.md#variable--hcaloenstack)** <br>Histograms stacks for CALO energy release.  |
 | TH2F * | **[_hCALOenTOF](/Classes/classLivePlots.md#variable--hcaloentof)** <br>Histogram for CALO energy vs TOF plots.  |
 | TH2D * | **[_hCALOhitmap](/Classes/classLivePlots.md#variable--hcalohitmap)** <br>2D histogram for CALO hitmap  |
+| TH2D * | **[_hCALOhitmap1hit_MM](/Classes/classLivePlots.md#variable--hcalohitmap1hit-mm)** <br>2D histogram for CALO hitmap with multiplicity 1 in the Michela view  |
+| TH2D * | **[_hCALOhitmap_MM](/Classes/classLivePlots.md#variable--hcalohitmap-mm)** <br>2D histogram for CALO hitmap in the Michela view  |
 | TH1F * | **[_hDeltaT_FR](/Classes/classLivePlots.md#variable--hdeltat-fr)** <br>Histogram for DeltaT Front-Rear at TW center.  |
 | TH2F * | **[_hdEvsTOFbar](/Classes/classLivePlots.md#variable--hdevstofbar)** <br>histogram for front/rear layer raw dEvsTOF  |
 | TH2F * | **[_hdEvsTOFcenter](/Classes/classLivePlots.md#variable--hdevstofcenter)** <br>histogram for front/rear layer raw dEvsTOF  |
@@ -80,6 +84,7 @@ Class containing all the methods used in the LivePlotter executable.
 | TH1I * | **[_hTWchSat](/Classes/classLivePlots.md#variable--htwchsat)** <br>Histograms for TW channel saturation monitoring.  |
 | THStack * | **[_hTWchSatStack](/Classes/classLivePlots.md#variable--htwchsatstack)** <br>Histogram stack for TW channel saturation counts.  |
 | TH2F * | **[_hTWhitmapAll](/Classes/classLivePlots.md#variable--htwhitmapall)** <br>Histogram for TW hitmap w/ MB trigger.  |
+| TH2F * | **[_hTWhitmapAll_MM](/Classes/classLivePlots.md#variable--htwhitmapall-mm)** <br>Histogram for TW hitmap w/ MB trigger in Michela view.  |
 | TH2F * | **[_hTWhitmapFrag](/Classes/classLivePlots.md#variable--htwhitmapfrag)** <br>Histogram for TW hitmap w/ fragmentation trigger.  |
 | TH2F * | **[_hTWhitmapFragSW](/Classes/classLivePlots.md#variable--htwhitmapfragsw)** <br>Histogram for TW hitmap w/ fragmentation trigger.  |
 | TH2F * | **[_hTWhitmapMB](/Classes/classLivePlots.md#variable--htwhitmapmb)** <br>Histogram for TW hitmap w/ MB trigger and NOT Fragmentation.  |
@@ -313,6 +318,22 @@ std::map< Int_t, TH1F * > _hCALOAmp;
 
 Histograms for CALO amplitude. 
 
+### variable _hCALOAmp1hit
+
+```cpp
+std::map< Int_t, TH1F * > _hCALOAmp1hit;
+```
+
+Histograms for CALO amplitude with multiplicity 1. 
+
+### variable _hCALOAmp1hitStack
+
+```cpp
+std::map< Int_t, THStack * > _hCALOAmp1hitStack;
+```
+
+Histograms stacks for CALO amplitude with multiplicity 1. 
+
 ### variable _hCALOAmpStack
 
 ```cpp
@@ -360,6 +381,22 @@ TH2D * _hCALOhitmap;
 ```
 
 2D histogram for CALO hitmap 
+
+### variable _hCALOhitmap1hit_MM
+
+```cpp
+TH2D * _hCALOhitmap1hit_MM;
+```
+
+2D histogram for CALO hitmap with multiplicity 1 in the Michela view 
+
+### variable _hCALOhitmap_MM
+
+```cpp
+TH2D * _hCALOhitmap_MM;
+```
+
+2D histogram for CALO hitmap in the Michela view 
 
 ### variable _hDeltaT_FR
 
@@ -609,6 +646,14 @@ TH2F * _hTWhitmapAll;
 
 Histogram for TW hitmap w/ MB trigger. 
 
+### variable _hTWhitmapAll_MM
+
+```cpp
+TH2F * _hTWhitmapAll_MM;
+```
+
+Histogram for TW hitmap w/ MB trigger in Michela view. 
+
 ### variable _hTWhitmapFrag
 
 ```cpp
@@ -835,4 +880,4 @@ y-values of RC Pile-Up plot
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

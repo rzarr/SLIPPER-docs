@@ -169,6 +169,9 @@ Check that the RC map has been loaded without errors.
 
 **Return**: True if the RC channel map is formed as expected, False otherwise 
 
+**Reimplements**: [BaseMap::CheckMapConsistency](/Classes/classBaseMap.md#function-checkmapconsistency)
+
+
 This function makes sure that there is only one WaveDREAM board in the Channel Map that is connected to the Rome Counter and checks that the number of channels is the one expected from [Parameters.h]
 
 
@@ -184,4 +187,4 @@ Vector of the RC channels.
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000

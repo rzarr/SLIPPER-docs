@@ -1,8 +1,7 @@
 Position Calibration
 ======
 
-# Position Calibration
-The "CalibratePosition" executable takes the output ROOT files created with the Reconstruction binary and produces the maps needed to correlate the hit position of particles along TW bars and the time difference between its A-B channels. This executable requires a Reconstruction output rootfile containing an homogenous scan of the TW with the same particle beam. An example of such runs are the so-called "Screensaver" runs tested at CNAO2022 or the TW scans of GSI2021 campaign.
+The **CalibratePosition** executable takes the output ROOT files created with the Reconstruction binary and produces the maps needed to correlate the hit position of particles along TW bars and the time difference between its A-B channels. This executable requires a Reconstruction output rootfile containing an homogenous scan of the TW with the same particle beam. An example of such runs are the so-called "Screensaver" runs tested at CNAO2022 or the TW scans of GSI2021 campaign.
 
 The parameters needed by the CalibratePosition executable can be seen through the help function. Again, to display it, run the code with no options:
 

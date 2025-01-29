@@ -236,6 +236,9 @@ Check the consistency of the Neutrons channel map.
 
 **Return**: True if the map is formed as expected, False otherwise 
 
+**Reimplements**: [BaseMap::CheckMapConsistency](/Classes/classBaseMap.md#function-checkmapconsistency)
+
+
 This functions checks that the Neutron detectors are connected to exactly one Slow and one Fast WaveDREAM board. Moreover, it checks that both slow and fast channels have been loaded and are exactly in the expected number (check [Parameters.h]) 
 
 
@@ -291,4 +294,4 @@ List of channels used in the slow board.
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:16:32 +0000
+Updated on 2025-01-29 at 16:37:30 +0000
