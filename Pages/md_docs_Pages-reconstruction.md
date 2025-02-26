@@ -18,7 +18,7 @@ Each executable compiled provides an help function, run the executable without a
 >> ./Reconstruction
 
 -x, --channelmap arg        Channel Map XML file,
--i, --inputfilename arg     WaveDAQ binary (.bin) input filename,
+-i, --inputfilename arg     WaveDAQ binary (.bin) or TDAQ raw data (.data) input filename,
 -o, --outputfilename arg    output filename (should be .root),
 -t, --timecalfile arg       (optional) WaveDAQ time calibration (.dat) filename,
 -g, --gain arg              (optional) gain set to perform the acquisition (default: 1),
@@ -256,4 +256,4 @@ Different name conventions can be implemented for different campaigns containing
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:37:30 +0000
+Updated on 2025-02-26 at 13:36:50 +0000

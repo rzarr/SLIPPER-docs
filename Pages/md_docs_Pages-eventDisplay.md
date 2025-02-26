@@ -17,7 +17,7 @@ The parameters needed by the EventDisplay executable can be seen through the hel
 >> ./EventDisplay [OPTION...]
 
   -x, --channelmap       Channel Map XML file
-  -i, --inputfilename    WaveDAQ binary (.bin) input filename
+  -i, --inputfilename    WaveDAQ binary (.bin) or TDAQ raw data (.data) input filename
   -c, --timecalfile      (optional) WaveDAQ time calibration filename
       --board            (optional) WaveDAQ specific board to check
       --channel          (optional) WaveDAQ specific channel to check
@@ -38,4 +38,4 @@ The default behavior of this executable shows the waveforms for all detectors in
 
 -------------------------------
 
-Updated on 2025-01-29 at 16:37:30 +0000
+Updated on 2025-02-26 at 13:36:50 +0000
